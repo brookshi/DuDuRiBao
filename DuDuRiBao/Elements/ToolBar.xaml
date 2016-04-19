@@ -1,0 +1,138 @@
+﻿<UserControl x:Class="Brook.DuDuRiBao.Elements.ToolBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:common="using:Brook.DuDuRiBao.Common"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="using:Brook.DuDuRiBao.Elements"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:utils="using:Brook.DuDuRiBao.Utils"
+             xmlns:xp="using:XP"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <utils:Config x:Key="Config" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid x:Name="ToolBarGrid">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="State">
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <common:ToolBarTrigger MaxWidth="1000"
+                                               CurrentToolBarHost="{x:Bind Host}"
+                                               TargetElement="{x:Bind Path=ToolBarGrid}"
+                                               TargetToolBarHost="MainPage" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="CommentButton.Visibility" Value="Collapsed" />
+                        <Setter Target="LikeButton.Visibility" Value="Collapsed" />
+                        <Setter Target="FavButton.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <common:ToolBarTrigger MaxWidth="10000"
+                                               CurrentToolBarHost="{x:Bind Host}"
+                                               TargetElement="{x:Bind Path=ToolBarGrid}"
+                                               TargetToolBarHost="ContentPage" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MenuButton.Visibility" Value="Collapsed" />
+                        <Setter Target="CategoryText.(RelativePanel.RightOf)" Value="" />
+                        <Setter Target="CategoryText.Margin" Value="20, 0, 0, 0" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <common:ToolBarTrigger MaxWidth="10000"
+                                               CurrentToolBarHost="{x:Bind Host}"
+                                               TargetElement="{x:Bind Path=ToolBarGrid}"
+                                               TargetToolBarHost="CommentPage" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MenuButton.Visibility" Value="Collapsed" />
+                        <Setter Target="CommentButton.Visibility" Value="Collapsed" />
+                        <Setter Target="LikeButton.Visibility" Value="Collapsed" />
+                        <Setter Target="FavButton.Visibility" Value="Collapsed" />
+                        <Setter Target="CategoryText.(RelativePanel.RightOf)" Value="" />
+                        <Setter Target="CategoryText.Margin" Value="20, 0, 0, 0" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <RelativePanel Background="{ThemeResource BrushPrimary}">
+            <xp:XPButton x:Name="MenuButton"
+                         Width="48"
+                         Height="48"
+                         Background="Transparent"
+                         Click="MenuButton_Click"
+                         Foreground="White"
+                         IconPosition="OnlyIcon"
+                         IconSize="20"
+                         PointerOverBackground="{StaticResource BrushPointerOver}"
+                         PressedBackground="{StaticResource BrushPressed}">
+                <xp:XPButton.Icon>
+                    <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE700;" />
+                </xp:XPButton.Icon>
+            </xp:XPButton>
+            <TextBlock x:Name="CategoryText"
+                       Margin="10, 0, 0, 0"
+                       FontSize="16"
+                       FontWeight="Medium"
+                       Foreground="White"
+                       RelativePanel.AlignVerticalCenterWithPanel="True"
+                       RelativePanel.RightOf="MenuButton"
+                       Text="{x:Bind Category, Mode=OneWay}" />
+            <xp:XPButton x:Name="CommentButton"
+                         Height="48"
+                         Margin="10, 0, 0, 0"
+                         Background="Transparent"
+                         Click="CommentButton_Click"
+                         Content="{x:Bind CommentCount, Mode=OneWay}"
+                         Foreground="White"
+                         Icon="Comment"
+                         IconPosition="Left"
+                         IconSize="20"
+                         PointerOverBackground="{StaticResource BrushPointerOver}"
+                         PressedBackground="{StaticResource BrushPressed}"
+                         RelativePanel.AlignRightWithPanel="True" />
+            <xp:XPToggleButton x:Name="LikeButton"
+                               Height="48"
+                               Margin="10, 0, 0, 0"
+                               Background="Transparent"
+                               CheckedContent="{x:Bind LikeCount, Mode=OneWay}"
+                               CheckedIconForeground="Red"
+                               CheckedPointerOverBackground="{StaticResource BrushPointerOver}"
+                               CheckedPressedBackground="{StaticResource BrushPressed}"
+                               CheckedTextForeground="Red"
+                               Content="{x:Bind LikeCount, Mode=OneWay}"
+                               Foreground="White"
+                               Icon="Like"
+                               IconPosition="Left"
+                               IconSize="20"
+                               IsChecked="{x:Bind IsLikeButtonChecked, Mode=TwoWay}"
+                               OnToggleChanged="LikeStatusChanged"
+                               PointerOverBackground="{StaticResource BrushPointerOver}"
+                               PressedBackground="{StaticResource BrushPointerOver}"
+                               RelativePanel.LeftOf="CommentButton" />
+            <xp:XPToggleButton x:Name="FavButton"
+                               Width="48"
+                               Height="48"
+                               Background="Transparent"
+                               CheckedIconForeground="Yellow"
+                               CheckedPointerOverBackground="{StaticResource BrushPointerOver}"
+                               CheckedPressedBackground="{StaticResource BrushPressed}"
+                               Foreground="White"
+                               Icon="SolidStar"
+                               IconPosition="OnlyIcon"
+                               IconSize="20"
+                               IsChecked="{x:Bind IsFavoriteButtonChecked, Mode=TwoWay}"
+                               OnToggleChanged="FavStatusChanged"
+                               PointerOverBackground="{StaticResource BrushPointerOver}"
+                               PressedBackground="{StaticResource BrushPressed}"
+                               RelativePanel.LeftOf="LikeButton" />
+        </RelativePanel>
+    </Grid>
+</UserControl>

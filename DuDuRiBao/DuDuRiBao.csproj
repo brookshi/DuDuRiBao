@@ -98,10 +98,74 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Authorization\AuthoAttribution.cs" />
+    <Compile Include="Authorization\AuthorizationHelper.cs" />
+    <Compile Include="Authorization\IAuthorize.cs" />
+    <Compile Include="Authorization\SinaAuthorization.cs" />
+    <Compile Include="Common\AdaptiveTriggerExtended.cs" />
+    <Compile Include="Common\AppUIStatus.cs" />
+    <Compile Include="Common\CommentType.cs" />
+    <Compile Include="Common\LoginType.cs" />
+    <Compile Include="Common\ObservableCollectionExtended.cs" />
+    <Compile Include="Common\PageBase.cs" />
+    <Compile Include="Common\ResourceBackgroundClass.cs" />
+    <Compile Include="Common\StoryDataTemplateSelector.cs" />
+    <Compile Include="Common\ToolBarHost.cs" />
+    <Compile Include="Common\ToolBarTrigger.cs" />
+    <Compile Include="Common\ViewModelBase.cs" />
+    <Compile Include="Common\WebViewExtend.cs" />
+    <Compile Include="Converters\BooleanReverseConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\FlipViewVisibilityConverter.cs" />
+    <Compile Include="Converters\NullableBooleanToBooleanConverter.cs" />
+    <Compile Include="Converters\ReplyAuthorFormatConverter.cs" />
+    <Compile Include="Converters\TimeConverter.cs" />
+    <Compile Include="Elements\CommentToolBar.xaml.cs">
+      <DependentUpon>CommentToolBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Elements\FlipViewIndicator.cs" />
+    <Compile Include="Elements\ToolBar.xaml.cs">
+      <DependentUpon>ToolBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Events\CommentEvent.cs" />
+    <Compile Include="Events\LoginEvent.cs" />
+    <Compile Include="Events\OpenNewStoryEvent.cs" />
+    <Compile Include="Events\StoryEvent.cs" />
+    <Compile Include="Events\StoryExtraEvent.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\LoginData.cs" />
+    <Compile Include="Models\MainContent.cs" />
+    <Compile Include="Models\MainData.cs" />
+    <Compile Include="Models\MinorData.cs" />
+    <Compile Include="Models\SendCommentData.cs" />
+    <Compile Include="Models\StorageInfo.cs" />
+    <Compile Include="Models\StoryExtraInfo.cs" />
+    <Compile Include="Models\ZhiHuAuthoInfo.cs" />
+    <Compile Include="Pages\CommentPage.xaml.cs">
+      <DependentUpon>CommentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainContentPage.xaml.cs">
+      <DependentUpon>MainContentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Config.cs" />
+    <Compile Include="Utils\DataRequester.cs" />
+    <Compile Include="Utils\Html.cs" />
+    <Compile Include="Utils\Misc.cs" />
+    <Compile Include="Utils\PopupMessage.cs" />
+    <Compile Include="Utils\StorageUtil.cs" />
+    <Compile Include="Utils\StringUtil.cs" />
+    <Compile Include="Utils\Urls.cs" />
+    <Compile Include="Utils\WebViewUtil.cs" />
+    <Compile Include="ViewModels\CommentViewModel.cs" />
+    <Compile Include="ViewModels\MainContentViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.Category.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.Favorites.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -124,10 +188,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
+    <Page Include="Elements\Comment.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Elements\CommentToolBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Elements\FlipViewIndicatorItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Elements\Story.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Elements\ToolBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\CommentPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MainContentPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="RestSharp">
+      <HintPath>dll\RestSharp.winmd</HintPath>
+    </Reference>
+    <Reference Include="WeiboSDKForWinRT">
+      <HintPath>dll\WeiboSDKForWinRT.winmd</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

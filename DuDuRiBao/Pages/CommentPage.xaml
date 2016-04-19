@@ -1,0 +1,108 @@
+﻿<Page x:Class="Brook.DuDuRiBao.Pages.CommentPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:common="using:Brook.DuDuRiBao.Common"
+      xmlns:convert="using:Brook.DuDuRiBao.Converters"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:element="using:Brook.DuDuRiBao.Elements"
+      xmlns:llm="using:LLM"
+      xmlns:local="using:Brook.DuDuRiBao.Pages"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:vm="using:Brook.DuDuRiBao.ViewModels"
+      xmlns:xp="using:XP"
+      mc:Ignorable="d">
+    <Page.DataContext>
+        <vm:CommentViewModel />
+    </Page.DataContext>
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <common:ResourceBackgroundClass />
+            </ResourceDictionary.MergedDictionaries>
+            <CollectionViewSource x:Name="CommentGroup"
+                                  IsSourceGrouped="True"
+                                  Source="{x:Bind VM.CommentList, Mode=OneWay}" />
+            <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource BrushListBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <element:ToolBar Height="48"
+                         Category="{x:Bind VM.Title}"
+                         Host="CommentPage"
+                         Visibility="{x:Bind ToolBarVisibility}" />
+        <llm:LLMListView x:Name="CommentListView"
+                         Grid.Row="1"
+                         IsItemClickEnabled="False"
+                         ItemTemplate="{StaticResource Comment}"
+                         ItemsSource="{x:Bind CommentGroup.View}"
+                         LoadMoreProgressBarBrush="{ThemeResource BrushPrimaryDark}"
+                         RefreshProgressRingBrush="{ThemeResource BrushPrimaryDark}"
+                         SelectionMode="Single"
+                         ShowsScrollingPlaceholders="True">
+            <llm:LLMListView.GroupStyle>
+                <GroupStyle HeaderTemplate="{StaticResource CommentHeader}" />
+            </llm:LLMListView.GroupStyle>
+            <llm:LLMListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </llm:LLMListView.ItemContainerStyle>
+        </llm:LLMListView>
+        <Border Grid.Row="2"
+                BorderBrush="LightGray"
+                BorderThickness="0, 1, 0, 0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <xp:XPButton Background="Transparent"
+                             BorderThickness="0"
+                             Click="{x:Bind VM.CancelReply}"
+                             Content="{x:Bind VM.ReplyTip, Mode=OneWay}"
+                             FontSize="10"
+                             Foreground="{StaticResource BrushCommentReplyToForeground}"
+                             Icon="Clear"
+                             IconForeground="{StaticResource BrushCommentReplyToPointerOverForeground}"
+                             IconPosition="Right"
+                             IconSize="8"
+                             PointerOverIconForeground="{StaticResource BrushCommentReplyToPointerOverForeground}"
+                             PointerOverTextForeground="{StaticResource BrushCommentReplyToPointerOverForeground}"
+                             Visibility="{x:Bind VM.IsReplingTo, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
+                <RelativePanel Grid.Row="1">
+                    <TextBox x:Uid="CommentPlaceholder"
+                             x:Name="CommentText"
+                             Margin="4"
+                             AcceptsReturn="True"
+                             RelativePanel.AlignBottomWithPanel="True"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True"
+                             RelativePanel.AlignVerticalCenterWithPanel="True"
+                             RelativePanel.LeftOf="SendBtn"
+                             Text="{x:Bind VM.CommentContent, Mode=TwoWay}"
+                             TextWrapping="Wrap" />
+                    <xp:XPButton x:Name="SendBtn"
+                                 VerticalAlignment="Stretch"
+                                 Background="Transparent"
+                                 Click="{x:Bind SendComment}"
+                                 Foreground="{StaticResource BrushSendButton}"
+                                 Icon="Send"
+                                 IconPosition="OnlyIcon"
+                                 PointerOverBackground="Transparent"
+                                 PointerOverIconForeground="{StaticResource BrushPrimary}"
+                                 PressedBackground="{ThemeResource BrushPressed}"
+                                 PressedIconForeground="{StaticResource BrushPrimary}"
+                                 RelativePanel.AlignRightWithPanel="True"
+                                 RelativePanel.AlignVerticalCenterWithPanel="True" />
+                </RelativePanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

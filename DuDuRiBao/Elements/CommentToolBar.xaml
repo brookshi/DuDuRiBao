@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="Brook.DuDuRiBao.Elements.CommentToolBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="using:Brook.DuDuRiBao.Elements"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xp="using:XP"
+             d:DesignHeight="300"
+             d:DesignWidth="400"
+             mc:Ignorable="d">
+
+    <RelativePanel>
+        <xp:XPToggleButton x:Name="CommentLike"
+                           Height="30"
+                           Background="Transparent"
+                           CheckedContent="{x:Bind CommentLikeCount, Mode=OneWay}"
+                           CheckedIconForeground="{ThemeResource BrushPrimary}"
+                           CheckedPointerOverIconForeground="{ThemeResource BrushPrimaryDark}"
+                           CheckedPointerOverTextForeground="{ThemeResource BrushPrimaryDark}"
+                           CheckedTextForeground="{ThemeResource BrushPrimaryDark}"
+                           Content="{x:Bind CommentLikeCount, Mode=OneWay}"
+                           FontSize="12"
+                           Foreground="{ThemeResource BrushCommentExtraInfoForeground}"
+                           IconForeground="{ThemeResource BrushCommentExtraInfoForeground}"
+                           IconSize="10"
+                           IsChecked="{x:Bind IsLikeComment, Mode=TwoWay}"
+                           OnToggleChanged="LikeComment"
+                           PointerOverIconForeground="{ThemeResource BrushCommentInfoForeground}"
+                           PointerOverTextForeground="{ThemeResource BrushCommentInfoForeground}"
+                           PressedBackground="{ThemeResource BrushPointerOver}"
+                           RelativePanel.AlignRightWithPanel="True"
+                           RelativePanel.AlignTopWithPanel="True">
+            <xp:XPToggleButton.Icon>
+                <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf164;" />
+            </xp:XPToggleButton.Icon>
+        </xp:XPToggleButton>
+        <xp:XPButton x:Name="CommentReply"
+                     Height="30"
+                     Background="Transparent"
+                     Click="ReplyComment"
+                     Foreground="{ThemeResource BrushCommentExtraInfoForeground}"
+                     IconPosition="OnlyIcon"
+                     IconSize="10"
+                     PointerOverIconForeground="{ThemeResource BrushCommentInfoForeground}"
+                     PointerOverTextForeground="{ThemeResource BrushCommentInfoForeground}"
+                     PressedBackground="{ThemeResource BrushPointerOver}"
+                     RelativePanel.AlignVerticalCenterWith="CommentLike"
+                     RelativePanel.LeftOf="CommentLike">
+            <xp:XPButton.Icon>
+                <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf112;" />
+            </xp:XPButton.Icon>
+        </xp:XPButton>
+        <xp:XPButton x:Name="CommentDel"
+                     Height="30"
+                     Background="Transparent"
+                     Click="DelComment"
+                     Foreground="{ThemeResource BrushCommentExtraInfoForeground}"
+                     IconPosition="OnlyIcon"
+                     IconSize="10"
+                     PointerOverIconForeground="{ThemeResource BrushCommentInfoForeground}"
+                     PointerOverTextForeground="{ThemeResource BrushCommentInfoForeground}"
+                     PressedBackground="{ThemeResource BrushPointerOver}"
+                     RelativePanel.LeftOf="CommentLike"
+                     RelativePanel.AlignVerticalCenterWith="CommentLike"
+                     Visibility="Collapsed">
+            <xp:XPButton.Icon>
+                <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf1f8;" />
+            </xp:XPButton.Icon>
+        </xp:XPButton>
+    </RelativePanel>
+</UserControl>
