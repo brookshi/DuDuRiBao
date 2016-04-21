@@ -32,10 +32,6 @@ namespace Brook.DuDuRiBao.ViewModels
 
         public ObservableCollectionExtended<Story> StoryDataList { get { return _storyDataList; } }
 
-        private List<TopStory> _topStoryList = new List<TopStory>();
-
-        public List<TopStory> TopStoryList { get { return _topStoryList; } set { if (value != _topStoryList) { _topStoryList = value; Notify("TopStoryList"); } } }
-
         private List<bool> _indicators = new List<bool>();
 
         public List<bool> Indicators { get { return _indicators; } set { if (value != _indicators) { _indicators = value; Notify("Indicators"); } } }
@@ -70,7 +66,8 @@ namespace Brook.DuDuRiBao.ViewModels
 
         public override void Init()
         {
-            InitCategories();
+            //InitCategories();
+           // RequestMainList(false);
         }
 
         public async Task Refresh()
@@ -93,53 +90,50 @@ namespace Brook.DuDuRiBao.ViewModels
         {
             _currentDate = DateTime.Now.AddDays(1).ToString("yyyyMMdd");
             StoryDataList.Clear();
-            TopStoryList.Clear();
             Indicators.Clear();
         }
 
         private async Task RequestMainList(bool isLoadingMore)
         {
-            if(CurrentCategoryId == Misc.Default_Category_Id)
+            //if(CurrentCategoryId == Misc.Default_Category_Id)
             {
                 await RequestDefaultCategoryData(isLoadingMore);
             }
-            else if(CurrentCategoryId == Misc.Favorite_Category_Id)
-            {
-                await RequestFavorites(isLoadingMore);
-            }
-            else
-            {
-                await RequestMinorCategoryData(isLoadingMore);
-            }
+            //else if(CurrentCategoryId == Misc.Favorite_Category_Id)
+            //{
+            //    await RequestFavorites(isLoadingMore);
+            //}
+            //else
+            //{
+            //    await RequestMinorCategoryData(isLoadingMore);
+            //}
         }
 
         private async Task RequestDefaultCategoryData(bool isLoadingMore)
         {
-            MainData storyData = null;
+            TimeLine timeLine = null;
 
-            if (isLoadingMore)
-            {
-                storyData = await DataRequester.RequestStories(_currentDate);
-            }
-            else
+            //if (isLoadingMore)
+            //{
+            //    timeLine = await DataRequester.RequestStories(_currentDate);
+            //}
+            //else
             {
                 ResetStorys();
-                storyData = await DataRequester.RequestLatestStories();
-                if (storyData != null)
+                timeLine = await DataRequester.RequestLatestTimeLine();
+                if (timeLine != null)
                 {
-                    TopStoryList = storyData.top_stories;
-                    UpdateIndicators(TopStoryList.Count);
-                    CurrentStoryId = storyData.stories.First().id.ToString();
+                    CurrentStoryId = timeLine.Items.First().Id.ToString();
                 }
             }
 
-            if (storyData == null)
+            if (timeLine == null)
                 return;
 
-            _currentDate = storyData.date;
+           // _currentDate = timeLine;
 
-            StoryDataList.Add(new Story() { title = StringUtil.GetStoryGroupName(_currentDate), type = Misc.Group_Name_Type });
-            StoryDataList.AddRange(storyData.stories);
+            //StoryDataList.Add(new Story() { title = StringUtil.GetStoryGroupName(_currentDate), type = Misc.Group_Name_Type });
+            StoryDataList.AddRange(timeLine.Items);
         }
 
         private void UpdateIndicators(int count)
@@ -150,33 +144,6 @@ namespace Brook.DuDuRiBao.ViewModels
                 indicators.Add(true);
             }
             Indicators = indicators;
-        }
-
-        private async Task RequestMinorCategoryData(bool isLoadingMore)
-        {
-            MinorData storyData = null;
-
-            if (isLoadingMore)
-            {
-                storyData = await DataRequester.RequestCategoryStories(CurrentCategoryId.ToString(), _currentDate);
-            }
-            else
-            {
-                ResetStorys();
-                storyData = await DataRequester.RequestCategoryLatestStories(CurrentCategoryId.ToString());
-                if (storyData != null)
-                {
-                    var firstStoryId = storyData.stories.First().id;
-                    TopStoryList = new List<TopStory>() { new TopStory() { image = storyData.background, id = Misc.Unvalid_Image_Id, title = storyData.description } };
-                    CurrentStoryId = firstStoryId.ToString();
-                }
-            }
-            if (storyData == null || storyData.stories.Count == 0)
-                return;
-
-            _currentDate = storyData.stories.Last().id.ToString();
-
-            StoryDataList.AddRange(storyData.stories);
         }
 
         public void LoginSuccess()

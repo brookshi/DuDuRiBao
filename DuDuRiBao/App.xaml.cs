@@ -1,10 +1,14 @@
 ﻿using Brook.DuDuRiBao.Pages;
+using Brook.DuDuRiBao.Utils;
+using LLQ;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using XPHttp;
 
 namespace DuDuRiBao
 {
@@ -39,6 +43,8 @@ namespace DuDuRiBao
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+            InitConfig();
+            InitHttpClient();
             Frame rootFrame = Window.Current.Content as Frame;
 
             // 不要在窗口已包含内容时重复应用程序初始化，
@@ -71,6 +77,20 @@ namespace DuDuRiBao
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
             }
+        }
+
+        public void InitConfig()
+        {
+            LLQNotifier.MainDispatcher = Window.Current.Dispatcher;
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+        }
+
+        void InitHttpClient()
+        {
+            XPHttpClient.DefaultClient.HttpConfig
+                .SetBaseUrl(Urls.BaseUrl)
+                .SetUseHttpCache(false)
+                .ApplyConfig();
         }
 
         /// <summary>

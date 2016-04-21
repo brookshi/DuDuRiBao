@@ -23,26 +23,26 @@ namespace Brook.DuDuRiBao.Common
 {
     public class StoryDataTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate ImageTemplate { get; set; }
+        public DataTemplate NormalTemplate { get; set; }
 
         public DataTemplate GroupTemplate { get; set; }
 
-        public DataTemplate NoImageTemplate { get; set; }
+        public DataTemplate ReferTemplate { get; set; }
 
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
-            var story = item as Story;
-            if(story != null && Misc.IsGroupItem(story.type))
-            {
-                return GroupTemplate;
-            }
+            //var story = item as Story;
+            //if(story != null && Misc.IsGroupItem(story.Type))
+            //{
+            //    return GroupTemplate;
+            //}
 
-            if(story.images == null || story.images.Count == 0 || string.IsNullOrEmpty(story.images[0]))
-            {
-                return NoImageTemplate;
-            }
+            //if(story.Posts.Count > 0 && story.Posts[0].OriginPoster != null)
+            //{
+            //    return ReferTemplate;
+            //}
 
-            return ImageTemplate;
+            return NormalTemplate;
         }
     }
 }

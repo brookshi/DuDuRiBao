@@ -24,15 +24,20 @@ namespace Brook.DuDuRiBao.Utils
 {
     public class DataRequester
     {
-        public static Task<MainData> RequestStories(string before)
+        public static Task<TimeLine> RequestLatestTimeLine()
         {
-            return RequestDataForStory<MainData>("", before, Urls.Stories);
+            return RequestDataForStory<TimeLine>("", Urls.TimeLine);
         }
 
-        public static Task<MainData> RequestLatestStories()
-        {
-            return RequestDataForStory<MainData>("", Urls.LatestStories);
-        }
+        //public static Task<MainData> RequestStories(string before)
+        //{
+        //    return RequestDataForStory<MainData>("", before, Urls.Stories);
+        //}
+
+        //public static Task<MainData> RequestLatestStories()
+        //{
+        //    return RequestDataForStory<MainData>("", Urls.LatestStories);
+        //}
 
         public static Task<MinorData> RequestCategoryStories(string categoryId, string before)
         {
@@ -139,17 +144,17 @@ namespace Brook.DuDuRiBao.Utils
             XPHttpClient.DefaultClient.DeleteAsync(Urls.LikeComment, httpParam, null);
         }
 
-        public static Task<Favorites> RequestLatestFavorites()
-        {
-            return XPHttpClient.DefaultClient.GetAsync<Favorites>(Urls.LatestFavorites, null);
-        }
+        //public static Task<Favorites> RequestLatestFavorites()
+        //{
+        //    return XPHttpClient.DefaultClient.GetAsync<Favorites>(Urls.LatestFavorites, null);
+        //}
 
-        public static Task<Favorites> RequestFavorites(string lastTime)
-        {
-            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
-                .AddUrlSegements("lasttime", lastTime);
-            return XPHttpClient.DefaultClient.GetAsync<Favorites>(Urls.Favorites, httpParam);
-        }
+        //public static Task<Favorites> RequestFavorites(string lastTime)
+        //{
+        //    var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+        //        .AddUrlSegements("lasttime", lastTime);
+        //    return XPHttpClient.DefaultClient.GetAsync<Favorites>(Urls.Favorites, httpParam);
+        //}
 
         public static Task<T> RequestDataForStory<T>(string storyId, string before, string functionUrl)
         {

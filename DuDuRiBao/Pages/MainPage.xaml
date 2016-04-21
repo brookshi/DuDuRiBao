@@ -21,21 +21,18 @@
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Elements/FlipViewIndicatorItem.xaml" />
                 <ResourceDictionary Source="../Elements/Story.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <utils:Config x:Key="Config" />
-            <CollectionViewSource x:Key="TopStorySource" Source="{Binding TopStoryList}" />
 
             <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <convert:BooleanReverseConverter x:Key="BooleanReverseConverter" />
-            <convert:FlipViewVisibilityConverter x:Key="FlipViewVisibilityConverter" />
 
             <common:StoryDataTemplateSelector x:Key="StoryDataTemplateSelector"
                                               GroupTemplate="{StaticResource GroupHeader}"
-                                              ImageTemplate="{StaticResource Story}"
-                                              NoImageTemplate="{StaticResource StoryWithoutImage}" />
+                                              NormalTemplate="{StaticResource Story}"
+                                              ReferTemplate="{StaticResource StoryWithoutImage}" />
 
             <DataTemplate x:Key="CategoryItem">
                 <TextBlock Margin="12, 0, 0, 0" Text="{Binding name}" />
@@ -93,7 +90,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <element:ToolBar Category="{x:Bind VM.CategoryName, Mode=OneWay}" Host="MainPage" />
+        <!--<element:ToolBar Category="{x:Bind VM.CategoryName, Mode=OneWay}" Host="MainPage" />-->
         <SplitView x:Name="MainView"
                    Grid.Row="1"
                    Background="{ThemeResource BrushListBackground}"
@@ -170,7 +167,6 @@
                               IsItemClickEnabled="True"
                               ItemClick="CategoryListView_ItemClick"
                               ItemTemplate="{StaticResource CategoryItem}"
-                              ItemsSource="{x:Bind VM.CategoryList}"
                               RelativePanel.AlignBottomWithPanel="True"
                               RelativePanel.AlignLeftWithPanel="True"
                               RelativePanel.AlignRightWithPanel="True"
@@ -193,56 +189,6 @@
                                  RefreshProgressRingBrush="{ThemeResource BrushPrimaryDark}"
                                  RelativePanel.AlignLeftWithPanel="True"
                                  SelectionMode="Single">
-                    <llm:LLMListView.HeaderTemplate>
-                        <DataTemplate x:DataType="vm:MainViewModel">
-                            <Grid>
-                                <FlipView x:Name="ImageFlipView"
-                                          Width="auto"
-                                          Height="{StaticResource HeightFlipView}"
-                                          Margin="0, 0, 0, 10"
-                                          ItemsSource="{x:Bind TopStoryList, Mode=OneWay}"
-                                          ManipulationMode="TranslateX"
-                                          Visibility="{x:Bind CurrentCategoryId, Mode=OneWay, Converter={StaticResource FlipViewVisibilityConverter}}">
-                                    <FlipView.ItemTemplate>
-                                        <DataTemplate x:DataType="data:TopStory">
-                                            <Grid>
-                                                <Image x:Name="MainItem_Image"
-                                                       VerticalAlignment="Center"
-                                                       Stretch="UniformToFill">
-                                                    <Image.Source>
-                                                        <BitmapImage UriSource="{x:Bind image}" />
-                                                    </Image.Source>
-                                                </Image>
-                                                <Rectangle Fill="#33000000"
-                                                           Tag="{x:Bind id}"
-                                                           Tapped="TapFlipImage" />
-                                                <TextBlock Margin="20"
-                                                           VerticalAlignment="Bottom"
-                                                           FontSize="20"
-                                                           FontWeight="SemiBold"
-                                                           Foreground="White"
-                                                           IsHitTestVisible="False"
-                                                           Text="{x:Bind title}"
-                                                           TextWrapping="Wrap" />
-                                            </Grid>
-                                        </DataTemplate>
-                                    </FlipView.ItemTemplate>
-                                </FlipView>
-                                <element:FlipViewIndicator Margin="0, 0, 0, 14"
-                                                           HorizontalAlignment="Center"
-                                                           VerticalAlignment="Bottom"
-                                                           Background="Transparent"
-                                                           FlipView="{Binding ElementName=ImageFlipView}"
-                                                           ItemContainerStyle="{StaticResource FlipViewIndicatorItem}">
-                                    <element:FlipViewIndicator.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Horizontal" />
-                                        </ItemsPanelTemplate>
-                                    </element:FlipViewIndicator.ItemsPanel>
-                                </element:FlipViewIndicator>
-                            </Grid>
-                        </DataTemplate>
-                    </llm:LLMListView.HeaderTemplate>
                     <llm:LLMListView.ItemContainerStyle>
                         <Style TargetType="llm:LLMListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
