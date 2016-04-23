@@ -7,8 +7,24 @@
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">
-                    <Color x:Key="ColorPrimary">#03a9f4</Color>
-                    <Color x:Key="ColorPrimaryDark">#0288d1</Color>
+                    <Color x:Key="ColorPrimary">#2196F3</Color>
+                    <Color x:Key="ColorPrimaryDark">#1976D2</Color>
+
+                    <Color x:Key="ColorStoryCircleName">#5B87A6</Color>
+                    <Color x:Key="ColorStoryList">#F5F6F7</Color>
+                    <Color x:Key="ColorStoryListItem">#FFFFFF</Color>
+                    <Color x:Key="ColorStoryListItemBorder">#D7D9D9</Color>
+                    <Color x:Key="ColorStoryReferenceArea">#FAFAFA</Color>
+                    <Color x:Key="ColorStoryReferenceBorder">#E6E6E6</Color>
+                    <Color x:Key="ColorStoryPoster">#5B87A6</Color>
+                    <Color x:Key="ColorStoryPosterTime">#9DA3A6</Color>
+                    <Color x:Key="ColorStoryPosterName">#9DA3A6</Color>
+                    <Color x:Key="ColorStoryReason">#616466</Color>
+                    <Color x:Key="ColorStoryTitle">#494B4D</Color>
+                    <Color x:Key="ColorStoryTitleArea">#FFFFFF</Color>
+                    <Color x:Key="ColorStoryTitleBorder">#DADBDB</Color>
+                    <Color x:Key="ColorStoryLike">#C2C9CC</Color>
+
                     <Color x:Key="ColorButton">#40c4ff</Color>
                     <Color x:Key="ColorListBackground">#f9f9f9</Color>
                     <Color x:Key="ColorCommentSplitter">#e4e4e4</Color>
@@ -21,6 +37,22 @@
 
                     <SolidColorBrush x:Key="BrushPrimary" Color="{ThemeResource ColorPrimary}" />
                     <SolidColorBrush x:Key="BrushPrimaryDark" Color="{ThemeResource ColorPrimaryDark}" />
+
+                    <SolidColorBrush x:Key="BrushStoryCircleName" Color="{ThemeResource ColorStoryCircleName}" />
+                    <SolidColorBrush x:Key="BrushStoryList" Color="{ThemeResource ColorStoryList}" />
+                    <SolidColorBrush x:Key="BrushStoryListItem" Color="{ThemeResource ColorStoryListItem}" />
+                    <SolidColorBrush x:Key="BrushStoryListItemBorder" Color="{ThemeResource ColorStoryListItemBorder}" />
+                    <SolidColorBrush x:Key="BrushStoryReferenceArea" Color="{ThemeResource ColorStoryReferenceArea}" />
+                    <SolidColorBrush x:Key="BrushStoryReferenceBorder" Color="{ThemeResource ColorStoryReferenceBorder}" />
+                    <SolidColorBrush x:Key="BrushStoryPoster" Color="{ThemeResource ColorStoryPoster}" />
+                    <SolidColorBrush x:Key="BrushStoryPosterTime" Color="{ThemeResource ColorStoryPosterTime}" />
+                    <SolidColorBrush x:Key="BrushStoryPosterName" Color="{ThemeResource ColorStoryPosterName}" />
+                    <SolidColorBrush x:Key="BrushStoryReason" Color="{ThemeResource ColorStoryReason}" />
+                    <SolidColorBrush x:Key="BrushStoryTitle" Color="{ThemeResource ColorStoryTitle}" />
+                    <SolidColorBrush x:Key="BrushStoryTitleArea" Color="{ThemeResource ColorStoryTitleArea}" />
+                    <SolidColorBrush x:Key="BrushStoryTitleBorder" Color="{ThemeResource ColorStoryTitleBorder}" />
+                    <SolidColorBrush x:Key="BrushStoryLike" Color="{ThemeResource ColorStoryLike}" />
+
                     <SolidColorBrush x:Key="BrushButton" Color="{ThemeResource ColorButton}" />
                     <SolidColorBrush x:Key="BrushListBackground" Color="{ThemeResource ColorListBackground}" />
                     <SolidColorBrush x:Key="BrushCommentSplitter" Color="{ThemeResource ColorCommentSplitter}" />

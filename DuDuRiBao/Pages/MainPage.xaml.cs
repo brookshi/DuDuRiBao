@@ -48,7 +48,7 @@ namespace Brook.DuDuRiBao.Pages
             }
             await InitUI();
 
-            //AuthorizationHelper.AutoLogin(VM.LoginSuccess);
+            await AuthorizationHelper.AutoLogin();
 
             MainListView.SetRefresh(true);
         }
@@ -167,20 +167,20 @@ namespace Brook.DuDuRiBao.Pages
 
         private void Login(object sender, RoutedEventArgs e)
         {
-            VM.UserName = StringUtil.GetString("Logining");
-            AuthorizationHelper.Login(LoginType.Sina, (isSuccess, msg) =>
-            {
-                if (isSuccess)
-                {
-                    VM.LoginSuccess();
-                    PopupMessage.DisplayMessageInRes("LoginSuccess");
-                }
-                else
-                {
-                    PopupMessage.DisplayMessageInRes("LoginFailed");
-                    VM.UserName = StringUtil.GetString("PleaseLogin");
-                }
-            });
+            //VM.UserName = StringUtil.GetString("Logining");
+            //AuthorizationHelper.Login(LoginType.Sina, (isSuccess, msg) =>
+            //{
+            //    if (isSuccess)
+            //    {
+            //        VM.LoginSuccess();
+            //        PopupMessage.DisplayMessageInRes("LoginSuccess");
+            //    }
+            //    else
+            //    {
+            //        PopupMessage.DisplayMessageInRes("LoginFailed");
+            //        VM.UserName = StringUtil.GetString("PleaseLogin");
+            //    }
+            //});
             //ResetCategoryPanel();
         }
 

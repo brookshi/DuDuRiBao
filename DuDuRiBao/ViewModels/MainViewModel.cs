@@ -77,7 +77,7 @@ namespace Brook.DuDuRiBao.ViewModels
 
             if (StoryDataList.Count < Misc.Page_Count)
             {
-                await LoadMore();
+                //await LoadMore();
             }
         }
 

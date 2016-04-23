@@ -66,6 +66,16 @@ namespace Brook.DuDuRiBao.Utils
             }
         }
 
+        public static string DisplayTime(int sec)
+        {
+            return DisplayTime(CalcDateFromSec(sec));
+        }
+
+        public static DateTime CalcDateFromSec(int sec)
+        {
+            return new DateTime(1970, 1, 1).AddSeconds(sec);
+        }
+
         public static string DisplayTime(DateTime date)
         {
             const int MINUTE = 60;

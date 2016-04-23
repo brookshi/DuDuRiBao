@@ -29,6 +29,13 @@ namespace Brook.DuDuRiBao.Utils
             return RequestDataForStory<TimeLine>("", Urls.TimeLine);
         }
 
+        public static Task<LoginToken> AnonymousLogin(string key)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .SetJsonStringBody("{\"data\":\"" + key + "\"}");
+            
+            return XPHttpClient.DefaultClient.PostAsync<LoginToken>(Urls.AnonymousLogin, httpParam);
+        }
         //public static Task<MainData> RequestStories(string before)
         //{
         //    return RequestDataForStory<MainData>("", before, Urls.Stories);

@@ -14,20 +14,16 @@
 //   limitations under the License. 
 #endregion
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Brook.DuDuRiBao.Models
 {
-    public class ZhiHuAuthoInfo
+    public class LoginToken
     {
-        public string access_token { get; set; }
-
-        public List<string> bound_services { get; set; }
-
-        public string name { get; set; }
-
-        public string avatar { get; set; }
-
-        public string AnonymousLoginToken { get; set; }
+        public string Access_Token { get; set; }
     }
 }

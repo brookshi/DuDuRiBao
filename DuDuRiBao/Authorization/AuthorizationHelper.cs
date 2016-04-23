@@ -25,6 +25,7 @@ using Brook.DuDuRiBao.Utils;
 using Brook.DuDuRiBao.ViewModels;
 using Brook.DuDuRiBao.Common;
 using XPHttp;
+using Brook.DuDuRiBao.Models;
 
 namespace Brook.DuDuRiBao.Authorization
 {
@@ -52,84 +53,100 @@ namespace Brook.DuDuRiBao.Authorization
             return (IAuthorize)typeInfo.GetDeclaredField("Instance").GetValue(null);
         }
 
-        public static void AutoLogin(Action loginSuccessCallback)
+        public static async Task<bool> AutoLogin()
+        {
+            if(!(await AutoLoginZhiHu()))
+            {
+                return await AnonymousLogin();
+            }
+
+            return true;
+        }
+
+        public static async Task<bool> AutoLoginZhiHu()
         {
             if (IsLogin)
-                return;
+                return true;
 
             string msg = string.Empty;
             var loginType = StorageUtil.StorageInfo.LoginType;
             if (!CheckLoginType(loginType, out msg))
-                return;
+                return false;
 
             var authorizer = Authorizations[loginType];
-            if(!authorizer.IsAuthorized)
-                return;
+            if (!authorizer.IsAuthorized)
+                return false;
 
             if (StorageUtil.StorageInfo.IsZhiHuAuthoVaild())
             {
                 IsLogin = true;
                 SetHttpAuthorization();
-                if (loginSuccessCallback != null)
-                    loginSuccessCallback();
+                return true;
             }
-            else if(Authorizations[loginType].LoginData != null)
+            else if (Authorizations[loginType].LoginData != null)
             {
-                Action<bool, object> callback = (isSuccess, res) => { if(loginSuccessCallback != null) loginSuccessCallback(); };
-                LoginZhiHu(loginType, callback);
+                return await LoginZhiHu(loginType);
             }
+
+            return false;
         }
 
-        public static void Login(LoginType loginType, Action<bool, object> loginCallback)
+        public static async Task<bool> AnonymousLogin()
+        {
+            var key = AnonymousLoginKey.GetAnonymousLoginKey();
+            LoginToken loginToken = await DataRequester.AnonymousLogin(key);
+            if (loginToken == null)
+                return false;
+
+            StorageUtil.StorageInfo.ZhiHuAuthoInfo = new ZhiHuAuthoInfo() { AnonymousLoginToken = loginToken.Access_Token };
+            SetHttpAuthorization();
+
+            return true;
+        }
+
+        public static async Task<bool> Login(LoginType loginType)
         {
             if (IsLogin)
-                return;
-
-            if (loginCallback == null)
-                loginCallback = (b, o) => { };
+                return true;
 
             string msg = string.Empty;
             if (!CheckLoginType(loginType, out msg))
             {
-                loginCallback(false, msg);
-                return;
+                return false;
             }
             var authorizer = Authorizations[loginType];
 
             if (authorizer.IsAuthorized && Authorizations[loginType].LoginData != null)
             {
-                LoginZhiHu(loginType, loginCallback);
+                return await LoginZhiHu(loginType);
             }
             else
             {
+                bool loginSuccess = false;
                 try
                 { 
-                    authorizer.Login((isSuccess, res)=>
+                    authorizer.Login(async (isSuccess, res) =>
                     {
-                        if(isSuccess)
+                        if (isSuccess)
                         {
-                            LoginZhiHu(loginType, loginCallback);
-                        }
-                        else
-                        {
-                            loginCallback(false, StringUtil.GetString("LoginFailed"));
+                            loginSuccess = await LoginZhiHu(loginType);
                         }
                     });
                 }
                 catch(Exception)
                 {
-                    loginCallback(false, StringUtil.GetString("LoginFailed"));
+
                 }
+                return loginSuccess;
             }
         }
 
-        private static async void LoginZhiHu(LoginType loginType, Action<bool, object> loginCallback)
+        private static async Task<bool> LoginZhiHu(LoginType loginType)
         {
             var zhiHuAuthoData = await DataRequester.Login(Authorizations[loginType].LoginData);
             if (zhiHuAuthoData == null)
             {
-                loginCallback(false, StringUtil.GetString("LoginZhiHuFailed"));
-                return;
+                return false;
             }
             StorageUtil.StorageInfo.LoginType = loginType;
             StorageUtil.StorageInfo.ZhiHuAuthoInfo = zhiHuAuthoData;
@@ -137,12 +154,12 @@ namespace Brook.DuDuRiBao.Authorization
 
             IsLogin = true;
             SetHttpAuthorization();
-            loginCallback(true, StringUtil.GetString("LoginSuccess"));
+            return true;
         }
 
         private static void SetHttpAuthorization()
         {
-            XPHttpClient.DefaultClient.HttpConfig.SetAuthorization("Bearer", StorageUtil.StorageInfo.ZhiHuAuthoInfo.access_token);
+            XPHttpClient.DefaultClient.HttpConfig.SetAuthorization("Bearer", StorageUtil.StorageInfo.ZhiHuAuthoInfo.access_token ?? StorageUtil.StorageInfo.ZhiHuAuthoInfo.AnonymousLoginToken);
         }
 
         public static void Logout()
