@@ -13,9 +13,9 @@
                     <Color x:Key="ColorStoryCircleName">#5B87A6</Color>
                     <Color x:Key="ColorStoryList">#F5F6F7</Color>
                     <Color x:Key="ColorStoryListItem">#FFFFFF</Color>
-                    <Color x:Key="ColorStoryListItemBorder">#D7D9D9</Color>
+                    <Color x:Key="ColorStoryListItemBorder">#EEEEEE</Color>
                     <Color x:Key="ColorStoryReferenceArea">#FAFAFA</Color>
-                    <Color x:Key="ColorStoryReferenceBorder">#E6E6E6</Color>
+                    <Color x:Key="ColorStoryReferenceBorder">#EAEAEA</Color>
                     <Color x:Key="ColorStoryPoster">#5B87A6</Color>
                     <Color x:Key="ColorStoryPosterTime">#9DA3A6</Color>
                     <Color x:Key="ColorStoryPosterName">#9DA3A6</Color>

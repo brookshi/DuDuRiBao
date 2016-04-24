@@ -7,72 +7,81 @@
 
     <converter:TimeConverter x:Key="TimeConverter" />
     <DataTemplate x:Key="Story">
-        <Border Background="{ThemeResource BrushStoryListItem}" BorderBrush="{ThemeResource BrushStoryListItemBorder}">
-            <RelativePanel>
-                <Image x:Name="CircleImage"
-                       Width="36"
-                       Height="36"
-                       Margin="12, 12, 8, 12"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Stretch="UniformToFill">
-                    <Image.Source>
-                        <BitmapImage UriSource="{Binding Posts[0].Circle.Thumbnail}" />
-                    </Image.Source>
-                </Image>
-                <TextBlock x:Name="CircleName"
-                           Margin="0, 8, 0, 4"
-                           FontSize="10"
-                           Foreground="{ThemeResource BrushStoryCircleName}"
-                           RelativePanel.AlignTopWith="CircleImage"
-                           RelativePanel.RightOf="CircleImage"
-                           Text="{Binding Posts[0].Circle.Name}" />
-                <TextBlock x:Name="PosterTime"
-                           Margin="0, 0, 4, 0"
-                           FontSize="8"
-                           Foreground="{ThemeResource BrushStoryPosterTime}"
-                           RelativePanel.Below="CircleName"
-                           RelativePanel.RightOf="CircleImage"
-                           Text="{Binding Time,
-                                          Converter={StaticResource TimeConverter}}" />
-                <TextBlock x:Name="PosterName"
-                           FontSize="8"
-                           Foreground="{ThemeResource BrushStoryPosterName}"
-                           RelativePanel.RightOf="PosterTime"
-                           Text="{Binding Posts[0].Poster.Name}" />
-                <Border x:Name="TitleBorder"
-                        Margin="12, 0, 12, 12"
-                        Background="{ThemeResource BrushStoryTitleArea}"
-                        BorderBrush="{ThemeResource BrushStoryTitleBorder}"
-                        CornerRadius="5"
-                        RelativePanel.Below="CircleImage">
-                    <RelativePanel>
-                        <Image x:Name="MainImage"
-                               Width="60"
-                               Height="60"
-                               Margin="0, 0, 8, 0"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Stretch="UniformToFill">
-                            <Image.Source>
-                                <BitmapImage x:Name="Bitmap" UriSource="{Binding Images[0]}" />
-                            </Image.Source>
-                        </Image>
-                        <TextBlock x:Name="Content"
-                                   VerticalAlignment="Center"
-                                   FontWeight="Medium"
-                                   Foreground="{ThemeResource BrushStoryTitle}"
-                                   LineHeight="24"
-                                   RelativePanel.RightOf="MainImage"
-                                   Text="{Binding Title}"
-                                   TextWrapping="Wrap" />
-                    </RelativePanel>
-                </Border>
-                <Rectangle Height="6"
-                           Fill="{ThemeResource BrushStoryList}"
-                           RelativePanel.Below="TitleBorder" />
-            </RelativePanel>
-        </Border>
+        <Grid Background="{ThemeResource BrushStoryListItem}">
+            <Border BorderBrush="{ThemeResource BrushStoryListItemBorder}" BorderThickness="0, 1, 0, 1">
+                <!--<Image Height="{Binding Path=ActualHeight,
+                                    ElementName=ItemPanel}"
+                   NineGrid="0, 20, 0, 20"
+                   Source="ms-appx:///Assets/ListItemShadow.png"
+                   Stretch="Fill" />-->
+                <RelativePanel x:Name="ItemPanel">
+                    <Rectangle x:Name="CircleImage"
+                               Width="36"
+                               Height="36"
+                               Margin="12, 12, 8, 12"
+                               RadiusX="2"
+                               RadiusY="2"
+                               RelativePanel.AlignLeftWithPanel="True">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{Binding Posts[0].Circle.Thumbnail}" Stretch="Fill" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock x:Name="CircleName"
+                               Margin="0, 14, 0, 4"
+                               FontSize="12"
+                               Foreground="{ThemeResource BrushStoryCircleName}"
+                               RelativePanel.RightOf="CircleImage"
+                               Text="{Binding Posts[0].Circle.Name}" />
+                    <TextBlock x:Name="PosterTime"
+                               Margin="0, 0, 4, 0"
+                               FontSize="10"
+                               Foreground="{ThemeResource BrushStoryPosterTime}"
+                               RelativePanel.Below="CircleName"
+                               RelativePanel.RightOf="CircleImage"
+                               Text="{Binding Time,
+                                              Converter={StaticResource TimeConverter}}" />
+                    <TextBlock x:Name="PosterName"
+                               FontSize="10"
+                               Foreground="{ThemeResource BrushStoryPosterName}"
+                               RelativePanel.RightOf="PosterTime"
+                               Text="{Binding Posts[0].Poster.Name}" />
+                    <Border x:Name="TitleBorder"
+                            Margin="12, 0, 12, 12"
+                            Background="{ThemeResource BrushStoryTitleArea}"
+                            BorderBrush="{ThemeResource BrushStoryTitleBorder}"
+                            BorderThickness="1"
+                            CornerRadius="3"
+                            RelativePanel.AlignLeftWithPanel="True"
+                            RelativePanel.AlignRightWithPanel="True"
+                            RelativePanel.Below="CircleImage">
+                        <RelativePanel VerticalAlignment="Center">
+                            <Image x:Name="MainImage"
+                                   Width="72"
+                                   Height="72"
+                                   Margin="0, 0, 8, 0"
+                                   RelativePanel.AlignBottomWithPanel="True"
+                                   RelativePanel.AlignLeftWithPanel="True"
+                                   RelativePanel.AlignTopWithPanel="True"
+                                   Stretch="Fill">
+                                <Image.Source>
+                                    <BitmapImage x:Name="Bitmap" UriSource="{Binding Images[0]}" />
+                                </Image.Source>
+                            </Image>
+                            <TextBlock x:Name="Content"
+                                       FontWeight="Medium"
+                                       Foreground="{ThemeResource BrushStoryTitle}"
+                                       LineHeight="24"
+                                       MaxLines="2"
+                                       RelativePanel.AlignVerticalCenterWithPanel="True"
+                                       RelativePanel.RightOf="MainImage"
+                                       Text="{Binding Title}"
+                                       TextWrapping="Wrap" />
+                        </RelativePanel>
+                    </Border>
+                </RelativePanel>
+            </Border>
+            <!--<Rectangle Height="6" Fill="{ThemeResource BrushStoryList}" />-->
+        </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="StoryWithoutImage">
