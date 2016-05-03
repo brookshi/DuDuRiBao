@@ -9,16 +9,11 @@
     <DataTemplate x:Key="Story">
         <Grid Background="{ThemeResource BrushStoryListItem}">
             <Border BorderBrush="{ThemeResource BrushStoryListItemBorder}" BorderThickness="0, 1, 0, 1">
-                <!--<Image Height="{Binding Path=ActualHeight,
-                                    ElementName=ItemPanel}"
-                   NineGrid="0, 20, 0, 20"
-                   Source="ms-appx:///Assets/ListItemShadow.png"
-                   Stretch="Fill" />-->
                 <RelativePanel x:Name="ItemPanel">
                     <Rectangle x:Name="CircleImage"
                                Width="36"
                                Height="36"
-                               Margin="12, 12, 8, 12"
+                               Margin="12, 12, 8, 8"
                                RadiusX="2"
                                RadiusY="2"
                                RelativePanel.AlignLeftWithPanel="True">
@@ -45,7 +40,7 @@
                                Foreground="{ThemeResource BrushStoryPosterName}"
                                RelativePanel.RightOf="PosterTime"
                                Text="{Binding Posts[0].Poster.Name}" />
-                    <Border x:Name="TitleBorder"
+                    <!--<Border x:Name="TitleBorder"
                             Margin="12, 0, 12, 12"
                             Background="{ThemeResource BrushStoryTitleArea}"
                             BorderBrush="{ThemeResource BrushStoryTitleBorder}"
@@ -53,7 +48,12 @@
                             CornerRadius="3"
                             RelativePanel.AlignLeftWithPanel="True"
                             RelativePanel.AlignRightWithPanel="True"
-                            RelativePanel.Below="CircleImage">
+                            RelativePanel.Below="CircleImage">-->
+                    <Grid x:Name="TitleBorder"
+                          Margin="12, 0, 12, 8"
+                          RelativePanel.AlignLeftWithPanel="True"
+                          RelativePanel.AlignRightWithPanel="True"
+                          RelativePanel.Below="CircleImage">
                         <RelativePanel VerticalAlignment="Center">
                             <Image x:Name="MainImage"
                                    Width="72"
@@ -68,6 +68,7 @@
                                 </Image.Source>
                             </Image>
                             <TextBlock x:Name="Content"
+                                       Margin="0, 0, 8, 0"
                                        FontWeight="Medium"
                                        Foreground="{ThemeResource BrushStoryTitle}"
                                        LineHeight="24"
@@ -77,7 +78,12 @@
                                        Text="{Binding Title}"
                                        TextWrapping="Wrap" />
                         </RelativePanel>
-                    </Border>
+                        <Image Height="75"
+                               Margin="-2, 2, 0, 0"
+                               NineGrid="20, 20, 20, 20"
+                               Source="ms-appx:///Assets/ListItemShadow.png"
+                               Stretch="Fill" />
+                    </Grid>
                 </RelativePanel>
             </Border>
             <!--<Rectangle Height="6" Fill="{ThemeResource BrushStoryList}" />-->
