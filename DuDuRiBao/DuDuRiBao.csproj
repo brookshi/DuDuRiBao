@@ -127,6 +127,9 @@
       <DependentUpon>CommentToolBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Elements\FlipViewIndicator.cs" />
+    <Compile Include="Elements\StoryToolBar.xaml.cs">
+      <DependentUpon>StoryToolBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Elements\ToolBar.xaml.cs">
       <DependentUpon>ToolBar.xaml</DependentUpon>
     </Compile>
@@ -201,6 +204,10 @@
     <Page Include="Elements\Story.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Elements\StoryToolBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Elements\ToolBar.xaml">
       <Generator>MSBuild:Compile</Generator>

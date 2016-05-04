@@ -50,7 +50,7 @@
                             RelativePanel.AlignRightWithPanel="True"
                             RelativePanel.Below="CircleImage">-->
                     <Grid x:Name="TitleBorder"
-                          Margin="12, 0, 12, 8"
+                          Margin="12, 0, 12, 4"
                           RelativePanel.AlignLeftWithPanel="True"
                           RelativePanel.AlignRightWithPanel="True"
                           RelativePanel.Below="CircleImage">
@@ -84,6 +84,10 @@
                                Source="ms-appx:///Assets/ListItemShadow.png"
                                Stretch="Fill" />
                     </Grid>
+                    <local:StoryToolBar Margin="4, 0, 8, 6"
+                                        RelativePanel.AlignLeftWithPanel="True"
+                                        RelativePanel.AlignRightWithPanel="True"
+                                        RelativePanel.Below="TitleBorder" />
                 </RelativePanel>
             </Border>
             <!--<Rectangle Height="6" Fill="{ThemeResource BrushStoryList}" />-->
