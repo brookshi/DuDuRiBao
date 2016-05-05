@@ -76,16 +76,16 @@ namespace Brook.DuDuRiBao.Pages
 
         private async void LoadMoreStories()
         {
-            //if (_isLoadComplete)
-            //{
-            //    MainListView.FinishLoadingMore();
-            //    return;
-            //}
+            if (_isLoadComplete)
+            {
+                MainListView.FinishLoadingMore();
+                return;
+            }
 
-            //var preCount = VM.StoryDataList.Count;
-            //await VM.LoadMore();
-            //MainListView.FinishLoadingMore();
-            //_isLoadComplete = preCount == VM.StoryDataList.Count;
+            var preCount = VM.StoryDataList.Count;
+            await VM.LoadMore();
+            MainListView.FinishLoadingMore();
+            _isLoadComplete = preCount == VM.StoryDataList.Count;
         }
 
         private void MainListView_ItemClick(object sender, ItemClickEventArgs e)

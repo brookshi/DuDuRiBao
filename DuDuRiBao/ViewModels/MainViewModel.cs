@@ -77,7 +77,7 @@ namespace Brook.DuDuRiBao.ViewModels
 
             if (StoryDataList.Count < Misc.Page_Count)
             {
-                //await LoadMore();
+                await LoadMore();
             }
         }
 
@@ -113,11 +113,14 @@ namespace Brook.DuDuRiBao.ViewModels
         {
             TimeLine timeLine = null;
 
-            //if (isLoadingMore)
-            //{
-            //    timeLine = await DataRequester.RequestStories(_currentDate);
-            //}
-            //else
+            if (isLoadingMore)
+            {
+                if (StoryDataList.Count > 0)
+                {
+                    timeLine = await DataRequester.RequestNextTimeLine(StoryDataList.Last().Time.ToString());
+                }
+            }
+            else
             {
                 ResetStorys();
                 timeLine = await DataRequester.RequestLatestTimeLine();

@@ -26,7 +26,11 @@ namespace Brook.DuDuRiBao.Utils
     {
         public static Task<TimeLine> RequestLatestTimeLine()
         {
-            return RequestDataForStory<TimeLine>("", Urls.TimeLine);
+            return RequestDataForTimeLine<TimeLine>("", Urls.TimeLine);
+        }
+        public static Task<TimeLine> RequestNextTimeLine(string before)
+        {
+            return RequestDataForTimeLine<TimeLine>(before, Urls.NextTimeLine);
         }
 
         public static Task<LoginToken> AnonymousLogin(string key)
@@ -162,6 +166,14 @@ namespace Brook.DuDuRiBao.Utils
         //        .AddUrlSegements("lasttime", lastTime);
         //    return XPHttpClient.DefaultClient.GetAsync<Favorites>(Urls.Favorites, httpParam);
         //}
+
+        public static Task<T> RequestDataForTimeLine<T>(string before, string functionUrl)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("before", before ?? "");
+
+            return XPHttpClient.DefaultClient.GetAsync<T>(functionUrl, httpParam);
+        }
 
         public static Task<T> RequestDataForStory<T>(string storyId, string before, string functionUrl)
         {
