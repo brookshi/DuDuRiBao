@@ -47,6 +47,11 @@ namespace Brook.DuDuRiBao.Utils
             return XPHttpClient.DefaultClient.GetAsync<StoryExtraInfo>(Urls.StoryExtraInfo, httpParam);
         }
 
+        public static Task<CommentList> RequestComments(string storyId, string before)
+        {
+            return RequestDataForStory<CommentList>(storyId, before, string.IsNullOrEmpty(before) ? Urls.Comments : Urls.NextComments);
+        }
+
         public static Task<LoginToken> AnonymousLogin(string key)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
@@ -73,15 +78,10 @@ namespace Brook.DuDuRiBao.Utils
         {
             return RequestDataForCategory<MinorData>(categoryId, "", Urls.CategoryLatestStories);
         }
-       
-        public static Task<Comments> RequestLongComment(string storyId, string before)
-        {
-            return RequestDataForStory<Comments>(storyId, before, string.IsNullOrEmpty(before) ? Urls.LongComment : Urls.LongComment_More);
-        }
 
-        public static Task<Comments> RequestShortComment(string storyId, string before)
+        public static Task<CommentList> RequestShortComment(string storyId, string before)
         {
-            return RequestDataForStory<Comments>(storyId, before, string.IsNullOrEmpty(before) ? Urls.ShortComment : Urls.ShortComment_More);
+            return RequestDataForStory<CommentList>(storyId, before, string.IsNullOrEmpty(before) ? Urls.ShortComment : Urls.ShortComment_More);
         }
 
         public static Task<RootObject> RequestCategory()

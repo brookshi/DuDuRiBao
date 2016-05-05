@@ -20,7 +20,7 @@
                      Height="36"
                      Margin="4, 4, 2, 0">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="{x:Bind avatar}" Stretch="Fill" />
+                    <ImageBrush ImageSource="{x:Bind User.Avatar}" Stretch="Fill" />
                 </Ellipse.Fill>
             </Ellipse>
             <TextBlock x:Name="CommentAuthor"
@@ -30,7 +30,7 @@
                        Foreground="{ThemeResource BrushCommentInfoForeground}"
                        RelativePanel.AlignVerticalCenterWith="CommentAvatar"
                        RelativePanel.RightOf="CommentAvatar"
-                       Text="{x:Bind author}" />
+                       Text="{x:Bind User.Name}" />
             <TextBlock x:Name="CommentContent"
                        Margin="5"
                        HorizontalAlignment="Stretch"
@@ -39,40 +39,26 @@
                        RelativePanel.Below="CommentAvatar"
                        RelativePanel.RightOf="CommentAvatar"
                        TextWrapping="Wrap">
-                <Run Foreground="{ThemeResource BrushCommentInfoForeground}" Text="{x:Bind content}" />
+                <Run Foreground="{ThemeResource BrushCommentInfoForeground}" Text="{x:Bind Content}" />
                 <Run FontSize="12"
                      FontWeight="SemiBold"
-                     Text="{x:Bind reply_to.author, Converter={StaticResource ReplyAuthorFormatConverter}}" />
+                     Text="{x:Bind Reply_To.Author, Converter={StaticResource ReplyAuthorFormatConverter}}" />
                 <Run FontSize="12"
                      Foreground="{ThemeResource BrushCommentReplyToContent}"
-                     Text="{x:Bind reply_to.content}" />
+                     Text="{x:Bind Reply_To.Content}" />
             </TextBlock>
             <TextBlock Margin="5"
                        FontSize="12"
                        Foreground="{ThemeResource BrushCommentExtraInfoForeground}"
                        RelativePanel.Below="CommentContent"
                        RelativePanel.RightOf="CommentAvatar"
-                       Text="{x:Bind time, Converter={StaticResource TimeConverter}}" />
-            <local:CommentToolBar CommentLikeCount="{x:Bind likes}"
-                                  IsLikeComment="{x:Bind voted, Converter={StaticResource NullableBooleanToBooleanConverter}}"
-                                  IsOwner="{x:Bind own}"
+                       Text="{x:Bind Time, Converter={StaticResource TimeConverter}}" />
+            <local:CommentToolBar CommentLikeCount="{x:Bind Likes}"
+                                  IsLikeComment="{x:Bind Voted, Converter={StaticResource NullableBooleanToBooleanConverter}}"
+                                  IsOwner="{x:Bind Own}"
                                   RelativePanel.AlignRightWithPanel="True"
                                   RelativePanel.AlignTopWithPanel="True" />
         </RelativePanel>
-    </DataTemplate>
-
-    <DataTemplate x:Key="CommentHeader">
-        <Grid>
-            <Rectangle Width="4"
-                       Height="10"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Fill="{ThemeResource BrushPrimary}" />
-            <TextBlock Margin="10, 0, 0, 0"
-                       VerticalAlignment="Center"
-                       FontSize="12"
-                       Text="{Binding GroupName}" />
-        </Grid>
     </DataTemplate>
 
 </ResourceDictionary>

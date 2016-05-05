@@ -48,10 +48,10 @@ namespace Brook.DuDuRiBao.Pages
                 return;
             }
 
-            var preCount = VM.CurrentCommentCount;
+            var preCount = VM.CommentList.Count;
             await VM.RequestComments(true);
             CommentListView.FinishLoadingMore();
-            _isLoadComplete = preCount == VM.CurrentCommentCount;
+            _isLoadComplete = preCount == VM.CommentList.Count;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -66,11 +66,11 @@ namespace Brook.DuDuRiBao.Pages
                 return;
             }
 
-            if (string.IsNullOrEmpty(VM.CommentContent))
+            if (string.IsNullOrEmpty(VM.PostCommentContent))
                 return;
 
             await VM.SendComment();
-            VM.CommentContent = "";
+            VM.PostCommentContent = "";
             CommentListView.SetRefresh(true);
         }
     }

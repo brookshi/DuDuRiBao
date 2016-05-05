@@ -20,51 +20,36 @@ using System.ComponentModel;
 
 namespace Brook.DuDuRiBao.Models
 {
-    public class Comments
+    public class User
     {
-        public List<Comment> comments { get; set; }
-    }
-
-    public class GroupComments : ObservableCollectionExtended<Comment>
-    {
-        private string _groupName = "";
-        public string GroupName
-        {
-            get { return _groupName; }
-            set
-            {
-                if (value != _groupName)
-                {
-                    _groupName = value;
-                    Notify("GroupName");
-                }
-            }
-        }
-
-        protected void Notify(string property)
-        {
-            OnPropertyChanged(new PropertyChangedEventArgs(property));
-        }
+        public int Id { get; set; }
+        public string Avatar { get; set; }
+        public string Name { get; set; }
     }
 
     public class ReplyTo
     {
-        public string content { get; set; }
-        public int status { get; set; }
-        public int id { get; set; }
-        public string author { get; set; }
+        public string Content { get; set; }
+        public int Status { get; set; }
+        public User User { get; set; }
+        public int Id { get; set; }
+        public string Author { get; set; }
     }
 
     public class Comment
     {
-        public bool own { get; set; }
-        public string author { get; set; }
-        public string content { get; set; }
-        public string avatar { get; set; }
-        public int time { get; set; }
-        public bool voted { get; set; }
-        public int id { get; set; }
-        public int likes { get; set; }
-        public ReplyTo reply_to { get; set; }
+        public string Content { get; set; }
+        public bool Own { get; set; }
+        public User User { get; set; }
+        public int Time { get; set; }
+        public bool Voted { get; set; }
+        public int Id { get; set; }
+        public int Likes { get; set; }
+        public ReplyTo Reply_To { get; set; }
+    }
+
+    public class CommentList
+    {
+        public List<Comment> Comments { get; set; }
     }
 }

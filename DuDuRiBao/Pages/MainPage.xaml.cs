@@ -22,7 +22,7 @@ namespace Brook.DuDuRiBao.Pages
 
         public bool IsDesktopDevice { get { return UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Mouse; } }
 
-        public bool IsCommentPanelOpen { get { return StorageUtil.StorageInfo.IsCommentPanelOpen; } }
+        public bool IsCommentPanelOpen { get { return true; } }
 
         private bool _isLoadComplete = false;
 
@@ -113,7 +113,7 @@ namespace Brook.DuDuRiBao.Pages
             if (Config.UIStatus == AppUIStatus.All || Config.UIStatus == AppUIStatus.ListAndContent)
             {
                 MainContentFrame.Navigate(typeof(MainContentPage), storyId);
-                //CommentFrame.Navigate(typeof(CommentPage), storyId);
+                CommentFrame.Navigate(typeof(CommentPage), storyId);
             }
             else
             {
@@ -139,7 +139,7 @@ namespace Brook.DuDuRiBao.Pages
             if (Config.IsPageSwitched(e.PreviousSize, e.NewSize) && !string.IsNullOrEmpty(ViewModelBase.CurrentStoryId))
             {
                 MainContentFrame.Navigate(typeof(MainContentPage));
-               // CommentFrame.Navigate(typeof(CommentPage));
+                CommentFrame.Navigate(typeof(CommentPage));
             }
         }
 

@@ -10,15 +10,13 @@ namespace Brook.DuDuRiBao.ViewModels
 {
     public class CommentViewModel : ViewModelBase
     {
-        private CommentType _currCommentType = CommentType.Long;
+        private readonly ObservableCollectionExtended<Comment> _commentList = new ObservableCollectionExtended<Comment>();
 
-        private readonly ObservableCollectionExtended<GroupComments> _commentList = new ObservableCollectionExtended<GroupComments>();
-
-        public ObservableCollectionExtended<GroupComments> CommentList { get { return _commentList; } }
+        public ObservableCollectionExtended<Comment> CommentList { get { return _commentList; } }
 
         public string LastCommentId
         {
-            get { return CommentList.Last().LastOrDefault()?.id.ToString() ?? null; }
+            get { return CommentList.LastOrDefault()?.Id.ToString() ?? null; }
         }
 
         public string Title
@@ -54,16 +52,16 @@ namespace Brook.DuDuRiBao.ViewModels
             }
         }
 
-        private string _commentContent;
-        public string CommentContent
+        private string _postCommentContent;
+        public string PostCommentContent
         {
-            get { return _commentContent; }
+            get { return _postCommentContent; }
             set
             {
-                if (value != _commentContent)
+                if (value != _postCommentContent)
                 {
-                    _commentContent = value;
-                    Notify("CommentContent");
+                    _postCommentContent = value;
+                    Notify("PostCommentContent");
                 }
             }
         }
@@ -80,86 +78,38 @@ namespace Brook.DuDuRiBao.ViewModels
             LLQNotifier.Default.Register(CommentExclusiveSubscriber.Instance);
         }
 
+        public void ResetComments()
+        {
+            CommentList.Clear();
+        }
+
         public async Task RequestComments(bool isLoadingMore)
         {
             if (!isLoadingMore)
             {
                 ResetComments();
-                InitCommentInfo();
             }
 
-            if (_currCommentType == CommentType.Long)
-            {
-                await RequestLongComments(isLoadingMore);
-            }
-            else if (_currCommentType == CommentType.Short)
-            {
-                await RequestShortComments();
-            }
-        }
-
-        private void InitCommentInfo()
-        {
-            if (CommentList.Count == 0)
-            {
-                CommentList.Add(new GroupComments() { GroupName = StringUtil.GetCommentGroupName(CommentType.Long, CurrentStoryExtraInfo.long_comments.ToString()) });
-                CommentList.Add(new GroupComments() { GroupName = StringUtil.GetCommentGroupName(CommentType.Short, CurrentStoryExtraInfo.short_comments.ToString()) });
-            }
-        }
-
-        public void ResetComments()
-        {
-            CommentList.Clear();
-            _currCommentType = CommentType.Long;
-        }
-
-        public int CurrentCommentCount { get { return CommentList.Count > 1 ? CommentList[0].Count + CommentList[1].Count : 0; } }
-
-        private async Task RequestLongComments(bool isLoadingMore)
-        {
-            var longComment = await DataRequester.RequestLongComment(CurrentStoryId, LastCommentId);
-            if (longComment == null)
+            var comments = await DataRequester.RequestComments(CurrentStoryId, LastCommentId);
+            if (comments == null || comments.Comments == null || comments.Comments.Count == 0)
                 return;
 
-            CommentList.First().AddRange(longComment.comments);
+            CommentList.AddRange(comments.Comments);
 
-            if (longComment == null || longComment.comments.Count < Misc.Page_Count)
+            if (CommentList.Count < Misc.Page_Count)
             {
-                await RequestShortComments();
-            }
-        }
-
-        private async Task RequestShortComments()
-        {
-            if (_currCommentType == CommentType.Long)
-            {
-                _currCommentType = CommentType.Short;
-            }
-            var shortComment = await DataRequester.RequestShortComment(CurrentStoryId, _currCommentType == CommentType.Long ? null : LastCommentId);
-            if (shortComment != null)
-            {
-                CommentList.Last().AddRange(shortComment.comments);
+                await RequestComments(true);
             }
         }
 
         public async Task SendComment()
         {
-            await DataRequester.SendComment(CurrentStoryId, CommentContent, ReplyCommentId);
+            await DataRequester.SendComment(CurrentStoryId, PostCommentContent, ReplyCommentId);
         }
 
         public void CancelReply()
         {
             IsReplingTo = false;
-        }
-
-        [SubscriberCallback(typeof(StoryExtraEvent))]
-        private void StoryExtraSubscriber(StoryExtraEvent param)
-        {
-            if(CommentList.Count > 1)
-            {
-                CommentList[0].GroupName = StringUtil.GetCommentGroupName(CommentType.Long, CurrentStoryExtraInfo.long_comments.ToString());
-                CommentList[1].GroupName = StringUtil.GetCommentGroupName(CommentType.Short, CurrentStoryExtraInfo.short_comments.ToString());
-            }
         }
 
         [SubscriberCallback(typeof(CommentEvent))]
@@ -168,26 +118,23 @@ namespace Brook.DuDuRiBao.ViewModels
             switch(param.Type)
             {
                 case CommentEventType.Reply:
-                    ReplyCommentId = param.Comment.id;
+                    ReplyCommentId = param.Comment.Id;
                     IsReplingTo = true;
-                    ReplyTip = string.Format(StringUtil.GetString("ReplyTip"), param.Comment.author);
+                    ReplyTip = string.Format(StringUtil.GetString("ReplyTip"), param.Comment.User.Name);
                     break;
                 case CommentEventType.Delete:
-                    if(CommentList.Count > 1)
+                    var comment = CommentList.SingleOrDefault(o => o.Id == param.Comment.Id);
+                    if(comment != null)
                     {
-                        var comment = CommentList[0].SingleOrDefault(o => o.id == param.Comment.id);
-                        if(comment != null)
-                        {
-                            CommentList[0].Remove(comment);
-                            return;
-                        }
+                        CommentList.Remove(comment);
+                        return;
+                    }
 
-                        comment = CommentList[1].SingleOrDefault(o => o.id == param.Comment.id);
-                        if (comment != null)
-                        {
-                            CommentList[1].Remove(comment);
-                            return;
-                        }
+                    comment = CommentList.SingleOrDefault(o => o.Id == param.Comment.Id);
+                    if (comment != null)
+                    {
+                        CommentList.Remove(comment);
+                        return;
                     }
                     break;
             }
@@ -200,7 +147,7 @@ namespace Brook.DuDuRiBao.ViewModels
             [SubscriberCallback(typeof(CommentEvent))]
             private void Subscriber(CommentEvent param)
             {
-                var commentId = param.Comment.id.ToString();
+                var commentId = param.Comment.Id.ToString();
                 switch (param.Type)
                 {
                     case CommentEventType.Delete:
