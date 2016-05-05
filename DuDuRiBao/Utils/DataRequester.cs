@@ -33,6 +33,20 @@ namespace Brook.DuDuRiBao.Utils
             return RequestDataForTimeLine<TimeLine>(before, Urls.NextTimeLine);
         }
 
+        public static Task<MainContent> RequestStoryContent(string storyId)
+        {
+            return RequestDataForStory<MainContent>(storyId, "", Urls.StoryContent);
+        }
+
+        public static Task<StoryExtraInfo> RequestStoryExtraInfo(string storyId)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("storyid", storyId ?? "")
+                .SetIfModifiedSince(DateTime.Now);
+
+            return XPHttpClient.DefaultClient.GetAsync<StoryExtraInfo>(Urls.StoryExtraInfo, httpParam);
+        }
+
         public static Task<LoginToken> AnonymousLogin(string key)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
@@ -58,20 +72,6 @@ namespace Brook.DuDuRiBao.Utils
         public static Task<MinorData> RequestCategoryLatestStories(string categoryId)
         {
             return RequestDataForCategory<MinorData>(categoryId, "", Urls.CategoryLatestStories);
-        }
-
-        public static Task<MainContent> RequestStoryContent(string storyId)
-        {
-            return RequestDataForStory<MainContent>(storyId, "", Urls.StoryContent);
-        }
-
-        public static Task<StoryExtraInfo> RequestStoryExtraInfo(string storyId)
-        {
-            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
-                .AddUrlSegements("storyid", storyId ?? "")
-                .SetIfModifiedSince(DateTime.Now);
-
-            return XPHttpClient.DefaultClient.GetAsync<StoryExtraInfo>(Urls.StoryExtraInfo, httpParam);
         }
        
         public static Task<Comments> RequestLongComment(string storyId, string before)

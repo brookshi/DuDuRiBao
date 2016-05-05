@@ -68,10 +68,10 @@ namespace Brook.DuDuRiBao.Pages
         {
             await VM.Refresh();
             MainListView.SetRefresh(false);
-            //if (!Config.IsSinglePage)
-            //{
-            //    DisplayStory(ViewModelBase.CurrentStoryId);
-            //}
+            if (!Config.IsSinglePage)
+            {
+                DisplayStory(ViewModelBase.CurrentStoryId);
+            }
         }
 
         private async void LoadMoreStories()
@@ -90,12 +90,12 @@ namespace Brook.DuDuRiBao.Pages
 
         private void MainListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            //var story = e.ClickedItem as Story;
-            //if (Misc.IsGroupItem(story.type))
-            //    return;
+            var story = e.ClickedItem as Story;
+            if (Misc.IsGroupItem(story.Type))
+                return;
 
-            //var storyId = story.id.ToString();
-            //DisplayStory(storyId);
+            var storyId = story.Id.ToString();
+            DisplayStory(storyId);
         }
 
         private void TapFlipImage(object sender, RoutedEventArgs e)
@@ -109,20 +109,20 @@ namespace Brook.DuDuRiBao.Pages
 
         private void DisplayStory(string storyId)
         {
-            //ViewModelBase.CurrentStoryId = storyId;
-            //if(Config.UIStatus == AppUIStatus.All || Config.UIStatus == AppUIStatus.ListAndContent)
-            //{
-            //    MainContentFrame.Navigate(typeof(MainContentPage), storyId);
-            //    CommentFrame.Navigate(typeof(CommentPage), storyId);
-            //}
-            //else
-            //{
-            //    Frame rootFrame = App.GetWindowFrame();
-            //    if (rootFrame == null)
-            //        return;
+            ViewModelBase.CurrentStoryId = storyId;
+            if (Config.UIStatus == AppUIStatus.All || Config.UIStatus == AppUIStatus.ListAndContent)
+            {
+                MainContentFrame.Navigate(typeof(MainContentPage), storyId);
+                //CommentFrame.Navigate(typeof(CommentPage), storyId);
+            }
+            else
+            {
+                Frame rootFrame = App.GetWindowFrame();
+                if (rootFrame == null)
+                    return;
 
-            //    rootFrame.Navigate(typeof(MainContentPage), storyId);
-            //}
+                rootFrame.Navigate(typeof(MainContentPage), storyId);
+            }
         }
 
         private void CategoryListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -136,11 +136,11 @@ namespace Brook.DuDuRiBao.Pages
 
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            //if(Config.IsPageSwitched(e.PreviousSize, e.NewSize) && !string.IsNullOrEmpty(ViewModelBase.CurrentStoryId))
-            //{
-            //    MainContentFrame.Navigate(typeof(MainContentPage));
-            //    CommentFrame.Navigate(typeof(CommentPage));
-            //}
+            if (Config.IsPageSwitched(e.PreviousSize, e.NewSize) && !string.IsNullOrEmpty(ViewModelBase.CurrentStoryId))
+            {
+                MainContentFrame.Navigate(typeof(MainContentPage));
+               // CommentFrame.Navigate(typeof(CommentPage));
+            }
         }
 
         //[SubscriberCallback(typeof(StoryEvent))]

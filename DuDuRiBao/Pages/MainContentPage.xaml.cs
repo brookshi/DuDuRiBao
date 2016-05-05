@@ -41,19 +41,19 @@ namespace Brook.DuDuRiBao.Pages
         [SubscriberCallback(typeof(StoryEvent))]
         private void Subscriber(StoryEvent param)
         {
-            switch (param.Type)
-            {
-                case StoryEventType.Comment:
-                    if (Config.IsSinglePageStatus(CurrentUIStatus))
-                    {
-                        Frame rootFrame = App.GetWindowFrame();
-                        if (rootFrame == null)
-                            return;
+            //switch (param.Type)
+            //{
+            //    case StoryEventType.Comment:
+            //        if (Config.IsSinglePageStatus(CurrentUIStatus))
+            //        {
+            //            Frame rootFrame = App.GetWindowFrame();
+            //            if (rootFrame == null)
+            //                return;
 
-                        rootFrame.Navigate(typeof(CommentPage));
-                    }
-                    break;
-            }
+            //            rootFrame.Navigate(typeof(CommentPage));
+            //        }
+            //        break;
+            //}
         }
     }
 }

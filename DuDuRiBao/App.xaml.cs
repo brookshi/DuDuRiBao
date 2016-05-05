@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using XPHttp;
 
-namespace DuDuRiBao
+namespace Brook.DuDuRiBao
 {
     /// <summary>
     /// 提供特定于应用程序的行为，以补充默认的应用程序类。
@@ -91,6 +91,11 @@ namespace DuDuRiBao
                 .SetBaseUrl(Urls.BaseUrl)
                 .SetUseHttpCache(false)
                 .ApplyConfig();
+        }
+
+        public static Frame GetWindowFrame()
+        {
+            return Window.Current.Content as Frame;
         }
 
         /// <summary>

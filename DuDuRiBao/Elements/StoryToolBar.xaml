@@ -23,6 +23,7 @@
                            IconPosition="Left"
                            IconSize="14"
                            IsChecked="{x:Bind IsLikeButtonChecked, Mode=TwoWay}"
+                           OnToggleChanged="LikeStatusChanged"
                            PointerOverBackground="{StaticResource BrushPointerOver}"
                            PressedBackground="{StaticResource BrushPointerOver}"
                            RelativePanel.AlignLeftWithPanel="True"

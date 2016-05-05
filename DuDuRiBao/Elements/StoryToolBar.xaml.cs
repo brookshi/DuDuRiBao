@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using XP;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -63,5 +64,19 @@ namespace Brook.DuDuRiBao.Elements
         }
         public static readonly DependencyProperty IsFavoriteButtonCheckedProperty =
             DependencyProperty.Register("IsFavoriteButtonChecked", typeof(bool?), typeof(StoryToolBar), new PropertyMetadata(false));
+
+        private void LikeStatusChanged(object sender, ToggleEventArgs e)
+        {
+            //if (!AuthorizationHelper.IsLogin)
+            //{
+            //    PopupMessage.DisplayMessageInRes("NeedLogin");
+            //    Animator.Use(AnimationType.Shake).PlayOn(LikeButton);
+            //    e.IsCancel = true;
+            //    return;
+            //}
+            //LikeCount = (int.Parse(LikeCount) + (e.IsChecked ? 1 : -1)).ToString();
+            //Animator.Use(AnimationType.StandUp).PlayOn(LikeButton);
+            //LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Like, IsChecked = e.IsChecked });
+        }
     }
 }

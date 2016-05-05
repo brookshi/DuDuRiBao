@@ -149,6 +149,9 @@
     <Compile Include="Models\StorageInfo.cs" />
     <Compile Include="Models\StoryExtraInfo.cs" />
     <Compile Include="Models\ZhiHuAuthoInfo.cs" />
+    <Compile Include="Pages\MainContentPage.xaml.cs">
+      <DependentUpon>MainContentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -163,6 +166,7 @@
     <Compile Include="Utils\StringUtil.cs" />
     <Compile Include="Utils\Urls.cs" />
     <Compile Include="Utils\WebViewUtil.cs" />
+    <Compile Include="ViewModels\MainContentViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +214,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Elements\ToolBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MainContentPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
