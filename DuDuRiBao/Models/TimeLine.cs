@@ -33,10 +33,10 @@ namespace Brook.DuDuRiBao.Models
     }
     public class Post
     {
-        public OriginCircle OriginCircle { get; set; }
+        public OriginCircle Origin_Circle { get; set; }
         public Poster Poster { get; set; }
         public Circle Circle { get; set; }
-        public OriginPoster OriginPoster { get; set; }
+        public OriginPoster Origin_Poster { get; set; }
     }
     public class Story
     {
@@ -45,10 +45,10 @@ namespace Brook.DuDuRiBao.Models
         public IList<Post> Posts { get; set; }
         public int Time { get; set; }
         public IList<string> Images { get; set; }
-        public int VoteStatus { get; set; }
+        public int Vote_Status { get; set; }
         public int Type { get; set; }
         public int Id { get; set; }
-        public string ExternalUrl { get; set; }
+        public string External_Url { get; set; }
     }
     public class TimeLine
     {

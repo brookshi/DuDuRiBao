@@ -16,6 +16,7 @@
 
 using Brook.DuDuRiBao.Models;
 using System.Text;
+using System.Linq;
 
 namespace Brook.DuDuRiBao.Utils
 {
@@ -44,22 +45,22 @@ namespace Brook.DuDuRiBao.Utils
 
         public static void ArrangeMainContent(MainContent content)
         {
-            content.body = ConstructorHtml(content);
+            content.Body = ConstructorHtml(content);
         }
 
         public static string ConstructorHtml(MainContent content)
         {
-            if (string.IsNullOrEmpty(content.body))
+            if (string.IsNullOrEmpty(content.Body))
                 return string.Empty;
 
             var cssBuilder = new StringBuilder();
             var jsBuilder = new StringBuilder();
 
-            content.css.ForEach(o => cssBuilder.Append(string.Format(_cssTemplate, o)));
-            content.js.ForEach(o => jsBuilder.Append(string.Format(_jsTemplate, o)));
+            content.Css.ForEach(o => cssBuilder.Append(string.Format(_cssTemplate, o)));
+            content.Js.ForEach(o => jsBuilder.Append(string.Format(_jsTemplate, o)));
 
-            var header = string.Format(_headerTemplate, content.image, content.title, content.image_source);
-            var source = string.Format(_htmlTemplate, cssBuilder.ToString(), jsBuilder.ToString(), content.body, _notifyScript);
+            var header = string.Format(_headerTemplate, content.Image, content.Title, content.Image_Source);
+            var source = string.Format(_htmlTemplate, cssBuilder.ToString(), jsBuilder.ToString(), content.Body, _notifyScript);
 
             source = source.Replace("<div class=\"img-place-holder\"></div>", header);
 

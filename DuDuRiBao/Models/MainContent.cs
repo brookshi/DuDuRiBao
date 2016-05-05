@@ -20,23 +20,23 @@ namespace Brook.DuDuRiBao.Models
 {
     public class Section
     {
-        public string thumbnail { get; set; }
-        public int id { get; set; }
-        public string name { get; set; }
+        public string Thumbnail { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
-
     public class MainContent
     {
-        public string body { get; set; }
-        public string image_source { get; set; }
-        public string title { get; set; }
-        public string image { get; set; }
-        public string share_url { get; set; }
-        public List<object> js { get; set; }
-        public string ga_prefix { get; set; }
-        public Section section { get; set; }
-        public int type { get; set; }
-        public int id { get; set; }
-        public List<string> css { get; set; }
+        public string Body { get; set; }
+        public string Image_Source { get; set; }
+        public string Title { get; set; }
+        public string Image { get; set; }
+        public string Share_Url { get; set; }
+        public List<object> Js { get; set; }
+        public string Ga_Prefix { get; set; }
+        public Section Section { get; set; }
+        public List<string> Images { get; set; }
+        public int Type { get; set; }
+        public int Id { get; set; }
+        public List<string> Css { get; set; }
     }
 }

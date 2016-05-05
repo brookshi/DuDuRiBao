@@ -20,13 +20,13 @@ namespace Brook.DuDuRiBao.Common
             if (mainHtmlContent == null)
                 return;
 
-            if (!string.IsNullOrEmpty(mainHtmlContent.body))
+            if (!string.IsNullOrEmpty(mainHtmlContent.Body))
             {
-                webView.NavigateToString(mainHtmlContent.body);
+                webView.NavigateToString(mainHtmlContent.Body);
             }
-            else if(!string.IsNullOrEmpty(mainHtmlContent.share_url))
+            else if(!string.IsNullOrEmpty(mainHtmlContent.Share_Url))
             {
-                webView.Navigate(new Uri(mainHtmlContent.share_url));
+                webView.Navigate(new Uri(mainHtmlContent.Share_Url));
             }
         }
 
