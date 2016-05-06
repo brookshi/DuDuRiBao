@@ -6,9 +6,9 @@ namespace Brook.DuDuRiBao.ViewModels
 {
     public partial class MainViewModel
     {
-        private readonly ObservableCollectionExtended<Others> _categoryList = new ObservableCollectionExtended<Others>() { new Others() { id = -1, name = StringUtil.GetString("DefaultCategory") } };
+        private readonly ObservableCollectionExtended<HotRiBao> _categoryList = new ObservableCollectionExtended<HotRiBao>();
 
-        public ObservableCollectionExtended<Others> CategoryList { get { return _categoryList; } }
+        public ObservableCollectionExtended<HotRiBao> CategoryList { get { return _categoryList; } }
 
         private int _currentCategoryId = Misc.Default_Category_Id;
         public int CurrentCategoryId
@@ -48,7 +48,7 @@ namespace Brook.DuDuRiBao.ViewModels
 
             if (CategoryList.Count > 0)
             {
-                CategoryName = CategoryList[0].name;
+                CategoryName = CategoryList[0].Title;
             }
         }
     }

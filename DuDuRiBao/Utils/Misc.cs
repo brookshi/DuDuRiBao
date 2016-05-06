@@ -19,19 +19,15 @@ namespace Brook.DuDuRiBao.Utils
 {
     public static class Misc
     {
-        public const int Group_Name_Type = -100;
-
         public const int Default_Category_Id = -1;
 
         public const int Favorite_Category_Id = -2;
+
+        public const int HotArtical_Category_Id = -3;
 
         public const int Page_Count = 30;
 
         public const int Unvalid_Image_Id = -1;
 
-        public static bool IsGroupItem(int type)
-        {
-            return Group_Name_Type == type;
-        }
     }
 }

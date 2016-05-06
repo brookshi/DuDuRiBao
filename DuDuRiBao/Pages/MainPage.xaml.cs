@@ -91,8 +91,6 @@ namespace Brook.DuDuRiBao.Pages
         private void MainListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var story = e.ClickedItem as Story;
-            if (Misc.IsGroupItem(story.Type))
-                return;
 
             var storyId = story.Id.ToString();
             DisplayStory(storyId);
@@ -125,7 +123,7 @@ namespace Brook.DuDuRiBao.Pages
             }
         }
 
-        private void CategoryListView_ItemClick(object sender, ItemClickEventArgs e)
+        private void HotArticleListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             //var category = e.ClickedItem as Others;
             //VM.CurrentCategoryId = category.id;
@@ -143,27 +141,27 @@ namespace Brook.DuDuRiBao.Pages
             }
         }
 
-        //[SubscriberCallback(typeof(StoryEvent))]
-        //private void Subscriber(StoryEvent param)
-        //{
-        //    switch(param.Type)
-        //    {
-        //        case StoryEventType.Menu:
-        //            ResetCategoryPanel();
-        //            break;
-        //        case StoryEventType.Comment:
-        //            if (!Config.IsSinglePage)
-        //            {
-        //                StoryContentView.IsPaneOpen = !StoryContentView.IsPaneOpen;
-        //            }
+        [SubscriberCallback(typeof(StoryEvent))]
+        private void Subscriber(StoryEvent param)
+        {
+            switch (param.Type)
+            {
+                case StoryEventType.Menu:
+                    ResetCategoryPanel();
+                    break;
+                case StoryEventType.Comment:
+                    if (!Config.IsSinglePage)
+                    {
+                        StoryContentView.IsPaneOpen = !StoryContentView.IsPaneOpen;
+                    }
 
-        //            if(Config.UIStatus == AppUIStatus.All)
-        //            {
-        //                StorageUtil.SetCommentPanelStatus(StoryContentView.IsPaneOpen);
-        //            }
-        //            break;
-        //    }
-        //}
+                    if (Config.UIStatus == AppUIStatus.All)
+                    {
+                        StorageUtil.SetCommentPanelStatus(StoryContentView.IsPaneOpen);
+                    }
+                    break;
+            }
+        }
 
         private void Login(object sender, RoutedEventArgs e)
         {
@@ -184,28 +182,28 @@ namespace Brook.DuDuRiBao.Pages
             //ResetCategoryPanel();
         }
 
-        //private void ResetCategoryPanel()
-        //{
-        //    MainView.IsPaneOpen = !MainView.IsPaneOpen;
-        //}
+        private void ResetCategoryPanel()
+        {
+            MainView.IsPaneOpen = !MainView.IsPaneOpen;
+        }
 
-        private void DownloadButton_Click(object sender, RoutedEventArgs e)
+        private void HotArticle_Click(object sender, RoutedEventArgs e)
         {
             PopupMessage.DisplayMessageInRes("Inprogress");
         }
 
         private void MyFav_Click(object sender, RoutedEventArgs e)
         {
-            //if(!AuthorizationHelper.IsLogin)
-            //{
-            //    PopupMessage.DisplayMessageInRes("NeedLogin");
-            //    return;
-            //}
+            if (!AuthorizationHelper.IsLogin)
+            {
+                PopupMessage.DisplayMessageInRes("NeedLogin");
+                return;
+            }
 
-            //VM.CurrentCategoryId = Misc.Favorite_Category_Id;
-            //VM.CategoryName = string.Format(StringUtil.GetString("FavCategoryName"), 0);
-            //MainListView.SetRefresh(true);
-            //ResetCategoryPanel();
+            VM.CurrentCategoryId = Misc.Favorite_Category_Id;
+            VM.CategoryName = string.Format(StringUtil.GetString("FavCategoryName"), 0);
+            MainListView.SetRefresh(true);
+            ResetCategoryPanel();
         }
     }
 }

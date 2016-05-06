@@ -34,8 +34,8 @@
                                               NormalTemplate="{StaticResource Story}"
                                               ReferTemplate="{StaticResource StoryWithoutImage}" />
 
-            <DataTemplate x:Key="CategoryItem">
-                <TextBlock Margin="12, 0, 0, 0" Text="{Binding name}" />
+            <DataTemplate x:Key="HotArticleItem">
+                <TextBlock Margin="12, 0, 0, 0" Text="{Binding Name}" />
             </DataTemplate>
 
         </ResourceDictionary>
@@ -91,7 +91,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <!--<element:ToolBar Category="{x:Bind VM.CategoryName, Mode=OneWay}" Host="MainPage" />-->
+        <element:ToolBar Category="{x:Bind VM.CategoryName, Mode=OneWay}" Host="MainPage" />
         <SplitView x:Name="MainView"
                    Grid.Row="1"
                    Background="{ThemeResource BrushListBackground}"
@@ -127,51 +127,58 @@
                                      PressedBackground="{StaticResource BrushPressed}"
                                      RelativePanel.AlignVerticalCenterWith="UserPhoto"
                                      RelativePanel.RightOf="UserPhoto" />
-                        <xp:XPButton x:Uid="Favorite"
-                                     x:Name="MyFav"
-                                     Margin="12, 0, 0, 12"
-                                     Background="Transparent"
-                                     BorderThickness="0"
-                                     Click="MyFav_Click"
-                                     Content=""
-                                     Foreground="White"
-                                     IconInterval="12"
-                                     IconPosition="Left"
-                                     PointerOverBackground="{StaticResource BrushPointerOver}"
-                                     PressedBackground="{StaticResource BrushPressed}"
-                                     RelativePanel.AlignBottomWithPanel="True">
-                            <xp:XPButton.Icon>
-                                <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf005;" />
-                            </xp:XPButton.Icon>
-                        </xp:XPButton>
-                        <xp:XPButton x:Uid="DownloadOffline"
-                                     x:Name="DownloadButton"
-                                     Margin="0, 0, 12, 12"
-                                     Background="Transparent"
-                                     BorderThickness="0"
-                                     Click="DownloadButton_Click"
-                                     Content=""
-                                     Foreground="White"
-                                     IconInterval="12"
-                                     IconPosition="Left"
-                                     PointerOverBackground="{StaticResource BrushPointerOver}"
-                                     PressedBackground="{StaticResource BrushPressed}"
-                                     RelativePanel.AlignBottomWithPanel="True"
-                                     RelativePanel.AlignRightWithPanel="True">
-                            <xp:XPButton.Icon>
-                                <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf019;" />
-                            </xp:XPButton.Icon>
-                        </xp:XPButton>
                     </RelativePanel>
-                    <ListView x:Name="CategoryListView"
+                    <xp:XPButton x:Uid="Favorite"
+                                 x:Name="MyFav"
+                                 Margin="12, 0, 0, 12"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Click="MyFav_Click"
+                                 Content=""
+                                 Foreground="White"
+                                 IconInterval="12"
+                                 IconPosition="Left"
+                                 PointerOverBackground="{StaticResource BrushPointerOver}"
+                                 PressedBackground="{StaticResource BrushPressed}"
+                                 RelativePanel.AlignLeftWithPanel="True"
+                                 RelativePanel.AlignRightWithPanel="True"
+                                 RelativePanel.Below="LoginPanel">
+                        <xp:XPButton.Icon>
+                            <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf005;" />
+                        </xp:XPButton.Icon>
+                    </xp:XPButton>
+                    <xp:XPButton x:Uid="HotArticle"
+                                 x:Name="DownloadButton"
+                                 Margin="12, 0, 0, 12"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Click="HotArticle_Click"
+                                 Content=""
+                                 Foreground="White"
+                                 IconInterval="12"
+                                 IconPosition="Left"
+                                 PointerOverBackground="{StaticResource BrushPointerOver}"
+                                 PressedBackground="{StaticResource BrushPressed}"
+                                 RelativePanel.AlignLeftWithPanel="True"
+                                 RelativePanel.AlignRightWithPanel="True"
+                                 RelativePanel.Below="Favorite">
+                        <xp:XPButton.Icon>
+                            <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf019;" />
+                        </xp:XPButton.Icon>
+                    </xp:XPButton>
+                    <StackPanel x:Name="HotRiBao" Orientation="Horizontal">
+                        <TextBlock Text="热门日报" />
+                        <Button HorizontalAlignment="Right" Content="换一批" />
+                    </StackPanel>
+                    <ListView x:Name="HotArticleListView"
                               Margin="0, 12, 0, 0"
                               IsItemClickEnabled="True"
-                              ItemClick="CategoryListView_ItemClick"
-                              ItemTemplate="{StaticResource CategoryItem}"
+                              ItemClick="HotArticleListView_ItemClick"
+                              ItemTemplate="{StaticResource HotArticleItem}"
                               RelativePanel.AlignBottomWithPanel="True"
                               RelativePanel.AlignLeftWithPanel="True"
                               RelativePanel.AlignRightWithPanel="True"
-                              RelativePanel.Below="LoginPanel"
+                              RelativePanel.Below="HotRiBao"
                               SelectionMode="Single" />
                 </RelativePanel>
             </SplitView.Pane>
