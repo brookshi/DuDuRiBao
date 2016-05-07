@@ -36,37 +36,9 @@ namespace Brook.DuDuRiBao.ViewModels
 
         public List<bool> Indicators { get { return _indicators; } set { if (value != _indicators) { _indicators = value; Notify("Indicators"); } } }
 
-        private string _userPhotoUrl = "ms-appx:///Assets/Login.png";
-        public string UserPhotoUrl
-        {
-            get { return _userPhotoUrl; }
-            set
-            {
-                if(value != _userPhotoUrl)
-                {
-                    _userPhotoUrl = value;
-                    Notify("UserPhotoUrl");
-                }
-            }
-        }
-
-        private string _userName = StringUtil.GetString("PleaseLogin");
-        public string UserName
-        {
-            get { return _userName; }
-            set
-            {
-                if(value != _userName)
-                {
-                    _userName = value;
-                    Notify("UserName");
-                }
-            }
-        }
-
         public override void Init()
         {
-            InitHotCircles();
+            RefreshHotCircles();
         }
 
         public async Task Refresh()
@@ -146,16 +118,6 @@ namespace Brook.DuDuRiBao.ViewModels
                 indicators.Add(true);
             }
             Indicators = indicators;
-        }
-
-        public void LoginSuccess()
-        {
-            var info = StorageUtil.StorageInfo.ZhiHuAuthoInfo;
-            if (info == null)
-                return;
-
-            UserPhotoUrl = info.avatar;
-            UserName = info.name;
         }
     }
 }

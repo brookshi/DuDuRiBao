@@ -19,7 +19,7 @@ namespace Brook.DuDuRiBao.Models
 
     public static class HotCircleBuilder
     {
-        public const string HotRiBaoRegex = "circle/\\d*|<img class=\"cell-avatar.*\">|cell-title\">.*</span>|<i>.*</i>";
+        public const string HotRiBaoRegex = "circle/\\d*|cell-avatar.*>|cell-title\">.*</span>|<i>.*</i>";
 
         public static List<HotCircle> Builder(string hotRiBaoContent)
         {
@@ -40,8 +40,8 @@ namespace Brook.DuDuRiBao.Models
         public static HotCircle GenerateByMatches(string matchId, string matchThumbnail, string matchTitle, string matchArticles, string matchFans)
         {
             var id = matchId.Replace("circle/", "");
-            var thumbnail = matchThumbnail.Substring(matchThumbnail.IndexOf("https")).Replace("\">", "");
-            var title = matchTitle.Substring(matchTitle.IndexOf("<") + 1, matchTitle.LastIndexOf("<") - matchTitle.IndexOf("<") - 1);
+            var thumbnail = HandleThumbnail(matchThumbnail);
+            var title = HandleTitle(matchTitle);
             var articles = matchArticles.Replace("<i>", "").Replace("</i>", "");
             var fans = matchFans.Replace("<i>", "").Replace("</i>", "");
 
@@ -53,6 +53,38 @@ namespace Brook.DuDuRiBao.Models
                 Articles = articles,
                 Fans = fans
             };
+        }
+
+        static string HandleThumbnail(string matchThumbnail)
+        {
+            string thumbnail = "";
+            var httpsIndex = matchThumbnail.IndexOf("https");
+            if (httpsIndex > 0)
+            {
+                thumbnail = matchThumbnail.Substring(httpsIndex).Replace("\">", "");
+            }
+            else
+            {
+                var firstIndex = matchThumbnail.IndexOf(">");
+                var lastIndex = matchThumbnail.LastIndexOf("<");
+                if(firstIndex >=0 && lastIndex >=0 && lastIndex > firstIndex)
+                {
+                    thumbnail = matchThumbnail.Substring(firstIndex + 1, lastIndex - firstIndex - 1);
+                }
+            }
+            return thumbnail;
+        }
+
+        static string HandleTitle(string matchTitle)
+        {
+            string title = "";
+            var firstIndex = matchTitle.IndexOf(">");
+            var lastIndex = matchTitle.LastIndexOf("<");
+            if (firstIndex >= 0 && lastIndex >= 0 && lastIndex > firstIndex)
+            {
+                title = matchTitle.Substring(firstIndex + 1, lastIndex - firstIndex - 1);
+            }
+            return title;
         }
     }
 }

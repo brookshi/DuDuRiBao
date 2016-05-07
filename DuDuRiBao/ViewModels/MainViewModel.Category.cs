@@ -38,13 +38,21 @@ namespace Brook.DuDuRiBao.ViewModels
             }
         }
 
-        public async void InitHotCircles()
+        public async void RefreshHotCircles()
         {
-            var hotCircles = await DataRequester.RequestHotCircles();
-            if (string.IsNullOrEmpty(hotCircles))
-                return;
+            var hotCircleList = await DataRequester.RequestHotCircles().ContinueWith(hotCirclesTask =>
+            {
+                var hotCircles = hotCirclesTask.Result;
+                if (string.IsNullOrEmpty(hotCircles))
+                    return null;
+                return HotCircleBuilder.Builder(hotCircles);
+            }) ;
 
-            HotCircles.AddRange(HotCircleBuilder.Builder(hotCircles));
+            if(hotCircleList != null)
+            {
+                HotCircles.Clear();
+                HotCircles.AddRange(hotCircleList);
+            }
         }
     }
 }

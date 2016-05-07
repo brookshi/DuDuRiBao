@@ -40,6 +40,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="MenuButton.Visibility" Value="Collapsed" />
+                        <Setter Target="LoginButton.Visibility" Value="Collapsed" />
                         <Setter Target="CategoryText.(RelativePanel.RightOf)" Value="" />
                         <Setter Target="CategoryText.Margin" Value="20, 0, 0, 0" />
                     </VisualState.Setters>
@@ -85,6 +86,21 @@
                        RelativePanel.AlignVerticalCenterWithPanel="True"
                        RelativePanel.RightOf="MenuButton"
                        Text="{x:Bind Category, Mode=OneWay}" />
+            <xp:XPButton x:Name="LoginButton"
+                         Width="48"
+                         Height="48"
+                         Margin="{ThemeResource LoginButtonMargin}"
+                         Background="Transparent"
+                         Click="LoginButton_Click"
+                         Foreground="White"
+                         IconPosition="OnlyIcon"
+                         PointerOverBackground="{StaticResource BrushPointerOver}"
+                         PressedBackground="{StaticResource BrushPressed}"
+                         RelativePanel.AlignVerticalCenterWithPanel="True">
+                <xp:XPButton.Icon>
+                    <BitmapIcon UriSource="{x:Bind UserPhotoUrl, Mode=OneWay}" />
+                </xp:XPButton.Icon>
+            </xp:XPButton>
             <xp:XPButton x:Name="CommentButton"
                          Height="48"
                          Margin="10, 0, 0, 0"

@@ -8,7 +8,7 @@
     "Microsoft.ApplicationInsights.WindowsApps": "1.1.1",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "XPButton": "0.1.0",
-    "XPHttp": "0.3.6"
+    "XPHttp": "0.3.7"
   },
   "frameworks": {
     "uap10.0": {}

@@ -25,6 +25,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <utils:Config x:Key="Config" />
+            <utils:RandomColors x:Key="Colors" />
 
             <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <convert:BooleanReverseConverter x:Key="BooleanReverseConverter" />
@@ -34,10 +35,101 @@
                                               NormalTemplate="{StaticResource Story}"
                                               ReferTemplate="{StaticResource StoryWithoutImage}" />
 
-            <DataTemplate x:Key="HotArticleItem">
-                <TextBlock Margin="12, 0, 0, 0" Text="{Binding Name}" />
-            </DataTemplate>
+            <common:CircleDataTemplateSelector x:Key="CircleDataTemplateSelector"
+                                               CircleImageTemplate="{StaticResource HotCircleItemWithImage}"
+                                               CircleWordTemplate="{StaticResource HotCircleItemWithWord}" />
 
+            <DataTemplate x:Key="HotCircleItemWithImage">
+                <Border Margin="8, 0"
+                        BorderBrush="#2190e9"
+                        BorderThickness="0, 0, 0, 1">
+                    <RelativePanel>
+                        <Rectangle x:Name="CircleImage"
+                                   Width="36"
+                                   Height="36"
+                                   Margin="0, 8, 8, 8"
+                                   RadiusX="4"
+                                   RadiusY="4"
+                                   RelativePanel.AlignLeftWithPanel="True">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{Binding Thumbnail}" Stretch="Fill" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock x:Name="CircleName"
+                                   Margin="8, 8, 0, 0"
+                                   FontSize="13"
+                                   Foreground="White"
+                                   MaxLines="1"
+                                   RelativePanel.AlignTopWith="CircleImage"
+                                   RelativePanel.RightOf="CircleImage"
+                                   Text="{Binding Name}" />
+                        <TextBlock x:Name="Articles"
+                                   Margin="8, 4, 12, 0"
+                                   FontSize="11"
+                                   Foreground="#eeeeee"
+                                   MaxLines="1"
+                                   RelativePanel.Below="CircleName"
+                                   RelativePanel.RightOf="CircleImage"
+                                   Text="{Binding Articles}" />
+                        <TextBlock x:Name="Fans"
+                                   Margin="0, 4, 0, 0"
+                                   FontSize="11"
+                                   Foreground="#eeeeee"
+                                   MaxLines="1"
+                                   RelativePanel.Below="CircleName"
+                                   RelativePanel.RightOf="Articles"
+                                   Text="{Binding Fans}" />
+                    </RelativePanel>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="HotCircleItemWithWord">
+                <Border Margin="8, 0"
+                        BorderBrush="#2190e9"
+                        BorderThickness="0, 0, 0, 1">
+                    <RelativePanel>
+                        <Border x:Name="CircleImage"
+                                Width="36"
+                                Height="36"
+                                Margin="0, 8, 8, 8"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="{Binding Colors.RandomBrush}"
+                                CornerRadius="4"
+                                RelativePanel.AlignLeftWithPanel="True">
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="20"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       Text="{Binding Thumbnail}"
+                                       TextAlignment="Center" />
+                        </Border>
+                        <TextBlock x:Name="CircleName"
+                                   Margin="8, 8, 0, 0"
+                                   FontSize="13"
+                                   Foreground="White"
+                                   MaxLines="1"
+                                   RelativePanel.RightOf="CircleImage"
+                                   Text="{Binding Name}" />
+                        <TextBlock x:Name="Articles"
+                                   Margin="8, 4, 12, 0"
+                                   FontSize="11"
+                                   Foreground="#eeeeee"
+                                   MaxLines="1"
+                                   RelativePanel.Below="CircleName"
+                                   RelativePanel.RightOf="CircleImage"
+                                   Text="{Binding Articles}" />
+                        <TextBlock x:Name="Fans"
+                                   Margin="0, 4, 0, 0"
+                                   FontSize="11"
+                                   Foreground="#eeeeee"
+                                   MaxLines="1"
+                                   RelativePanel.Below="CircleName"
+                                   RelativePanel.RightOf="Articles"
+                                   Text="{Binding Fans}" />
+                    </RelativePanel>
+                </Border>
+            </DataTemplate>
         </ResourceDictionary>
     </Page.Resources>
 
@@ -99,38 +191,32 @@
                    OpenPaneLength="{StaticResource WidthCategoryPanel}"
                    PaneBackground="White">
             <SplitView.Pane>
-                <RelativePanel>
-                    <RelativePanel x:Name="LoginPanel"
-                                   Height="{StaticResource HeightLoginPanel}"
-                                   Background="{ThemeResource BrushPrimary}"
-                                   RelativePanel.AlignLeftWithPanel="True"
-                                   RelativePanel.AlignRightWithPanel="True"
-                                   RelativePanel.AlignTopWithPanel="True">
-                        <Ellipse x:Name="UserPhoto"
-                                 Width="48"
+                <RelativePanel Background="{ThemeResource BrushPrimary}">
+                    <xp:XPButton x:Uid="Home"
+                                 x:Name="Home"
+                                 Width="{ThemeResource WidthStoryPanel}"
                                  Height="48"
-                                 Margin="20, 4, 0, 0"
-                                 Tapped="Login">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="{x:Bind VM.UserPhotoUrl, Mode=OneWay}" Stretch="Fill" />
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <xp:XPButton x:Name="UserName"
-                                     Margin="10, 4, 0, 0"
-                                     Background="Transparent"
-                                     Click="Login"
-                                     Content="{x:Bind VM.UserName, Mode=OneWay}"
-                                     FontSize="16"
-                                     Foreground="White"
-                                     IconPosition="NoIcon"
-                                     PointerOverBackground="{StaticResource BrushPointerOver}"
-                                     PressedBackground="{StaticResource BrushPressed}"
-                                     RelativePanel.AlignVerticalCenterWith="UserPhoto"
-                                     RelativePanel.RightOf="UserPhoto" />
-                    </RelativePanel>
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Click="Home_Click"
+                                 Content=""
+                                 Foreground="White"
+                                 IconInterval="12"
+                                 IconPosition="Left"
+                                 Padding="14, 0, 0, 0"
+                                 PointerOverBackground="{StaticResource BrushPointerOver}"
+                                 PressedBackground="{StaticResource BrushPressed}"
+                                 RelativePanel.AlignLeftWithPanel="True"
+                                 RelativePanel.AlignRightWithPanel="True"
+                                 RelativePanel.AlignTopWithPanel="True">
+                        <xp:XPButton.Icon>
+                            <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf015;" />
+                        </xp:XPButton.Icon>
+                    </xp:XPButton>
                     <xp:XPButton x:Uid="Favorite"
                                  x:Name="MyFav"
-                                 Margin="12, 0, 0, 12"
+                                 Width="{ThemeResource WidthStoryPanel}"
+                                 Height="48"
                                  Background="Transparent"
                                  BorderThickness="0"
                                  Click="MyFav_Click"
@@ -138,18 +224,20 @@
                                  Foreground="White"
                                  IconInterval="12"
                                  IconPosition="Left"
+                                 Padding="14, 0, 0, 0"
                                  PointerOverBackground="{StaticResource BrushPointerOver}"
                                  PressedBackground="{StaticResource BrushPressed}"
                                  RelativePanel.AlignLeftWithPanel="True"
                                  RelativePanel.AlignRightWithPanel="True"
-                                 RelativePanel.Below="LoginPanel">
+                                 RelativePanel.Below="Home">
                         <xp:XPButton.Icon>
                             <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf005;" />
                         </xp:XPButton.Icon>
                     </xp:XPButton>
                     <xp:XPButton x:Uid="HotArticle"
-                                 x:Name="DownloadButton"
-                                 Margin="12, 0, 0, 12"
+                                 x:Name="HotArticle"
+                                 Width="{ThemeResource WidthStoryPanel}"
+                                 Height="48"
                                  Background="Transparent"
                                  BorderThickness="0"
                                  Click="HotArticle_Click"
@@ -157,29 +245,71 @@
                                  Foreground="White"
                                  IconInterval="12"
                                  IconPosition="Left"
+                                 Padding="14, 0, 0, 0"
                                  PointerOverBackground="{StaticResource BrushPointerOver}"
                                  PressedBackground="{StaticResource BrushPressed}"
                                  RelativePanel.AlignLeftWithPanel="True"
                                  RelativePanel.AlignRightWithPanel="True"
-                                 RelativePanel.Below="Favorite">
+                                 RelativePanel.Below="MyFav">
                         <xp:XPButton.Icon>
-                            <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf019;" />
+                            <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf004;" />
                         </xp:XPButton.Icon>
                     </xp:XPButton>
-                    <StackPanel x:Name="HotRiBao" Orientation="Horizontal">
-                        <TextBlock Text="热门日报" />
-                        <Button HorizontalAlignment="Right" Content="换一批" />
-                    </StackPanel>
-                    <ListView x:Name="HotArticleListView"
+                    <RelativePanel x:Name="HotCircle"
+                                   VerticalAlignment="Center"
+                                   Background="{ThemeResource BrushPrimaryDark}"
+                                   RelativePanel.AlignLeftWithPanel="True"
+                                   RelativePanel.AlignRightWithPanel="True"
+                                   RelativePanel.Below="HotArticle">
+                        <TextBlock x:Uid="HotCircle"
+                                   Margin="14, 0, 0, 0"
+                                   FontSize="12"
+                                   Foreground="#EEEEEE"
+                                   RelativePanel.AlignLeftWithPanel="True"
+                                   RelativePanel.AlignVerticalCenterWithPanel="True"
+                                   Text="" />
+                        <xp:XPButton x:Uid="HotCircleRefresh"
+                                     Height="24"
+                                     Margin="12, 0, 0, 0"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     Click="RefershHotCircle_Click"
+                                     Content=""
+                                     CornerRadius="4"
+                                     FontSize="12"
+                                     Foreground="#EEEEEE"
+                                     IconInterval="12"
+                                     IconPosition="Left"
+                                     IconSize="12"
+                                     PointerOverBackground="{StaticResource BrushPointerOver}"
+                                     PressedBackground="{StaticResource BrushPressed}"
+                                     RelativePanel.AlignRightWithPanel="True"
+                                     RelativePanel.AlignVerticalCenterWithPanel="True">
+                            <xp:XPButton.Icon>
+                                <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf021;" />
+                            </xp:XPButton.Icon>
+                        </xp:XPButton>
+                    </RelativePanel>
+                    <ListView x:Name="HotCircleListView"
                               Margin="0, 12, 0, 0"
                               IsItemClickEnabled="True"
-                              ItemClick="HotArticleListView_ItemClick"
-                              ItemTemplate="{StaticResource HotArticleItem}"
+                              ItemClick="HotCircleListView_ItemClick"
+                              ItemTemplateSelector="{StaticResource CircleDataTemplateSelector}"
+                              ItemsSource="{x:Bind VM.HotCircles}"
                               RelativePanel.AlignBottomWithPanel="True"
                               RelativePanel.AlignLeftWithPanel="True"
                               RelativePanel.AlignRightWithPanel="True"
-                              RelativePanel.Below="HotRiBao"
-                              SelectionMode="Single" />
+                              RelativePanel.Below="HotCircle"
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                              SelectionMode="Single">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="Margin" Value="0, 0, 0, 2" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
                 </RelativePanel>
             </SplitView.Pane>
             <RelativePanel>

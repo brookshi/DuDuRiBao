@@ -33,6 +33,19 @@ namespace Brook.DuDuRiBao.Elements
         public static readonly DependencyProperty CategoryProperty =
             DependencyProperty.Register("Category", typeof(string), typeof(ToolBar), new PropertyMetadata(""));
 
+        private string _userPhotoUrl = "ms-appx:///Assets/Login.png";
+        public string UserPhotoUrl
+        {
+            get { return _userPhotoUrl; }
+            set
+            {
+                if (value != _userPhotoUrl)
+                {
+                    _userPhotoUrl = value;
+                    Notify("UserPhotoUrl");
+                }
+            }
+        }
 
         private string _commentCount = "0";
         public string CommentCount
@@ -117,6 +130,24 @@ namespace Brook.DuDuRiBao.Elements
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
             LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Menu });
+        }
+
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            var isSuccess = await AuthorizationHelper.Login(LoginType.Sina);
+            if (isSuccess)
+            {
+                PopupMessage.DisplayMessageInRes("LoginSuccess");
+                var info = StorageUtil.StorageInfo.ZhiHuAuthoInfo;
+                if (info == null)
+                    return;
+
+                UserPhotoUrl = info.avatar;
+            }
+            else
+            {
+                PopupMessage.DisplayMessageInRes("LoginFailed");
+            }
         }
 
         private void CommentButton_Click(object sender, RoutedEventArgs e)

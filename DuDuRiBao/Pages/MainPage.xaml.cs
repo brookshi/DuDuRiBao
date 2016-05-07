@@ -123,7 +123,7 @@ namespace Brook.DuDuRiBao.Pages
             }
         }
 
-        private void HotArticleListView_ItemClick(object sender, ItemClickEventArgs e)
+        private void HotCircleListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             //var category = e.ClickedItem as Others;
             //VM.CurrentCategoryId = category.id;
@@ -163,28 +163,19 @@ namespace Brook.DuDuRiBao.Pages
             }
         }
 
-        private void Login(object sender, RoutedEventArgs e)
+        private void RefershHotCircle_Click(object sender, RoutedEventArgs e)
         {
-            //VM.UserName = StringUtil.GetString("Logining");
-            //AuthorizationHelper.Login(LoginType.Sina, (isSuccess, msg) =>
-            //{
-            //    if (isSuccess)
-            //    {
-            //        VM.LoginSuccess();
-            //        PopupMessage.DisplayMessageInRes("LoginSuccess");
-            //    }
-            //    else
-            //    {
-            //        PopupMessage.DisplayMessageInRes("LoginFailed");
-            //        VM.UserName = StringUtil.GetString("PleaseLogin");
-            //    }
-            //});
-            //ResetCategoryPanel();
+            VM.RefreshHotCircles();
         }
 
         private void ResetCategoryPanel()
         {
             MainView.IsPaneOpen = !MainView.IsPaneOpen;
+        }
+
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+            PopupMessage.DisplayMessageInRes("Inprogress");
         }
 
         private void HotArticle_Click(object sender, RoutedEventArgs e)
