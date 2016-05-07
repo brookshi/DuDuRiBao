@@ -22,10 +22,10 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Elements/Story.xaml" />
+                <ResourceDictionary Source="../Elements/HotCircle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <utils:Config x:Key="Config" />
-            <utils:RandomColors x:Key="Colors" />
 
             <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <convert:BooleanReverseConverter x:Key="BooleanReverseConverter" />
@@ -39,97 +39,6 @@
                                                CircleImageTemplate="{StaticResource HotCircleItemWithImage}"
                                                CircleWordTemplate="{StaticResource HotCircleItemWithWord}" />
 
-            <DataTemplate x:Key="HotCircleItemWithImage">
-                <Border Margin="8, 0"
-                        BorderBrush="#2190e9"
-                        BorderThickness="0, 0, 0, 1">
-                    <RelativePanel>
-                        <Rectangle x:Name="CircleImage"
-                                   Width="36"
-                                   Height="36"
-                                   Margin="0, 8, 8, 8"
-                                   RadiusX="4"
-                                   RadiusY="4"
-                                   RelativePanel.AlignLeftWithPanel="True">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{Binding Thumbnail}" Stretch="Fill" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <TextBlock x:Name="CircleName"
-                                   Margin="8, 8, 0, 0"
-                                   FontSize="13"
-                                   Foreground="White"
-                                   MaxLines="1"
-                                   RelativePanel.AlignTopWith="CircleImage"
-                                   RelativePanel.RightOf="CircleImage"
-                                   Text="{Binding Name}" />
-                        <TextBlock x:Name="Articles"
-                                   Margin="8, 4, 12, 0"
-                                   FontSize="11"
-                                   Foreground="#eeeeee"
-                                   MaxLines="1"
-                                   RelativePanel.Below="CircleName"
-                                   RelativePanel.RightOf="CircleImage"
-                                   Text="{Binding Articles}" />
-                        <TextBlock x:Name="Fans"
-                                   Margin="0, 4, 0, 0"
-                                   FontSize="11"
-                                   Foreground="#eeeeee"
-                                   MaxLines="1"
-                                   RelativePanel.Below="CircleName"
-                                   RelativePanel.RightOf="Articles"
-                                   Text="{Binding Fans}" />
-                    </RelativePanel>
-                </Border>
-            </DataTemplate>
-            <DataTemplate x:Key="HotCircleItemWithWord">
-                <Border Margin="8, 0"
-                        BorderBrush="#2190e9"
-                        BorderThickness="0, 0, 0, 1">
-                    <RelativePanel>
-                        <Border x:Name="CircleImage"
-                                Width="36"
-                                Height="36"
-                                Margin="0, 8, 8, 8"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Background="{Binding Colors.RandomBrush}"
-                                CornerRadius="4"
-                                RelativePanel.AlignLeftWithPanel="True">
-                            <TextBlock HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       FontSize="20"
-                                       FontWeight="Bold"
-                                       Foreground="White"
-                                       Text="{Binding Thumbnail}"
-                                       TextAlignment="Center" />
-                        </Border>
-                        <TextBlock x:Name="CircleName"
-                                   Margin="8, 8, 0, 0"
-                                   FontSize="13"
-                                   Foreground="White"
-                                   MaxLines="1"
-                                   RelativePanel.RightOf="CircleImage"
-                                   Text="{Binding Name}" />
-                        <TextBlock x:Name="Articles"
-                                   Margin="8, 4, 12, 0"
-                                   FontSize="11"
-                                   Foreground="#eeeeee"
-                                   MaxLines="1"
-                                   RelativePanel.Below="CircleName"
-                                   RelativePanel.RightOf="CircleImage"
-                                   Text="{Binding Articles}" />
-                        <TextBlock x:Name="Fans"
-                                   Margin="0, 4, 0, 0"
-                                   FontSize="11"
-                                   Foreground="#eeeeee"
-                                   MaxLines="1"
-                                   RelativePanel.Below="CircleName"
-                                   RelativePanel.RightOf="Articles"
-                                   Text="{Binding Fans}" />
-                    </RelativePanel>
-                </Border>
-            </DataTemplate>
         </ResourceDictionary>
     </Page.Resources>
 

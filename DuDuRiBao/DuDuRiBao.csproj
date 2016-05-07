@@ -92,6 +92,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Add.png" />
     <Content Include="Assets\Fonts\fontawesome-webfont.ttf" />
     <None Include="project.json" />
     <PRIResource Include="strings\zh-CN\Resources.resw" />
@@ -214,6 +215,11 @@
     <Page Include="Elements\FlipViewIndicatorItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Elements\HotCircle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Elements\Story.xaml">
       <Generator>MSBuild:Compile</Generator>
