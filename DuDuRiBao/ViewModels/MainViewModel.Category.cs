@@ -6,9 +6,9 @@ namespace Brook.DuDuRiBao.ViewModels
 {
     public partial class MainViewModel
     {
-        private readonly ObservableCollectionExtended<HotRiBao> _categoryList = new ObservableCollectionExtended<HotRiBao>();
+        private readonly ObservableCollectionExtended<HotCircle> _hotCircles = new ObservableCollectionExtended<HotCircle>();
 
-        public ObservableCollectionExtended<HotRiBao> CategoryList { get { return _categoryList; } }
+        public ObservableCollectionExtended<HotCircle> HotCircles { get { return _hotCircles; } }
 
         private int _currentCategoryId = Misc.Default_Category_Id;
         public int CurrentCategoryId
@@ -38,18 +38,13 @@ namespace Brook.DuDuRiBao.ViewModels
             }
         }
 
-        public async void InitCategories()
+        public async void InitHotCircles()
         {
-            var categories = await DataRequester.RequestCategory();
-            if (categories == null)
+            var hotCircles = await DataRequester.RequestHotCircles();
+            if (string.IsNullOrEmpty(hotCircles))
                 return;
 
-            CategoryList.AddRange(categories.others);
-
-            if (CategoryList.Count > 0)
-            {
-                CategoryName = CategoryList[0].Title;
-            }
+            HotCircles.AddRange(HotCircleBuilder.Builder(hotCircles));
         }
     }
 }

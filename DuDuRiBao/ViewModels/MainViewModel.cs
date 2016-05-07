@@ -66,8 +66,7 @@ namespace Brook.DuDuRiBao.ViewModels
 
         public override void Init()
         {
-            //InitCategories();
-           // RequestMainList(false);
+            InitHotCircles();
         }
 
         public async Task Refresh()

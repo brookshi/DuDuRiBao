@@ -52,6 +52,11 @@ namespace Brook.DuDuRiBao.Utils
             return RequestDataForStory<CommentList>(storyId, before, string.IsNullOrEmpty(before) ? Urls.Comments : Urls.NextComments);
         }
 
+        public static Task<string> RequestHotCircles()
+        {
+            return XPHttpClient.DefaultClient.GetAsync<string>(Urls.HotCircle, null);
+        }
+
         public static Task<LoginToken> AnonymousLogin(string key)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
@@ -82,11 +87,6 @@ namespace Brook.DuDuRiBao.Utils
         public static Task<CommentList> RequestShortComment(string storyId, string before)
         {
             return RequestDataForStory<CommentList>(storyId, before, string.IsNullOrEmpty(before) ? Urls.ShortComment : Urls.ShortComment_More);
-        }
-
-        public static Task<RootObject> RequestCategory()
-        {
-            return XPHttpClient.DefaultClient.GetAsync<RootObject>(Urls.Categories, null);
         }
 
         public static Task<ZhiHuAuthoInfo> Login(LoginData loginData)

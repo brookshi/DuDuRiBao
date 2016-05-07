@@ -19,12 +19,6 @@ namespace Brook.DuDuRiBao.Models
         public string Avatar { get; set; }
         public string Name { get; set; }
     }
-    public class Circle
-    {
-        public string Thumbnail { get; set; }
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
     public class OriginPoster
     {
         public string Reason { get; set; }
@@ -35,7 +29,7 @@ namespace Brook.DuDuRiBao.Models
     {
         public OriginCircle Origin_Circle { get; set; }
         public Poster Poster { get; set; }
-        public Circle Circle { get; set; }
+        public HotCircle Circle { get; set; }
         public OriginPoster Origin_Poster { get; set; }
     }
     public class Story

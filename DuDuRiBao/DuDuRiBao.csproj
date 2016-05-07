@@ -138,7 +138,7 @@
     <Compile Include="Events\OpenNewStoryEvent.cs" />
     <Compile Include="Events\StoryEvent.cs" />
     <Compile Include="Events\StoryExtraEvent.cs" />
-    <Compile Include="Models\HotRiBao.cs" />
+    <Compile Include="Models\HotCircle.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\LoginData.cs" />
     <Compile Include="Models\LoginToken.cs" />
