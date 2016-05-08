@@ -33,6 +33,15 @@ namespace Brook.DuDuRiBao.Utils
             return RequestDataForTimeLine<TimeLine>(before, Urls.NextTimeLine);
         }
 
+        public static Task<HotCircleStories> RequestLatestStoriesForCircle(string circleId)
+        {
+            return RequestDataForCircleStories<HotCircleStories>(circleId, "", Urls.CircleStories);
+        }
+        public static Task<HotCircleStories> RequestNextStoriesForCircle(string circleId, string before)
+        {
+            return RequestDataForCircleStories<HotCircleStories>(circleId, before, Urls.NextCircleStories);
+        }
+
         public static Task<MainContent> RequestStoryContent(string storyId)
         {
             return RequestDataForStory<MainContent>(storyId, "", Urls.StoryContent);
@@ -175,6 +184,15 @@ namespace Brook.DuDuRiBao.Utils
         public static Task<T> RequestDataForTimeLine<T>(string before, string functionUrl)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("before", before ?? "");
+
+            return XPHttpClient.DefaultClient.GetAsync<T>(functionUrl, httpParam);
+        }
+
+        public static Task<T> RequestDataForCircleStories<T>(string circleId, string before, string functionUrl)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("circleid", circleId ?? "")
                 .AddUrlSegements("before", before ?? "");
 
             return XPHttpClient.DefaultClient.GetAsync<T>(functionUrl, httpParam);

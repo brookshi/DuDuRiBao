@@ -37,6 +37,7 @@ namespace Brook.DuDuRiBao.Models
         public Count Count { get; set; }
         public string Title { get; set; }
         public IList<Post> Posts { get; set; }
+        public Poster Poster { get; set; }
         public int Time { get; set; }
         public IList<string> Images { get; set; }
         public int Vote_Status { get; set; }
@@ -45,11 +46,29 @@ namespace Brook.DuDuRiBao.Models
         public string External_Url { get; set; }
         public string FollowerCount { get; set; }
         public string WebImage { get; set; }
+
+        public void AdjustPosterForHotCircleStory(string circleName)
+        {
+            if(Posts == null && Poster != null)
+            {
+                Posts = new List<Post>();
+                Posts.Add(new Post() {
+                    Poster = Poster,
+                    Circle = new HotCircle() { Thumbnail = Poster.Avatar, Name = circleName, Id = Poster.Id.ToString() }
+                });
+            }
+        }
     }
     public class TimeLine
     {
         public int Dimension { get; set; }
         public IList<Story> Items { get; set; }
+        public int Time { get; set; }
+    }
+
+    public class HotCircleStories
+    {
+        public List<Story> Stories { get; set; }
         public int Time { get; set; }
     }
 

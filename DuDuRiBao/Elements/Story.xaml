@@ -38,6 +38,7 @@
                     <TextBlock x:Name="PosterName"
                                FontSize="10"
                                Foreground="{ThemeResource BrushStoryPosterName}"
+                               RelativePanel.Below="CircleName"
                                RelativePanel.RightOf="PosterTime"
                                Text="{Binding Posts[0].Poster.Name}" />
                     <Grid x:Name="TitleBorder"

@@ -25,7 +25,7 @@ namespace Brook.DuDuRiBao.ViewModels
             }
         }
 
-        private string _categoryName = "";
+        private string _categoryName = StringUtil.GetString("DefaultCategory");
         public string CategoryName
         {
             get { return _categoryName; }

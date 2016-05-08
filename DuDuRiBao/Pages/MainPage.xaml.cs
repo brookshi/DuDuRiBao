@@ -123,15 +123,6 @@ namespace Brook.DuDuRiBao.Pages
             }
         }
 
-        private void HotCircleListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            //var category = e.ClickedItem as Others;
-            //VM.CurrentCategoryId = category.id;
-            //VM.CategoryName = category.name;
-            //MainListView.SetRefresh(true);
-            //ResetCategoryPanel();
-        }
-
         private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (Config.IsPageSwitched(e.PreviousSize, e.NewSize) && !string.IsNullOrEmpty(ViewModelBase.CurrentStoryId))
@@ -176,13 +167,17 @@ namespace Brook.DuDuRiBao.Pages
         private void Home_Click(object sender, RoutedEventArgs e)
         {
             VM.CurrentCategoryId = Misc.Default_Category_Id;
-            VM.Refresh();
+            VM.CategoryName = (sender as Button).Content.ToString();
+            MainListView.SetRefresh(true);
+            ResetCategoryPanel();
         }
 
         private void HotArticle_Click(object sender, RoutedEventArgs e)
         {
             VM.CurrentCategoryId = Misc.HotArtical_Category_Id;
-            VM.Refresh();
+            VM.CategoryName = (sender as Button).Content.ToString();
+            MainListView.SetRefresh(true);
+            ResetCategoryPanel();
         }
 
         private void MyFav_Click(object sender, RoutedEventArgs e)
@@ -195,6 +190,15 @@ namespace Brook.DuDuRiBao.Pages
 
             VM.CurrentCategoryId = Misc.Favorite_Category_Id;
             VM.CategoryName = string.Format(StringUtil.GetString("FavCategoryName"), 0);
+            MainListView.SetRefresh(true);
+            ResetCategoryPanel();
+        }
+
+        private void HotCircleListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var circel = e.ClickedItem as HotCircle;
+            VM.CurrentCategoryId = int.Parse(circel.Id);
+            VM.CategoryName = circel.Name;
             MainListView.SetRefresh(true);
             ResetCategoryPanel();
         }

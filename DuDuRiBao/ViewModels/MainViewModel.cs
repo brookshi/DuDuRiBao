@@ -80,7 +80,7 @@ namespace Brook.DuDuRiBao.ViewModels
             }
             else
             {
-                //await RequestMinorCategoryData(isLoadingMore);
+                await RequestMinorCategoryData(isLoadingMore);
             }
         }
 
@@ -109,6 +109,34 @@ namespace Brook.DuDuRiBao.ViewModels
                 return;
 
             StoryDataList.AddRange(timeLine.Items);
+        }
+
+        private async Task RequestMinorCategoryData(bool isLoadingMore)
+        {
+            HotCircleStories hotCircleStories = null;
+
+            if (isLoadingMore)
+            {
+                if (StoryDataList.Count > 0)
+                {
+                    hotCircleStories = await DataRequester.RequestNextStoriesForCircle(CurrentCategoryId.ToString(), StoryDataList.Last().Time.ToString());
+                }
+            }
+            else
+            {
+                ResetStorys();
+                hotCircleStories = await DataRequester.RequestLatestStoriesForCircle(CurrentCategoryId.ToString());
+                if (hotCircleStories != null && hotCircleStories.Stories != null && hotCircleStories.Stories.Count > 0)
+                {
+                    CurrentStoryId = hotCircleStories.Stories.First().Id.ToString();
+                }
+            }
+
+            if (hotCircleStories == null && hotCircleStories.Stories != null)
+                return;
+
+            hotCircleStories.Stories.ForEach(story => story.AdjustPosterForHotCircleStory(CategoryName));
+            StoryDataList.AddRange(hotCircleStories.Stories);
         }
 
         private void UpdateIndicators(int count)
