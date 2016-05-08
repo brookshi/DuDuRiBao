@@ -93,6 +93,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Add.png" />
+    <Content Include="Assets\Eye.png" />
     <Content Include="Assets\Fonts\fontawesome-webfont.ttf" />
     <None Include="project.json" />
     <PRIResource Include="strings\zh-CN\Resources.resw" />
@@ -109,6 +110,7 @@
     <Compile Include="Common\AdaptiveTriggerExtended.cs" />
     <Compile Include="Common\AppUIStatus.cs" />
     <Compile Include="Common\CommentType.cs" />
+    <Compile Include="Common\DelayCommand.cs" />
     <Compile Include="Common\LoginType.cs" />
     <Compile Include="Common\ObservableCollectionExtended.cs" />
     <Compile Include="Common\PageBase.cs" />
@@ -161,6 +163,9 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\HotArticleBuilder.cs" />
+    <Compile Include="Utils\HotCircleBuilder.cs" />
+    <Compile Include="Utils\VisualHelper.cs" />
     <Compile Include="Utils\RandomColors.cs" />
     <Compile Include="Utils\Config.cs" />
     <Compile Include="Utils\DataRequester.cs" />
@@ -176,6 +181,8 @@
     <Compile Include="ViewModels\MainContentViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.Category.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.HotArticle.cs" />
+    <Compile Include="ViewModels\MainViewModel.Favorites.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -185,6 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\header_background.png" />
+    <Content Include="Assets\HotArticleListItemShadow.png" />
     <Content Include="Assets\ListItemShadow.png" />
     <Content Include="Assets\ListItemShadow1.png" />
     <Content Include="Assets\Login.png" />

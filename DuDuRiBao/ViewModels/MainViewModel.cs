@@ -66,18 +66,22 @@ namespace Brook.DuDuRiBao.ViewModels
 
         private async Task RequestMainList(bool isLoadingMore)
         {
-            //if(CurrentCategoryId == Misc.Default_Category_Id)
+            if(CurrentCategoryId == Misc.Default_Category_Id)
             {
                 await RequestDefaultCategoryData(isLoadingMore);
             }
-            //else if(CurrentCategoryId == Misc.Favorite_Category_Id)
-            //{
-            //    await RequestFavorites(isLoadingMore);
-            //}
-            //else
-            //{
-            //    await RequestMinorCategoryData(isLoadingMore);
-            //}
+            else if (CurrentCategoryId == Misc.Favorite_Category_Id)
+            {
+                await RequestFavorites(isLoadingMore);
+            }
+            else if (CurrentCategoryId == Misc.HotArtical_Category_Id)
+            {
+                await RequestHotArticles(isLoadingMore);
+            }
+            else
+            {
+                //await RequestMinorCategoryData(isLoadingMore);
+            }
         }
 
         private async Task RequestDefaultCategoryData(bool isLoadingMore)
@@ -104,9 +108,6 @@ namespace Brook.DuDuRiBao.ViewModels
             if (timeLine == null)
                 return;
 
-           // _currentDate = timeLine;
-
-            //StoryDataList.Add(new Story() { title = StringUtil.GetStoryGroupName(_currentDate), type = Misc.Group_Name_Type });
             StoryDataList.AddRange(timeLine.Items);
         }
 

@@ -25,22 +25,15 @@ namespace Brook.DuDuRiBao.Common
     {
         public DataTemplate NormalTemplate { get; set; }
 
-        public DataTemplate GroupTemplate { get; set; }
-
-        public DataTemplate ReferTemplate { get; set; }
+        public DataTemplate HotArticleTemplate { get; set; }
 
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
-            //var story = item as Story;
-            //if(story != null && Misc.IsGroupItem(story.Type))
-            //{
-            //    return GroupTemplate;
-            //}
-
-            //if(story.Posts.Count > 0 && story.Posts[0].OriginPoster != null)
-            //{
-            //    return ReferTemplate;
-            //}
+            var story = item as Story;
+            if (story != null && !string.IsNullOrEmpty(story.WebImage))
+            {
+                return HotArticleTemplate;
+            }
 
             return NormalTemplate;
         }

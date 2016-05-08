@@ -51,6 +51,9 @@
                              Height="48"
                              Background="Transparent"
                              BorderThickness="0"
+                             Command="{Binding DataContext.AddCircleCommand,
+                                               ElementName=HotCircleListView}"
+                             CommandParameter="{Binding }"
                              Foreground="White"
                              Icon="Add"
                              IconInterval="12"

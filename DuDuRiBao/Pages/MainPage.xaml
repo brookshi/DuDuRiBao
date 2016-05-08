@@ -31,9 +31,8 @@
             <convert:BooleanReverseConverter x:Key="BooleanReverseConverter" />
 
             <common:StoryDataTemplateSelector x:Key="StoryDataTemplateSelector"
-                                              GroupTemplate="{StaticResource GroupHeader}"
-                                              NormalTemplate="{StaticResource Story}"
-                                              ReferTemplate="{StaticResource StoryWithoutImage}" />
+                                              HotArticleTemplate="{StaticResource HotArticle}"
+                                              NormalTemplate="{StaticResource Story}" />
 
             <common:CircleDataTemplateSelector x:Key="CircleDataTemplateSelector"
                                                CircleImageTemplate="{StaticResource HotCircleItemWithImage}"
@@ -235,6 +234,7 @@
                                  RefreshProgressBarBrush="{ThemeResource BrushPrimaryDark}"
                                  RefreshProgressRingBrush="{ThemeResource BrushPrimaryDark}"
                                  RelativePanel.AlignLeftWithPanel="True"
+                                 ScrollViewer.IsVerticalRailEnabled="True"
                                  SelectionMode="Single">
                     <llm:LLMListView.ItemContainerStyle>
                         <Style TargetType="llm:LLMListViewItem">

@@ -43,11 +43,20 @@ namespace Brook.DuDuRiBao.Models
         public int Type { get; set; }
         public int Id { get; set; }
         public string External_Url { get; set; }
+        public string FollowerCount { get; set; }
+        public string WebImage { get; set; }
     }
     public class TimeLine
     {
         public int Dimension { get; set; }
         public IList<Story> Items { get; set; }
         public int Time { get; set; }
+    }
+
+    public class Favorites
+    {
+        public int count { get; set; }
+        public List<Story> stories { get; set; }
+        public int? last_time { get; set; } = null;
     }
 }

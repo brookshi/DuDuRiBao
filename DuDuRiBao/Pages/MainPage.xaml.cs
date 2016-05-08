@@ -175,12 +175,14 @@ namespace Brook.DuDuRiBao.Pages
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
-            PopupMessage.DisplayMessageInRes("Inprogress");
+            VM.CurrentCategoryId = Misc.Default_Category_Id;
+            VM.Refresh();
         }
 
         private void HotArticle_Click(object sender, RoutedEventArgs e)
         {
-            PopupMessage.DisplayMessageInRes("Inprogress");
+            VM.CurrentCategoryId = Misc.HotArtical_Category_Id;
+            VM.Refresh();
         }
 
         private void MyFav_Click(object sender, RoutedEventArgs e)

@@ -1,6 +1,7 @@
 ﻿using Brook.DuDuRiBao.Common;
 using Brook.DuDuRiBao.Models;
 using Brook.DuDuRiBao.Utils;
+using XP;
 
 namespace Brook.DuDuRiBao.ViewModels
 {
@@ -54,5 +55,9 @@ namespace Brook.DuDuRiBao.ViewModels
                 HotCircles.AddRange(hotCircleList);
             }
         }
+
+        public DelayCommand<HotCircle> AddCircleCommand { get; set; } = new DelayCommand<HotCircle>(circle => {
+            System.Diagnostics.Debug.WriteLine("aa");
+        });
     }
 }

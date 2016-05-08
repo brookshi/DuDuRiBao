@@ -56,6 +56,11 @@ namespace Brook.DuDuRiBao.Utils
         {
             return XPHttpClient.DefaultClient.GetAsync<string>(Urls.HotCircle, null);
         }
+        
+        public static Task<string> RequestHotArticles()
+        {
+            return XPHttpClient.DefaultClient.GetAsync<string>(Urls.HotArticle, null);
+        }
 
         public static Task<LoginToken> AnonymousLogin(string key)
         {

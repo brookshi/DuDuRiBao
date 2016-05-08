@@ -40,15 +40,6 @@
                                Foreground="{ThemeResource BrushStoryPosterName}"
                                RelativePanel.RightOf="PosterTime"
                                Text="{Binding Posts[0].Poster.Name}" />
-                    <!--<Border x:Name="TitleBorder"
-                            Margin="12, 0, 12, 12"
-                            Background="{ThemeResource BrushStoryTitleArea}"
-                            BorderBrush="{ThemeResource BrushStoryTitleBorder}"
-                            BorderThickness="1"
-                            CornerRadius="3"
-                            RelativePanel.AlignLeftWithPanel="True"
-                            RelativePanel.AlignRightWithPanel="True"
-                            RelativePanel.Below="CircleImage">-->
                     <Grid x:Name="TitleBorder"
                           Margin="12, 0, 12, 4"
                           RelativePanel.AlignLeftWithPanel="True"
@@ -90,7 +81,55 @@
                                         RelativePanel.Below="TitleBorder" />
                 </RelativePanel>
             </Border>
-            <!--<Rectangle Height="6" Fill="{ThemeResource BrushStoryList}" />-->
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="HotArticle">
+        <Grid Margin="8, 0, 8, 0">
+            <Image Height="98"
+                   Margin="-1, 0"
+                   NineGrid="20, 20, 20, 20"
+                   Source="ms-appx:///Assets/HotArticleListItemShadow.png"
+                   Stretch="Fill" />
+            <RelativePanel Height="88"
+                           Margin="5, 0, 5, 0"
+                           Background="White"
+                           CornerRadius="5">
+                <Image x:Name="MainItem_Image"
+                       Width="80"
+                       Height="80"
+                       Margin="8"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Stretch="UniformToFill">
+                    <Image.Source>
+                        <BitmapImage x:Name="Bitmap" UriSource="{Binding WebImage}" />
+                    </Image.Source>
+                </Image>
+                <TextBlock x:Name="MainItem_Content"
+                           Margin="8"
+                           FontWeight="Medium"
+                           LineHeight="24"
+                           MaxLines="2"
+                           RelativePanel.RightOf="MainItem_Image"
+                           Text="{Binding Title}"
+                           TextWrapping="Wrap" />
+                <Image x:Name="EyeImage"
+                       Width="20"
+                       Height="20"
+                       Margin="8, 0, 4, 6"
+                       RelativePanel.AlignBottomWithPanel="True"
+                       RelativePanel.RightOf="MainItem_Image"
+                       Source="ms-appx:///Assets/Eye.png"
+                       Stretch="Fill" />
+                <TextBlock x:Name="FollowerCount"
+                           Margin="0, 0, 0, 8"
+                           FontSize="12"
+                           Foreground="#CED5D9"
+                           RelativePanel.AlignBottomWithPanel="True"
+                           RelativePanel.RightOf="EyeImage"
+                           Text="{Binding FollowerCount}" />
+            </RelativePanel>
         </Grid>
     </DataTemplate>
 
