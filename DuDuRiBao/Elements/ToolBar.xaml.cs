@@ -112,10 +112,10 @@ namespace Brook.DuDuRiBao.Elements
         [SubscriberCallback(typeof(StoryExtraEvent))]
         private void Subscriber(StoryExtraEvent param)
         {
-            CommentCount = param.StoryExtraInfo.comments.ToString();
-            LikeCount = param.StoryExtraInfo.popularity.ToString();
-            IsLikeButtonChecked = param.StoryExtraInfo.vote_status == 1;
-            IsFavoriteButtonChecked = param.StoryExtraInfo.favorite;
+            CommentCount = param.StoryExtraInfo.Count.Comments.ToString();
+            LikeCount = param.StoryExtraInfo.Count.Likes.ToString();
+            IsLikeButtonChecked = param.StoryExtraInfo.VoteStatus == 1;
+            IsFavoriteButtonChecked = param.StoryExtraInfo.Favorite;
         }
 
         [SubscriberCallback(typeof(OpenNewStoryEvent))]

@@ -25,14 +25,13 @@ namespace Brook.DuDuRiBao.Common
 
         public static StoryExtraInfo CurrentStoryExtraInfo { get; set; } = new StoryExtraInfo()
         {
-            comments = 0,
-            favorite = false,
-            long_comments = 0,
-            normal_comments = 0,
-            popularity = 0,
-            post_reasons = 0,
-            short_comments = 0,
-            vote_status = 0,
+            Count = new ExtraCount()
+            {
+                Likes = 0,
+                Comments = 0,
+            },
+            Favorite = false,
+            VoteStatus = 0,
         };
 
         public event PropertyChangedEventHandler PropertyChanged;
