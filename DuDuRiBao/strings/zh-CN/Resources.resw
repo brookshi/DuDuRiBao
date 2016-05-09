@@ -171,8 +171,8 @@
   <data name="LoginZhiHuFailed" xml:space="preserve">
     <value>登录知乎失败</value>
   </data>
-  <data name="LongComment" xml:space="preserve">
-    <value>长评</value>
+  <data name="RecommendComment" xml:space="preserve">
+    <value>推荐语</value>
   </data>
   <data name="Monday" xml:space="preserve">
     <value>星期一</value>
@@ -201,8 +201,8 @@
   <data name="Saturday" xml:space="preserve">
     <value>星期六</value>
   </data>
-  <data name="ShortComment" xml:space="preserve">
-    <value>短评</value>
+  <data name="NormalComment" xml:space="preserve">
+    <value>评论</value>
   </data>
   <data name="Sunday" xml:space="preserve">
     <value>星期日</value>

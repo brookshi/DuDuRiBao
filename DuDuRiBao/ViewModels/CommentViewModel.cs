@@ -10,13 +10,15 @@ namespace Brook.DuDuRiBao.ViewModels
 {
     public class CommentViewModel : ViewModelBase
     {
-        private readonly ObservableCollectionExtended<Comment> _commentList = new ObservableCollectionExtended<Comment>();
+        private CommentType _currCommentType = CommentType.Recommend;
 
-        public ObservableCollectionExtended<Comment> CommentList { get { return _commentList; } }
+        private readonly ObservableCollectionExtended<GroupComments> _commentList = new ObservableCollectionExtended<GroupComments>();
+
+        public ObservableCollectionExtended<GroupComments> CommentList { get { return _commentList; } }
 
         public string LastCommentId
         {
-            get { return CommentList.LastOrDefault()?.Id.ToString() ?? null; }
+            get { return CommentList.Last().LastOrDefault()?.Id.ToString() ?? null; }
         }
 
         public string Title
@@ -78,27 +80,66 @@ namespace Brook.DuDuRiBao.ViewModels
             LLQNotifier.Default.Register(CommentExclusiveSubscriber.Instance);
         }
 
-        public void ResetComments()
-        {
-            CommentList.Clear();
-        }
-
         public async Task RequestComments(bool isLoadingMore)
         {
             if (!isLoadingMore)
             {
                 ResetComments();
+                InitCommentInfo();
             }
 
-            var comments = await DataRequester.RequestComments(CurrentStoryId, LastCommentId);
-            if (comments == null || comments.Comments == null || comments.Comments.Count == 0)
+            if (_currCommentType == CommentType.Recommend)
+            {
+                await RequestRecommendComments(isLoadingMore);
+            }
+            else if (_currCommentType == CommentType.Normal)
+            {
+                await RequestNormalComments();
+            }
+        }
+
+
+        private void InitCommentInfo()
+        {
+            if (CommentList.Count == 0)
+            {
+                CommentList.Add(new GroupComments() { GroupName = StringUtil.GetCommentGroupName(CommentType.Recommend, CurrentStoryExtraInfo.Count.Post_Reasons.ToString()) });
+                CommentList.Add(new GroupComments() { GroupName = StringUtil.GetCommentGroupName(CommentType.Normal, CurrentStoryExtraInfo.Count.Normal_Comments.ToString()) });
+            }
+        }
+
+        public void ResetComments()
+        {
+            CommentList.Clear();
+            _currCommentType = CommentType.Recommend;
+        }
+
+        public int CurrentCommentCount { get { return CommentList.Count > 1 ? CommentList[0].Count + CommentList[1].Count : 0; } }
+
+        private async Task RequestRecommendComments(bool isLoadingMore)
+        {
+            var recommendComments = await DataRequester.RequestRecommendComments(CurrentStoryId, LastCommentId);
+            if (recommendComments == null)
                 return;
 
-            CommentList.AddRange(comments.Comments);
+            CommentList.First().AddRange(recommendComments.Comments);
 
-            if (CommentList.Count < Misc.Page_Count)
+            if (recommendComments == null || recommendComments.Comments == null || recommendComments.Comments.Count < Misc.Page_Count)
             {
-                await RequestComments(true);
+                await RequestNormalComments();
+            }
+        }
+
+        private async Task RequestNormalComments()
+        {
+            if (_currCommentType == CommentType.Recommend)
+            {
+                _currCommentType = CommentType.Normal;
+            }
+            var normalComments = await DataRequester.RequestNormalComments(CurrentStoryId, _currCommentType == CommentType.Recommend ? null : LastCommentId);
+            if (normalComments != null)
+            {
+                CommentList.Last().AddRange(normalComments.Comments);
             }
         }
 
@@ -112,6 +153,16 @@ namespace Brook.DuDuRiBao.ViewModels
             IsReplingTo = false;
         }
 
+        [SubscriberCallback(typeof(StoryExtraEvent))]
+        private void StoryExtraSubscriber(StoryExtraEvent param)
+        {
+            if (CommentList.Count > 1)
+            {
+                CommentList[0].GroupName = StringUtil.GetCommentGroupName(CommentType.Recommend, CurrentStoryExtraInfo.Count.Post_Reasons.ToString());
+                CommentList[1].GroupName = StringUtil.GetCommentGroupName(CommentType.Normal, CurrentStoryExtraInfo.Count.Normal_Comments.ToString());
+            }
+        }
+
         [SubscriberCallback(typeof(CommentEvent))]
         private void CommentSubscriber(CommentEvent param)
         {
@@ -123,18 +174,21 @@ namespace Brook.DuDuRiBao.ViewModels
                     ReplyTip = string.Format(StringUtil.GetString("ReplyTip"), param.Comment.User.Name);
                     break;
                 case CommentEventType.Delete:
-                    var comment = CommentList.SingleOrDefault(o => o.Id == param.Comment.Id);
-                    if(comment != null)
+                    if (CommentList.Count > 1)
                     {
-                        CommentList.Remove(comment);
-                        return;
-                    }
+                        var comment = CommentList[0].SingleOrDefault(o => o.Id == param.Comment.Id);
+                        if (comment != null)
+                        {
+                            CommentList[0].Remove(comment);
+                            return;
+                        }
 
-                    comment = CommentList.SingleOrDefault(o => o.Id == param.Comment.Id);
-                    if (comment != null)
-                    {
-                        CommentList.Remove(comment);
-                        return;
+                        comment = CommentList[1].SingleOrDefault(o => o.Id == param.Comment.Id);
+                        if (comment != null)
+                        {
+                            CommentList[1].Remove(comment);
+                            return;
+                        }
                     }
                     break;
             }

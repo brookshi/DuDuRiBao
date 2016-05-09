@@ -2,7 +2,7 @@
 {
     public enum CommentType
     {
-        Long = 0,
-        Short
+        Recommend = 0,
+        Normal = 1
     }
 }

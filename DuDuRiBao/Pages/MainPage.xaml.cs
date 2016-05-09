@@ -96,15 +96,6 @@ namespace Brook.DuDuRiBao.Pages
             DisplayStory(storyId);
         }
 
-        private void TapFlipImage(object sender, RoutedEventArgs e)
-        {
-            var storyId = (sender as FrameworkElement).Tag.ToString();
-            if (storyId != Misc.Unvalid_Image_Id.ToString())
-            {
-                DisplayStory(storyId);
-            }
-        }
-
         private void DisplayStory(string storyId)
         {
             ViewModelBase.CurrentStoryId = storyId;

@@ -29,6 +29,8 @@ namespace Brook.DuDuRiBao.Common
             {
                 Likes = 0,
                 Comments = 0,
+                Post_Reasons = 0,
+                Normal_Comments = 0,
             },
             Favorite = false,
             VoteStatus = 0,

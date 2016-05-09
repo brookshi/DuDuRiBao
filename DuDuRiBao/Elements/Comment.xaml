@@ -61,4 +61,17 @@
         </RelativePanel>
     </DataTemplate>
 
+    <DataTemplate x:Key="CommentHeader">
+        <Grid>
+            <Rectangle Width="4"
+                       Height="10"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Fill="{ThemeResource BrushPrimary}" />
+            <TextBlock Margin="10, 0, 0, 0"
+                       VerticalAlignment="Center"
+                       FontSize="12"
+                       Text="{Binding GroupName}" />
+        </Grid>
+    </DataTemplate>
 </ResourceDictionary>

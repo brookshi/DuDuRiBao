@@ -36,8 +36,15 @@ namespace Brook.DuDuRiBao.Models
         public string Author { get; set; }
     }
 
+    public class Circle
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
     public class Comment
     {
+        public Circle Circle { get; set; }
         public string Content { get; set; }
         public bool Own { get; set; }
         public User User { get; set; }
@@ -51,5 +58,27 @@ namespace Brook.DuDuRiBao.Models
     public class CommentList
     {
         public List<Comment> Comments { get; set; }
+    }
+
+    public class GroupComments : ObservableCollectionExtended<Comment>
+    {
+        private string _groupName = "";
+        public string GroupName
+        {
+            get { return _groupName; }
+            set
+            {
+                if (value != _groupName)
+                {
+                    _groupName = value;
+                    Notify("GroupName");
+                }
+            }
+        }
+
+        protected void Notify(string property)
+        {
+            OnPropertyChanged(new PropertyChangedEventArgs(property));
+        }
     }
 }

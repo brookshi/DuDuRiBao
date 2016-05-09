@@ -21,8 +21,9 @@ namespace Brook.DuDuRiBao.ViewModels
                 return HotArticleBuilder.Builder(hotArticles);
             });
 
-            if (hotArticleList != null)
+            if (hotArticleList != null && hotArticleList.Count > 0)
             {
+                CurrentStoryId = hotArticleList.First().Id.ToString();
                 StoryDataList.Clear();
                 StoryDataList.AddRange(hotArticleList);
             }

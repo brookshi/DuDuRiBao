@@ -40,7 +40,7 @@ namespace Brook.DuDuRiBao.Utils
 
         public static string GetCommentGroupName(CommentType type, string count)
         {
-            return count + GetString("CommentItem") + (type == CommentType.Long ? GetString("LongComment") : GetString("ShortComment"));
+            return count + GetString("CommentItem") + (type == CommentType.Recommend ? GetString("RecommendComment") : GetString("NormalComment"));
         }
 
         public static string DateToWeek(DateTime date)

@@ -20,7 +20,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <common:ResourceBackgroundClass />
             </ResourceDictionary.MergedDictionaries>
-
+            <CollectionViewSource x:Name="CommentGroup"
+                                  IsSourceGrouped="True"
+                                  Source="{x:Bind VM.CommentList, Mode=OneWay}" />
             <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </Page.Resources>
@@ -39,11 +41,14 @@
                          Grid.Row="1"
                          IsItemClickEnabled="False"
                          ItemTemplate="{StaticResource Comment}"
-                         ItemsSource="{x:Bind VM.CommentList}"
+                         ItemsSource="{x:Bind CommentGroup.View}"
                          LoadMoreProgressBarBrush="{ThemeResource BrushPrimaryDark}"
                          RefreshProgressRingBrush="{ThemeResource BrushPrimaryDark}"
                          SelectionMode="Single"
                          ShowsScrollingPlaceholders="True">
+            <llm:LLMListView.GroupStyle>
+                <GroupStyle HeaderTemplate="{StaticResource CommentHeader}" />
+            </llm:LLMListView.GroupStyle>
             <llm:LLMListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
