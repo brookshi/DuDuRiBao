@@ -127,27 +127,36 @@ namespace Brook.DuDuRiBao.Elements
             IsFavoriteButtonChecked = false;
         }
 
+        [SubscriberCallback(typeof(LoginEvent))]
+        public void AutoLogin(LoginEvent param)
+        {
+            if (param.IsLogin)
+                UserPhotoUrl = param.UserPhotoUrl;
+        }
+
         private void MenuButton_Click(object sender, RoutedEventArgs e)
         {
             LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Menu });
         }
 
-        private async void LoginButton_Click(object sender, RoutedEventArgs e)
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            var isSuccess = await AuthorizationHelper.Login(LoginType.Sina);
-            if (isSuccess)
+            AuthorizationHelper.Login(LoginType.Sina, loginSuccess =>
             {
-                PopupMessage.DisplayMessageInRes("LoginSuccess");
-                var info = StorageUtil.StorageInfo.ZhiHuAuthoInfo;
-                if (info == null)
-                    return;
+                if (loginSuccess)
+                {
+                    PopupMessage.DisplayMessageInRes("LoginSuccess");
+                    var info = StorageUtil.StorageInfo.ZhiHuAuthoInfo;
+                    if (info == null)
+                        return;
 
-                UserPhotoUrl = info.avatar;
-            }
-            else
-            {
-                PopupMessage.DisplayMessageInRes("LoginFailed");
-            }
+                    UserPhotoUrl = info.avatar;
+                }
+                else
+                {
+                    PopupMessage.DisplayMessageInRes("LoginFailed");
+                }
+            });
         }
 
         private void CommentButton_Click(object sender, RoutedEventArgs e)

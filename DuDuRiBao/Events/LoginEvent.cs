@@ -20,5 +20,7 @@ namespace Brook.DuDuRiBao.Events
     public class LoginEvent
     {
         public bool IsLogin { get; set; }
+
+        public string UserPhotoUrl { get; set; }
     }
 }

@@ -48,9 +48,20 @@ namespace Brook.DuDuRiBao.Pages
             }
             await InitUI();
 
-            await AuthorizationHelper.AutoLogin();
+            var isLogin = await AuthorizationHelper.AutoLogin();
+            if (isLogin)
+                UpdateLoginInfo();
 
             MainListView.SetRefresh(true);
+        }
+
+        private void UpdateLoginInfo()
+        {
+            var info = StorageUtil.StorageInfo.ZhiHuAuthoInfo;
+            if (info == null)
+                return;
+
+            LLQNotifier.Default.Notify(new LoginEvent() { IsLogin = true, UserPhotoUrl = info.avatar });
         }
 
         private static async Task InitUI()

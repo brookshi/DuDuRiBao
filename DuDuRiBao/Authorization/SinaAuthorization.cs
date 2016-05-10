@@ -63,10 +63,7 @@ namespace Brook.DuDuRiBao.Authorization
                 {
                     UpdateLoginData(response);
                 }
-                if(loginCallback != null)
-                {
-                    loginCallback(isSuccess, response);
-                }
+                loginCallback?.Invoke(isSuccess, response);
             };
             _oauth.BeginOAuth();
         }

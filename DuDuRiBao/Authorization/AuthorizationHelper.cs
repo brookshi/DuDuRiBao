@@ -104,40 +104,44 @@ namespace Brook.DuDuRiBao.Authorization
             return true;
         }
 
-        public static async Task<bool> Login(LoginType loginType)
+        public static async void Login(LoginType loginType, Action<bool> loginCallback)
         {
             if (IsLogin)
-                return true;
+                return;
+
+            if (loginCallback == null)
+                loginCallback = isSuccess => { };
 
             string msg = string.Empty;
             if (!CheckLoginType(loginType, out msg))
             {
-                return false;
+                loginCallback(false);
             }
             var authorizer = Authorizations[loginType];
 
+            var loginSuccess = false;
             if (authorizer.IsAuthorized && Authorizations[loginType].LoginData != null)
             {
-                return await LoginZhiHu(loginType);
+                loginSuccess = await LoginZhiHu(loginType);
+                loginCallback(loginSuccess);
             }
             else
             {
-                bool loginSuccess = false;
                 try
-                { 
+                {
                     authorizer.Login(async (isSuccess, res) =>
                     {
                         if (isSuccess)
                         {
                             loginSuccess = await LoginZhiHu(loginType);
+                            loginCallback(loginSuccess);
                         }
                     });
                 }
-                catch(Exception)
+                catch (Exception)
                 {
-
+                    loginCallback(loginSuccess);
                 }
-                return loginSuccess;
             }
         }
 
