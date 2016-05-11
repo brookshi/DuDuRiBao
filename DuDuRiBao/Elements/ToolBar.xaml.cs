@@ -39,7 +39,7 @@ namespace Brook.DuDuRiBao.Elements
             get { return _userPhotoUrl; }
             set
             {
-                if (value != _userPhotoUrl)
+                if (value != _userPhotoUrl && !string.IsNullOrEmpty(value))
                 {
                     _userPhotoUrl = value;
                     Notify("UserPhotoUrl");

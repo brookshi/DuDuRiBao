@@ -145,7 +145,7 @@
     <value>离线下载</value>
   </data>
   <data name="FavCategoryName" xml:space="preserve">
-    <value> {0} 条收藏</value>
+    <value>我的收藏</value>
   </data>
   <data name="Favorite.Content" xml:space="preserve">
     <value>我的收藏</value>

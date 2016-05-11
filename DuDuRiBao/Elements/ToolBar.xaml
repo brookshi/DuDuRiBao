@@ -92,34 +92,23 @@
                          Margin="{ThemeResource LoginButtonMargin}"
                          Background="Transparent"
                          Click="LoginButton_Click"
-                         Padding="0"
                          Foreground="White"
                          IconPosition="NoIcon"
+                         Padding="0"
                          PointerOverBackground="{StaticResource BrushPointerOver}"
                          PressedBackground="{StaticResource BrushPressed}"
                          RelativePanel.AlignVerticalCenterWithPanel="True">
                 <xp:XPButton.Content>
-                    <Rectangle
-                         Width="32"
-                         Height="32" RadiusX="16" RadiusY="16">
+                    <Rectangle Width="28"
+                               Height="28"
+                               RadiusX="14"
+                               RadiusY="14">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="{x:Bind UserPhotoUrl, Mode=OneWay}" />
                         </Rectangle.Fill>
                     </Rectangle>
                 </xp:XPButton.Content>
             </xp:XPButton>
-            <!--<Button x:Name="LoginButton"
-                    Width="48"
-                    Height="48"
-                    Margin="{ThemeResource LoginButtonMargin}"
-                    Background="Transparent"
-                    Click="LoginButton_Click"
-                    Foreground="White"
-                    RelativePanel.AlignVerticalCenterWithPanel="True">
-                <Button.Content>
-                    <Image Source="{x:Bind UserPhotoUrl, Mode=OneWay}" Stretch="Fill" />
-                </Button.Content>
-            </Button>-->
             <xp:XPButton x:Name="CommentButton"
                          Height="48"
                          Margin="10, 0, 0, 0"

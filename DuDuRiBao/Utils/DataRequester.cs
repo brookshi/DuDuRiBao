@@ -28,6 +28,7 @@ namespace Brook.DuDuRiBao.Utils
         {
             return RequestDataForTimeLine<TimeLine>("", Urls.TimeLine);
         }
+
         public static Task<TimeLine> RequestNextTimeLine(string before)
         {
             return RequestDataForTimeLine<TimeLine>(before, Urls.NextTimeLine);
@@ -37,6 +38,7 @@ namespace Brook.DuDuRiBao.Utils
         {
             return RequestDataForCircleStories<HotCircleStories>(circleId, "", Urls.CircleStories);
         }
+
         public static Task<HotCircleStories> RequestNextStoriesForCircle(string circleId, string before)
         {
             return RequestDataForCircleStories<HotCircleStories>(circleId, before, Urls.NextCircleStories);
@@ -83,6 +85,18 @@ namespace Brook.DuDuRiBao.Utils
             
             return XPHttpClient.DefaultClient.PostAsync<LoginToken>(Urls.AnonymousLogin, httpParam);
         }
+
+        public static Task<Favorites> RequestLatestFavorites()
+        {
+            return XPHttpClient.DefaultClient.GetAsync<Favorites>(Urls.LatestFavorites, null);
+        }
+
+        public static Task<Favorites> RequestFavorites(string lastTime)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("lasttime", lastTime);
+            return XPHttpClient.DefaultClient.GetAsync<Favorites>(Urls.Favorites, httpParam);
+        }
         //public static Task<MainData> RequestStories(string before)
         //{
         //    return RequestDataForStory<MainData>("", before, Urls.Stories);
@@ -105,7 +119,7 @@ namespace Brook.DuDuRiBao.Utils
 
         public static Task<ZhiHuAuthoInfo> Login(LoginData loginData)
         {
-            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder.SetBody(new HttpJsonContent(loginData));
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder.SetBody(new HttpJsonContent(loginData)).AddHeader("x-client-id", "3");
             return XPHttpClient.DefaultClient.PostAsync<ZhiHuAuthoInfo>(Urls.Login, httpParam);
         }
 
@@ -168,18 +182,6 @@ namespace Brook.DuDuRiBao.Utils
 
             XPHttpClient.DefaultClient.DeleteAsync(Urls.LikeComment, httpParam, null);
         }
-
-        //public static Task<Favorites> RequestLatestFavorites()
-        //{
-        //    return XPHttpClient.DefaultClient.GetAsync<Favorites>(Urls.LatestFavorites, null);
-        //}
-
-        //public static Task<Favorites> RequestFavorites(string lastTime)
-        //{
-        //    var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
-        //        .AddUrlSegements("lasttime", lastTime);
-        //    return XPHttpClient.DefaultClient.GetAsync<Favorites>(Urls.Favorites, httpParam);
-        //}
 
         public static Task<T> RequestDataForTimeLine<T>(string before, string functionUrl)
         {

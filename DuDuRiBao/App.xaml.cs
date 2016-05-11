@@ -90,7 +90,7 @@ namespace Brook.DuDuRiBao
             XPHttpClient.DefaultClient.HttpConfig
                 .SetBaseUrl(Urls.BaseUrl)
                 .SetUseHttpCache(false)
-                .SetDefaultHeaders("x-client-id", "3")
+                .SetDefaultHeaders("x-client-id", "4")
                 .ApplyConfig();
         }
 

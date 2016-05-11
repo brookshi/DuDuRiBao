@@ -191,7 +191,7 @@ namespace Brook.DuDuRiBao.Pages
             }
 
             VM.CurrentCategoryId = Misc.Favorite_Category_Id;
-            VM.CategoryName = string.Format(StringUtil.GetString("FavCategoryName"), 0);
+            VM.CategoryName = StringUtil.GetString("FavCategoryName");
             MainListView.SetRefresh(true);
             ResetCategoryPanel();
         }

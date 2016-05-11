@@ -27,12 +27,19 @@ namespace Brook.DuDuRiBao.Common
 
         public DataTemplate HotArticleTemplate { get; set; }
 
+        public DataTemplate FavoriteTemplate { get; set; }
+
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
             var story = item as Story;
             if (story != null && !string.IsNullOrEmpty(story.WebImage))
             {
                 return HotArticleTemplate;
+            }
+
+            if (story != null && story.Posts == null)
+            {
+                return FavoriteTemplate;
             }
 
             return NormalTemplate;
