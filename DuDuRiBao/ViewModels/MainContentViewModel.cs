@@ -108,7 +108,7 @@ namespace Brook.DuDuRiBao.ViewModels
                 switch (param.Type)
                 {
                     case StoryEventType.Fav:
-                        DataRequester.SetStoryFavorite(CurrentStoryId, param.IsChecked);
+                        DataRequester.SetFavoriteStory(CurrentStoryId, param.IsChecked);
                         break;
                     case StoryEventType.Like:
                         DataRequester.SetStoryLike(CurrentStoryId, param.IsChecked);
