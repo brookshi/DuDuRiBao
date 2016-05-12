@@ -26,7 +26,9 @@ namespace Brook.DuDuRiBao.Utils
     {
         public static Task<ZhiHuAuthoInfo> Login(LoginData loginData)
         {
-            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder.SetBody(new HttpJsonContent(loginData)).AddHeader("x-client-id", "3");
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .SetBody(new HttpJsonContent(loginData))
+                .AddHeader("x-client-id", "3");
             return XPHttpClient.DefaultClient.PostAsync<ZhiHuAuthoInfo>(Urls.Login, httpParam);
         }
 
@@ -80,6 +82,20 @@ namespace Brook.DuDuRiBao.Utils
         public static Task<string> RequestHotArticles()
         {
             return XPHttpClient.DefaultClient.GetAsync<string>(Urls.HotArticle, null);
+        }
+
+        public static Task JoinCircle(string circleId)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("circleid", circleId);
+            return XPHttpClient.DefaultClient.PostAsync<ZhiHuAuthoInfo>(Urls.JoinCircle, httpParam);
+        }
+
+        public static Task QuitCircle(string circleId)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("circleid", circleId);
+            return XPHttpClient.DefaultClient.PostAsync<ZhiHuAuthoInfo>(Urls.QuitCircle, httpParam);
         }
 
         public static Task<Favorites> RequestLatestFavorites()

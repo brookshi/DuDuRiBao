@@ -78,6 +78,7 @@ namespace Brook.DuDuRiBao.ViewModels
             {
                 Html.ArrangeMainContent(content);
                 MainHtmlContent = content;
+                LLQNotifier.Default.Notify(new ShareEvent() { ShareUrl = content.Share_Url });
             }
             IsRefreshContent = false;
         }

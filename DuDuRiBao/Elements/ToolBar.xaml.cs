@@ -116,6 +116,7 @@ namespace Brook.DuDuRiBao.Elements
         public ToolBar()
         {
             this.InitializeComponent();
+            WeiXinItem.DataContext = this;
             Loaded += (s, e) =>
             {
                 if (this.Visibility == Visibility.Visible)

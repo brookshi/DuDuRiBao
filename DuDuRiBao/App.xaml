@@ -39,6 +39,8 @@
                     <Color x:Key="ColorStoryLike">#C2C9CC</Color>
                     <Color x:Key="ColorListBackground">#f9f9f9</Color>
                     <Color x:Key="ColorCommentSplitter">#e4e4e4</Color>
+                    <Color x:Key="ColorButtonForeground">#FFFFFF</Color>
+                    <Color x:Key="ColorCheckedForeground">#00D74B</Color>
 
                     <SolidColorBrush x:Key="BrushPrimary" Color="{ThemeResource ColorPrimary}" />
                     <SolidColorBrush x:Key="BrushPrimaryDark" Color="{ThemeResource ColorPrimaryDark}" />
@@ -63,6 +65,8 @@
                     <SolidColorBrush x:Key="BrushStoryLike" Color="{ThemeResource ColorStoryLike}" />
                     <SolidColorBrush x:Key="BrushListBackground" Color="{ThemeResource ColorListBackground}" />
                     <SolidColorBrush x:Key="BrushCommentSplitter" Color="{ThemeResource ColorCommentSplitter}" />
+                    <SolidColorBrush x:Key="BrushButtonForeground" Color="{ThemeResource ColorButtonForeground}" />
+                    <SolidColorBrush x:Key="BrushCheckedForeground" Color="{ThemeResource ColorCheckedForeground}" />
                     <SolidColorBrush x:Key="BrushMainSplitter" Color="White" />
                     <SolidColorBrush x:Key="BrushPointerOver" Color="#22000000" />
                     <SolidColorBrush x:Key="BrushPressed" Color="#44000000" />

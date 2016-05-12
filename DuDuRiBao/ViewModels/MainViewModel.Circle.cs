@@ -1,6 +1,8 @@
-﻿using Brook.DuDuRiBao.Common;
+﻿using Brook.DuDuRiBao.Authorization;
+using Brook.DuDuRiBao.Common;
 using Brook.DuDuRiBao.Models;
 using Brook.DuDuRiBao.Utils;
+using Windows.UI.Xaml.Controls;
 using XP;
 
 namespace Brook.DuDuRiBao.ViewModels
@@ -56,8 +58,31 @@ namespace Brook.DuDuRiBao.ViewModels
             }
         }
 
-        public DelayCommand<HotCircle> AddCircleCommand { get; set; } = new DelayCommand<HotCircle>(circle => {
-            System.Diagnostics.Debug.WriteLine("aa");
+        public DelayCommand<XPButton> JoinQuitCircleCommand { get; set; } = new DelayCommand<XPButton>(btn => {
+            if (!AuthorizationHelper.IsLogin)
+            {
+                PopupMessage.DisplayMessageInRes("NeedLogin");
+                return;
+            }
+
+            var circle = btn.DataContext as HotCircle;
+            if (circle == null)
+                return;
+
+            if (btn.Tag.ToString() == "0")
+            {
+                DataRequester.JoinCircle(circle.Id);
+                btn.Icon = new SymbolIcon(Symbol.Accept);
+                btn.PointerOverIconForeground = btn.PressedIconForeground = btn.IconForeground = ResUtil.GetAppThemeBrush("BrushCheckedForeground");
+                btn.Tag = "1";
+            }
+            else
+            {
+                DataRequester.QuitCircle(circle.Id);
+                btn.Icon = new SymbolIcon(Symbol.Add);
+                btn.PointerOverIconForeground = btn.PressedIconForeground = btn.IconForeground = ResUtil.GetAppThemeBrush("BrushButtonForeground");
+                btn.Tag = "0";
+            }
         });
     }
 }
