@@ -80,6 +80,7 @@
                     <TextBox x:Uid="CommentPlaceholder"
                              x:Name="CommentText"
                              Margin="4"
+                             BorderThickness="1"
                              AcceptsReturn="True"
                              RelativePanel.AlignBottomWithPanel="True"
                              RelativePanel.AlignLeftWithPanel="True"

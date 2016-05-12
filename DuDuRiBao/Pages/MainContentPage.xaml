@@ -7,6 +7,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:ui="using:CN.Brook.UI"
       xmlns:vm="using:Brook.DuDuRiBao.ViewModels"
+      xmlns:xp="using:XP"
       mc:Ignorable="d">
     <Page.DataContext>
         <vm:MainContentViewModel />
@@ -16,7 +17,9 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <element:ToolBar Category="{x:Bind VM.Title}" Host="ContentPage" Visibility="{x:Bind ToolBarVisibility}" />
+        <element:ToolBar Category="{x:Bind VM.Title}"
+                         Host="ContentPage"
+                         Visibility="{x:Bind ToolBarVisibility}" />
         <Grid x:Name="MainContent"
               Grid.Row="1"
               BorderBrush="{ThemeResource BrushMainSplitter}"
@@ -29,5 +32,90 @@
                           Foreground="{ThemeResource BrushPrimaryDark}"
                           IsActive="{Binding IsRefreshContent}" />
         </Grid>
+        <Popup x:Name="WeiboSharePopup"
+               Grid.Row="1"
+               Width="{Binding ElementName=MainContent,
+                               Path=ActualWidth}"
+               Height="200"
+               MaxWidth="400"
+               HorizontalAlignment="Center"
+               IsOpen="False">
+            <Grid Width="{Binding ElementName=MainContent,
+                                  Path=ActualWidth}"
+                  Height="200"
+                  MaxWidth="400">
+                <Image Width="{Binding ElementName=MainContent,
+                                       Path=ActualWidth}"
+                       Height="200"
+                       MaxWidth="400"
+                       NineGrid="20, 20, 20, 20"
+                       Source="ms-appx:///Assets/ListItemShadow.png"
+                       Stretch="Fill" />
+                <RelativePanel Height="188"
+                               MaxWidth="388"
+                               Background="White">
+                    <RelativePanel x:Name="PostTitle"
+                                   Height="36"
+                                   Background="{ThemeResource BrushPrimary}"
+                                   RelativePanel.AlignLeftWithPanel="True"
+                                   RelativePanel.AlignRightWithPanel="True"
+                                   RelativePanel.AlignTopWithPanel="True">
+                        <Image x:Name="WeiBoImg"
+                               Width="24"
+                               Height="22"
+                               Margin="4, 0, 0, 0"
+                               RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignVerticalCenterWithPanel="True"
+                               Source="ms-appx:///Assets/weibo.png"
+                               Stretch="Fill" />
+                        <TextBlock x:Uid="ShareToWeiBo"
+                                   x:Name="Title"
+                                   Margin="8, 0, 0, 0"
+                                   Foreground="White"
+                                   RelativePanel.AlignVerticalCenterWithPanel="True"
+                                   RelativePanel.RightOf="WeiBoImg"
+                                   Text="" />
+                        <xp:XPButton Background="Transparent"
+                                     Click="CloseWeiBoShareDlg"
+                                     Foreground="White"
+                                     Icon="Cancel"
+                                     IconPosition="OnlyIcon"
+                                     PointerOverBackground="{ThemeResource BrushPrimaryLight}"
+                                     PointerOverIconForeground="Red"
+                                     PressedBackground="Red"
+                                     PressedIconForeground="White"
+                                     RelativePanel.AlignRightWithPanel="True"
+                                     RelativePanel.AlignVerticalCenterWithPanel="True" />
+                    </RelativePanel>
+                    <TextBox x:Name="PostMsg"
+                             Height="108"
+                             Margin="4"
+                             HorizontalContentAlignment="Stretch"
+                             VerticalContentAlignment="Stretch"
+                             AcceptsReturn="True"
+                             BorderThickness="1"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.Below="PostTitle"
+                             TextWrapping="Wrap" />
+                    <xp:XPButton x:Uid="Send"
+                                 x:Name="SendBtn"
+                                 Margin="0, 0, 2, 2"
+                                 Background="{ThemeResource BrushPrimary}"
+                                 Click="ShareWeiBo"
+                                 Content=""
+                                 CornerRadius="2"
+                                 Foreground="White"
+                                 IconPosition="NoIcon"
+                                 PointerOverBackground="{ThemeResource BrushPrimaryLight}"
+                                 PointerOverTextForeground="White"
+                                 PressedBackground="{ThemeResource BrushPrimaryDark}"
+                                 PressedTextForeground="White"
+                                 RelativePanel.AlignBottomWithPanel="True"
+                                 RelativePanel.AlignRightWithPanel="True"
+                                 RelativePanel.Below="PostMsg" />
+                </RelativePanel>
+            </Grid>
+        </Popup>
     </Grid>
 </Page>

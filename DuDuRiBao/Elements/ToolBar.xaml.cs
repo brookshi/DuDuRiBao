@@ -47,6 +47,22 @@ namespace Brook.DuDuRiBao.Elements
             }
         }
 
+        private const string _shareUrlFormat = "https://www.zhihu.com/qrcode?url={0}";
+        private string _shareUrl = "https://www.zhihu.com/qrcode?url=123";
+        public string ShareUrl
+        {
+            get { return _shareUrl; }
+            set
+            {
+                var url = string.Format(_shareUrlFormat, value);
+                if (url != _shareUrl)
+                {
+                    _shareUrl = url;
+                    Notify("ShareUrl");
+                }
+            }
+        }
+
         private string _commentCount = "0";
         public string CommentCount
         {
@@ -132,6 +148,12 @@ namespace Brook.DuDuRiBao.Elements
         {
             if (param.IsLogin)
                 UserPhotoUrl = param.UserPhotoUrl;
+        }
+
+        [SubscriberCallback(typeof(ShareEvent))]
+        private void UpdateShareUrl(ShareEvent shareEvent)
+        {
+            ShareUrl = shareEvent.ShareUrl;
         }
 
         private void MenuButton_Click(object sender, RoutedEventArgs e)

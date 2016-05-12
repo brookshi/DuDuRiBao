@@ -14,25 +14,16 @@
 //   limitations under the License. 
 #endregion
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Brook.DuDuRiBao.Events
 {
-    public enum StoryEventType
+    public class ShareEvent
     {
-        Menu,
-        Comment,
-        Like,
-        Fav,
-        ShareToWeiBo,
-        ShareToWeiXin
-    }
-
-    public class StoryEvent
-    {
-        public StoryEventType Type { get; set; }
-
-        public int Count { get; set; }
-
-        public bool IsChecked { get; set; }
+        public string ShareUrl { get; set; }
     }
 }
