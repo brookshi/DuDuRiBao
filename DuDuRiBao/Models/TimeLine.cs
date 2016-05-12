@@ -62,8 +62,17 @@ namespace Brook.DuDuRiBao.Models
     public class TimeLine
     {
         public int Dimension { get; set; }
-        public IList<Story> Items { get; set; }
+        public List<Story> Items { get; set; }
         public int Time { get; set; }
+
+        public void Adjust()
+        {
+            Items.ForEach(item =>
+            {
+                if(item.Posts.Count > 0)
+                    item.Posts[0].Circle.Adjust();
+            });
+        }
     }
 
     public class HotCircleStories

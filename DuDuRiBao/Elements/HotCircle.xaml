@@ -1,34 +1,23 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:element="using:Brook.DuDuRiBao.Elements"
-                    xmlns:local="using:DuDuRiBao.Elements"
                     xmlns:utils="using:Brook.DuDuRiBao.Utils"
                     xmlns:xp="using:XP">
 
     <utils:RandomColors x:Key="RandomColors" />
 
-    <DataTemplate x:Key="HotCircleItemWithImage">
+    <DataTemplate x:Key="HotCircleItem">
         <Border Margin="8, 0"
                 BorderBrush="{ThemeResource BrushHotCircleSplitter}"
                 BorderThickness="0, 0, 0, 1">
             <RelativePanel>
-                <!--<Rectangle x:Name="CircleImage"
-                           Width="36"
-                           Height="36"
-                           Margin="0, 8, 8, 8"
-                           RadiusX="4"
-                           RadiusY="4"
-                           RelativePanel.AlignLeftWithPanel="True">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="{Binding Thumbnail}" Stretch="Fill" />
-                    </Rectangle.Fill>
-                </Rectangle>-->
                 <element:CircleImage x:Name="CirclePhoto"
                                      Width="36"
                                      Height="36"
                                      Margin="0, 8, 8, 8"
                                      ImageUrl="{Binding Thumbnail}"
                                      IsEnabled="False"
+                                     Radius="4"
                                      RelativePanel.AlignLeftWithPanel="True"
                                      Word="{Binding Thumbnail}" />
                 <TextBlock x:Name="CircleName"
@@ -37,63 +26,6 @@
                            Foreground="White"
                            MaxLines="1"
                            RelativePanel.AlignTopWith="CirclePhoto"
-                           RelativePanel.RightOf="CirclePhoto"
-                           Text="{Binding Name}" />
-                <TextBlock x:Name="Articles"
-                           Margin="8, 4, 12, 0"
-                           FontSize="11"
-                           Foreground="{ThemeResource ColorHotCircleTitle}"
-                           MaxLines="1"
-                           RelativePanel.Below="CircleName"
-                           RelativePanel.RightOf="CirclePhoto"
-                           Text="{Binding Articles}" />
-                <TextBlock x:Name="Fans"
-                           Margin="0, 4, 0, 0"
-                           FontSize="11"
-                           Foreground="{ThemeResource ColorHotCircleTitle}"
-                           MaxLines="1"
-                           RelativePanel.Below="CircleName"
-                           RelativePanel.RightOf="Articles"
-                           Text="{Binding Fans}" />
-                <xp:XPButton x:Name="AddToMyCircle"
-                             Width="48"
-                             Height="48"
-                             Background="Transparent"
-                             BorderThickness="0"
-                             Command="{Binding DataContext.JoinQuitCircleCommand,
-                                               ElementName=HotCircleListView}"
-                             CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                             Foreground="White"
-                             Icon="Add"
-                             IconInterval="12"
-                             IconPosition="OnlyIcon"
-                             IconSize="16"
-                             PointerOverBackground="{StaticResource BrushPointerOver}"
-                             PressedBackground="{StaticResource BrushPressed}"
-                             RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.AlignVerticalCenterWithPanel="True"
-                             Tag="0" />
-            </RelativePanel>
-        </Border>
-    </DataTemplate>
-    <DataTemplate x:Key="HotCircleItemWithWord">
-        <Border Margin="8, 0"
-                BorderBrush="{ThemeResource BrushHotCircleSplitter}"
-                BorderThickness="0, 0, 0, 1">
-            <RelativePanel>
-                <element:CircleImage x:Name="CirclePhoto"
-                                     Width="36"
-                                     Height="36"
-                                     Margin="0, 8, 8, 8"
-                                     ImageUrl="{Binding Thumbnail}"
-                                     IsEnabled="False"
-                                     RelativePanel.AlignLeftWithPanel="True"
-                                     Word="{Binding Thumbnail}" />
-                <TextBlock x:Name="CircleName"
-                           Margin="8, 8, 0, 0"
-                           FontSize="13"
-                           Foreground="White"
-                           MaxLines="1"
                            RelativePanel.RightOf="CirclePhoto"
                            Text="{Binding Name}" />
                 <TextBlock x:Name="Articles"

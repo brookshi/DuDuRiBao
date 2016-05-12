@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:common="using:Brook.DuDuRiBao.Common"
                     xmlns:converter="using:Brook.DuDuRiBao.Converters"
+                    xmlns:element="using:Brook.DuDuRiBao.Elements"
                     xmlns:local="using:Brook.DuDuRiBao.Elements"
                     xmlns:xp="using:XP">
 
@@ -21,18 +22,26 @@
                             <ImageBrush ImageSource="{Binding Posts[0].Circle.Thumbnail}" Stretch="Fill" />
                         </Rectangle.Fill>
                     </Rectangle>
+                    <local:CircleImage x:Name="CirclePhoto"
+                                       Width="36"
+                                       Height="36"
+                                       Margin="12, 12, 8, 8"
+                                       ImageUrl="{Binding Posts[0].Circle.Thumbnail}"
+                                       Radius="2"
+                                       RelativePanel.AlignLeftWithPanel="True"
+                                       Word="{Binding Posts[0].Circle.Thumbnail}" />
                     <TextBlock x:Name="CircleName"
                                Margin="0, 14, 0, 4"
                                FontSize="12"
                                Foreground="{ThemeResource BrushStoryCircleName}"
-                               RelativePanel.RightOf="CircleImage"
+                               RelativePanel.RightOf="CirclePhoto"
                                Text="{Binding Posts[0].Circle.Name}" />
                     <TextBlock x:Name="PosterTime"
                                Margin="0, 0, 4, 0"
                                FontSize="10"
                                Foreground="{ThemeResource BrushStoryPosterTime}"
                                RelativePanel.Below="CircleName"
-                               RelativePanel.RightOf="CircleImage"
+                               RelativePanel.RightOf="CirclePhoto"
                                Text="{Binding Time,
                                               Converter={StaticResource TimeConverter}}" />
                     <TextBlock x:Name="PosterName"

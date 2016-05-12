@@ -62,6 +62,14 @@ namespace Brook.DuDuRiBao.Elements
         public static readonly DependencyProperty WordProperty =
             DependencyProperty.Register("Word", typeof(string), typeof(CircleImage), new PropertyMetadata(""));
 
+        public CornerRadius Radius
+        {
+            get { return (CornerRadius)GetValue(RadiusProperty); }
+            set { SetValue(RadiusProperty, value); }
+        }
+        public static readonly DependencyProperty RadiusProperty =
+            DependencyProperty.Register("Radius", typeof(CornerRadius), typeof(CircleImage), new PropertyMetadata(0));
+
         private void ClickButton(object sender, RoutedEventArgs e)
         {
             Click?.Invoke(sender, e);

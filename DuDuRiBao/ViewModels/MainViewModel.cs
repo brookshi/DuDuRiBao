@@ -107,7 +107,7 @@ namespace Brook.DuDuRiBao.ViewModels
 
             if (timeLine == null)
                 return;
-
+            timeLine.Adjust();
             StoryDataList.AddRange(timeLine.Items);
         }
 

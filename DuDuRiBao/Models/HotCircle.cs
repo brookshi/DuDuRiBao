@@ -15,5 +15,13 @@ namespace Brook.DuDuRiBao.Models
         public string Fans { get; set; }
 
         public string Name { get; set; }
+
+        public void Adjust()
+        {
+            if(string.IsNullOrEmpty(Thumbnail) && !string.IsNullOrEmpty(Name))
+            {
+                Thumbnail = Name[0].ToString();
+            }
+        }
     }
 }
