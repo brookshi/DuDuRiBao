@@ -128,7 +128,7 @@
                 <TextBlock x:Name="FollowerCount"
                            Margin="0, 0, 0, 8"
                            FontSize="12"
-                           Foreground="#CED5D9"
+                           Foreground="{ThemeResource BrushFollowCount}"
                            RelativePanel.AlignBottomWithPanel="True"
                            RelativePanel.RightOf="EyeImage"
                            Text="{Binding FollowerCount}" />

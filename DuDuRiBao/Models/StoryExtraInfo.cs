@@ -17,6 +17,6 @@ namespace Brook.DuDuRiBao.Models
     {
         public ExtraCount Count { get; set; }
         public bool Favorite { get; set; }
-        public int VoteStatus { get; set; }
+        public int Vote_Status { get; set; }
     }
 }

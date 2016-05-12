@@ -130,7 +130,7 @@ namespace Brook.DuDuRiBao.Elements
         {
             CommentCount = param.StoryExtraInfo.Count.Comments.ToString();
             LikeCount = param.StoryExtraInfo.Count.Likes.ToString();
-            IsLikeButtonChecked = param.StoryExtraInfo.VoteStatus == 1;
+            IsLikeButtonChecked = param.StoryExtraInfo.Vote_Status == 1;
             IsFavoriteButtonChecked = param.StoryExtraInfo.Favorite;
         }
 
@@ -179,6 +179,17 @@ namespace Brook.DuDuRiBao.Elements
                     PopupMessage.DisplayMessageInRes("LoginFailed");
                 }
             });
+        }
+
+        private void ShareToWeiBo(object sender, RoutedEventArgs e)
+        {
+            if (!AuthorizationHelper.IsLogin)
+            {
+                PopupMessage.DisplayMessageInRes("NeedLogin");
+                Animator.Use(AnimationType.Shake).PlayOn(ShareButton);
+                return;
+            }
+            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.ShareToWeiBo });
         }
 
         private void CommentButton_Click(object sender, RoutedEventArgs e)

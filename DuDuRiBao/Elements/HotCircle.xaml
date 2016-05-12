@@ -8,7 +8,7 @@
 
     <DataTemplate x:Key="HotCircleItemWithImage">
         <Border Margin="8, 0"
-                BorderBrush="#2190e9"
+                BorderBrush="{ThemeResource BrushHotCircleSplitter}"
                 BorderThickness="0, 0, 0, 1">
             <RelativePanel>
                 <Rectangle x:Name="CircleImage"
@@ -33,7 +33,7 @@
                 <TextBlock x:Name="Articles"
                            Margin="8, 4, 12, 0"
                            FontSize="11"
-                           Foreground="#eeeeee"
+                           Foreground="{ThemeResource ColorHotCircleTitle}"
                            MaxLines="1"
                            RelativePanel.Below="CircleName"
                            RelativePanel.RightOf="CircleImage"
@@ -41,7 +41,7 @@
                 <TextBlock x:Name="Fans"
                            Margin="0, 4, 0, 0"
                            FontSize="11"
-                           Foreground="#eeeeee"
+                           Foreground="{ThemeResource ColorHotCircleTitle}"
                            MaxLines="1"
                            RelativePanel.Below="CircleName"
                            RelativePanel.RightOf="Articles"
@@ -68,7 +68,7 @@
     </DataTemplate>
     <DataTemplate x:Key="HotCircleItemWithWord">
         <Border Margin="8, 0"
-                BorderBrush="#2190e9"
+                BorderBrush="{ThemeResource BrushHotCircleSplitter}"
                 BorderThickness="0, 0, 0, 1">
             <RelativePanel>
                 <Border x:Name="CircleImage"
@@ -100,7 +100,7 @@
                 <TextBlock x:Name="Articles"
                            Margin="8, 4, 12, 0"
                            FontSize="11"
-                           Foreground="#eeeeee"
+                           Foreground="{ThemeResource ColorHotCircleTitle}"
                            MaxLines="1"
                            RelativePanel.Below="CircleName"
                            RelativePanel.RightOf="CircleImage"
@@ -108,7 +108,7 @@
                 <TextBlock x:Name="Fans"
                            Margin="0, 4, 0, 0"
                            FontSize="11"
-                           Foreground="#eeeeee"
+                           Foreground="{ThemeResource ColorHotCircleTitle}"
                            MaxLines="1"
                            RelativePanel.Below="CircleName"
                            RelativePanel.RightOf="Articles"

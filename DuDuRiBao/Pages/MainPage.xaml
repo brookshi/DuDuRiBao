@@ -173,7 +173,7 @@
                         <TextBlock x:Uid="HotCircle"
                                    Margin="14, 0, 0, 0"
                                    FontSize="12"
-                                   Foreground="#EEEEEE"
+                                   Foreground="{ThemeResource BrushHotCircleTitle}"
                                    RelativePanel.AlignLeftWithPanel="True"
                                    RelativePanel.AlignVerticalCenterWithPanel="True"
                                    Text="" />
@@ -186,7 +186,7 @@
                                      Content=""
                                      CornerRadius="4"
                                      FontSize="12"
-                                     Foreground="#EEEEEE"
+                                     Foreground="{ThemeResource BrushHotCircleTitle}"
                                      IconInterval="12"
                                      IconPosition="Left"
                                      IconSize="12"

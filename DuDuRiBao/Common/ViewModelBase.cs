@@ -33,7 +33,7 @@ namespace Brook.DuDuRiBao.Common
                 Normal_Comments = 0,
             },
             Favorite = false,
-            VoteStatus = 0,
+            Vote_Status = 0,
         };
 
         public event PropertyChangedEventHandler PropertyChanged;

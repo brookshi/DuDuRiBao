@@ -28,7 +28,7 @@ namespace Brook.DuDuRiBao.Utils
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder.SetBody(new HttpJsonContent(loginData)).AddHeader("x-client-id", "3");
             return XPHttpClient.DefaultClient.PostAsync<ZhiHuAuthoInfo>(Urls.Login, httpParam);
-
+        }
 
         public static Task<LoginToken> AnonymousLogin(string key)
         {
