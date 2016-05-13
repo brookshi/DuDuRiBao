@@ -31,6 +31,7 @@ namespace Brook.DuDuRiBao.Models
         public string Title { get; set; }
         public string Image { get; set; }
         public string Share_Url { get; set; }
+        public string External_Url { get; set; }
         public List<object> Js { get; set; }
         public string Ga_Prefix { get; set; }
         public Section Section { get; set; }

@@ -24,6 +24,10 @@ namespace Brook.DuDuRiBao.Common
             {
                 webView.NavigateToString(mainHtmlContent.Body);
             }
+            else if (!string.IsNullOrEmpty(mainHtmlContent.External_Url))
+            {
+                webView.Navigate(new Uri(mainHtmlContent.External_Url));
+            }
             else if(!string.IsNullOrEmpty(mainHtmlContent.Share_Url))
             {
                 webView.Navigate(new Uri(mainHtmlContent.Share_Url));
