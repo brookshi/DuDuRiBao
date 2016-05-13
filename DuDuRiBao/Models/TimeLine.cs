@@ -58,6 +58,14 @@ namespace Brook.DuDuRiBao.Models
                 });
             }
         }
+
+        public void AdjustForImage()
+        {
+            if (Images == null || Images.Count == 0)
+            {
+                Images = new List<string>() { "ms-appx:///Assets/StoryPlaceHolder.png" };
+            }
+        }
     }
     public class TimeLine
     {
@@ -71,6 +79,7 @@ namespace Brook.DuDuRiBao.Models
             {
                 if(item.Posts.Count > 0)
                     item.Posts[0].Circle.Adjust();
+                item.AdjustForImage();
             });
         }
     }
