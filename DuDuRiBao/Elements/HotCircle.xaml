@@ -3,9 +3,6 @@
                     xmlns:element="using:Brook.DuDuRiBao.Elements"
                     xmlns:utils="using:Brook.DuDuRiBao.Utils"
                     xmlns:xp="using:XP">
-
-    <utils:RandomColors x:Key="RandomColors" />
-
     <DataTemplate x:Key="HotCircleItem">
         <Border Margin="8, 0"
                 BorderBrush="{ThemeResource BrushHotCircleSplitter}"
@@ -15,6 +12,7 @@
                                      Width="36"
                                      Height="36"
                                      Margin="0, 8, 8, 8"
+                                     BackgroundBrush="{Binding BackgroundBrush}"
                                      ImageUrl="{Binding Thumbnail}"
                                      IsEnabled="False"
                                      Radius="4"

@@ -49,7 +49,7 @@ namespace Brook.DuDuRiBao.Models
 
         public void AdjustPosterForHotCircleStory(string circleName)
         {
-            if(Posts == null && Poster != null)
+            if (Posts == null && Poster != null)
             {
                 Posts = new List<Post>();
                 Posts.Add(new Post() {

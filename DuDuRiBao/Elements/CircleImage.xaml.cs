@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -69,6 +70,14 @@ namespace Brook.DuDuRiBao.Elements
         }
         public static readonly DependencyProperty RadiusProperty =
             DependencyProperty.Register("Radius", typeof(CornerRadius), typeof(CircleImage), new PropertyMetadata(0));
+
+        public Brush BackgroundBrush
+        {
+            get { return (Brush)GetValue(BackgroundBrushProperty); }
+            set { SetValue(BackgroundBrushProperty, value); }
+        }
+        public static readonly DependencyProperty BackgroundBrushProperty =
+            DependencyProperty.Register("BackgroundBrush", typeof(Brush), typeof(CircleImage), new PropertyMetadata(new SolidColorBrush(Colors.Transparent)));
 
         private void ClickButton(object sender, RoutedEventArgs e)
         {

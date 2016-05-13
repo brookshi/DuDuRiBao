@@ -10,11 +10,6 @@
              d:DesignWidth="400"
              Padding="0"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <utils:RandomColors x:Key="RandomColors" />
-        </ResourceDictionary>
-    </UserControl.Resources>
     <Grid>
         <xp:XPButton x:Name="ImageButton"
                      Background="Transparent"
@@ -41,8 +36,7 @@
         <xp:XPButton x:Name="WordButton"
                      Width="{x:Bind Width, Mode=OneWay}"
                      Height="{x:Bind Height, Mode=OneWay}"
-                     Background="{Binding Source={StaticResource RandomColors},
-                                          Path=RandomBrush}"
+                     Background="{x:Bind BackgroundBrush, Mode=OneWay}"
                      BorderThickness="0"
                      Click="ClickButton"
                      CornerRadius="{x:Bind Radius, Mode=OneWay}"

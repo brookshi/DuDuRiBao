@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Brook.DuDuRiBao.Utils;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Windows.UI.Xaml.Media;
 
 namespace Brook.DuDuRiBao.Models
 {
@@ -14,6 +16,8 @@ namespace Brook.DuDuRiBao.Models
 
         public string Fans { get; set; }
 
+        public Brush BackgroundBrush { get; set; }
+
         public string Name { get; set; }
 
         public void Adjust()
@@ -22,6 +26,7 @@ namespace Brook.DuDuRiBao.Models
             {
                 Thumbnail = Name[0].ToString();
             }
+            BackgroundBrush = ColorUtil.GetBrushByCircleId(int.Parse(Id));
         }
     }
 }

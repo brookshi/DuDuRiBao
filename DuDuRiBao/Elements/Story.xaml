@@ -8,8 +8,8 @@
 
     <converter:TimeConverter x:Key="TimeConverter" />
     <DataTemplate x:Key="Story">
-        <Grid Background="{ThemeResource BrushStoryListItem}">
-            <Border BorderBrush="{ThemeResource BrushStoryListItemBorder}" BorderThickness="0, 1, 0, 1">
+        <Grid Margin="8, 0, 8, 0" Background="{ThemeResource BrushStoryListItem}">
+            <Border BorderBrush="{ThemeResource BrushStoryListItemBorder}" BorderThickness="1, 1, 1, 1">
                 <RelativePanel x:Name="ItemPanel">
                     <Rectangle x:Name="CircleImage"
                                Width="36"
@@ -26,6 +26,7 @@
                                        Width="36"
                                        Height="36"
                                        Margin="12, 12, 8, 8"
+                                       BackgroundBrush="{Binding Posts[0].Circle.BackgroundBrush}"
                                        ImageUrl="{Binding Posts[0].Circle.Thumbnail}"
                                        Radius="2"
                                        RelativePanel.AlignLeftWithPanel="True"

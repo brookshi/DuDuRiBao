@@ -172,7 +172,7 @@
     <Compile Include="Utils\HotCircleBuilder.cs" />
     <Compile Include="Utils\ResUtil.cs" />
     <Compile Include="Utils\VisualHelper.cs" />
-    <Compile Include="Utils\RandomColors.cs" />
+    <Compile Include="Utils\ColorUtil.cs" />
     <Compile Include="Utils\Config.cs" />
     <Compile Include="Utils\DataRequester.cs" />
     <Compile Include="Utils\Html.cs" />
@@ -199,6 +199,7 @@
   <ItemGroup>
     <Content Include="Assets\header_background.png" />
     <Content Include="Assets\HotArticleListItemShadow.png" />
+    <Content Include="Assets\StoryPlaceHolder.png" />
     <Content Include="Assets\ListItemShadow.png" />
     <Content Include="Assets\ListItemShadow1.png" />
     <Content Include="Assets\Login.png" />

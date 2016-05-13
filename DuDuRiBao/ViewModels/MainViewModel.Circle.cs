@@ -2,6 +2,7 @@
 using Brook.DuDuRiBao.Common;
 using Brook.DuDuRiBao.Models;
 using Brook.DuDuRiBao.Utils;
+using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
 using XP;
 
@@ -9,9 +10,13 @@ namespace Brook.DuDuRiBao.ViewModels
 {
     public partial class MainViewModel
     {
-        private readonly ObservableCollectionExtended<HotCircle> _hotCircles = new ObservableCollectionExtended<HotCircle>();
+        private List<HotCircle> _hotCircles = new List<HotCircle>();
 
-        public ObservableCollectionExtended<HotCircle> HotCircles { get { return _hotCircles; } }
+        public List<HotCircle> HotCircles
+        {
+            get { return _hotCircles; }
+            set { _hotCircles = value; Notify("HotCircles"); }
+        }
 
         private int _currentCategoryId = Misc.Default_Category_Id;
         public int CurrentCategoryId
@@ -53,8 +58,8 @@ namespace Brook.DuDuRiBao.ViewModels
 
             if(hotCircleList != null)
             {
-                HotCircles.Clear();
-                HotCircles.AddRange(hotCircleList);
+                hotCircleList.ForEach(circle => circle.Adjust());
+                HotCircles = hotCircleList;
             }
         }
 

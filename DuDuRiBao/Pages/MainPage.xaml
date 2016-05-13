@@ -34,11 +34,6 @@
                                               FavoriteTemplate="{StaticResource Favorite}"
                                               HotArticleTemplate="{StaticResource HotArticle}"
                                               NormalTemplate="{StaticResource Story}" />
-
-            <!--<common:CircleDataTemplateSelector x:Key="CircleDataTemplateSelector"
-                                               CircleImageTemplate="{StaticResource HotCircleItemWithImage}"
-                                               CircleWordTemplate="{StaticResource HotCircleItemWithWord}" />-->
-
         </ResourceDictionary>
     </Page.Resources>
 
@@ -204,7 +199,7 @@
                               IsItemClickEnabled="True"
                               ItemClick="HotCircleListView_ItemClick"
                               ItemTemplate="{StaticResource HotCircleItem}"
-                              ItemsSource="{x:Bind VM.HotCircles}"
+                              ItemsSource="{x:Bind VM.HotCircles, Mode=OneWay}"
                               RelativePanel.AlignBottomWithPanel="True"
                               RelativePanel.AlignLeftWithPanel="True"
                               RelativePanel.AlignRightWithPanel="True"

@@ -21,6 +21,8 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Windows.UI;
+using Windows.UI.Xaml.Media;
 
 namespace Brook.DuDuRiBao.Utils
 {
@@ -52,15 +54,16 @@ namespace Brook.DuDuRiBao.Utils
             var title = HandleTitle(matchTitle);
             var articles = matchArticles.Replace("<i>", "").Replace("</i>", "");
             var fans = matchFans.Replace("<i>", "").Replace("</i>", "");
-
-            return new HotCircle()
+            var circle = new HotCircle()
             {
                 Id = id,
                 Thumbnail = thumbnail,
                 Name = title,
                 Articles = articles,
-                Fans = fans
+                Fans = fans,
             };
+
+            return circle;
         }
 
         static string HandleThumbnail(string matchThumbnail)

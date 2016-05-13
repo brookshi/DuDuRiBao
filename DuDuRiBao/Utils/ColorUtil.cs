@@ -24,23 +24,23 @@ using Windows.UI.Xaml.Media;
 
 namespace Brook.DuDuRiBao.Utils
 {
-    public class RandomColors
+    public class ColorUtil
     {
         static string[] _colorPool = new string[] { "#4db6ac", "#ff8964", "#90a4ae", "#9575cd", "#aed581", "#9e9e9e", "#4dd0e1", "#a1887f" };
 
-        public static string RandomColorString
+        public static string GetColorStringByCircleId(int circleId)
         {
-           get { return _colorPool[new Random().Next() % _colorPool.Length]; }
+            return _colorPool[circleId % _colorPool.Length];
         }
 
-        public static Color RandomColor
+        public static Color GetColorByCircleId(int circleId)
         {
-            get{ return GetColorFromHexString(RandomColorString); }
+            return GetColorFromHexString(GetColorStringByCircleId(circleId));
         }
 
-        public static Brush RandomBrush
+        public static Brush GetBrushByCircleId(int circleId)
         {
-            get{ return new SolidColorBrush(RandomColor); }
+            return new SolidColorBrush(GetColorByCircleId(circleId));
         }
 
         public static Color GetColorFromHexString(string hexValue)
