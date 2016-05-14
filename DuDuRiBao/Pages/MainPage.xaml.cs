@@ -201,6 +201,7 @@ namespace Brook.DuDuRiBao.Pages
             var circel = e.ClickedItem as HotCircle;
             VM.CurrentCategoryId = int.Parse(circel.Id);
             VM.CategoryName = circel.Name;
+            VM.CurrentCircle = circel;
             MainListView.SetRefresh(true);
             ResetCategoryPanel();
         }

@@ -47,14 +47,14 @@ namespace Brook.DuDuRiBao.Models
         public string FollowerCount { get; set; }
         public string WebImage { get; set; }
 
-        public void AdjustPosterForHotCircleStory(string circleName)
+        public void AdjustForHotCircleStory(HotCircle circle)
         {
-            if (Posts == null && Poster != null)
+            if (Posts == null && circle != null)
             {
                 Posts = new List<Post>();
                 Posts.Add(new Post() {
                     Poster = Poster,
-                    Circle = new HotCircle() { Thumbnail = Poster.Avatar, Name = circleName, Id = Poster.Id.ToString() }
+                    Circle = circle.Clone()
                 });
             }
             AdjustForImage();

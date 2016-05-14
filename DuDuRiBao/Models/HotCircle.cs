@@ -28,5 +28,18 @@ namespace Brook.DuDuRiBao.Models
             }
             BackgroundBrush = ColorUtil.GetBrushByCircleId(int.Parse(Id));
         }
+
+        public HotCircle Clone()
+        {
+            return new HotCircle()
+            {
+                Thumbnail = Thumbnail,
+                Id = Id,
+                Articles = Articles,
+                Fans = Fans,
+                BackgroundBrush = BackgroundBrush,
+                Name = Name
+            };
+        }
     }
 }

@@ -46,6 +46,8 @@ namespace Brook.DuDuRiBao.ViewModels
             }
         }
 
+        public HotCircle CurrentCircle { get; set; }
+
         public async void RefreshHotCircles()
         {
             var hotCircleList = await DataRequester.RequestHotCircles().ContinueWith(hotCirclesTask =>
