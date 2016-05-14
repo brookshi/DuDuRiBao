@@ -228,8 +228,8 @@
   <data name="HotArticle.Content" xml:space="preserve">
     <value>热门文章</value>
   </data>
-  <data name="HotCircle.Text" xml:space="preserve">
-    <value>热门日报</value>
+  <data name="HotCircle" xml:space="preserve">
+    <value>热门日报 ({0})</value>
   </data>
   <data name="HotCircleRefresh.Content" xml:space="preserve">
     <value>换一批</value>

@@ -165,13 +165,12 @@
                                    RelativePanel.AlignLeftWithPanel="True"
                                    RelativePanel.AlignRightWithPanel="True"
                                    RelativePanel.Below="HotArticle">
-                        <TextBlock x:Uid="HotCircle"
-                                   Margin="14, 0, 0, 0"
+                        <TextBlock Margin="14, 0, 0, 0"
                                    FontSize="12"
                                    Foreground="{ThemeResource BrushHotCircleTitle}"
                                    RelativePanel.AlignLeftWithPanel="True"
                                    RelativePanel.AlignVerticalCenterWithPanel="True"
-                                   Text="" />
+                                   Text="{x:Bind VM.HotCircleWithCount, Mode=OneWay}" />
                         <xp:XPButton x:Uid="HotCircleRefresh"
                                      Height="24"
                                      Margin="12, 0, 0, 0"

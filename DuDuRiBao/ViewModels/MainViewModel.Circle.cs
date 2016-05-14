@@ -48,6 +48,17 @@ namespace Brook.DuDuRiBao.ViewModels
 
         public HotCircle CurrentCircle { get; set; }
 
+        private string _hotCircleWithCount = string.Format(StringUtil.GetString("HotCircle"), 0);
+        public string HotCircleWithCount
+        {
+            get { return _hotCircleWithCount; }
+            set
+            {
+                _hotCircleWithCount = value;
+                Notify("HotCircleWithCount");
+            }
+        }
+
         public async void RefreshHotCircles()
         {
             var hotCircleList = await DataRequester.RequestHotCircles().ContinueWith(hotCirclesTask =>
@@ -62,6 +73,7 @@ namespace Brook.DuDuRiBao.ViewModels
             {
                 hotCircleList.ForEach(circle => circle.Adjust());
                 HotCircles = hotCircleList;
+                HotCircleWithCount = string.Format(StringUtil.GetString("HotCircle"), HotCircles.Count);
             }
         }
 
