@@ -156,7 +156,7 @@
                                  RelativePanel.AlignRightWithPanel="True"
                                  RelativePanel.Below="MyFav">
                         <xp:XPButton.Icon>
-                            <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf004;" />
+                            <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf0e7;" />
                         </xp:XPButton.Icon>
                     </xp:XPButton>
                     <RelativePanel x:Name="HotCircle"

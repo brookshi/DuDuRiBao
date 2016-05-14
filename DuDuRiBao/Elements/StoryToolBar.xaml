@@ -9,34 +9,58 @@
              d:DesignWidth="400"
              mc:Ignorable="d">
     <RelativePanel>
+        <xp:XPButton x:Name="OpenButton"
+                     Height="32"
+                     Background="Transparent"
+                     Click="OpenButton_Click"
+                     Foreground="{ThemeResource BrushStoryTool}"
+                     IconPosition="OnlyIcon"
+                     IconSize="14"
+                     PointerOverBackground="{StaticResource BrushPointerOver}"
+                     PressedBackground="{StaticResource BrushPressed}"
+                     RelativePanel.AlignLeftWithPanel="True"
+                     RelativePanel.AlignVerticalCenterWithPanel="True"
+                     Visibility="{x:Bind HasExternalUrl, Mode=OneWay}">
+            <xp:XPButton.Icon>
+                <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf26b;" />
+            </xp:XPButton.Icon>
+        </xp:XPButton>
+        <Border x:Name="Splitter1"
+                Width="1"
+                Height="12"
+                Margin="4"
+                Background="{ThemeResource BrushStoryTool}"
+                RelativePanel.AlignVerticalCenterWithPanel="True"
+                RelativePanel.RightOf="OpenButton"
+                Visibility="{x:Bind HasExternalUrl, Mode=OneWay}" />
         <xp:XPToggleButton x:Name="LikeButton"
                            Height="32"
                            Background="Transparent"
                            Content="{x:Bind LikeCount, Mode=OneWay}"
-                           Foreground="Gray"
+                           Foreground="{ThemeResource BrushStoryTool}"
                            Icon="Like"
                            IconPosition="Left"
                            IconSize="14"
                            IsEnabled="False"
-                           RelativePanel.AlignLeftWithPanel="True"
-                           RelativePanel.AlignVerticalCenterWithPanel="True" />
-        <Border x:Name="Splitter"
+                           RelativePanel.AlignVerticalCenterWithPanel="True"
+                           RelativePanel.RightOf="Splitter1" />
+        <Border x:Name="Splitter2"
                 Width="1"
                 Height="12"
                 Margin="4"
-                Background="Gray"
+                Background="{ThemeResource BrushStoryTool}"
                 RelativePanel.AlignVerticalCenterWithPanel="True"
                 RelativePanel.RightOf="LikeButton" />
         <xp:XPButton x:Name="CommentButton"
                      HorizontalAlignment="Stretch"
                      Background="Transparent"
                      Content="{x:Bind CommentCount, Mode=OneWay}"
-                     Foreground="Gray"
+                     Foreground="{ThemeResource BrushStoryTool}"
                      Icon="Comment"
                      IconPosition="Left"
                      IconSize="14"
                      IsEnabled="False"
                      RelativePanel.AlignVerticalCenterWithPanel="True"
-                     RelativePanel.RightOf="Splitter" />
+                     RelativePanel.RightOf="Splitter2" />
     </RelativePanel>
 </UserControl>

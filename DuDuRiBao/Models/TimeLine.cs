@@ -57,6 +57,7 @@ namespace Brook.DuDuRiBao.Models
                     Circle = new HotCircle() { Thumbnail = Poster.Avatar, Name = circleName, Id = Poster.Id.ToString() }
                 });
             }
+            AdjustForImage();
         }
 
         public void AdjustForImage()

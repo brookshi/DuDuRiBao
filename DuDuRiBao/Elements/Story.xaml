@@ -7,6 +7,8 @@
                     xmlns:xp="using:XP">
 
     <converter:TimeConverter x:Key="TimeConverter" />
+    <converter:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+
     <DataTemplate x:Key="Story">
         <Grid Margin="8, 0, 8, 0" Background="{ThemeResource BrushStoryListItem}">
             <Border BorderBrush="{ThemeResource BrushStoryListItemBorder}" BorderThickness="1, 1, 1, 1">
@@ -88,6 +90,8 @@
                     </Grid>
                     <local:StoryToolBar Margin="4, 12, 8, 6"
                                         CommentCount="{Binding Count.Comments}"
+                                        HasExternalUrl="{Binding External_Url,
+                                                                 Converter={StaticResource StringToVisibilityConverter}}"
                                         LikeCount="{Binding Count.Likes}"
                                         RelativePanel.AlignRightWithPanel="True"
                                         RelativePanel.AlignTopWithPanel="True"

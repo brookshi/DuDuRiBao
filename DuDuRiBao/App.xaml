@@ -54,6 +54,7 @@
                     <SolidColorBrush x:Key="BrushStoryPoster" Color="{ThemeResource ColorStoryPoster}" />
                     <SolidColorBrush x:Key="BrushStoryPosterTime" Color="{ThemeResource ColorStoryInfo}" />
                     <SolidColorBrush x:Key="BrushStoryPosterName" Color="{ThemeResource ColorStoryInfo}" />
+                    <SolidColorBrush x:Key="BrushStoryTool" Color="{ThemeResource ColorStoryInfo}" />
                     <SolidColorBrush x:Key="BrushStoryReason" Color="{ThemeResource ColorStoryReason}" />
                     <SolidColorBrush x:Key="BrushStoryTitle" Color="{ThemeResource ColorStoryTitle}" />
                     <SolidColorBrush x:Key="BrushStoryTitleArea" Color="{ThemeResource ColorStoryListItem}" />

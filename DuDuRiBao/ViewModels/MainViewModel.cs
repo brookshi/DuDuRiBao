@@ -32,10 +32,6 @@ namespace Brook.DuDuRiBao.ViewModels
 
         public ObservableCollectionExtended<Story> StoryDataList { get { return _storyDataList; } }
 
-        private List<bool> _indicators = new List<bool>();
-
-        public List<bool> Indicators { get { return _indicators; } set { if (value != _indicators) { _indicators = value; Notify("Indicators"); } } }
-
         public override void Init()
         {
             RefreshHotCircles();
@@ -61,7 +57,6 @@ namespace Brook.DuDuRiBao.ViewModels
         {
             _currentDate = DateTime.Now.AddDays(1).ToString("yyyyMMdd");
             StoryDataList.Clear();
-            Indicators.Clear();
         }
 
         private async Task RequestMainList(bool isLoadingMore)
@@ -137,16 +132,6 @@ namespace Brook.DuDuRiBao.ViewModels
 
             hotCircleStories.Stories.ForEach(story => story.AdjustPosterForHotCircleStory(CategoryName));
             StoryDataList.AddRange(hotCircleStories.Stories);
-        }
-
-        private void UpdateIndicators(int count)
-        {
-            var indicators = new List<bool>();
-            for(int i=0;i< count; i++)
-            {
-                indicators.Add(true);
-            }
-            Indicators = indicators;
         }
     }
 }
