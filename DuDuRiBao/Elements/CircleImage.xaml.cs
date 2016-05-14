@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Brook.DuDuRiBao.Authorization;
+using Brook.DuDuRiBao.Models;
+using Brook.DuDuRiBao.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,8 +26,6 @@ namespace Brook.DuDuRiBao.Elements
         {
             this.InitializeComponent();
         }
-
-        public event RoutedEventHandler Click;
 
         public BitmapImage ImageUrl
         {
@@ -79,9 +80,25 @@ namespace Brook.DuDuRiBao.Elements
         public static readonly DependencyProperty BackgroundBrushProperty =
             DependencyProperty.Register("BackgroundBrush", typeof(Brush), typeof(CircleImage), new PropertyMetadata(new SolidColorBrush(Colors.Transparent)));
 
-        private void ClickButton(object sender, RoutedEventArgs e)
+        private async void QuitCircle(object sender, RoutedEventArgs e)
         {
-            Click?.Invoke(sender, e);
+            if (!AuthorizationHelper.IsLogin)
+            {
+                return;
+            }
+            var story = this.DataContext as Story;
+            if (story == null || story.Posts.Count == 0 || story.Posts[0].Circle == null)
+                return;
+
+            var id = story.Posts[0].Circle.Id;
+            if (int.Parse(id) < 10)
+            {
+                PopupMessage.DisplayMessageInRes("ProtectedCircle");
+                return;
+            }
+
+            await DataRequester.QuitCircle(id);
+            PopupMessage.DisplayMessageInRes("QuitCircleSuccess");
         }
     }
 }

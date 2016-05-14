@@ -14,7 +14,6 @@
         <xp:XPButton x:Name="ImageButton"
                      Background="Transparent"
                      BorderThickness="0"
-                     Click="ClickButton"
                      Foreground="White"
                      IconPosition="NoIcon"
                      IsEnabled="{x:Bind IsEnabled, Mode=OneWay}"
@@ -32,13 +31,23 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </xp:XPButton.Content>
+            <xp:XPButton.Flyout>
+                <MenuFlyout x:Name="ShareMenu">
+                    <!--<MenuFlyout.MenuFlyoutPresenterStyle>
+                        <Style TargetType="MenuFlyoutPresenter">
+                            <Setter Property="MaxWidth" Value="140" />
+                        </Style>
+                    </MenuFlyout.MenuFlyoutPresenterStyle>-->
+
+                    <MenuFlyoutItem x:Uid="QuitCircle" Click="QuitCircle" />
+                </MenuFlyout>
+            </xp:XPButton.Flyout>
         </xp:XPButton>
         <xp:XPButton x:Name="WordButton"
                      Width="{x:Bind Width, Mode=OneWay}"
                      Height="{x:Bind Height, Mode=OneWay}"
                      Background="{x:Bind BackgroundBrush, Mode=OneWay}"
                      BorderThickness="0"
-                     Click="ClickButton"
                      CornerRadius="{x:Bind Radius, Mode=OneWay}"
                      Foreground="White"
                      IconPosition="NoIcon"

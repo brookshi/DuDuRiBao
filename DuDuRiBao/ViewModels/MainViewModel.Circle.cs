@@ -77,7 +77,7 @@ namespace Brook.DuDuRiBao.ViewModels
             }
         }
 
-        public DelayCommand<XPButton> JoinQuitCircleCommand { get; set; } = new DelayCommand<XPButton>(btn => {
+        public DelayCommand<XPButton> JoinQuitCircleCommand { get; set; } = new DelayCommand<XPButton>(async btn => {
             if (!AuthorizationHelper.IsLogin)
             {
                 PopupMessage.DisplayMessageInRes("NeedLogin");
@@ -90,17 +90,19 @@ namespace Brook.DuDuRiBao.ViewModels
 
             if (btn.Tag.ToString() == "0")
             {
-                DataRequester.JoinCircle(circle.Id);
+                await DataRequester.JoinCircle(circle.Id);
                 btn.Icon = new SymbolIcon(Symbol.Accept);
                 btn.PointerOverIconForeground = btn.PressedIconForeground = btn.IconForeground = ResUtil.GetAppThemeBrush("BrushCheckedForeground");
                 btn.Tag = "1";
+                PopupMessage.DisplayMessageInRes("JoinCircleSuccess");
             }
             else
             {
-                DataRequester.QuitCircle(circle.Id);
+                await DataRequester.QuitCircle(circle.Id);
                 btn.Icon = new SymbolIcon(Symbol.Add);
                 btn.PointerOverIconForeground = btn.PressedIconForeground = btn.IconForeground = ResUtil.GetAppThemeBrush("BrushButtonForeground");
                 btn.Tag = "0";
+                PopupMessage.DisplayMessageInRes("QuitCircleSuccess");
             }
         });
     }

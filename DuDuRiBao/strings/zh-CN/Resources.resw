@@ -249,4 +249,16 @@
   <data name="ShareToWeiXin.Text" xml:space="preserve">
     <value>微信扫一扫</value>
   </data>
+  <data name="JoinCircleSuccess" xml:space="preserve">
+    <value> 订阅成功</value>
+  </data>
+  <data name="ProtectedCircle" xml:space="preserve">
+    <value>不能取消订阅这个日报哦</value>
+  </data>
+  <data name="QuitCircle.Text" xml:space="preserve">
+    <value>取消订阅</value>
+  </data>
+  <data name="QuitCircleSuccess" xml:space="preserve">
+    <value> 取消订阅成功</value>
+  </data>
 </root>
