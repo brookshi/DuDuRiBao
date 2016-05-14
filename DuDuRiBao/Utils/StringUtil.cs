@@ -99,5 +99,17 @@ namespace Brook.DuDuRiBao.Utils
 
             return date.ToString("MM-dd HH:mm");
         }
+
+        public static string DecodeXmlString(string xml)
+        {
+            if (string.IsNullOrEmpty(xml))
+                return xml;
+
+            return xml.Replace("&lt;", "<")
+                             .Replace("&gt;", ">")
+                             .Replace("&apos;", "&apos;")
+                             .Replace("&quot;", "\"")
+                             .Replace("&amp;", "&");
+        }
     }
 }

@@ -58,7 +58,7 @@ namespace Brook.DuDuRiBao.Utils
             {
                 Id = id,
                 Thumbnail = thumbnail,
-                Name = title,
+                Name = StringUtil.DecodeXmlString(title),
                 Articles = articles,
                 Fans = fans,
             };
