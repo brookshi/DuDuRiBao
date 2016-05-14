@@ -261,4 +261,7 @@
   <data name="QuitCircleSuccess" xml:space="preserve">
     <value> 取消订阅成功</value>
   </data>
+  <data name="Shang.Content" xml:space="preserve">
+    <value>支持小布，赏！</value>
+  </data>
 </root>
