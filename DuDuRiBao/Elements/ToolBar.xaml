@@ -52,6 +52,8 @@
                         <Setter Target="LikeButton.Visibility" Value="Collapsed" />
                         <Setter Target="FavButton.Visibility" Value="Collapsed" />
                         <Setter Target="ShareButton.Visibility" Value="Collapsed" />
+                        <Setter Target="LoginButton.Margin" Value="0" />
+                        <Setter Target="LoginButton.(RelativePanel.AlignRightWithPanel)" Value="True" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>

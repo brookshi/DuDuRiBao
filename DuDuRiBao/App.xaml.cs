@@ -4,6 +4,7 @@ using LLQ;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -75,7 +76,21 @@ namespace Brook.DuDuRiBao
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
                 // 确保当前窗口处于活动状态
+                SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
                 Window.Current.Activate();
+            }
+        }
+
+        private void App_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            Frame rootFrame = GetWindowFrame();
+            if (rootFrame == null)
+                return;
+
+            if (rootFrame.CanGoBack && e.Handled == false)
+            {
+                e.Handled = true;
+                rootFrame.GoBack();
             }
         }
 
