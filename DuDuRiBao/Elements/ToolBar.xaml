@@ -51,6 +51,7 @@
                         <Setter Target="CommentButton.Visibility" Value="Collapsed" />
                         <Setter Target="LikeButton.Visibility" Value="Collapsed" />
                         <Setter Target="FavButton.Visibility" Value="Collapsed" />
+                        <Setter Target="ShareButton.Visibility" Value="Collapsed" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -78,6 +79,7 @@
                         <Setter Target="MenuButton.Visibility" Value="Collapsed" />
                         <Setter Target="CommentButton.Visibility" Value="Collapsed" />
                         <Setter Target="LikeButton.Visibility" Value="Collapsed" />
+                        <Setter Target="ShareButton.Visibility" Value="Collapsed" />
                         <Setter Target="FavButton.Visibility" Value="Collapsed" />
                         <Setter Target="CategoryText.(RelativePanel.RightOf)" Value="" />
                         <Setter Target="CategoryText.Margin" Value="20, 0, 0, 0" />
