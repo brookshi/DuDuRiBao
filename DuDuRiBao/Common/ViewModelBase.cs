@@ -23,7 +23,7 @@ namespace Brook.DuDuRiBao.Common
     {
         public static string CurrentStoryId { get; set; }
 
-        public static StoryExtraInfo CurrentStoryExtraInfo { get; set; } = new StoryExtraInfo()
+        public static StoryExtraInfo DefaultStoryExtraInfo { get; set; } = new StoryExtraInfo()
         {
             Count = new ExtraCount()
             {
@@ -35,6 +35,8 @@ namespace Brook.DuDuRiBao.Common
             Favorite = false,
             Vote_Status = 0,
         };
+
+        public static StoryExtraInfo CurrentStoryExtraInfo { get; set; } = DefaultStoryExtraInfo;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
