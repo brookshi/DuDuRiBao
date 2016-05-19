@@ -112,10 +112,25 @@
                        RelativePanel.AlignVerticalCenterWithPanel="True"
                        RelativePanel.RightOf="MenuButton"
                        Text="{x:Bind Category, Mode=OneWay}" />
-            <xp:XPButton x:Name="LoginButton"
+            <xp:XPButton x:Name="SearchButton"
                          Width="48"
                          Height="48"
                          Margin="{ThemeResource LoginButtonMargin}"
+                         Background="Transparent"
+                         Click="LoginButton_Click"
+                         Foreground="White"
+                         IconPosition="OnlyIcon"
+                         Padding="0"
+                         PointerOverBackground="{StaticResource BrushPointerOver}"
+                         PressedBackground="{StaticResource BrushPressed}"
+                         RelativePanel.AlignVerticalCenterWithPanel="True">
+                <xp:XPButton.Icon>
+                    <BitmapIcon UriSource="ms-appx:///Assets/Search.png" />
+                </xp:XPButton.Icon>
+            </xp:XPButton>
+            <xp:XPButton x:Name="LoginButton"
+                         Width="48"
+                         Height="48"
                          Background="Transparent"
                          Click="LoginButton_Click"
                          Foreground="White"
@@ -123,7 +138,8 @@
                          Padding="0"
                          PointerOverBackground="{StaticResource BrushPointerOver}"
                          PressedBackground="{StaticResource BrushPressed}"
-                         RelativePanel.AlignVerticalCenterWithPanel="True">
+                         RelativePanel.AlignVerticalCenterWithPanel="True"
+                         RelativePanel.RightOf="SearchButton">
                 <xp:XPButton.Content>
                     <Rectangle Width="28"
                                Height="28"
