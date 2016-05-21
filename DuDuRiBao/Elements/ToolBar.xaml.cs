@@ -6,6 +6,7 @@ using LLM;
 using LLQ;
 using System.ComponentModel;
 using Windows.UI.Xaml;
+using System;
 using Windows.UI.Xaml.Controls;
 using XP;
 
@@ -164,22 +165,24 @@ namespace Brook.DuDuRiBao.Elements
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            AuthorizationHelper.Login(LoginType.Sina, loginSuccess =>
-            {
-                if (loginSuccess)
-                {
-                    PopupMessage.DisplayMessageInRes("LoginSuccess");
-                    var info = StorageUtil.StorageInfo.ZhiHuAuthoInfo;
-                    if (info == null)
-                        return;
+            LoginSelectedDialog dlg = new LoginSelectedDialog();
+            dlg.ShowAsync();
+            //AuthorizationHelper.Login(LoginType.Sina, loginSuccess =>
+            //{
+            //    if (loginSuccess)
+            //    {
+            //        PopupMessage.DisplayMessageInRes("LoginSuccess");
+            //        var info = StorageUtil.StorageInfo.ZhiHuAuthoInfo;
+            //        if (info == null)
+            //            return;
 
-                    UserPhotoUrl = info.avatar;
-                }
-                else
-                {
-                    PopupMessage.DisplayMessageInRes("LoginFailed");
-                }
-            });
+            //        UserPhotoUrl = info.avatar;
+            //    }
+            //    else
+            //    {
+            //        PopupMessage.DisplayMessageInRes("LoginFailed");
+            //    }
+            //});
         }
 
         private void ShareToWeiBo(object sender, RoutedEventArgs e)

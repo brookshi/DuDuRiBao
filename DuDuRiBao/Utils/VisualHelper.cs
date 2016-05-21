@@ -31,8 +31,13 @@ namespace DuDuRiBao.Utils
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
             {
                 DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is T && ((T)child).Name == childName)
+                if (child == null)
+                    continue;
+
+                if (child is T && ((T)child).Name == childName)
+                {
                     return (T)child;
+                }
                 else
                 {
                     T childOfChild = FindVisualChild<T>(child, childName);
@@ -43,9 +48,34 @@ namespace DuDuRiBao.Utils
             return null;
         }
 
+        public static T FindVisualChild<T>(DependencyObject obj) where T : FrameworkElement
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child == null)
+                    continue;
+
+                if (child is T)
+                {
+                    return (T)child;
+                }
+                else
+                {
+                    T childOfChild = FindVisualChild<T>(child);
+                    if (childOfChild != null)
+                        return childOfChild;
+                }
+            }
+            return null;
+        }
+
         public static T FindVisualParent<T>(DependencyObject obj) where T : DependencyObject
         {
             DependencyObject parent = VisualTreeHelper.GetParent(obj);
+            if (parent == null)
+                return null;
+
             if (parent is T)
                 return (T)parent;
             else

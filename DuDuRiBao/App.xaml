@@ -19,6 +19,7 @@
                     <Color x:Key="ColorPrimary">#2196F3</Color>
                     <Color x:Key="ColorPrimaryDark">#1976D2</Color>
                     <Color x:Key="ColorPrimaryLight">#81d4f9</Color>
+                    <Color x:Key="ColorPrimaryLightS">#41a4f2</Color>
                     <Color x:Key="ColorHotCircleTitle">#EEEEEE</Color>
                     <Color x:Key="ColorMenuSplitter">#e4e4e4</Color>
                     <Color x:Key="ColorHotCircleSplitter">#2190e9</Color>
@@ -41,6 +42,7 @@
                     <SolidColorBrush x:Key="BrushPrimary" Color="{ThemeResource ColorPrimary}" />
                     <SolidColorBrush x:Key="BrushPrimaryDark" Color="{ThemeResource ColorPrimaryDark}" />
                     <SolidColorBrush x:Key="BrushPrimaryLight" Color="{ThemeResource ColorPrimaryLight}" />
+                    <SolidColorBrush x:Key="BrushPrimaryLightS" Color="{ThemeResource ColorPrimaryLightS}" />
                     <SolidColorBrush x:Key="BrushHotCircleTitle" Color="{ThemeResource ColorHotCircleTitle}" />
                     <SolidColorBrush x:Key="BrushMenuSplitter" Color="{ThemeResource ColorMenuSplitter}" />
                     <SolidColorBrush x:Key="BrushFollowCount" Color="{ThemeResource ColorFollowCount}" />
@@ -75,6 +77,9 @@
                     <SolidColorBrush x:Key="BrushCommentInfoForeground" Color="Black" />
                     <SolidColorBrush x:Key="BrushIndicatorNormalBackground" Color="LightGray" />
                     <SolidColorBrush x:Key="BrushIndicatorHighlightBackground" Color="White" />
+                    <SolidColorBrush x:Key="BrushWebBoBackground" Color="#ff9b0f" />
+                    <SolidColorBrush x:Key="BrushWebBoBackgroundLight" Color="#fca831" />
+                    <SolidColorBrush x:Key="BrushWebBoBackgroundDark" Color="#ff9500" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>

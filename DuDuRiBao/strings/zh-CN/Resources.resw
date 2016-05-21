@@ -264,4 +264,13 @@
   <data name="Shang.Content" xml:space="preserve">
     <value>支持小布，打赏！</value>
   </data>
+  <data name="LoginDesc.Text" xml:space="preserve">
+    <value>推荐知乎账号登录，新浪账号登录可能导致闪退</value>
+  </data>
+  <data name="WeiBoLogin.Content" xml:space="preserve">
+    <value>微博账号登录</value>
+  </data>
+  <data name="ZhiHuLogin.Content" xml:space="preserve">
+    <value>知乎账号登录</value>
+  </data>
 </root>

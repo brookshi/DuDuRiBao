@@ -145,6 +145,9 @@
     </Compile>
     <Compile Include="Elements\CustomMenuFlyoutItem.cs" />
     <Compile Include="Elements\FlipViewIndicator.cs" />
+    <Compile Include="Elements\LoginSelectedDialog.xaml.cs">
+      <DependentUpon>LoginSelectedDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Elements\StoryToolBar.xaml.cs">
       <DependentUpon>StoryToolBar.xaml</DependentUpon>
     </Compile>
@@ -259,6 +262,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Elements\LoginSelectedDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Elements\Story.xaml">
       <Generator>MSBuild:Compile</Generator>
