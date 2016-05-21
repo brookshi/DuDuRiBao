@@ -4,7 +4,7 @@ namespace Brook.DuDuRiBao.Models
 {
     public class StorageInfo
     {
-        public ZhiHuAuthoInfo ZhiHuAuthoInfo { get; set; }
+        public RiBaoAuthoInfo ZhiHuAuthoInfo { get; set; }
 
         public LoginType LoginType { get; set; } = LoginType.None;
 

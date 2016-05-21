@@ -93,12 +93,12 @@ namespace Brook.DuDuRiBao.Authorization
 
         public static async Task<bool> AnonymousLogin()
         {
-            var key = AnonymousLoginKey.GetAnonymousLoginKey();
+            var key = LoginKeyProvider.GetAnonymousLoginKey();
             LoginToken loginToken = await DataRequester.AnonymousLogin(key);
             if (loginToken == null)
                 return false;
 
-            StorageUtil.StorageInfo.ZhiHuAuthoInfo = new ZhiHuAuthoInfo() { AnonymousLoginToken = loginToken.Access_Token };
+            StorageUtil.StorageInfo.ZhiHuAuthoInfo = new RiBaoAuthoInfo() { AnonymousLoginToken = loginToken.Access_Token };
             SetHttpAuthorization();
 
             return true;
@@ -147,7 +147,7 @@ namespace Brook.DuDuRiBao.Authorization
 
         private static async Task<bool> LoginZhiHu(LoginType loginType)
         {
-            var zhiHuAuthoData = await DataRequester.Login(Authorizations[loginType].LoginData);
+            var zhiHuAuthoData = await DataRequester.LoginUsingWeibo(Authorizations[loginType].LoginData);
             if (zhiHuAuthoData == null)
             {
                 return false;

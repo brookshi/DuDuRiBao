@@ -111,7 +111,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Authorization\AnonymousLoginKey.cs" />
+    <Compile Include="Authorization\LoginKeyProvider.cs" />
     <Compile Include="Authorization\AuthoAttribution.cs" />
     <Compile Include="Authorization\AuthorizationHelper.cs" />
     <Compile Include="Authorization\IAuthorize.cs" />

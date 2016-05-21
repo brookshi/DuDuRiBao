@@ -248,3 +248,4 @@ ModelManifest.xml
 *.saz
 /DuDuRiBao/Authorization/AnonymousLogin.cs
 /DuDuRiBao/Authorization/AnonymousLoginKey.cs
+/DuDuRiBao/Authorization/LoginKeyProvider.cs

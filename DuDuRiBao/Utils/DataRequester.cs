@@ -14,6 +14,7 @@
 //   limitations under the License. 
 #endregion
 
+using Brook.DuDuRiBao.Authorization;
 using Brook.DuDuRiBao.Models;
 using System;
 using System.Threading.Tasks;
@@ -24,12 +25,19 @@ namespace Brook.DuDuRiBao.Utils
 {
     public class DataRequester
     {
-        public static Task<ZhiHuAuthoInfo> Login(LoginData loginData)
+        public static Task<RiBaoAuthoInfo> LoginUsingWeibo(LoginData loginData)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
                 .SetBody(new HttpJsonContent(loginData))
                 .AddHeader("x-client-id", "3");
-            return XPHttpClient.DefaultClient.PostAsync<ZhiHuAuthoInfo>(Urls.Login, httpParam);
+            return XPHttpClient.DefaultClient.PostAsync<RiBaoAuthoInfo>(Urls.Login, httpParam);
+        }
+
+        public static Task<RiBaoAuthoInfo> LoginUsingZhiHu(ZhiHuTokenInfo info)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .SetBody(new HttpJsonContent(new LoginData() { source = "zhihu", access_token = info.Access_Token }));
+            return XPHttpClient.DefaultClient.PostAsync<RiBaoAuthoInfo>(Urls.Login, httpParam);
         }
 
         public static Task<LoginToken> AnonymousLogin(string key)
@@ -38,6 +46,64 @@ namespace Brook.DuDuRiBao.Utils
                 .SetJsonStringBody("{\"data\":\"" + key + "\"}");
 
             return XPHttpClient.DefaultClient.PostAsync<LoginToken>(Urls.AnonymousLogin, httpParam);
+        }
+
+        public static Task<ZhiHuSignInfo> ZhiHuLogin(string userName, string password)
+        {
+            var postData = LoginKeyProvider.GetZhiHuLoginKey(userName, password);
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .SetStringBody(postData)
+                .SetContentEncoding(Windows.Storage.Streams.UnicodeEncoding.Utf8)
+                .SetAuthorization("oauth", LoginKeyProvider.ClientId)
+                .SetMediaType("application/x-www-form-urlencoded");
+
+            return XPHttpClient.DefaultClient.PostAsync<ZhiHuSignInfo>(Urls.ZhiHuLogin, httpParam);
+        }
+
+        public static async Task<Captcha> GetCaptchaImage()
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .SetAuthorization("oauth", LoginKeyProvider.ClientId);
+
+            var captcha = await XPHttpClient.DefaultClient.GetAsync<Captcha>(Urls.ZhiHuCaptcha, httpParam);
+            if(captcha.Show_Captcha)
+            {
+                return await XPHttpClient.DefaultClient.PutAsync<Captcha>(Urls.ZhiHuCaptcha, httpParam);
+            }
+
+            return null;
+        }
+
+        public static Task<CaptchaChecked> CheckCaptcha(string captcha)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .SetStringBody("input_text="+captcha)
+                .SetContentEncoding(Windows.Storage.Streams.UnicodeEncoding.Utf8)
+                .SetAuthorization("oauth", LoginKeyProvider.ClientId)
+                .SetMediaType("application/x-www-form-urlencoded");
+
+            return XPHttpClient.DefaultClient.PostAsync<CaptchaChecked>(Urls.ZhiHuCaptcha, httpParam);
+        }
+
+        public static Task<ZhiHuAuthInfo> GetZhiHuAuthorization(ZhiHuSignInfo info)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .SetStringBody("app_id=6&redirect_uri=http://dudu.zhihu.com/zhihu/auth&response_type=code")
+                .SetContentEncoding(Windows.Storage.Streams.UnicodeEncoding.Utf8)
+                .SetAuthorization(info.Token_Type, info.Access_Token)
+                .SetMediaType("application/x-www-form-urlencoded");
+
+            return XPHttpClient.DefaultClient.PostAsync<ZhiHuAuthInfo>(Urls.ZhiHuAuthorization, httpParam);
+        }
+
+        public static Task<ZhiHuTokenInfo> GetZhiHuToken(ZhiHuAuthInfo info)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .SetStringBody(string.Format($"code={info.AuthorizationCode}&grant_type=authorization_code&redirect_uri=http://dudu.zhihu.com/zhihu/auth&app_id=6&app_key=90e026a5762d4a5e94c2d93b58e88955"))
+                .SetContentEncoding(Windows.Storage.Streams.UnicodeEncoding.Utf8)
+                .SetMediaType("application/x-www-form-urlencoded");
+
+            return XPHttpClient.DefaultClient.PostAsync<ZhiHuTokenInfo>(Urls.ZhiHuToken, httpParam);
         }
 
         public static Task<TimeLine> RequestLatestTimeLine()
@@ -88,14 +154,14 @@ namespace Brook.DuDuRiBao.Utils
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
                 .AddUrlSegements("circleid", circleId);
-            return XPHttpClient.DefaultClient.PostAsync<ZhiHuAuthoInfo>(Urls.JoinCircle, httpParam);
+            return XPHttpClient.DefaultClient.PostAsync<RiBaoAuthoInfo>(Urls.JoinCircle, httpParam);
         }
 
         public static Task QuitCircle(string circleId)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
                 .AddUrlSegements("circleid", circleId);
-            return XPHttpClient.DefaultClient.PostAsync<ZhiHuAuthoInfo>(Urls.QuitCircle, httpParam);
+            return XPHttpClient.DefaultClient.PostAsync<RiBaoAuthoInfo>(Urls.QuitCircle, httpParam);
         }
 
         public static Task<Favorites> RequestLatestFavorites()
