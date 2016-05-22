@@ -54,17 +54,22 @@ namespace Brook.DuDuRiBao.Utils
 
         public static void Add(string key, string value)
         {
+            if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(value))
+                return;
+
             _localSetting.Values[key] = value;
         }
 
         public static void AddObject(string key, object value)
         {
+            if (string .IsNullOrEmpty(key) || value == null)
+                return;
             _localSetting.Values[key] = JsonSerializer.Serialize(value);
         }
 
         public static bool TryGet(string key, out string value)
         {
-            if(_localSetting.Values.ContainsKey(key))
+            if (!string.IsNullOrEmpty(key) && _localSetting.Values.ContainsKey(key))
             {
                 value = _localSetting.Values[key].ToString();
                 return true;
@@ -76,7 +81,7 @@ namespace Brook.DuDuRiBao.Utils
 
         public static bool TryGet(string key, out int value)
         {
-            if (_localSetting.Values.ContainsKey(key))
+            if (!string.IsNullOrEmpty(key) && _localSetting.Values.ContainsKey(key))
             {
                 bool ret = int.TryParse(_localSetting.Values[key].ToString(), out value);
                 return ret;
@@ -88,7 +93,7 @@ namespace Brook.DuDuRiBao.Utils
 
         public static bool TryGetJsonObj<T>(string key, out T value) where T : class
         {
-            if (_localSetting.Values.ContainsKey(key))
+            if (!string.IsNullOrEmpty(key) && _localSetting.Values.ContainsKey(key))
             {
                 try {
                     var content = _localSetting.Values[key].ToString();
@@ -108,7 +113,7 @@ namespace Brook.DuDuRiBao.Utils
 
         public static void Remove(string key)
         {
-            if(_localSetting.Values.ContainsKey(key))
+            if(!string.IsNullOrEmpty(key) && _localSetting.Values.ContainsKey(key))
             {
                 _localSetting.Values.Remove(key);
             }

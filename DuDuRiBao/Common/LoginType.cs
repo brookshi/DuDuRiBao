@@ -7,6 +7,7 @@ namespace Brook.DuDuRiBao.Common
         None = 0,
         Sina,
         QQ,
+        ZhiHu
     }
 
     public static class LoginTypeClass
@@ -14,6 +15,7 @@ namespace Brook.DuDuRiBao.Common
         public const string NoneLoginType = "None";
         public const string SinaLoginType = "sina";
         public const string QQLoginType = "qq";
+        public const string ZhiHuLoginType = "zhihu";
 
         public static string Convert(this LoginType loginType)
         {
@@ -23,6 +25,8 @@ namespace Brook.DuDuRiBao.Common
                     return SinaLoginType;
                 case LoginType.QQ:
                     return QQLoginType;
+                case LoginType.ZhiHu:
+                    return ZhiHuLoginType;
                 default:
                     throw new NotSupportedException();
             }
@@ -36,6 +40,8 @@ namespace Brook.DuDuRiBao.Common
                     return LoginType.Sina;
                 case QQLoginType:
                     return LoginType.QQ;
+                case ZhiHuLoginType:
+                    return LoginType.ZhiHu;
                 default:
                     throw new NotSupportedException();
             }

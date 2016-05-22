@@ -80,6 +80,7 @@
                     <SolidColorBrush x:Key="BrushWebBoBackground" Color="#ff9b0f" />
                     <SolidColorBrush x:Key="BrushWebBoBackgroundLight" Color="#fca831" />
                     <SolidColorBrush x:Key="BrushWebBoBackgroundDark" Color="#ff9500" />
+                    <SolidColorBrush x:Key="BrushTextBoxBackground" Color="White" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>

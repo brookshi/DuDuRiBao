@@ -128,7 +128,7 @@ namespace Brook.DuDuRiBao.Elements
         }
 
         [SubscriberCallback(typeof(StoryExtraEvent))]
-        private void Subscriber(StoryExtraEvent param)
+        private void StoryExtraSubscriber(StoryExtraEvent param)
         {
             CommentCount = param.StoryExtraInfo.Count.Comments.ToString();
             LikeCount = param.StoryExtraInfo.Count.Likes.ToString();
@@ -137,7 +137,7 @@ namespace Brook.DuDuRiBao.Elements
         }
 
         [SubscriberCallback(typeof(OpenNewStoryEvent))]
-        public void Reset()
+        public void ResetSubscriber()
         {
             CommentCount = "0";
             LikeCount = "0";
@@ -146,14 +146,24 @@ namespace Brook.DuDuRiBao.Elements
         }
 
         [SubscriberCallback(typeof(LoginEvent))]
-        public void AutoLogin(LoginEvent param)
+        public void LoginSubscriber(LoginEvent param)
         {
             if (param.IsLogin)
+            {
                 UserPhotoUrl = param.UserPhotoUrl;
+                LoginSuccessButton.Visibility = Visibility.Visible;
+                LoginButton.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                UserPhotoUrl = "ms-appx:///Assets/Login.png";
+                LoginSuccessButton.Visibility = Visibility.Collapsed;
+                LoginButton.Visibility = Visibility.Visible;
+            }
         }
 
         [SubscriberCallback(typeof(ShareEvent))]
-        private void UpdateShareUrl(ShareEvent shareEvent)
+        private void ShareUrlSubscriber(ShareEvent shareEvent)
         {
             ShareUrl = shareEvent.ShareUrl;
         }
@@ -163,27 +173,20 @@ namespace Brook.DuDuRiBao.Elements
             LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Menu });
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            LoginSelectedDialog dlg = new LoginSelectedDialog();
-            dlg.ShowAsync();
-            //AuthorizationHelper.Login(LoginType.Sina, loginSuccess =>
-            //{
-            //    if (loginSuccess)
-            //    {
-            //        PopupMessage.DisplayMessageInRes("LoginSuccess");
-            //        var info = StorageUtil.StorageInfo.ZhiHuAuthoInfo;
-            //        if (info == null)
-            //            return;
-
-            //        UserPhotoUrl = info.avatar;
-            //    }
-            //    else
-            //    {
-            //        PopupMessage.DisplayMessageInRes("LoginFailed");
-            //    }
-            //});
+            if(!AuthorizationHelper.IsLogin)
+            {
+                LoginSelectedDialog dlg = new LoginSelectedDialog();
+                await dlg.ShowAsync();
+            }
         }
+
+        public DelayCommand<XPButton> LogoutCommand { get; set; } = new DelayCommand<XPButton>(async btn =>
+        {
+            await AuthorizationHelper.Logout();
+            LLQNotifier.Default.Notify(new LoginEvent() { IsLogin = false });
+        });
 
         private void ShareToWeiBo(object sender, RoutedEventArgs e)
         {

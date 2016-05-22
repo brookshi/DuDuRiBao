@@ -14,6 +14,7 @@
 //   limitations under the License. 
 #endregion
 
+using System;
 using System.Collections.Generic;
 
 namespace Brook.DuDuRiBao.Models
@@ -36,7 +37,8 @@ namespace Brook.DuDuRiBao.Models
         public string Q_C0 { get; set; }
         public string Z_C0 { get; set; }
     }
-    public class ZhiHuSignInfo
+
+    public class ZhiHuSignInfo : ErrorBase
     {
         public long User_Id { get; set; }
         public string Uid { get; set; }
@@ -47,12 +49,23 @@ namespace Brook.DuDuRiBao.Models
         public string Refresh_Token { get; set; }
     }
 
-    public class ZhiHuTokenInfo
+    public class ZhiHuLoginInfo
     {
-        public string Access_Token { get; set; }
+        public string Captcha { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+    }
+
+    public class TokenInfo
+    {
+        public string access_token { get; set; }
         public string Token_Type { get; set; }
         public int Code { get; set; }
         public int Expires_In { get; set; }
+        public string source { get; set; }
+        public string Refresh_Token { get; set; }
+        public string Data { get; set; }
+        public DateTime LastAuthoDate { get; set; }
     }
 
     public class Captcha
@@ -68,14 +81,18 @@ namespace Brook.DuDuRiBao.Models
         public string Name { get; set; }
     }
 
-    public class CaptchaChecked
+    public class CaptchaChecked : ErrorBase
     {
-        public Error Error { get; set; }
         public bool Success { get; set; }
     }
 
-    public class ZhiHuAuthInfo
+    public class ZhiHuAuthInfo : ErrorBase
     {
-        public string AuthorizationCode { get; set; }
+        public string Authorization_Code { get; set; }
+    }
+
+    public class ErrorBase
+    {
+        public Error Error { get; set; }
     }
 }

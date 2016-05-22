@@ -42,8 +42,7 @@ namespace Brook.DuDuRiBao.Common
 
         protected void Notify(string property)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
         public virtual void Init()

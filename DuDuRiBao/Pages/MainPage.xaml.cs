@@ -156,6 +156,12 @@ namespace Brook.DuDuRiBao.Pages
             }
         }
 
+        [SubscriberCallback(typeof(LoginEvent))]
+        public void LoginSubscriber(LoginEvent param)
+        {
+            RefreshMainList();
+        }
+
         private void RefershHotCircle_Click(object sender, RoutedEventArgs e)
         {
             VM.RefreshHotCircles();

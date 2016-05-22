@@ -25,18 +25,18 @@ namespace Brook.DuDuRiBao.Utils
 {
     public class DataRequester
     {
-        public static Task<RiBaoAuthoInfo> LoginUsingWeibo(LoginData loginData)
+        public static Task<RiBaoAuthoInfo> LoginUsingWeibo(TokenInfo info)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
-                .SetBody(new HttpJsonContent(loginData))
+                .SetBody(new HttpJsonContent(info))
                 .AddHeader("x-client-id", "3");
             return XPHttpClient.DefaultClient.PostAsync<RiBaoAuthoInfo>(Urls.Login, httpParam);
         }
 
-        public static Task<RiBaoAuthoInfo> LoginUsingZhiHu(ZhiHuTokenInfo info)
+        public static Task<RiBaoAuthoInfo> LoginUsingZhiHu(TokenInfo info)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
-                .SetBody(new HttpJsonContent(new LoginData() { source = "zhihu", access_token = info.Access_Token }));
+                .SetBody(new HttpJsonContent(info));
             return XPHttpClient.DefaultClient.PostAsync<RiBaoAuthoInfo>(Urls.Login, httpParam);
         }
 
@@ -53,8 +53,10 @@ namespace Brook.DuDuRiBao.Utils
             var postData = LoginKeyProvider.GetZhiHuLoginKey(userName, password);
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
                 .SetStringBody(postData)
+                .SetNeedBaseUrl(false)
                 .SetContentEncoding(Windows.Storage.Streams.UnicodeEncoding.Utf8)
                 .SetAuthorization("oauth", LoginKeyProvider.ClientId)
+                .AddHeader("User-Agent", "Google-HTTP-Java-Client/1.20.0 (gzip)")
                 .SetMediaType("application/x-www-form-urlencoded");
 
             return XPHttpClient.DefaultClient.PostAsync<ZhiHuSignInfo>(Urls.ZhiHuLogin, httpParam);
@@ -63,6 +65,7 @@ namespace Brook.DuDuRiBao.Utils
         public static async Task<Captcha> GetCaptchaImage()
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .SetNeedBaseUrl(false)
                 .SetAuthorization("oauth", LoginKeyProvider.ClientId);
 
             var captcha = await XPHttpClient.DefaultClient.GetAsync<Captcha>(Urls.ZhiHuCaptcha, httpParam);
@@ -78,6 +81,7 @@ namespace Brook.DuDuRiBao.Utils
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
                 .SetStringBody("input_text="+captcha)
+                .SetNeedBaseUrl(false)
                 .SetContentEncoding(Windows.Storage.Streams.UnicodeEncoding.Utf8)
                 .SetAuthorization("oauth", LoginKeyProvider.ClientId)
                 .SetMediaType("application/x-www-form-urlencoded");
@@ -91,19 +95,21 @@ namespace Brook.DuDuRiBao.Utils
                 .SetStringBody("app_id=6&redirect_uri=http://dudu.zhihu.com/zhihu/auth&response_type=code")
                 .SetContentEncoding(Windows.Storage.Streams.UnicodeEncoding.Utf8)
                 .SetAuthorization(info.Token_Type, info.Access_Token)
+                .SetNeedBaseUrl(false)
                 .SetMediaType("application/x-www-form-urlencoded");
 
             return XPHttpClient.DefaultClient.PostAsync<ZhiHuAuthInfo>(Urls.ZhiHuAuthorization, httpParam);
         }
 
-        public static Task<ZhiHuTokenInfo> GetZhiHuToken(ZhiHuAuthInfo info)
+        public static Task<TokenInfo> GetZhiHuToken(ZhiHuAuthInfo info)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
-                .SetStringBody(string.Format($"code={info.AuthorizationCode}&grant_type=authorization_code&redirect_uri=http://dudu.zhihu.com/zhihu/auth&app_id=6&app_key=90e026a5762d4a5e94c2d93b58e88955"))
+                .SetStringBody(string.Format($"code={info.Authorization_Code}&grant_type=authorization_code&redirect_uri=http://dudu.zhihu.com/zhihu/auth&app_id=6&app_key=90e026a5762d4a5e94c2d93b58e88955"))
                 .SetContentEncoding(Windows.Storage.Streams.UnicodeEncoding.Utf8)
+                .SetNeedBaseUrl(false)
                 .SetMediaType("application/x-www-form-urlencoded");
 
-            return XPHttpClient.DefaultClient.PostAsync<ZhiHuTokenInfo>(Urls.ZhiHuToken, httpParam);
+            return XPHttpClient.DefaultClient.PostAsync<TokenInfo>(Urls.ZhiHuToken, httpParam);
         }
 
         public static Task<TimeLine> RequestLatestTimeLine()

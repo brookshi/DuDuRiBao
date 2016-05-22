@@ -52,8 +52,10 @@
                         <Setter Target="LikeButton.Visibility" Value="Collapsed" />
                         <Setter Target="FavButton.Visibility" Value="Collapsed" />
                         <Setter Target="ShareButton.Visibility" Value="Collapsed" />
-                        <Setter Target="LoginButton.Margin" Value="0" />
-                        <Setter Target="LoginButton.(RelativePanel.AlignRightWithPanel)" Value="True" />
+                        <Setter Target="SearchButton.Margin" Value="0" />
+                        <Setter Target="SearchButton.(RelativePanel.LeftOf)" Value="LoginPanel" />
+                        <Setter Target="LoginPanel.(RelativePanel.AlignRightWithPanel)" Value="True" />
+                        <Setter Target="LoginPanel.(RelativePanel.RightOf)" Value="" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -128,29 +130,59 @@
                     <BitmapIcon UriSource="ms-appx:///Assets/Search.png" />
                 </xp:XPButton.Icon>
             </xp:XPButton>
-            <xp:XPButton x:Name="LoginButton"
-                         Width="48"
-                         Height="48"
-                         Background="Transparent"
-                         Click="LoginButton_Click"
-                         Foreground="White"
-                         IconPosition="NoIcon"
-                         Padding="0"
-                         PointerOverBackground="{StaticResource BrushPointerOver}"
-                         PressedBackground="{StaticResource BrushPressed}"
-                         RelativePanel.AlignVerticalCenterWithPanel="True"
-                         RelativePanel.RightOf="SearchButton">
-                <xp:XPButton.Content>
-                    <Rectangle Width="28"
-                               Height="28"
-                               RadiusX="14"
-                               RadiusY="14">
-                        <Rectangle.Fill>
-                            <ImageBrush ImageSource="{x:Bind UserPhotoUrl, Mode=OneWay}" />
-                        </Rectangle.Fill>
-                    </Rectangle>
-                </xp:XPButton.Content>
-            </xp:XPButton>
+            <Grid x:Name="LoginPanel"
+                  RelativePanel.AlignVerticalCenterWithPanel="True"
+                  RelativePanel.RightOf="SearchButton">
+                <xp:XPButton x:Name="LoginButton"
+                             Width="48"
+                             Height="48"
+                             Background="Transparent"
+                             Click="LoginButton_Click"
+                             Foreground="White"
+                             IconPosition="NoIcon"
+                             Padding="0"
+                             PointerOverBackground="{StaticResource BrushPointerOver}"
+                             PressedBackground="{StaticResource BrushPressed}">
+                    <xp:XPButton.Content>
+                        <Rectangle Width="28"
+                                   Height="28"
+                                   RadiusX="14"
+                                   RadiusY="14">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{x:Bind UserPhotoUrl, Mode=OneWay}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </xp:XPButton.Content>
+                </xp:XPButton>
+                <xp:XPButton x:Name="LoginSuccessButton"
+                             Width="48"
+                             Height="48"
+                             Background="Transparent"
+                             Foreground="White"
+                             IconPosition="NoIcon"
+                             Padding="0"
+                             PointerOverBackground="{StaticResource BrushPointerOver}"
+                             PressedBackground="{StaticResource BrushPressed}"
+                             Visibility="Collapsed">
+                    <xp:XPButton.Content>
+                        <Rectangle Width="28"
+                                   Height="28"
+                                   RadiusX="14"
+                                   RadiusY="14">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{x:Bind UserPhotoUrl, Mode=OneWay}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </xp:XPButton.Content>
+                    <xp:XPButton.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem x:Uid="Logout"
+                                            Command="{x:Bind LogoutCommand}"
+                                            Text="" />
+                        </MenuFlyout>
+                    </xp:XPButton.Flyout>
+                </xp:XPButton>
+            </Grid>
             <xp:XPButton x:Name="CommentButton"
                          Height="48"
                          Margin="10, 0, 0, 0"

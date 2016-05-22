@@ -1,15 +1,16 @@
 ﻿using Brook.DuDuRiBao.Models;
 using System;
+using System.Threading.Tasks;
 
 namespace Brook.DuDuRiBao.Authorization
 {
     public interface IAuthorize
     {
-        void Login(Action<bool, object> loginCallback);
+        Task Login(ZhiHuLoginInfo info, Action<RiBaoAuthoInfo> loginCallback);
 
         void Logout();
 
-        LoginData LoginData { get; }
+        TokenInfo TokenInfo { get; }
 
         bool IsAuthorized { get; }
     }

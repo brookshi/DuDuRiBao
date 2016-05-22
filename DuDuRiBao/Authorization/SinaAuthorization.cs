@@ -2,16 +2,15 @@
 using Brook.DuDuRiBao.Models;
 using Brook.DuDuRiBao.Utils;
 using System;
+using System.Threading.Tasks;
 using WeiboSDKForWinRT;
 
 namespace Brook.DuDuRiBao.Authorization
 {
     [AuthoAttribution(LoginType.Sina)]
-    public class SinaAuthorization : IAuthorize
+    public class SinaAuthorization : AuthorizationBase
     {
-        public const string LoginDataKey = "LoginData";
-
-        public readonly static SinaAuthorization Instance = new SinaAuthorization();
+        public static readonly SinaAuthorization Instance = new SinaAuthorization();
 
         private ClientOAuth _oauth = new ClientOAuth();
 
@@ -24,30 +23,21 @@ namespace Brook.DuDuRiBao.Authorization
 
         public SinaAuthorization()
         {
-            LoginData loginData;
-            if (StorageUtil.TryGetJsonObj(LoginDataKey, out loginData))
-            {
-                LoginData = loginData;
-            }
         }
 
-        public LoginData LoginData { get; private set; }
-
-        private void UpdateLoginData(SdkAuth2Res res)
+        private void UpdateTokenInfo(SdkAuth2Res res)
         {
-            if (LoginData == null)
-                LoginData = new LoginData();
+            if (TokenInfo == null)
+                TokenInfo = new TokenInfo();
 
-            LoginData.access_token = res.AccessToken;
-            LoginData.expires_in = int.Parse(res.ExpriesIn);
-            LoginData.refresh_token = res.RefreshToken;
-            LoginData.source = LoginType.Sina.Convert();
-            LoginData.user = res.Uid;
-
-            StorageUtil.AddObject(LoginDataKey, LoginData);
+            TokenInfo.access_token = res.AccessToken;
+            TokenInfo.Expires_In = int.Parse(res.ExpriesIn);
+            TokenInfo.Refresh_Token = res.RefreshToken;
+            TokenInfo.source = LoginType.Sina.Convert();
+            StoreTokenInfo();
         }
 
-        public bool IsAuthorized
+        public override bool IsAuthorized
         {
             get
             {
@@ -55,22 +45,43 @@ namespace Brook.DuDuRiBao.Authorization
             }
         }
 
-        public void Login(Action<bool, object> loginCallback)
+        public override async Task Login(ZhiHuLoginInfo info, Action<RiBaoAuthoInfo> loginCallback)
         {
-            _oauth.LoginCallback += (isSuccess, err, response) =>
+            if (IsAuthorized && TokenInfo != null)
             {
-                if(isSuccess)
+                var zhiHuAuthoData = await LoginZhiHu();
+                loginCallback?.Invoke(zhiHuAuthoData);
+                return;
+            }
+            try
+            {
+                _oauth.LoginCallback += async (isSuccess, err, response) =>
                 {
-                    UpdateLoginData(response);
-                }
-                loginCallback?.Invoke(isSuccess, response);
-            };
-            _oauth.BeginOAuth();
+                    if (isSuccess)
+                    {
+                        UpdateTokenInfo(response);
+                    }
+                    var zhiHuAuthoData = await LoginZhiHu();
+                    loginCallback?.Invoke(zhiHuAuthoData);
+                };
+                _oauth.BeginOAuth();
+            }
+            catch
+            {
+                loginCallback?.Invoke(null);
+            }
         }
 
-        public void Logout()
+        Task<RiBaoAuthoInfo> LoginZhiHu()
         {
-            StorageUtil.Remove(LoginDataKey);
+            return DataRequester.LoginUsingWeibo(TokenInfo);
+        }
+
+        public override void Logout()
+        {
+            base.Logout();
+            StorageUtil.Remove("access_token");
+            _oauth.IsAuthorized = false;
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Brook.DuDuRiBao.Authorization
         {
             var currentAssembly = Application.Current.GetType().GetTypeInfo().Assembly;
 
-            var authorizeTypes = currentAssembly.DefinedTypes.Where(type => type.ImplementedInterfaces.Any(inter => inter == typeof(IAuthorize))).ToList();
+            var authorizeTypes = currentAssembly.DefinedTypes.Where(type => type.BaseType == typeof(AuthorizationBase)).ToList();
 
             authorizeTypes.ForEach(o => Authorizations[GetLoginType(o)] = GetAuthorization(o));
         }
@@ -55,15 +55,16 @@ namespace Brook.DuDuRiBao.Authorization
 
         public static async Task<bool> AutoLogin()
         {
-            if(!(await AutoLoginZhiHu()))
+            if(!(await Login()))
             {
-                return await AnonymousLogin();
+                await AnonymousLogin();
+                return false;
             }
 
             return true;
         }
 
-        public static async Task<bool> AutoLoginZhiHu()
+        public static async Task<bool> Login()
         {
             if (IsLogin)
                 return true;
@@ -83,9 +84,10 @@ namespace Brook.DuDuRiBao.Authorization
                 SetHttpAuthorization();
                 return true;
             }
-            else if (Authorizations[loginType].LoginData != null)
+            else if (Authorizations[loginType].TokenInfo != null)
             {
-                return await LoginZhiHu(loginType);
+                await Authorizations[loginType].Login(null, autho=>UpdateLoginInfo(loginType, autho));
+                return true;
             }
 
             return false;
@@ -104,7 +106,7 @@ namespace Brook.DuDuRiBao.Authorization
             return true;
         }
 
-        public static async void Login(LoginType loginType, Action<bool> loginCallback)
+        public static void Login(LoginType loginType, ZhiHuLoginInfo loginInfo, Action<bool> loginCallback)
         {
             if (IsLogin)
                 return;
@@ -117,48 +119,22 @@ namespace Brook.DuDuRiBao.Authorization
             {
                 loginCallback(false);
             }
-            var authorizer = Authorizations[loginType];
-
-            var loginSuccess = false;
-            if (authorizer.IsAuthorized && Authorizations[loginType].LoginData != null)
-            {
-                loginSuccess = await LoginZhiHu(loginType);
-                loginCallback(loginSuccess);
-            }
-            else
-            {
-                try
-                {
-                    authorizer.Login(async (isSuccess, res) =>
-                    {
-                        if (isSuccess)
-                        {
-                            loginSuccess = await LoginZhiHu(loginType);
-                            loginCallback(loginSuccess);
-                        }
-                    });
-                }
-                catch (Exception)
-                {
-                    loginCallback(loginSuccess);
-                }
-            }
+            Authorizations[loginType].Login(loginInfo, autho => {
+                var isSuccess = autho != null;
+                if (isSuccess)
+                    UpdateLoginInfo(loginType, autho);
+                loginCallback?.Invoke(isSuccess);
+            });
         }
 
-        private static async Task<bool> LoginZhiHu(LoginType loginType)
+        private static void UpdateLoginInfo(LoginType loginType, RiBaoAuthoInfo info)
         {
-            var zhiHuAuthoData = await DataRequester.LoginUsingWeibo(Authorizations[loginType].LoginData);
-            if (zhiHuAuthoData == null)
-            {
-                return false;
-            }
             StorageUtil.StorageInfo.LoginType = loginType;
-            StorageUtil.StorageInfo.ZhiHuAuthoInfo = zhiHuAuthoData;
+            StorageUtil.StorageInfo.ZhiHuAuthoInfo = info;
             StorageUtil.UpdateStorageInfo();
 
             IsLogin = true;
             SetHttpAuthorization();
-            return true;
         }
 
         private static void SetHttpAuthorization()
@@ -166,16 +142,25 @@ namespace Brook.DuDuRiBao.Authorization
             XPHttpClient.DefaultClient.HttpConfig.SetAuthorization("Bearer", StorageUtil.StorageInfo.ZhiHuAuthoInfo.access_token ?? StorageUtil.StorageInfo.ZhiHuAuthoInfo.AnonymousLoginToken);
         }
 
-        public static void Logout()
+        private static void ClearHttpAuthorization()
+        {
+            XPHttpClient.DefaultClient.HttpConfig.SetAuthorization("Bearer", "");
+        }
+
+        public static async Task Logout()
         {
             IsLogin = false;
             string msg;
             var loginType = StorageUtil.StorageInfo.LoginType;
+            StorageUtil.StorageInfo.ZhiHuAuthoInfo = null;
+            StorageUtil.UpdateStorageInfo();
+            ClearHttpAuthorization();
 
             if (CheckLoginType(loginType, out msg))
             {
                 Authorizations[loginType].Logout();
             }
+            await AnonymousLogin();
         }
 
         private static bool CheckLoginType(LoginType loginType, out string msg)

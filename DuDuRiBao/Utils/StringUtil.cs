@@ -16,6 +16,7 @@
 
 using Brook.DuDuRiBao.Common;
 using System;
+using System.Text.RegularExpressions;
 using Windows.ApplicationModel.Resources;
 
 namespace Brook.DuDuRiBao.Utils
@@ -110,6 +111,20 @@ namespace Brook.DuDuRiBao.Utils
                              .Replace("&apos;", "&apos;")
                              .Replace("&quot;", "\"")
                              .Replace("&amp;", "&");
+        }
+
+        public static bool CheckEmail(string email)
+        {
+            var pattern = @"^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$";
+            Regex regex = new Regex(pattern);
+            return regex.IsMatch(email);
+        }
+
+        public static bool CheckPhoneNum(string num)
+        {
+            var pattern = "^[1]\\d{10}$";
+            Regex regex = new Regex(pattern);
+            return regex.IsMatch(num);
         }
     }
 }
