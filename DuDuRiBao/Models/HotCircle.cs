@@ -6,28 +6,31 @@ using Windows.UI.Xaml.Media;
 
 namespace Brook.DuDuRiBao.Models
 {
-    public class HotCircle
+    public class CircleBase
     {
-        public string Thumbnail { get; set; }
-
-        public string Id { get; set; }
-
-        public string Articles { get; set; }
-
-        public string Fans { get; set; }
-
         public Brush BackgroundBrush { get; set; }
 
         public string Name { get; set; }
 
+        public string Thumbnail { get; set; }
+
+        public string Id { get; set; }
+
         public void Adjust()
         {
-            if(string.IsNullOrEmpty(Thumbnail) && !string.IsNullOrEmpty(Name))
+            if (string.IsNullOrEmpty(Thumbnail) && !string.IsNullOrEmpty(Name))
             {
                 Thumbnail = Name[0].ToString();
             }
             BackgroundBrush = ColorUtil.GetBrushByCircleId(int.Parse(Id));
         }
+    }
+
+    public class HotCircle : CircleBase
+    {
+        public string Articles { get; set; }
+
+        public string Fans { get; set; }
 
         public HotCircle Clone()
         {

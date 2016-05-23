@@ -297,4 +297,19 @@
   <data name="Logout.Text" xml:space="preserve">
     <value>退出登录</value>
   </data>
+  <data name="ArticleHeader.Header" xml:space="preserve">
+    <value>文章</value>
+  </data>
+  <data name="ArticleSearchPlaceholder" xml:space="preserve">
+    <value>看有价值的文章</value>
+  </data>
+  <data name="CircleHeader.Header" xml:space="preserve">
+    <value>日报</value>
+  </data>
+  <data name="CircleSearchPlaceholder" xml:space="preserve">
+    <value>找感兴趣的日报</value>
+  </data>
+  <data name="PeopleSearchPlaceholder" xml:space="preserve">
+    <value>关注认真的人</value>
+  </data>
 </root>

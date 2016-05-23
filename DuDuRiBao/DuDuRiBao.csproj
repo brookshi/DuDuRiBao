@@ -152,6 +152,9 @@
     <Compile Include="Elements\LoginSelectedDialog.xaml.cs">
       <DependentUpon>LoginSelectedDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Elements\Searcher.xaml.cs">
+      <DependentUpon>Searcher.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Elements\StoryToolBar.xaml.cs">
       <DependentUpon>StoryToolBar.xaml</DependentUpon>
     </Compile>
@@ -161,6 +164,7 @@
     <Compile Include="Elements\ZhiHuLoginDialog.xaml.cs">
       <DependentUpon>ZhiHuLoginDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Elements\ZhiHuPivot.cs" />
     <Compile Include="Events\CommentEvent.cs" />
     <Compile Include="Events\LoginEvent.cs" />
     <Compile Include="Events\OpenNewStoryEvent.cs" />
@@ -171,6 +175,7 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\LoginToken.cs" />
     <Compile Include="Models\MainContent.cs" />
+    <Compile Include="Models\Search.cs" />
     <Compile Include="Models\TimeLine.cs" />
     <Compile Include="Models\MinorData.cs" />
     <Compile Include="Models\SendCommentData.cs" />
@@ -271,6 +276,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Elements\LoginSelectedDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Elements\Searcher.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
