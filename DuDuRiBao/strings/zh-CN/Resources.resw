@@ -250,7 +250,7 @@
     <value>微信扫一扫</value>
   </data>
   <data name="JoinCircleSuccess" xml:space="preserve">
-    <value> 订阅成功</value>
+    <value>订阅成功</value>
   </data>
   <data name="ProtectedCircle" xml:space="preserve">
     <value>不能取消订阅这个日报哦</value>
@@ -280,7 +280,7 @@
     <value>密码</value>
   </data>
   <data name="RiBaoLogin.Content" xml:space="preserve">
-    <value> 登录读读日报</value>
+    <value>登录读读日报</value>
   </data>
   <data name="UserNamePlaceholder.PlaceholderText" xml:space="preserve">
     <value>手机号或邮箱</value>
@@ -311,5 +311,11 @@
   </data>
   <data name="PeopleSearchPlaceholder" xml:space="preserve">
     <value>关注认真的人</value>
+  </data>
+  <data name="Member" xml:space="preserve">
+    <value>读者</value>
+  </data>
+  <data name="Story" xml:space="preserve">
+    <value>文章</value>
   </data>
 </root>

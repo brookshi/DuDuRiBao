@@ -134,6 +134,7 @@
     <Compile Include="Common\ToolBarTrigger.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
     <Compile Include="Common\WebViewExtend.cs" />
+    <Compile Include="Converters\AppendStringResConverter.cs" />
     <Compile Include="Converters\BooleanReverseConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\FlipViewVisibilityConverter.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Elements\CircleImage.xaml.cs">
       <DependentUpon>CircleImage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Elements\ColorTextBlock.cs" />
     <Compile Include="Elements\CommentToolBar.xaml.cs">
       <DependentUpon>CommentToolBar.xaml</DependentUpon>
     </Compile>
@@ -196,6 +198,7 @@
     <Compile Include="Utils\HotCircleBuilder.cs" />
     <Compile Include="Utils\LoadingIcon.cs" />
     <Compile Include="Utils\ResUtil.cs" />
+    <Compile Include="Common\TextBlockExtend.cs" />
     <Compile Include="Utils\VisualHelper.cs" />
     <Compile Include="Utils\ColorUtil.cs" />
     <Compile Include="Utils\Config.cs" />

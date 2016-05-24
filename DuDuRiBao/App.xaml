@@ -83,6 +83,8 @@
                     <SolidColorBrush x:Key="BrushTextBoxBackground" Color="White" />
                     <SolidColorBrush x:Key="BrushSearcherBtnForeground" Color="Gray" />
                     <SolidColorBrush x:Key="BrushSearchePanelBackground" Color="White" />
+                    <SolidColorBrush x:Key="BrushNormalFont" Color="Black" />
+                    <SolidColorBrush x:Key="BrushSubFont" Color="#9DA3A6" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>

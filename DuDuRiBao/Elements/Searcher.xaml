@@ -1,6 +1,8 @@
 ﻿<UserControl x:Class="DuDuRiBao.Elements.Searcher"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:common="using:Brook.DuDuRiBao.Common"
+             xmlns:converter="using:Brook.DuDuRiBao.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:element="using:Brook.DuDuRiBao.Elements"
              xmlns:local="using:DuDuRiBao.Elements"
@@ -12,6 +14,8 @@
              mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
+            <converter:AppendStringResConverter x:Key="AppendConverter" />
+
             <DataTemplate x:Key="SearchCircleItem">
                 <Border Margin="8, 0"
                         BorderBrush="{ThemeResource BrushHotCircleSplitter}"
@@ -30,45 +34,60 @@
                         <TextBlock x:Name="CircleName"
                                    Margin="8, 8, 0, 0"
                                    FontSize="13"
-                                   Foreground="White"
+                                   Foreground="{ThemeResource BrushNormalFont}"
                                    MaxLines="1"
                                    RelativePanel.AlignTopWith="CirclePhoto"
                                    RelativePanel.RightOf="CirclePhoto"
                                    Text="{Binding Name}" />
                         <TextBlock x:Name="Articles"
                                    Margin="8, 4, 12, 0"
+                                   common:TextBlockExtend.ColorfulText="{Binding Description}"
+                                   common:TextBlockExtend.HighLightColor="{ThemeResource BrushPrimary}"
                                    FontSize="11"
-                                   Foreground="{ThemeResource ColorHotCircleTitle}"
+                                   Foreground="{ThemeResource BrushSubFont}"
                                    MaxLines="1"
                                    RelativePanel.Below="CircleName"
                                    RelativePanel.RightOf="CirclePhoto"
-                                   Text="{Binding Articles}" />
-                        <TextBlock x:Name="Fans"
+                                   Text="{Binding SearchCirclCount.Stories,
+                                                  Converter={StaticResource AppendConverter},
+                                                  ConverterParameter=Story}" />
+                        <TextBlock x:Name="Members"
                                    Margin="0, 4, 0, 0"
                                    FontSize="11"
-                                   Foreground="{ThemeResource ColorHotCircleTitle}"
+                                   Foreground="{ThemeResource BrushSubFont}"
                                    MaxLines="1"
                                    RelativePanel.Below="CircleName"
                                    RelativePanel.RightOf="Articles"
-                                   Text="{Binding Fans}" />
-                        <xp:XPButton x:Name="AddToMyCircle"
-                                     Width="48"
-                                     Height="48"
-                                     Background="Transparent"
-                                     BorderThickness="0"
-                                     Command="{Binding DataContext.JoinQuitCircleCommand,
-                                                       ElementName=HotCircleListView}"
-                                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                                     Foreground="White"
-                                     Icon="Add"
-                                     IconInterval="12"
-                                     IconPosition="OnlyIcon"
-                                     IconSize="16"
-                                     PointerOverBackground="{StaticResource BrushPointerOver}"
-                                     PressedBackground="{StaticResource BrushPressed}"
-                                     RelativePanel.AlignRightWithPanel="True"
-                                     RelativePanel.AlignVerticalCenterWithPanel="True"
-                                     Tag="0" />
+                                   Text="{Binding SearchCirclCount.Members,
+                                                  Converter={StaticResource AppendConverter},
+                                                  ConverterParameter=Member}" />
+                        <TextBlock x:Name="Description"
+                                   Margin="0, 4, 0, 0"
+                                   common:TextBlockExtend.ColorfulText="{Binding Description}"
+                                   common:TextBlockExtend.HighLightColor="{ThemeResource BrushPrimary}"
+                                   FontSize="12"
+                                   Foreground="{ThemeResource BrushNormalFont}"
+                                   MaxLines="1"
+                                   RelativePanel.Below="Articles"
+                                   RelativePanel.RightOf="CirclePhoto" />
+                        <xp:XPToggleButton x:Name="AddToMyCircle"
+                                           Width="48"
+                                           Height="48"
+                                           Background="Transparent"
+                                           BorderThickness="0"
+                                           Command="{Binding DataContext.JoinQuitCircleCommand,
+                                                             ElementName=SearchCircleListView}"
+                                           CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                           Foreground="White"
+                                           Icon="Add"
+                                           IconInterval="12"
+                                           IconPosition="OnlyIcon"
+                                           IconSize="16"
+                                           PointerOverBackground="{StaticResource BrushPointerOver}"
+                                           PressedBackground="{StaticResource BrushPressed}"
+                                           RelativePanel.AlignRightWithPanel="True"
+                                           RelativePanel.AlignVerticalCenterWithPanel="True"
+                                           Tag="0" />
                     </RelativePanel>
                 </Border>
             </DataTemplate>
