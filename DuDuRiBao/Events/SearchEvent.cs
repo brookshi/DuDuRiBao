@@ -19,12 +19,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
 
-namespace Brook.DuDuRiBao.Elements
+namespace Brook.DuDuRiBao.Events
 {
-    public class ColorTextBlock : TextBlock
+    public enum SearchType
     {
+        Circle,
+        Story,
+        User,
+    }
 
+    public class SearchEvent
+    {
+        public SearchType Type { get; set; }
+
+        public string Id { get; set; }
     }
 }

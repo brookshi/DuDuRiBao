@@ -182,6 +182,11 @@ namespace Brook.DuDuRiBao.Elements
             }
         }
 
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Search });
+        }
+
         public DelayCommand<XPButton> LogoutCommand { get; set; } = new DelayCommand<XPButton>(async btn =>
         {
             await AuthorizationHelper.Logout();

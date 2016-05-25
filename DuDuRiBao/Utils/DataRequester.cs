@@ -17,6 +17,7 @@
 using Brook.DuDuRiBao.Authorization;
 using Brook.DuDuRiBao.Models;
 using System;
+using System.Net;
 using System.Threading.Tasks;
 using XPHttp;
 using XPHttp.HttpContent;
@@ -250,6 +251,22 @@ namespace Brook.DuDuRiBao.Utils
                 .AddUrlSegements("commentid", commentId ?? "");
 
             XPHttpClient.DefaultClient.DeleteAsync(Urls.LikeComment, httpParam, null);
+        }
+
+        public static Task<SearchCircles> SearchCircles(string text)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("text", text != null ? WebUtility.UrlEncode(text) : "");
+
+            return XPHttpClient.DefaultClient.GetAsync<SearchCircles>(Urls.SearchCircle, httpParam);
+        }
+
+        public static Task<SearchStories> SearchStories(string text)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("text", text != null ? WebUtility.UrlEncode(text) : "");
+
+            return XPHttpClient.DefaultClient.GetAsync<SearchStories>(Urls.SearchStory, httpParam);
         }
 
 

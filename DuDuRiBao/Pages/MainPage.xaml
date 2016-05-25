@@ -96,27 +96,6 @@
                    PaneBackground="White">
             <SplitView.Pane>
                 <RelativePanel Background="{ThemeResource BrushPrimary}">
-                    <xp:XPButton x:Uid="Shang"
-                                 x:Name="Shang"
-                                 Width="{ThemeResource WidthStoryPanel}"
-                                 Height="48"
-                                 Background="Transparent"
-                                 BorderThickness="0"
-                                 Click="Shang_Click"
-                                 Content=""
-                                 Foreground="Red"
-                                 IconInterval="12"
-                                 IconPosition="Left"
-                                 Padding="14, 0, 0, 0"
-                                 PointerOverBackground="{StaticResource BrushPointerOver}"
-                                 PressedBackground="{StaticResource BrushPressed}"
-                                 RelativePanel.AlignLeftWithPanel="True"
-                                 RelativePanel.AlignRightWithPanel="True"
-                                 RelativePanel.AlignTopWithPanel="True">
-                        <xp:XPButton.Icon>
-                            <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf157;" />
-                        </xp:XPButton.Icon>
-                    </xp:XPButton>
                     <xp:XPButton x:Uid="Home"
                                  x:Name="Home"
                                  Width="{ThemeResource WidthStoryPanel}"
@@ -133,7 +112,7 @@
                                  PressedBackground="{StaticResource BrushPressed}"
                                  RelativePanel.AlignLeftWithPanel="True"
                                  RelativePanel.AlignRightWithPanel="True"
-                                 RelativePanel.Below="Shang">
+                                 RelativePanel.AlignTopWithPanel="True">
                         <xp:XPButton.Icon>
                             <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf015;" />
                         </xp:XPButton.Icon>
@@ -238,13 +217,6 @@
             </SplitView.Pane>
             <RelativePanel>
                 <Grid x:Name="LeftPanel" RelativePanel.AlignLeftWithPanel="True">
-                    <StackPanel x:Name="ShangPanel"
-                                Width="{StaticResource WidthStoryPanel}"
-                                HorizontalAlignment="Center"
-                                Visibility="Collapsed">
-                        <Image Width="300" Source="ms-appx:///Assets/DaShang_Zhi.png" />
-                        <Image Width="300" Source="ms-appx:///Assets/DaShang_Wei.png" />
-                    </StackPanel>
                     <llm:LLMListView x:Name="MainListView"
                                      Width="{StaticResource WidthStoryPanel}"
                                      CanPullToRefresh="True"
@@ -267,6 +239,7 @@
                             </Style>
                         </llm:LLMListView.ItemContainerStyle>
                     </llm:LLMListView>
+                    <element:Searcher x:Name="Searcher" Width="{StaticResource WidthStoryPanel}" Height="900" />
                 </Grid>
                 <SplitView x:Name="StoryContentView"
                            CompactPaneLength="0"

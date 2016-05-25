@@ -318,4 +318,10 @@
   <data name="Story" xml:space="preserve">
     <value>文章</value>
   </data>
+  <data name="AddCircle.CheckedContent" xml:space="preserve">
+    <value>已订阅</value>
+  </data>
+  <data name="AddCircle.Content" xml:space="preserve">
+    <value>订阅</value>
+  </data>
 </root>

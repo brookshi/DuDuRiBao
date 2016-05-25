@@ -5,7 +5,6 @@
       xmlns:element="using:Brook.DuDuRiBao.Elements"
       xmlns:local="using:Brook.DuDuRiBao.Pages"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:ui="using:CN.Brook.UI"
       xmlns:vm="using:Brook.DuDuRiBao.ViewModels"
       xmlns:xp="using:XP"
       mc:Ignorable="d">

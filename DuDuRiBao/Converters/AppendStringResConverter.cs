@@ -28,7 +28,7 @@ namespace Brook.DuDuRiBao.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return value + StringUtil.GetString(parameter.ToString());
+            return value.ToString() + StringUtil.GetString(parameter.ToString());
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

@@ -153,7 +153,15 @@ namespace Brook.DuDuRiBao.Pages
                         StorageUtil.SetCommentPanelStatus(StoryContentView.IsPaneOpen);
                     }
                     break;
+                case StoryEventType.Search:
+                    Searcher.Visibility = GetInverseVisibility(Searcher.Visibility);
+                    break;
             }
+        }
+
+        Visibility GetInverseVisibility(Visibility v)
+        {
+            return v == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
         }
 
         [SubscriberCallback(typeof(LoginEvent))]
@@ -174,7 +182,6 @@ namespace Brook.DuDuRiBao.Pages
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
-            ResetMainListView();
             VM.CurrentCategoryId = Misc.Default_Category_Id;
             VM.CategoryName = (sender as Button).Content.ToString();
             MainListView.SetRefresh(true);
@@ -183,7 +190,6 @@ namespace Brook.DuDuRiBao.Pages
 
         private void HotArticle_Click(object sender, RoutedEventArgs e)
         {
-            ResetMainListView();
             VM.CurrentCategoryId = Misc.HotArtical_Category_Id;
             VM.CategoryName = (sender as Button).Content.ToString();
             MainListView.SetRefresh(true);
@@ -197,7 +203,6 @@ namespace Brook.DuDuRiBao.Pages
                 PopupMessage.DisplayMessageInRes("NeedLogin");
                 return;
             }
-            ResetMainListView();
             VM.CurrentCategoryId = Misc.Favorite_Category_Id;
             VM.CategoryName = StringUtil.GetString("FavCategoryName");
             MainListView.SetRefresh(true);
@@ -206,26 +211,12 @@ namespace Brook.DuDuRiBao.Pages
 
         private void HotCircleListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            ResetMainListView();
             var circel = e.ClickedItem as HotCircle;
             VM.CurrentCategoryId = int.Parse(circel.Id);
             VM.CategoryName = circel.Name;
             VM.CurrentCircle = circel;
             MainListView.SetRefresh(true);
             ResetCategoryPanel();
-        }
-
-        private void Shang_Click(object sender, RoutedEventArgs e)
-        {
-            ShangPanel.Visibility = Visibility.Visible;
-            MainListView.Visibility = Visibility.Collapsed;
-            ResetCategoryPanel();
-        }
-
-        private void ResetMainListView()
-        {
-            ShangPanel.Visibility = Visibility.Collapsed;
-            MainListView.Visibility = Visibility.Visible;
         }
     }
 }

@@ -20,6 +20,7 @@ namespace Brook.DuDuRiBao.Events
     public enum StoryEventType
     {
         Menu,
+        Search,
         Comment,
         Like,
         Fav,

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DuDuRiBao.Elements.Searcher"
+﻿<UserControl x:Class="Brook.DuDuRiBao.Elements.Searcher"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:common="using:Brook.DuDuRiBao.Common"
@@ -15,15 +15,37 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <converter:AppendStringResConverter x:Key="AppendConverter" />
-
+            <DataTemplate x:Key="SearchStoryItem">
+                <Border Margin="8, 0"
+                        BorderBrush="{ThemeResource BrushHotCircleSplitter}"
+                        BorderThickness="0, 0, 0, 1">
+                    <RelativePanel>
+                        <TextBlock x:Name="StoryName"
+                                   Margin="8, 8, 0, 0"
+                                   common:TextBlockExtend.ColorfulText="{Binding Title}"
+                                   common:TextBlockExtend.HighLightColor="{ThemeResource BrushPrimary}"
+                                   FontSize="13"
+                                   Foreground="{ThemeResource BrushNormalFont}"
+                                   MaxLines="1" />
+                        <TextBlock x:Name="StorySummary"
+                                   Margin="8, 8, 0, 0"
+                                   common:TextBlockExtend.ColorfulText="{Binding Summary}"
+                                   common:TextBlockExtend.HighLightColor="{ThemeResource BrushPrimary}"
+                                   FontSize="12"
+                                   Foreground="{ThemeResource BrushSubFont}"
+                                   MaxLines="1"
+                                   RelativePanel.Below="StoryName" />
+                    </RelativePanel>
+                </Border>
+            </DataTemplate>
             <DataTemplate x:Key="SearchCircleItem">
                 <Border Margin="8, 0"
                         BorderBrush="{ThemeResource BrushHotCircleSplitter}"
                         BorderThickness="0, 0, 0, 1">
                     <RelativePanel>
                         <element:CircleImage x:Name="CirclePhoto"
-                                             Width="36"
-                                             Height="36"
+                                             Width="56"
+                                             Height="56"
                                              Margin="0, 8, 8, 8"
                                              BackgroundBrush="{Binding BackgroundBrush}"
                                              ImageUrl="{Binding Thumbnail}"
@@ -33,24 +55,24 @@
                                              Word="{Binding Thumbnail}" />
                         <TextBlock x:Name="CircleName"
                                    Margin="8, 8, 0, 0"
+                                   common:TextBlockExtend.ColorfulText="{Binding Name}"
+                                   common:TextBlockExtend.HighLightColor="{ThemeResource BrushPrimary}"
                                    FontSize="13"
                                    Foreground="{ThemeResource BrushNormalFont}"
                                    MaxLines="1"
                                    RelativePanel.AlignTopWith="CirclePhoto"
-                                   RelativePanel.RightOf="CirclePhoto"
-                                   Text="{Binding Name}" />
+                                   RelativePanel.RightOf="CirclePhoto" />
                         <TextBlock x:Name="Articles"
                                    Margin="8, 4, 12, 0"
-                                   common:TextBlockExtend.ColorfulText="{Binding Description}"
+                                   common:TextBlockExtend.ColorfulText="{Binding Count.Stories,
+                                                                                 Converter={StaticResource AppendConverter},
+                                                                                 ConverterParameter=Story}"
                                    common:TextBlockExtend.HighLightColor="{ThemeResource BrushPrimary}"
                                    FontSize="11"
                                    Foreground="{ThemeResource BrushSubFont}"
                                    MaxLines="1"
                                    RelativePanel.Below="CircleName"
-                                   RelativePanel.RightOf="CirclePhoto"
-                                   Text="{Binding SearchCirclCount.Stories,
-                                                  Converter={StaticResource AppendConverter},
-                                                  ConverterParameter=Story}" />
+                                   RelativePanel.RightOf="CirclePhoto" />
                         <TextBlock x:Name="Members"
                                    Margin="0, 4, 0, 0"
                                    FontSize="11"
@@ -58,7 +80,7 @@
                                    MaxLines="1"
                                    RelativePanel.Below="CircleName"
                                    RelativePanel.RightOf="Articles"
-                                   Text="{Binding SearchCirclCount.Members,
+                                   Text="{Binding Count.Members,
                                                   Converter={StaticResource AppendConverter},
                                                   ConverterParameter=Member}" />
                         <TextBlock x:Name="Description"
@@ -70,19 +92,17 @@
                                    MaxLines="1"
                                    RelativePanel.Below="Articles"
                                    RelativePanel.RightOf="CirclePhoto" />
-                        <xp:XPToggleButton x:Name="AddToMyCircle"
-                                           Width="48"
-                                           Height="48"
+                        <xp:XPToggleButton x:Uid="AddCircle"
+                                           x:Name="AddToMyCircle"
+                                           Height="36"
                                            Background="Transparent"
                                            BorderThickness="0"
+                                           CheckedBackground="{ThemeResource BrushSubFont}"
                                            Command="{Binding DataContext.JoinQuitCircleCommand,
                                                              ElementName=SearchCircleListView}"
                                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                                            Foreground="White"
-                                           Icon="Add"
-                                           IconInterval="12"
-                                           IconPosition="OnlyIcon"
-                                           IconSize="16"
+                                           IconPosition="NoIcon"
                                            PointerOverBackground="{StaticResource BrushPointerOver}"
                                            PressedBackground="{StaticResource BrushPressed}"
                                            RelativePanel.AlignRightWithPanel="True"
@@ -95,7 +115,10 @@
     </UserControl.Resources>
     <Grid>
         <RelativePanel>
-            <RelativePanel x:Name="SearchPanel" Background="{ThemeResource BrushSearchePanelBackground}">
+            <RelativePanel x:Name="SearchPanel"
+                           Background="{ThemeResource BrushSearchePanelBackground}"
+                           RelativePanel.AlignLeftWithPanel="True"
+                           RelativePanel.AlignRightWithPanel="True">
                 <xp:XPButton x:Name="BackButton"
                              Width="48"
                              Height="48"
@@ -114,7 +137,7 @@
                          Padding="10, 13, 6, 5"
                          RelativePanel.LeftOf="ClearButton"
                          RelativePanel.RightOf="BackButton"
-                         Text="{x:Bind SearchText, Mode=TwoWay}"
+                         TextChanged="SearchTxt_TextChanged"
                          TextWrapping="NoWrap" />
                 <xp:XPButton x:Name="ClearButton"
                              Width="48"
@@ -129,39 +152,58 @@
                              PressedBackground="{StaticResource BrushPressed}"
                              RelativePanel.AlignRightWithPanel="True" />
             </RelativePanel>
-            <zh:ZhiHuPivot Margin="0, 16, 0, 0" RelativePanel.Below="SearchPanel">
-                <PivotItem x:Uid="CircleHeader" Header="">
-                    <ListView x:Name="SearchCircleListView"
-                              IsItemClickEnabled="True"
-                              ItemClick="SearchCircleListView_ItemClick"
-                              ItemTemplate="{StaticResource SearchCircleItem}"
-                              ItemsSource="{x:Bind SearchCircles, Mode=OneWay}"
-                              SelectionMode="Single">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                <Setter Property="Padding" Value="0" />
-                                <Setter Property="Margin" Value="0, 0, 0, 2" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
+            <zh:ZhiHuPivot x:Name="SearchPivot"
+                           Background="{ThemeResource BrushSearchePanelBackground}"
+                           BackgroundLineStoke="{ThemeResource BrushSearchePanelBackground}"
+                           BackgroundLineStokeThickness="2"
+                           IndicatorLineStokeThickness="2"
+                           IndicatorLineStroke="{ThemeResource BrushPrimary}"
+                           RelativePanel.AlignLeftWithPanel="True"
+                           RelativePanel.AlignRightWithPanel="True"
+                           RelativePanel.Below="SearchPanel"
+                           SelectionChanged="SearchPivot_SelectionChanged">
+                <PivotItem x:Uid="CircleHeader"
+                           Background="Red"
+                           Header="">
+                    <Grid>
+                        <ListView x:Name="SearchCircleListView"
+                                  Margin="0, 8, 0, 0"
+                                  IsItemClickEnabled="True"
+                                  ItemClick="SearchCircleListView_ItemClick"
+                                  ItemTemplate="{StaticResource SearchCircleItem}"
+                                  ItemsSource="{x:Bind SearchCircles, Mode=OneWay}"
+                                  SelectionMode="Single">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    <Setter Property="Padding" Value="0" />
+                                    <Setter Property="Margin" Value="0, 0, 0, 2" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </Grid>
                 </PivotItem>
-                <PivotItem x:Uid="ArticleHeader" Header="">
-                    <ListView x:Name="SearchArticleListView"
-                              Margin="0, 12, 0, 0"
-                              IsItemClickEnabled="True"
-                              ItemClick="HotCircleListView_ItemClick"
-                              ItemTemplate="{StaticResource SearchArticleItem}"
-                              ItemsSource="{x:Bind SearchArticles, Mode=OneWay}"
-                              SelectionMode="Single">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                <Setter Property="Padding" Value="0" />
-                                <Setter Property="Margin" Value="0, 0, 0, 2" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
+                <PivotItem x:Uid="ArticleHeader"
+                           Background="Red"
+                           Header="">
+                    <Grid>
+                        <ListView x:Name="SearchStoryListView"
+                                  Height="500"
+                                  Margin="0, 8, 0, 0"
+                                  IsItemClickEnabled="True"
+                                  ItemClick="SearchStoryListView_ItemClick"
+                                  ItemTemplate="{StaticResource SearchStoryItem}"
+                                  ItemsSource="{x:Bind SearchStories, Mode=OneWay}"
+                                  SelectionMode="Single">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    <Setter Property="Padding" Value="0" />
+                                    <Setter Property="Margin" Value="0, 0, 0, 2" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </Grid>
                 </PivotItem>
             </zh:ZhiHuPivot>
         </RelativePanel>

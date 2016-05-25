@@ -119,7 +119,7 @@
                          Height="48"
                          Margin="{ThemeResource LoginButtonMargin}"
                          Background="Transparent"
-                         Click="LoginButton_Click"
+                         Click="SearchButton_Click"
                          Foreground="White"
                          IconPosition="OnlyIcon"
                          Padding="0"

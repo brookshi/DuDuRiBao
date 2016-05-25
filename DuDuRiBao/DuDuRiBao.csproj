@@ -145,7 +145,6 @@
     <Compile Include="Elements\CircleImage.xaml.cs">
       <DependentUpon>CircleImage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Elements\ColorTextBlock.cs" />
     <Compile Include="Elements\CommentToolBar.xaml.cs">
       <DependentUpon>CommentToolBar.xaml</DependentUpon>
     </Compile>
@@ -170,6 +169,7 @@
     <Compile Include="Events\CommentEvent.cs" />
     <Compile Include="Events\LoginEvent.cs" />
     <Compile Include="Events\OpenNewStoryEvent.cs" />
+    <Compile Include="Events\SearchEvent.cs" />
     <Compile Include="Events\ShareEvent.cs" />
     <Compile Include="Events\StoryEvent.cs" />
     <Compile Include="Events\StoryExtraEvent.cs" />

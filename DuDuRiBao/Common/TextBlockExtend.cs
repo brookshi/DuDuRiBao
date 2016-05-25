@@ -26,7 +26,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Media;
 
-namespace Brook.DuDuRiBao.Utils
+namespace Brook.DuDuRiBao.Common
 {
     public class TextBlockExtend : DependencyObject
     {
@@ -35,11 +35,16 @@ namespace Brook.DuDuRiBao.Utils
         const string Pattern = @"<em>.*?</em>";
         static Regex _regex = new Regex(Pattern);
 
-        public string ColorfulText
+        public static void SetColorfulText(DependencyObject obj, string value)
         {
-            get { return (string)GetValue(ColorfulTextProperty); }
-            set { SetValue(ColorfulTextProperty, value); }
+            obj.SetValue(ColorfulTextProperty, value);
         }
+
+        public static string GetColorfulText(DependencyObject obj)
+        {
+            return (string)obj.GetValue(ColorfulTextProperty);
+        }
+
         public static readonly DependencyProperty ColorfulTextProperty =
             DependencyProperty.Register("ColorfulText", typeof(string), typeof(TextBlockExtend), new PropertyMetadata("", (s, e)=>
             {
@@ -48,35 +53,33 @@ namespace Brook.DuDuRiBao.Utils
                     return;
 
                 textBlock.Inlines.Clear();
+                var matches = _regex.Matches(e.NewValue.ToString());
                 var values = _regex.Split(e.NewValue.ToString());
-                foreach (var value in values)
+                for (int i=0; i < values.Length;i++)
                 {
-                    var newTextBlock = new TextBlock();
-                    if(value.Contains(Flag_Begin))
+                    var normalRun = new Run() { Text = values[i] };
+                    textBlock.Inlines.Add(normalRun);
+
+                    if (matches.Count > i)
                     {
-                        newTextBlock.Text = value.Replace(Flag_Begin, "").Replace(Flag_End, "");
-                        newTextBlock.Foreground = (Brush)textBlock.GetValue(HighLightColorProperty);
+                        var matchValue = matches[i].Value.Replace(Flag_Begin, "").Replace(Flag_End, "");
+                        var highLightRun = new Run() { Text = matchValue, Foreground = (Brush)textBlock.GetValue(HighLightColorProperty) };
+                        textBlock.Inlines.Add(highLightRun);
                     }
-                    else
-                    {
-                        newTextBlock.Text = value;
-                        newTextBlock.Foreground = textBlock.Foreground;
-                    }
-                    newTextBlock.FontSize = textBlock.FontSize;
-                    var inline = new InlineUIContainer() { Child = newTextBlock };
-                    textBlock.Inlines.Add(inline);
                 }
             }));
 
-        public Brush HighLightColor
+        public static void SetHighLightColor(DependencyObject obj, Brush value)
         {
-            get { return (Brush)GetValue(HighLightColorProperty); }
-            set { SetValue(HighLightColorProperty, value); }
+            obj.SetValue(HighLightColorProperty, value);
         }
+
+        public static Brush GetHighLightColor(DependencyObject obj)
+        {
+            return (Brush)obj.GetValue(HighLightColorProperty);
+        }
+
         public static readonly DependencyProperty HighLightColorProperty =
             DependencyProperty.Register("HighLightColor", typeof(Brush), typeof(TextBlockExtend), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
-
-
-
     }
 }

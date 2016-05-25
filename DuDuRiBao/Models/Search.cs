@@ -34,7 +34,7 @@ namespace Brook.DuDuRiBao.Models
     }
     public class SearchCircles
     {
-        public IEnumerable<SearchCircle> Circles { get; set; }
+        public IList<SearchCircle> Circles { get; set; }
     }
 
     public class SearchStory
@@ -47,7 +47,7 @@ namespace Brook.DuDuRiBao.Models
     }
     public class SearchStories
     {
-        public IEnumerable<SearchStory> Stories { get; set; }
+        public IList<SearchStory> Stories { get; set; }
     }
 
     public class PeopleCount
@@ -66,6 +66,6 @@ namespace Brook.DuDuRiBao.Models
     }
     public class SearchUsers
     {
-        public IEnumerable<SearchUser> Users { get; set; }
+        public IList<SearchUser> Users { get; set; }
     }
 }
