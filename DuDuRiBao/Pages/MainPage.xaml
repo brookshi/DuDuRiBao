@@ -239,7 +239,7 @@
                             </Style>
                         </llm:LLMListView.ItemContainerStyle>
                     </llm:LLMListView>
-                    <element:Searcher x:Name="Searcher" Width="{StaticResource WidthStoryPanel}" Height="900" />
+                    <element:Searcher x:Name="Searcher" Margin="0, -48, 0, 0" Width="{StaticResource WidthStoryPanel}" />
                 </Grid>
                 <SplitView x:Name="StoryContentView"
                            CompactPaneLength="0"

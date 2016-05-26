@@ -3,6 +3,7 @@ using Brook.DuDuRiBao.Common;
 using Brook.DuDuRiBao.Events;
 using Brook.DuDuRiBao.Models;
 using Brook.DuDuRiBao.Utils;
+using DuDuRiBao.Utils;
 using LLQ;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,7 @@ namespace Brook.DuDuRiBao.Elements
         {
             this.InitializeComponent();
             SearchCircleListView.DataContext = this;
+            Loaded += (s, e) => { SearchTxt.Focus(FocusState.Keyboard); };
         }
 
         public DelayCommand<XPButton> JoinQuitCircleCommand { get; set; } = new DelayCommand<XPButton>(async btn => {
@@ -168,6 +170,15 @@ namespace Brook.DuDuRiBao.Elements
         private void Notify(string property)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+
+        private void SearchPivot_Loaded(object sender, RoutedEventArgs e)
+        {
+            var headerTxts = VisualHelper.FindVisualChilds<TextBlock>(SearchPivot, "HeaderTxt");
+            if (headerTxts != null)
+            {
+                headerTxts.ForEach(headerTxt => headerTxt.Width = Math.Max(SearchPivot.ActualWidth / 2 - 24, 0));
+            }
         }
     }
 }

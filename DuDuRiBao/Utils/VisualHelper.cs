@@ -48,6 +48,29 @@ namespace DuDuRiBao.Utils
             return null;
         }
 
+        public static List<T> FindVisualChilds<T>(DependencyObject obj, string childName) where T : FrameworkElement
+        {
+            List<T> childs = new List<T>();
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child == null)
+                    continue;
+
+                if (child is T && ((T)child).Name == childName)
+                {
+                    childs.Add((T)child);
+                }
+                else
+                {
+                    IEnumerable<T> childOfChild = FindVisualChilds<T>(child, childName);
+                    if (childOfChild != null)
+                        childs.AddRange(childOfChild);
+                }
+            }
+            return childs;
+        }
+
         public static T FindVisualChild<T>(DependencyObject obj) where T : FrameworkElement
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)

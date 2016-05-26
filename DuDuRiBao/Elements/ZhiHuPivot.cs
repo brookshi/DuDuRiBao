@@ -107,8 +107,8 @@ namespace ZhiHu.Controls
         {
             if (Items.Count > 1)
             {
-                var res = ScreenSize().Width / Items.Count;
-                if (IsMobile)
+                var res = this.ActualWidth / Items.Count;
+               // if (IsMobile)
                     HeaderWidth = res;
                 _tipLine.X2 = HeaderWidth;
             }
@@ -142,32 +142,32 @@ namespace ZhiHu.Controls
                 if (right)
                 {
                     // 非边界
-                    if (SelectedIndex + 1 != Items.Count)
+                    //if (SelectedIndex + 1 != Items.Count)
                     {
                         var newX = (x - _previsousOffset) / Items.Count + (SelectedIndex * HeaderWidth);
                         var max = (SelectedIndex + 1) * HeaderWidth;
 
                         _tipLineTranslateTransform.X = newX < max ? newX : max;
                     }
-                    else
-                    {
-                        _tipLineTranslateTransform.X = (SelectedIndex * HeaderWidth) - (x - _previsousOffset);
-                    }
+                    //else
+                    //{
+                    //    _tipLineTranslateTransform.X = (SelectedIndex * HeaderWidth) - (x - _previsousOffset);
+                    //}
                 }
                 else
                 {
                     // 非边界
-                    if (SelectedIndex != 0)
-                    {
+                    //if (SelectedIndex != 0)
+                    //{
                         var newX = (x - _previsousOffset) / Items.Count + (SelectedIndex * HeaderWidth);
                         var max = (SelectedIndex + 1) * HeaderWidth;
 
                         _tipLineTranslateTransform.X = newX < max ? newX : max;
-                    }
-                    else
-                    {
-                        _tipLineTranslateTransform.X = _previsousOffset - x;
-                    }
+                    //}
+                    //else
+                    //{
+                    //    _tipLineTranslateTransform.X = _previsousOffset - x;
+                    //}
                 }
             }
         }

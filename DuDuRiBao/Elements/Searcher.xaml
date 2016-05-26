@@ -15,6 +15,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <converter:AppendStringResConverter x:Key="AppendConverter" />
+            <converter:PivotHeaderWidthConverter x:Key="PivotHeaderWidthConverter" />
             <DataTemplate x:Key="SearchStoryItem">
                 <Border Margin="8, 0"
                         BorderBrush="{ThemeResource BrushHotCircleSplitter}"
@@ -117,6 +118,8 @@
         <RelativePanel>
             <RelativePanel x:Name="SearchPanel"
                            Background="{ThemeResource BrushSearchePanelBackground}"
+                           BorderBrush="{ThemeResource BrushSubFont}"
+                           BorderThickness="0, 0, 0, 1"
                            RelativePanel.AlignLeftWithPanel="True"
                            RelativePanel.AlignRightWithPanel="True">
                 <xp:XPButton x:Name="BackButton"
@@ -127,30 +130,19 @@
                              Foreground="{ThemeResource BrushSearcherBtnForeground}"
                              Icon="Back"
                              IconPosition="OnlyIcon"
-                             IconSize="20"
+                             IconSize="18"
                              PointerOverBackground="{StaticResource BrushPointerOver}"
                              PressedBackground="{StaticResource BrushPressed}"
                              RelativePanel.AlignLeftWithPanel="True" />
                 <TextBox x:Name="SearchTxt"
                          Height="48"
                          BorderThickness="0"
+                         FontSize="17"
                          Padding="10, 13, 6, 5"
-                         RelativePanel.LeftOf="ClearButton"
+                         RelativePanel.AlignRightWithPanel="True"
                          RelativePanel.RightOf="BackButton"
                          TextChanged="SearchTxt_TextChanged"
                          TextWrapping="NoWrap" />
-                <xp:XPButton x:Name="ClearButton"
-                             Width="48"
-                             Height="48"
-                             Background="Transparent"
-                             Click="ClearButton_Click"
-                             Foreground="{ThemeResource BrushSearcherBtnForeground}"
-                             Icon="Cancel"
-                             IconPosition="OnlyIcon"
-                             IconSize="20"
-                             PointerOverBackground="{StaticResource BrushPointerOver}"
-                             PressedBackground="{StaticResource BrushPressed}"
-                             RelativePanel.AlignRightWithPanel="True" />
             </RelativePanel>
             <zh:ZhiHuPivot x:Name="SearchPivot"
                            Background="{ThemeResource BrushSearchePanelBackground}"
@@ -158,13 +150,21 @@
                            BackgroundLineStokeThickness="2"
                            IndicatorLineStokeThickness="2"
                            IndicatorLineStroke="{ThemeResource BrushPrimary}"
+                           Loaded="SearchPivot_Loaded"
+                           RelativePanel.AlignBottomWithPanel="True"
                            RelativePanel.AlignLeftWithPanel="True"
                            RelativePanel.AlignRightWithPanel="True"
                            RelativePanel.Below="SearchPanel"
                            SelectionChanged="SearchPivot_SelectionChanged">
-                <PivotItem x:Uid="CircleHeader"
-                           Background="Red"
-                           Header="">
+                <zh:ZhiHuPivot.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock x:Name="HeaderTxt"
+                                   FontSize="14"
+                                   Text="{Binding}"
+                                   TextAlignment="Center" />
+                    </DataTemplate>
+                </zh:ZhiHuPivot.HeaderTemplate>
+                <PivotItem x:Uid="CircleHeader" Header="">
                     <Grid>
                         <ListView x:Name="SearchCircleListView"
                                   Margin="0, 8, 0, 0"
@@ -183,12 +183,9 @@
                         </ListView>
                     </Grid>
                 </PivotItem>
-                <PivotItem x:Uid="ArticleHeader"
-                           Background="Red"
-                           Header="">
+                <PivotItem x:Uid="ArticleHeader" Header="">
                     <Grid>
                         <ListView x:Name="SearchStoryListView"
-                                  Height="500"
                                   Margin="0, 8, 0, 0"
                                   IsItemClickEnabled="True"
                                   ItemClick="SearchStoryListView_ItemClick"
