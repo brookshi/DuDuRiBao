@@ -33,12 +33,6 @@
             </xp:XPButton.Content>
             <xp:XPButton.Flyout>
                 <MenuFlyout x:Name="ShareMenu">
-                    <!--<MenuFlyout.MenuFlyoutPresenterStyle>
-                        <Style TargetType="MenuFlyoutPresenter">
-                            <Setter Property="MaxWidth" Value="140" />
-                        </Style>
-                    </MenuFlyout.MenuFlyoutPresenterStyle>-->
-
                     <MenuFlyoutItem x:Uid="QuitCircle" Click="QuitCircle" />
                 </MenuFlyout>
             </xp:XPButton.Flyout>
@@ -60,7 +54,7 @@
                 <TextBlock Margin="0, -4, 0, 0"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
-                           FontSize="20"
+                           FontSize="{x:Bind WordSize, Mode=OneWay}"
                            FontWeight="Bold"
                            Foreground="White"
                            Text="{x:Bind Word, Mode=OneWay}"

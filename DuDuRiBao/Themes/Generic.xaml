@@ -216,7 +216,7 @@
                                             <ContentControl.Clip>
                                                 <RectangleGeometry x:Name="HeaderClipperGeometry" />
                                             </ContentControl.Clip>
-                                            <Grid Background="Transparent">
+                                            <Grid Background="White">
                                                 <PivotHeaderPanel x:Name="StaticHeader" Visibility="Collapsed" />
                                                 <PivotHeaderPanel x:Name="Header" Margin="0">
                                                     <PivotHeaderPanel.RenderTransform>

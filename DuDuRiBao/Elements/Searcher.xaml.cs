@@ -110,6 +110,7 @@ namespace Brook.DuDuRiBao.Elements
         {
             _updateStatus.Clear();
             var text = ((TextBox)sender).Text;
+            System.Diagnostics.Debug.WriteLine(text);
             if (text == "")
             {
                 SearchCircles = new List<SearchCircle>();
@@ -146,7 +147,9 @@ namespace Brook.DuDuRiBao.Elements
             var stories = await DataRequester.SearchStories(text);
             if (stories != null && stories.Stories != null)
             {
-                SearchStories = stories.Stories;
+                var list = stories.Stories.ToList();
+                list.ForEach(o => o.Adjust());
+                SearchStories = list;
             }
         }
 
@@ -179,6 +182,12 @@ namespace Brook.DuDuRiBao.Elements
             {
                 headerTxts.ForEach(headerTxt => headerTxt.Width = Math.Max(SearchPivot.ActualWidth / 2 - 24, 0));
             }
+        }
+
+        private void SearchTxt_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(SearchTxt.Text))
+                SearchTxt.Focus(FocusState.Programmatic);
         }
     }
 }

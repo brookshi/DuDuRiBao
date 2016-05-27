@@ -16,19 +16,15 @@
 
 using Brook.DuDuRiBao.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
 
 namespace Brook.DuDuRiBao.Converters
 {
-    public class AppendStringResConverter : IValueConverter
+    public class SearchPlaceholderTextConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return value.ToString() + StringUtil.GetString(parameter.ToString());
+            return StringUtil.GetString(int.Parse(value.ToString()) == 0 ? "CircleSearchPlaceholder" : "ArticleSearchPlaceholder");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

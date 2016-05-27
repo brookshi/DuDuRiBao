@@ -259,13 +259,13 @@
     <value>取消订阅</value>
   </data>
   <data name="QuitCircleSuccess" xml:space="preserve">
-    <value> 取消订阅成功</value>
+    <value>取消订阅成功</value>
   </data>
   <data name="Shang.Content" xml:space="preserve">
     <value>支持小布，打赏！</value>
   </data>
   <data name="CaptchaCheckFailed" xml:space="preserve">
-    <value> 验证码输入错误，请重新输入</value>
+    <value>验证码输入错误，请重新输入</value>
   </data>
   <data name="CaptchaPlaceholder.PlaceholderText" xml:space="preserve">
     <value>请输入右图中字符</value>
@@ -292,7 +292,7 @@
     <value>知乎账号登录</value>
   </data>
   <data name="ZhiHuLoginDlg.Title" xml:space="preserve">
-    <value> 登录</value>
+    <value>登录</value>
   </data>
   <data name="Logout.Text" xml:space="preserve">
     <value>退出登录</value>
@@ -317,9 +317,6 @@
   </data>
   <data name="Story" xml:space="preserve">
     <value>文章</value>
-  </data>
-  <data name="AddCircle.CheckedContent" xml:space="preserve">
-    <value>已订阅</value>
   </data>
   <data name="AddCircle.Content" xml:space="preserve">
     <value>订阅</value>

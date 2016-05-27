@@ -16,11 +16,14 @@ namespace Brook.DuDuRiBao.Models
 
         public string Id { get; set; }
 
-        public void Adjust()
+        public virtual void Adjust()
         {
             if (string.IsNullOrEmpty(Thumbnail) && !string.IsNullOrEmpty(Name))
             {
-                Thumbnail = Name[0].ToString();
+                if(Name.StartsWith("<em>") && Name.Length > 4)
+                    Thumbnail = Name[4].ToString();
+                else
+                    Thumbnail = Name[0].ToString();
             }
             BackgroundBrush = ColorUtil.GetBrushByCircleId(int.Parse(Id));
         }

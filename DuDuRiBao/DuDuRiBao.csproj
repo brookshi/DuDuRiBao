@@ -134,7 +134,6 @@
     <Compile Include="Common\ToolBarTrigger.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
     <Compile Include="Common\WebViewExtend.cs" />
-    <Compile Include="Converters\AppendStringResConverter.cs" />
     <Compile Include="Converters\BooleanReverseConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\FlipViewVisibilityConverter.cs" />
@@ -142,6 +141,7 @@
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Converters\NullableBooleanToBooleanConverter.cs" />
     <Compile Include="Converters\ReplyAuthorFormatConverter.cs" />
+    <Compile Include="Converters\SearchPlaceholderTextConverter.cs" />
     <Compile Include="Converters\TimeConverter.cs" />
     <Compile Include="Elements\CircleImage.xaml.cs">
       <DependentUpon>CircleImage.xaml</DependentUpon>

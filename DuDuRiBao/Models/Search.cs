@@ -14,6 +14,7 @@
 //   limitations under the License. 
 #endregion
 
+using Brook.DuDuRiBao.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,16 @@ namespace Brook.DuDuRiBao.Models
     {
         public SearchCirclCount Count { get; set; }
         public string Description { get; set; }
+        public string StoryCount { get; set; }
+        public string Member_Alias { get; set; }
+
+        public override void Adjust()
+        {
+            base.Adjust();
+            var members = Math.Max(Count.Members, 1).ToString();
+            Member_Alias = string.IsNullOrEmpty(Member_Alias) ? members + StringUtil.GetString("Member") : members + Member_Alias;
+            StoryCount = Count.Stories.ToString() + StringUtil.GetString("Story");
+        }
     }
     public class SearchCircles
     {
@@ -44,6 +55,11 @@ namespace Brook.DuDuRiBao.Models
         public int Type { get; set; }
         public int Id { get; set; }
         public string Title { get; set; }
+
+        public void Adjust()
+        {
+            Summary = "..." + Summary;
+        }
     }
     public class SearchStories
     {

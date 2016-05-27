@@ -256,7 +256,7 @@ namespace Brook.DuDuRiBao.Utils
         public static Task<SearchCircles> SearchCircles(string text)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
-                .AddUrlSegements("text", text != null ? WebUtility.UrlEncode(text) : "");
+                .AddUrlSegements("text", text != null ? text : "");
 
             return XPHttpClient.DefaultClient.GetAsync<SearchCircles>(Urls.SearchCircle, httpParam);
         }
@@ -264,7 +264,7 @@ namespace Brook.DuDuRiBao.Utils
         public static Task<SearchStories> SearchStories(string text)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
-                .AddUrlSegements("text", text != null ? WebUtility.UrlEncode(text) : "");
+                .AddUrlSegements("text", text != null ? text : "");
 
             return XPHttpClient.DefaultClient.GetAsync<SearchStories>(Urls.SearchStory, httpParam);
         }

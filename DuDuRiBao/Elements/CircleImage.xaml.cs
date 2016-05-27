@@ -80,6 +80,15 @@ namespace Brook.DuDuRiBao.Elements
         public static readonly DependencyProperty BackgroundBrushProperty =
             DependencyProperty.Register("BackgroundBrush", typeof(Brush), typeof(CircleImage), new PropertyMetadata(new SolidColorBrush(Colors.Transparent)));
 
+        public double WordSize
+        {
+            get { return (double)GetValue(WordSizeProperty); }
+            set { SetValue(WordSizeProperty, value); }
+        }
+        public static readonly DependencyProperty WordSizeProperty =
+            DependencyProperty.Register("WordSize", typeof(double), typeof(CircleImage), new PropertyMetadata(20d));
+
+
         private async void QuitCircle(object sender, RoutedEventArgs e)
         {
             if (!AuthorizationHelper.IsLogin)
