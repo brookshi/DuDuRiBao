@@ -79,6 +79,8 @@
                         <Setter Target="StoryContentView.Visibility" Value="Collapsed" />
                         <Setter Target="MainListView.Width" Value="Auto" />
                         <Setter Target="MainListView.(RelativePanel.AlignRightWithPanel)" Value="True" />
+                        <Setter Target="Searcher.Width" Value="Auto" />
+                        <Setter Target="Searcher.(RelativePanel.AlignRightWithPanel)" Value="True" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
