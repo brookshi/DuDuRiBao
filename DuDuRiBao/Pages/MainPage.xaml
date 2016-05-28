@@ -225,6 +225,7 @@
                                      ItemTemplateSelector="{StaticResource StoryDataTemplateSelector}"
                                      ItemsSource="{x:Bind VM.StoryDataList}"
                                      LoadMoreProgressBarBrush="{ThemeResource BrushPrimaryDark}"
+                                     RefreshAreaHeight="30"
                                      RefreshButtonBackground="{ThemeResource BrushPrimary}"
                                      RefreshButtonVisibility="{x:Bind IsDesktopDevice, Converter={StaticResource BooleanToVisibilityConverter}}"
                                      RefreshProgressBarBrush="{ThemeResource BrushPrimaryDark}"
