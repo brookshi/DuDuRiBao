@@ -33,10 +33,10 @@ namespace Brook.DuDuRiBao.Utils
         {
             Regex regex = new Regex(HotRiBaoRegex, RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.Compiled);
             var matches = regex.Matches(hotRiBaoContent);
-            if (matches.Count % Step != 0)
-                throw new Exception("error matched count when do regex for hot article");
-
             List<Story> list = new List<Story>();
+            if (matches.Count % Step != 0)
+                return list;
+
             for (int i = 0; i < matches.Count; i += Step)
             {
                 list.Add(GenerateByMatches(matches[i].Value, matches[i + 1].Value, matches[i + 2].Value, matches[i + 3].Value));
@@ -47,7 +47,7 @@ namespace Brook.DuDuRiBao.Utils
 
         public static Story GenerateByMatches(string matchId, string matchThumbnail, string matchTitle, string matchFollowers)
         {
-            var id = matchId.Substring(matchId.LastIndexOf("/") + 1);
+            var id = matchId.Contains("/") ? matchId.Substring(matchId.LastIndexOf("/") + 1) : matchId;
             var thumbnail = HandleThumbnail(matchThumbnail);
             var title = HandleTitle(matchTitle);
             var followers = matchFollowers.Replace("<i>", "").Replace("</i>", "");
@@ -63,7 +63,7 @@ namespace Brook.DuDuRiBao.Utils
 
         static string HandleThumbnail(string matchThumbnail)
         {
-            string thumbnail = matchThumbnail.Substring(13, matchThumbnail.LastIndexOf("\"") - 13);
+            string thumbnail = matchThumbnail.Contains("\"") ? matchThumbnail.Substring(13, matchThumbnail.LastIndexOf("\"") - 13) : matchThumbnail;
             var httpsIndex = matchThumbnail.IndexOf("http");
             if (httpsIndex < 0)
             {
