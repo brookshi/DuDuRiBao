@@ -46,7 +46,7 @@ namespace Brook.DuDuRiBao.ViewModels
             }
         }
 
-        public HotCircle CurrentCircle { get; set; }
+        public CircleBase CurrentCircle { get; set; }
 
         private string _hotCircleWithCount = string.Format(StringUtil.GetString("HotCircle"), 0);
         public string HotCircleWithCount

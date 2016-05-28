@@ -47,7 +47,7 @@ namespace Brook.DuDuRiBao.Models
         public string FollowerCount { get; set; }
         public string WebImage { get; set; }
 
-        public void AdjustForHotCircleStory(HotCircle circle)
+        public void AdjustForHotCircleStory(CircleBase circle)
         {
             if (Posts == null && circle != null)
             {

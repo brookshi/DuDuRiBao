@@ -127,7 +127,7 @@ namespace Brook.DuDuRiBao.ViewModels
                 }
             }
 
-            if (hotCircleStories == null && hotCircleStories.Stories != null)
+            if (hotCircleStories == null || hotCircleStories.Stories == null || hotCircleStories.Stories.Count == 0)
                 return;
 
             hotCircleStories.Stories.ForEach(story => story.AdjustForHotCircleStory(CurrentCircle));

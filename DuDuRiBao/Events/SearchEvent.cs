@@ -33,6 +33,6 @@ namespace Brook.DuDuRiBao.Events
     {
         public SearchType Type { get; set; }
 
-        public string Id { get; set; }
+        public object SearchObj { get; set; }
     }
 }

@@ -321,4 +321,7 @@
   <data name="AddCircle.Content" xml:space="preserve">
     <value>订阅</value>
   </data>
+  <data name="GetCircle" xml:space="preserve">
+    <value>已订阅</value>
+  </data>
 </root>

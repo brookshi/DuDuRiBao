@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Media;
 
 namespace Brook.DuDuRiBao.Models
 {
-    public class CircleBase
+    public abstract class CircleBase
     {
         public Brush BackgroundBrush { get; set; }
 
@@ -27,6 +27,8 @@ namespace Brook.DuDuRiBao.Models
             }
             BackgroundBrush = ColorUtil.GetBrushByCircleId(int.Parse(Id));
         }
+
+        public abstract HotCircle Clone();
     }
 
     public class HotCircle : CircleBase
@@ -35,7 +37,7 @@ namespace Brook.DuDuRiBao.Models
 
         public string Fans { get; set; }
 
-        public HotCircle Clone()
+        public override HotCircle Clone()
         {
             return new HotCircle()
             {

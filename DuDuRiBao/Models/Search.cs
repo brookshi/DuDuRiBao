@@ -42,6 +42,17 @@ namespace Brook.DuDuRiBao.Models
             Member_Alias = string.IsNullOrEmpty(Member_Alias) ? members + StringUtil.GetString("Member") : members + Member_Alias;
             StoryCount = Count.Stories.ToString() + StringUtil.GetString("Story");
         }
+
+        public override HotCircle Clone()
+        {
+            return new HotCircle()
+            {
+                Thumbnail = Thumbnail,
+                Id = Id,
+                BackgroundBrush = BackgroundBrush,
+                Name = Name
+            };
+        }
     }
     public class SearchCircles
     {

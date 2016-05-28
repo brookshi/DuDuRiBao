@@ -13,6 +13,7 @@ using Brook.DuDuRiBao.Authorization;
 using System.Threading.Tasks;
 using Windows.Foundation.Metadata;
 using System;
+using LLM;
 
 namespace Brook.DuDuRiBao.Pages
 {
@@ -42,6 +43,7 @@ namespace Brook.DuDuRiBao.Pages
 
         private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+            Searcher.Visibility = Visibility.Collapsed;
             if (IsUsingCachedWhenNavigate())
             {
                 return;
@@ -154,7 +156,7 @@ namespace Brook.DuDuRiBao.Pages
                     }
                     break;
                 case StoryEventType.Search:
-                    Searcher.Visibility = GetInverseVisibility(Searcher.Visibility);
+                    ShowSearcher();
                     break;
             }
         }
@@ -162,6 +164,35 @@ namespace Brook.DuDuRiBao.Pages
         Visibility GetInverseVisibility(Visibility v)
         {
             return v == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        void ShowSearcher()
+        {
+            Searcher.Visibility = Visibility.Visible;
+            Animator.Use(AnimationType.FadeInDown).SetDuration(TimeSpan.FromMilliseconds(300)).PlayOn(Searcher, ()=> Searcher.FocusText());
+        }
+
+        void HideSearcher()
+        {
+            Animator.Use(AnimationType.FadeOutUp).SetDuration(TimeSpan.FromMilliseconds(300)).PlayOn(Searcher, () => Searcher.Visibility = Visibility.Collapsed);
+        }
+
+        [SubscriberCallback(typeof(SearchEvent))]
+        private void SearchSubscriber(SearchEvent param)
+        {
+            switch (param.Type)
+            {
+                case SearchType.Circle:
+                    var circle = (CircleBase)param.SearchObj;
+                    circle.Name = circle.Name.Replace("<em>", "").Replace("</em>", "");
+                    UpdateCircle(int.Parse(circle.Id), circle.Name, circle, false);
+                    HideSearcher();
+                    break;
+                case SearchType.Story:
+                    var story = (SearchStory)param.SearchObj;
+                    DisplayStory(story.Id.ToString());
+                    break;
+            }
         }
 
         [SubscriberCallback(typeof(LoginEvent))]
@@ -182,18 +213,12 @@ namespace Brook.DuDuRiBao.Pages
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
-            VM.CurrentCategoryId = Misc.Default_Category_Id;
-            VM.CategoryName = (sender as Button).Content.ToString();
-            MainListView.SetRefresh(true);
-            ResetCategoryPanel();
+            UpdateCircle(Misc.Default_Category_Id, (sender as Button).Content.ToString(), null, true);
         }
 
         private void HotArticle_Click(object sender, RoutedEventArgs e)
         {
-            VM.CurrentCategoryId = Misc.HotArtical_Category_Id;
-            VM.CategoryName = (sender as Button).Content.ToString();
-            MainListView.SetRefresh(true);
-            ResetCategoryPanel();
+            UpdateCircle(Misc.HotArtical_Category_Id, (sender as Button).Content.ToString(), null, true);
         }
 
         private void MyFav_Click(object sender, RoutedEventArgs e)
@@ -203,20 +228,28 @@ namespace Brook.DuDuRiBao.Pages
                 PopupMessage.DisplayMessageInRes("NeedLogin");
                 return;
             }
-            VM.CurrentCategoryId = Misc.Favorite_Category_Id;
-            VM.CategoryName = StringUtil.GetString("FavCategoryName");
-            MainListView.SetRefresh(true);
-            ResetCategoryPanel();
+            UpdateCircle(Misc.Favorite_Category_Id, StringUtil.GetString("FavCategoryName"), null, true);
         }
 
         private void HotCircleListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var circel = e.ClickedItem as HotCircle;
-            VM.CurrentCategoryId = int.Parse(circel.Id);
-            VM.CategoryName = circel.Name;
-            VM.CurrentCircle = circel;
+            var circle = e.ClickedItem as HotCircle;
+            UpdateCircle(int.Parse(circle.Id), circle.Name, circle, true);
+        }
+
+        private void UpdateCircle(int categoryId, string circleName, CircleBase circle, bool needResetPanel)
+        {
+            VM.CurrentCategoryId = categoryId;
+            VM.CategoryName = circleName;
+            if (circle != null)
+            {
+                VM.CurrentCircle = circle;
+            }
             MainListView.SetRefresh(true);
-            ResetCategoryPanel();
+            if (needResetPanel)
+            {
+                ResetCategoryPanel();
+            }
         }
     }
 }

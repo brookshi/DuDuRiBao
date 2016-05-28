@@ -107,7 +107,8 @@
                                      PointerOverBackground="{StaticResource BrushPrimaryLightS}"
                                      PressedBackground="{StaticResource BrushPrimaryDark}"
                                      RelativePanel.AlignRightWithPanel="True"
-                                     RelativePanel.AlignVerticalCenterWithPanel="True" />
+                                     RelativePanel.AlignVerticalCenterWithPanel="True"
+                                     Tag="0" />
                     </RelativePanel>
                 </Border>
             </DataTemplate>
@@ -142,7 +143,6 @@
                          Height="48"
                          BorderThickness="0"
                          FontSize="17"
-                         LostFocus="SearchTxt_LostFocus"
                          Padding="10, 13, 6, 5"
                          PlaceholderText="{Binding ElementName=SearchPivot,
                                                    Path=SelectedIndex,

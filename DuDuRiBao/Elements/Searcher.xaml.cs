@@ -4,6 +4,7 @@ using Brook.DuDuRiBao.Events;
 using Brook.DuDuRiBao.Models;
 using Brook.DuDuRiBao.Utils;
 using DuDuRiBao.Utils;
+using LLM;
 using LLQ;
 using System;
 using System.Collections.Generic;
@@ -54,7 +55,6 @@ namespace Brook.DuDuRiBao.Elements
         {
             this.InitializeComponent();
             SearchCircleListView.DataContext = this;
-            Loaded += (s, e) => { SearchTxt.Focus(FocusState.Keyboard); };
         }
 
         public DelayCommand<XPButton> JoinQuitCircleCommand { get; set; } = new DelayCommand<XPButton>(async btn => {
@@ -71,21 +71,26 @@ namespace Brook.DuDuRiBao.Elements
             if (btn.Tag.ToString() == "0")
             {
                 await DataRequester.JoinCircle(circle.Id);
+                btn.Content = StringUtil.GetString("GetCircle");
+                btn.PointerOverBackground = ResUtil.GetAppThemeBrush("BrushPointerOver");
+                btn.PressedBackground = ResUtil.GetAppThemeBrush("BrushPressed");  
+                btn.Background = ResUtil.GetAppThemeBrush("BrushPointerOver");
+                btn.Tag = "1";
             }
             else
             {
                 await DataRequester.QuitCircle(circle.Id);
+                btn.Content = StringUtil.GetString("AddCircle.Content");
+                btn.PointerOverBackground = ResUtil.GetAppThemeBrush("BrushPrimaryLightS");
+                btn.PressedBackground = ResUtil.GetAppThemeBrush("BrushPrimaryDark");
+                btn.Background = ResUtil.GetAppThemeBrush("BrushPrimary");
+                btn.Tag = "0";
             }
         });
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void ClearButton_Click(object sender, RoutedEventArgs e)
-        {
-
+            Animator.Use(AnimationType.FadeOutUp).SetDuration(TimeSpan.FromMilliseconds(300)).PlayOn(this, () => Visibility = Visibility.Collapsed);
         }
 
         private void SearchStoryListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -94,7 +99,7 @@ namespace Brook.DuDuRiBao.Elements
             if (story == null)
                 return;
 
-            LLQNotifier.Default.Notify(new SearchEvent() { Id = story.Id.ToString(), Type = SearchType.Story });
+            LLQNotifier.Default.Notify(new SearchEvent() { SearchObj = story, Type = SearchType.Story });
         }
 
         private void SearchCircleListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -103,7 +108,7 @@ namespace Brook.DuDuRiBao.Elements
             if (circle == null)
                 return;
 
-            LLQNotifier.Default.Notify(new SearchEvent() { Id = circle.Id.ToString(), Type = SearchType.Circle });
+            LLQNotifier.Default.Notify(new SearchEvent() { SearchObj = circle, Type = SearchType.Circle });
         }
 
         private void SearchTxt_TextChanged(object sender, TextChangedEventArgs e)
@@ -184,10 +189,9 @@ namespace Brook.DuDuRiBao.Elements
             }
         }
 
-        private void SearchTxt_LostFocus(object sender, RoutedEventArgs e)
+        public void FocusText()
         {
-            if (string.IsNullOrEmpty(SearchTxt.Text))
-                SearchTxt.Focus(FocusState.Programmatic);
+            SearchTxt.Focus(FocusState.Programmatic);
         }
     }
 }
