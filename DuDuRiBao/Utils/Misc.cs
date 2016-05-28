@@ -25,6 +25,8 @@ namespace Brook.DuDuRiBao.Utils
 
         public const int HotArtical_Category_Id = -3;
 
+        public const int Feedback_Story_Id = 8367476;
+
         public const int Page_Count = 30;
 
         public const int Unvalid_Image_Id = -1;

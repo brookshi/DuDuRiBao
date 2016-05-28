@@ -241,6 +241,12 @@ namespace Brook.DuDuRiBao.Pages
             UpdateCircle(Misc.Favorite_Category_Id, StringUtil.GetString("FavCategoryName"), null, true);
         }
 
+        private void Feedback_Click(object sender, RoutedEventArgs e)
+        {
+            DisplayStory(Misc.Feedback_Story_Id.ToString());
+            ResetCategoryPanel();
+        }
+
         private void HotCircleListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var circle = e.ClickedItem as HotCircle;
