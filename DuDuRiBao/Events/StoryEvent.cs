@@ -25,7 +25,8 @@ namespace Brook.DuDuRiBao.Events
         Like,
         Fav,
         ShareToWeiBo,
-        ShareToWeiXin
+        ShareToWeiXin,
+        Night,
     }
 
     public class StoryEvent

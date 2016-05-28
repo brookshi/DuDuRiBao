@@ -55,6 +55,7 @@ namespace Brook.DuDuRiBao.ViewModels
 
         public MainContentViewModel()
         {
+            StoryExclusiveSubscriber.Instance.VM = this;
         }
 
         static MainContentViewModel()
@@ -100,6 +101,7 @@ namespace Brook.DuDuRiBao.ViewModels
         internal class StoryExclusiveSubscriber
         {
             internal static StoryExclusiveSubscriber Instance = new StoryExclusiveSubscriber();
+            internal MainContentViewModel VM { get; set; }
 
             [SubscriberCallback(typeof(StoryEvent))]
             private void Subscriber(StoryEvent param)
@@ -112,7 +114,10 @@ namespace Brook.DuDuRiBao.ViewModels
                     case StoryEventType.Like:
                         DataRequester.SetStoryLike(CurrentStoryId, param.IsChecked);
                         break;
-
+                    case StoryEventType.Night:
+                        if(VM != null)
+                            VM.RequestMainContent();
+                        break;
                 }
             }
         }

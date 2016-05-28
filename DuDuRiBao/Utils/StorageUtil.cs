@@ -1,6 +1,7 @@
 ﻿using Brook.DuDuRiBao.Models;
 using System;
 using Windows.Storage;
+using Windows.UI.Xaml;
 
 namespace Brook.DuDuRiBao.Utils
 {
@@ -12,27 +13,32 @@ namespace Brook.DuDuRiBao.Utils
 
         static ApplicationDataContainer _localSetting = ApplicationData.Current.LocalSettings;
 
-        public static StorageInfo StorageInfo;
-
         static StorageUtil()
         {
-            if (!TryGetJsonObj(StorageInfoKey, out StorageInfo))
+            StorageInfo StorageInfo;
+            if (TryGetJsonObj(StorageInfoKey, out StorageInfo))
             {
-                StorageInfo = new StorageInfo();
+                StorageInfo.Instance.CopyValue(StorageInfo);
             }
         }
 
         public static void UpdateStorageInfo()
         {
-            if (StorageInfo == null)
+            if (StorageInfo.Instance == null)
                 return;
 
-            AddObject(StorageInfoKey, StorageInfo);
+            AddObject(StorageInfoKey, StorageInfo.Instance);
         }
 
         public static void SetCommentPanelStatus(bool isOpen)
         {
-            StorageInfo.IsCommentPanelOpen = isOpen;
+            StorageInfo.Instance.IsCommentPanelOpen = isOpen;
+            UpdateStorageInfo();
+        }
+
+        public static void SetAppTheme(ElementTheme theme)
+        {
+            StorageInfo.Instance.AppTheme = theme;
             UpdateStorageInfo();
         }
 

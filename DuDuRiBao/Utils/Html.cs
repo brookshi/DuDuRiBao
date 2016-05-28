@@ -17,6 +17,8 @@
 using Brook.DuDuRiBao.Models;
 using System.Text;
 using System.Linq;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 
 namespace Brook.DuDuRiBao.Utils
 {
@@ -34,11 +36,11 @@ namespace Brook.DuDuRiBao.Utils
 
         private const string _headerTemplate = "<div style=\"position:relative; height:250;  background:url({0}) no-repeat center center; background-size:100%; \">"
                                                + "<div style=\"position:relative; height:250;  background-image:url(ms-appx-web:///Assets/header_background.png); background-size:100% 100%;\">"
-                                               + "<table style = \"position:absolute; Bottom:30px; color:white; font-weight:bold; font-size:30;\" >"
-                                               +"<tr><td style=\"width:20px\"></td><td>{1}</td><td style=\"width:20px\"></td></tr>"
+                                               + "<table style = \"position:absolute; Bottom:30px; color:{1}; font-weight:bold; font-size:30;\" >"
+                                               +"<tr><td style=\"width:20px\"></td><td>{2}</td><td style=\"width:20px\"></td></tr>"
                                                +"</table>"
-                                               +"<table style=\"position:absolute; right:4px; margin:0,20; Bottom:8px;color:white;font-size:15;\">"
-                                               + "<tr><td>{2}</td><td style=\"width:20px\"></td></tr>"
+                                               +"<table style=\"position:absolute; right:4px; margin:0,20; Bottom:8px;color:{3};font-size:15;\">"
+                                               + "<tr><td>{4}</td><td style=\"width:20px\"></td></tr>"
                                                + "</table>"
                                                +"</div>"
                                                +"</div>";
@@ -59,8 +61,23 @@ namespace Brook.DuDuRiBao.Utils
             content.Css.ForEach(o => cssBuilder.Append(string.Format(_cssTemplate, o)));
             content.Js.ForEach(o => jsBuilder.Append(string.Format(_jsTemplate, o)));
 
-            var header = string.Format(_headerTemplate, content.Image, content.Title, content.Image_Source);
-            var source = string.Format(_htmlTemplate, cssBuilder.ToString(), jsBuilder.ToString(), content.Body, _notifyScript);
+            var titleColor = ((SolidColorBrush)((ResourceDictionary)Application.Current.Resources.ThemeDictionaries[StorageInfo.Instance.AppTheme == ElementTheme.Dark?"Dark":"Light"])["BrushToolBarForeground"]).Color.ToString();
+            if (titleColor.Length == 9)
+                titleColor = titleColor.Replace("#FF", "#");
+            var header = string.Format(_headerTemplate, content.Image, titleColor, content.Title, titleColor, content.Image_Source);
+            string body = "";
+            if(StorageInfo.Instance.AppTheme == ElementTheme.Dark)
+            {
+                var backgroundColor = ((SolidColorBrush)((ResourceDictionary)Application.Current.Resources.ThemeDictionaries["Dark"])["BrushPrimary"]).Color.ToString();
+                body = "<body class=\"dudu-night\">" + content.Body + "</body>";
+                body = body.Replace("class=\"main-wrap content-wrap\"", "class=\"main-wrap content-wrap\" style=\"background:"+ backgroundColor + "\"");
+            }
+            else
+            {
+                body = "<body>" + content.Body + "</body>";
+            }
+
+            var source = string.Format(_htmlTemplate, cssBuilder.ToString(), jsBuilder.ToString(), body, _notifyScript);
 
             source = source.Replace("<div class=\"img-place-holder\"></div>", header);
 

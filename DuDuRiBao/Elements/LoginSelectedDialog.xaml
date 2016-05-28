@@ -6,6 +6,8 @@
                    xmlns:local="using:DuDuRiBao.Elements"
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:xp="using:XP"
+                 RequestedTheme="{Binding Source={StaticResource StorageInfo},
+                                          Path=AppTheme}"
                    mc:Ignorable="d">
 
     <RelativePanel>

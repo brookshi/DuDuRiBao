@@ -8,6 +8,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:utils="using:Brook.DuDuRiBao.Utils"
              xmlns:xp="using:XP"
+             RequestedTheme="{Binding Source={StaticResource StorageInfo},
+                                      Path=AppTheme}"
              mc:Ignorable="d">
 
     <UserControl.Resources>
@@ -97,7 +99,8 @@
                          Height="48"
                          Background="Transparent"
                          Click="MenuButton_Click"
-                         Foreground="White"
+                         Foreground="{ThemeResource BrushToolBarForeground}"
+                         IconForeground="{ThemeResource BrushToolBarForeground}"
                          IconPosition="OnlyIcon"
                          IconSize="20"
                          PointerOverBackground="{StaticResource BrushPointerOver}"
@@ -110,7 +113,7 @@
                        Margin="10, 0, 0, 0"
                        FontSize="16"
                        FontWeight="Medium"
-                       Foreground="White"
+                       Foreground="{ThemeResource BrushToolBarForeground}"
                        RelativePanel.AlignVerticalCenterWithPanel="True"
                        RelativePanel.RightOf="MenuButton"
                        Text="{x:Bind Category, Mode=OneWay}" />
@@ -120,7 +123,8 @@
                          Margin="{ThemeResource LoginButtonMargin}"
                          Background="Transparent"
                          Click="SearchButton_Click"
-                         Foreground="White"
+                         Foreground="{ThemeResource BrushToolBarForeground}"
+                         IconForeground="{ThemeResource BrushToolBarForeground}"
                          IconPosition="OnlyIcon"
                          Padding="0"
                          PointerOverBackground="{StaticResource BrushPointerOver}"
@@ -138,27 +142,35 @@
                              Height="48"
                              Background="Transparent"
                              Click="LoginButton_Click"
-                             Foreground="White"
+                             Foreground="{ThemeResource BrushToolBarForeground}"
                              IconPosition="NoIcon"
                              Padding="0"
                              PointerOverBackground="{StaticResource BrushPointerOver}"
                              PressedBackground="{StaticResource BrushPressed}">
                     <xp:XPButton.Content>
-                        <Rectangle Width="28"
-                                   Height="28"
-                                   RadiusX="14"
-                                   RadiusY="14">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{x:Bind UserPhotoUrl, Mode=OneWay}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
+                        <Grid>
+                            <Rectangle Width="28"
+                                       Height="28"
+                                       RadiusX="14"
+                                       RadiusY="14">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="{x:Bind UserPhotoUrl, Mode=OneWay}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <Rectangle Width="28"
+                                       Height="28"
+                                       Fill="{ThemeResource BrushMask}"
+                                       RadiusX="14"
+                                       RadiusY="14" />
+                        </Grid>
                     </xp:XPButton.Content>
                 </xp:XPButton>
                 <xp:XPButton x:Name="LoginSuccessButton"
                              Width="48"
                              Height="48"
                              Background="Transparent"
-                             Foreground="White"
+                             Foreground="{ThemeResource BrushToolBarForeground}"
+                             IconForeground="{ThemeResource BrushToolBarForeground}"
                              IconPosition="NoIcon"
                              Padding="0"
                              PointerOverBackground="{StaticResource BrushPointerOver}"
@@ -189,8 +201,9 @@
                          Background="Transparent"
                          Click="CommentButton_Click"
                          Content="{x:Bind CommentCount, Mode=OneWay}"
-                         Foreground="White"
+                         Foreground="{ThemeResource BrushToolBarForeground}"
                          Icon="Comment"
+                         IconForeground="{ThemeResource BrushToolBarForeground}"
                          IconPosition="Left"
                          IconSize="20"
                          PointerOverBackground="{StaticResource BrushPointerOver}"
@@ -206,8 +219,9 @@
                                CheckedPressedBackground="{StaticResource BrushPressed}"
                                CheckedTextForeground="Red"
                                Content="{x:Bind LikeCount, Mode=OneWay}"
-                               Foreground="White"
+                               Foreground="{ThemeResource BrushToolBarForeground}"
                                Icon="Like"
+                               IconForeground="{ThemeResource BrushToolBarForeground}"
                                IconPosition="Left"
                                IconSize="20"
                                IsChecked="{x:Bind IsLikeButtonChecked, Mode=TwoWay}"
@@ -222,8 +236,9 @@
                                CheckedIconForeground="Yellow"
                                CheckedPointerOverBackground="{StaticResource BrushPointerOver}"
                                CheckedPressedBackground="{StaticResource BrushPressed}"
-                               Foreground="White"
+                               Foreground="{ThemeResource BrushToolBarForeground}"
                                Icon="SolidStar"
+                               IconForeground="{ThemeResource BrushToolBarForeground}"
                                IconPosition="OnlyIcon"
                                IconSize="20"
                                IsChecked="{x:Bind IsFavoriteButtonChecked, Mode=TwoWay}"
@@ -235,7 +250,8 @@
                          Width="48"
                          Height="48"
                          Background="Transparent"
-                         Foreground="White"
+                         Foreground="{ThemeResource BrushToolBarForeground}"
+                         IconForeground="{ThemeResource BrushToolBarForeground}"
                          IconPosition="Left"
                          IconSize="20"
                          PointerOverBackground="{StaticResource BrushPointerOver}"

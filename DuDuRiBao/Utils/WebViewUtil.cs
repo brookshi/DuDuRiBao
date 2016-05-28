@@ -15,12 +15,15 @@
 #endregion
 
 using Brook.DuDuRiBao.Common;
+using Brook.DuDuRiBao.Models;
 using System;
 using System.Collections.Generic;
 using Windows.System;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Media;
 
 namespace Brook.DuDuRiBao.Utils
 {
@@ -48,6 +51,8 @@ namespace Brook.DuDuRiBao.Utils
         {
             Clear();
             RemoveParent();
+
+            _webViewInstance.DefaultBackgroundColor = ((SolidColorBrush)((ResourceDictionary)Application.Current.Resources.ThemeDictionaries[StorageInfo.Instance.AppTheme.ToString()])["BrushPrimary"]).Color;
             _webViewInstance.SetBinding(WebViewExtend.ContentProperty, new Binding() { Source = source, Path = new PropertyPath(path) });
             lock(_parentLocker)
             {

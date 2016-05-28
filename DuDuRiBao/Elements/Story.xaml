@@ -55,6 +55,7 @@
                                Text="{Binding Posts[0].Poster.Name}" />
                     <Grid x:Name="TitleBorder"
                           Margin="12, 0, 12, 12"
+                          Background="{ThemeResource BrushStoryReferenceArea}"
                           RelativePanel.AlignLeftWithPanel="True"
                           RelativePanel.AlignRightWithPanel="True"
                           RelativePanel.Below="CircleImage">
@@ -110,7 +111,7 @@
                    Stretch="Fill" />
             <RelativePanel Height="88"
                            Margin="5, 0, 5, 0"
-                           Background="White"
+                           Background="{ThemeResource BrushStoryListItem}"
                            CornerRadius="5">
                 <Image x:Name="MainItem_Image"
                        Width="80"
@@ -159,7 +160,7 @@
                    Stretch="Fill" />
             <RelativePanel Height="88"
                            Margin="5, 0, 5, 0"
-                           Background="White"
+                           Background="{ThemeResource BrushStoryListItem}"
                            CornerRadius="5">
                 <Image x:Name="MainItem_Image"
                        Width="80"
@@ -193,7 +194,7 @@
                    Stretch="Fill" />
             <RelativePanel Height="96"
                            Margin="5, 0, 5, 0"
-                           Background="White"
+                           Background="{ThemeResource BrushStoryListItem}"
                            CornerRadius="5">
                 <TextBlock x:Name="MainItem_Content"
                            Margin="12, 8"

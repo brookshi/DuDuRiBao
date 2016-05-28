@@ -69,7 +69,7 @@ namespace Brook.DuDuRiBao.Pages
 
         private void UpdateLoginInfo()
         {
-            var info = StorageUtil.StorageInfo.ZhiHuAuthoInfo;
+            var info = StorageInfo.Instance.ZhiHuAuthoInfo;
             if (info == null)
                 return;
 
@@ -171,11 +171,6 @@ namespace Brook.DuDuRiBao.Pages
             }
         }
 
-        Visibility GetInverseVisibility(Visibility v)
-        {
-            return v == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
-        }
-
         void ShowSearcher()
         {
             Searcher.Visibility = Visibility.Visible;
@@ -243,8 +238,9 @@ namespace Brook.DuDuRiBao.Pages
 
         private void Feedback_Click(object sender, RoutedEventArgs e)
         {
-            DisplayStory(Misc.Feedback_Story_Id.ToString());
-            ResetCategoryPanel();
+            StorageUtil.SetAppTheme(ElementTheme.Dark);
+            //DisplayStory(Misc.Feedback_Story_Id.ToString());
+            //ResetCategoryPanel();
         }
 
         private void HotCircleListView_ItemClick(object sender, ItemClickEventArgs e)

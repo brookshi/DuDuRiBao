@@ -2,11 +2,13 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:DuDuRiBao"
+             xmlns:model="using:Brook.DuDuRiBao.Models"
              RequestedTheme="Light">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Default">
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <model:StorageInfo x:Key="StorageInfo" />
 
                     <x:Double x:Key="WidthCategoryPanel">320</x:Double>
                     <x:Double x:Key="WidthStoryPanel">400</x:Double>
@@ -15,7 +17,11 @@
                     <x:Double x:Key="HeightFlipView">250</x:Double>
 
                     <Thickness x:Key="LoginButtonMargin">300, 0, 0, 0</Thickness>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
 
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
                     <Color x:Key="ColorPrimary">#2196F3</Color>
                     <Color x:Key="ColorPrimaryDark">#1976D2</Color>
                     <Color x:Key="ColorPrimaryLight">#81d4f9</Color>
@@ -38,6 +44,32 @@
                     <Color x:Key="ColorListBackground">#f9f9f9</Color>
                     <Color x:Key="ColorButtonForeground">#FFFFFF</Color>
                     <Color x:Key="ColorCheckedForeground">#00D74B</Color>
+
+                    <SolidColorBrush x:Key="BrushMainSplitter" Color="White" />
+                    <SolidColorBrush x:Key="BrushPointerOver" Color="#22000000" />
+                    <SolidColorBrush x:Key="BrushPressed" Color="#44000000" />
+                    <SolidColorBrush x:Key="BrushCommentReplyToPointerOverForeground" Color="Red" />
+                    <SolidColorBrush x:Key="BrushCommentReplyToForeground" Color="Black" />
+                    <SolidColorBrush x:Key="BrushCommentReplyToContent" Color="Gray" />
+                    <SolidColorBrush x:Key="BrushSendButton" Color="Gray" />
+                    <SolidColorBrush x:Key="BrushCommentExtraInfoForeground" Color="Gray" />
+                    <SolidColorBrush x:Key="BrushCommentInfoForeground" Color="Black" />
+                    <SolidColorBrush x:Key="BrushIndicatorNormalBackground" Color="LightGray" />
+                    <SolidColorBrush x:Key="BrushIndicatorHighlightBackground" Color="White" />
+                    <SolidColorBrush x:Key="BrushWebBoBackground" Color="#ff9b0f" />
+                    <SolidColorBrush x:Key="BrushWebBoBackgroundLight" Color="#fca831" />
+                    <SolidColorBrush x:Key="BrushWebBoBackgroundDark" Color="#ff9500" />
+                    <SolidColorBrush x:Key="BrushTextBoxBackground" Color="White" />
+                    <SolidColorBrush x:Key="BrushSearcherBtnForeground" Color="Gray" />
+                    <SolidColorBrush x:Key="BrushSearchePanelBackground" Color="White" />
+                    <SolidColorBrush x:Key="BrushNormalFont" Color="Black" />
+                    <SolidColorBrush x:Key="BrushSecFont" Color="#444" />
+                    <SolidColorBrush x:Key="BrushSubFont" Color="#9DA3A6" />
+                    <SolidColorBrush x:Key="BrushSearchItem" Color="White" />
+                    <SolidColorBrush x:Key="BrushSearchBackground" Color="#BBFFFFFF" />
+
+                    <SolidColorBrush x:Key="BrushToolBarForeground" Color="White" />
+                    <SolidColorBrush x:Key="BrushMask" Color="#00000000" />
 
                     <SolidColorBrush x:Key="BrushPrimary" Color="{ThemeResource ColorPrimary}" />
                     <SolidColorBrush x:Key="BrushPrimaryDark" Color="{ThemeResource ColorPrimaryDark}" />
@@ -66,28 +98,89 @@
                     <SolidColorBrush x:Key="BrushCommentSplitter" Color="{ThemeResource ColorMenuSplitter}" />
                     <SolidColorBrush x:Key="BrushButtonForeground" Color="{ThemeResource ColorButtonForeground}" />
                     <SolidColorBrush x:Key="BrushCheckedForeground" Color="{ThemeResource ColorCheckedForeground}" />
-                    <SolidColorBrush x:Key="BrushMainSplitter" Color="White" />
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="Dark">
+                    <Color x:Key="ColorPrimary">#1c1d1f</Color>
+                    <Color x:Key="ColorPrimaryDark">#0e0e0f</Color>
+                    <Color x:Key="ColorPrimaryLight">#6f7175</Color>
+                    <Color x:Key="ColorPrimaryLightS">#393b3e</Color>
+                    <Color x:Key="ColorHotCircleTitle">#85888c</Color>
+                    <Color x:Key="ColorMenuSplitter">#e4e4e4</Color>
+                    <Color x:Key="ColorHotCircleSplitter">#2190e9</Color>
+                    <Color x:Key="ColorFollowCount">#CED5D9</Color>
+                    <Color x:Key="ColorStoryList">#121314</Color>
+                    <Color x:Key="ColorStoryListItem">#17181a</Color>
+                    <Color x:Key="ColorStoryListItemBorder">#17181a</Color>
+                    <Color x:Key="ColorStoryReferenceArea">#1c1d1f</Color>
+                    <Color x:Key="ColorStoryReferenceBorder">#1c1d1f</Color>
+                    <Color x:Key="ColorStoryPoster">#396280</Color>
+                    <Color x:Key="ColorStoryInfo">#555659</Color>
+                    <Color x:Key="ColorStoryReason">#797b80</Color>
+                    <Color x:Key="ColorStoryTitle">#85888c</Color>
+                    <Color x:Key="ColorStoryTitleBorder">#1c1d1f</Color>
+                    <Color x:Key="ColorStoryLike">#45474d</Color>
+                    <Color x:Key="ColorListBackground">#121314</Color>
+                    <Color x:Key="ColorButtonForeground">#7d7f83</Color>
+                    <Color x:Key="ColorCheckedForeground">#00D74B</Color>
+
+                    <SolidColorBrush x:Key="BrushMainSplitter" Color="#121314" />
                     <SolidColorBrush x:Key="BrushPointerOver" Color="#22000000" />
                     <SolidColorBrush x:Key="BrushPressed" Color="#44000000" />
-                    <SolidColorBrush x:Key="BrushCommentReplyToPointerOverForeground" Color="Red" />
-                    <SolidColorBrush x:Key="BrushCommentReplyToForeground" Color="Black" />
+                    <SolidColorBrush x:Key="BrushCommentReplyToPointerOverForeground" Color="#a40000" />
+                    <SolidColorBrush x:Key="BrushCommentReplyToForeground" Color="#7d7f83" />
                     <SolidColorBrush x:Key="BrushCommentReplyToContent" Color="Gray" />
                     <SolidColorBrush x:Key="BrushSendButton" Color="Gray" />
-                    <SolidColorBrush x:Key="BrushCommentExtraInfoForeground" Color="Gray" />
-                    <SolidColorBrush x:Key="BrushCommentInfoForeground" Color="Black" />
+                    <SolidColorBrush x:Key="BrushCommentExtraInfoForeground" Color="#4e4f52" />
+                    <SolidColorBrush x:Key="BrushCommentInfoForeground" Color="#85888c" />
+
                     <SolidColorBrush x:Key="BrushIndicatorNormalBackground" Color="LightGray" />
                     <SolidColorBrush x:Key="BrushIndicatorHighlightBackground" Color="White" />
+
                     <SolidColorBrush x:Key="BrushWebBoBackground" Color="#ff9b0f" />
                     <SolidColorBrush x:Key="BrushWebBoBackgroundLight" Color="#fca831" />
                     <SolidColorBrush x:Key="BrushWebBoBackgroundDark" Color="#ff9500" />
-                    <SolidColorBrush x:Key="BrushTextBoxBackground" Color="White" />
-                    <SolidColorBrush x:Key="BrushSearcherBtnForeground" Color="Gray" />
-                    <SolidColorBrush x:Key="BrushSearchePanelBackground" Color="White" />
-                    <SolidColorBrush x:Key="BrushNormalFont" Color="Black" />
-                    <SolidColorBrush x:Key="BrushSecFont" Color="#444" />
-                    <SolidColorBrush x:Key="BrushSubFont" Color="#9DA3A6" />
-                    <SolidColorBrush x:Key="BrushSearchItem" Color="White" />
-                    <SolidColorBrush x:Key="BrushSearchBackground" Color="#BBFFFFFF" />
+                    <SolidColorBrush x:Key="BrushTextBoxBackground" Color="#1c1d1f" />
+
+                    <SolidColorBrush x:Key="BrushSearcherBtnForeground" Color="#545559" />
+                    <SolidColorBrush x:Key="BrushSearchePanelBackground" Color="#1c1d1f" />
+                    <SolidColorBrush x:Key="BrushNormalFont" Color="#85888c" />
+                    <SolidColorBrush x:Key="BrushSecFont" Color="#797b80" />
+                    <SolidColorBrush x:Key="BrushSubFont" Color="#4e4f52" />
+                    <SolidColorBrush x:Key="BrushSearchItem" Color="#1c1d1f" />
+                    <SolidColorBrush x:Key="BrushSearchBackground" Color="#BB000000" />
+
+                    <SolidColorBrush x:Key="BrushToolBarForeground" Color="#b8b8b8" />
+
+                    <SolidColorBrush x:Key="BrushMask" Color="#33000000" />
+
+                    <SolidColorBrush x:Key="BrushPrimary" Color="{ThemeResource ColorPrimary}" />
+                    <SolidColorBrush x:Key="BrushPrimaryDark" Color="{ThemeResource ColorPrimaryDark}" />
+                    <SolidColorBrush x:Key="BrushPrimaryLight" Color="{ThemeResource ColorPrimaryLight}" />
+                    <SolidColorBrush x:Key="BrushPrimaryLightS" Color="{ThemeResource ColorPrimaryLightS}" />
+                    <SolidColorBrush x:Key="BrushHotCircleTitle" Color="{ThemeResource ColorHotCircleTitle}" />
+                    <SolidColorBrush x:Key="BrushMenuSplitter" Color="{ThemeResource ColorMenuSplitter}" />
+                    <SolidColorBrush x:Key="BrushFollowCount" Color="{ThemeResource ColorFollowCount}" />
+                    <SolidColorBrush x:Key="BrushHotCircleSplitter" Color="{ThemeResource ColorHotCircleSplitter}" />
+                    <SolidColorBrush x:Key="BrushStoryCircleName" Color="{ThemeResource ColorStoryPoster}" />
+                    <SolidColorBrush x:Key="BrushStoryList" Color="{ThemeResource ColorStoryList}" />
+                    <SolidColorBrush x:Key="BrushStoryListItem" Color="{ThemeResource ColorStoryListItem}" />
+                    <SolidColorBrush x:Key="BrushStoryListItemBorder" Color="{ThemeResource ColorStoryListItemBorder}" />
+                    <SolidColorBrush x:Key="BrushStoryReferenceArea" Color="{ThemeResource ColorStoryReferenceArea}" />
+                    <SolidColorBrush x:Key="BrushStoryReferenceBorder" Color="{ThemeResource ColorStoryReferenceBorder}" />
+                    <SolidColorBrush x:Key="BrushStoryPoster" Color="{ThemeResource ColorStoryPoster}" />
+                    <SolidColorBrush x:Key="BrushStoryPosterTime" Color="{ThemeResource ColorStoryInfo}" />
+                    <SolidColorBrush x:Key="BrushStoryPosterName" Color="{ThemeResource ColorStoryInfo}" />
+                    <SolidColorBrush x:Key="BrushStoryTool" Color="{ThemeResource ColorStoryInfo}" />
+                    <SolidColorBrush x:Key="BrushStoryReason" Color="{ThemeResource ColorStoryReason}" />
+                    <SolidColorBrush x:Key="BrushStoryTitle" Color="{ThemeResource ColorStoryTitle}" />
+                    <SolidColorBrush x:Key="BrushStoryTitleArea" Color="{ThemeResource ColorStoryListItem}" />
+                    <SolidColorBrush x:Key="BrushStoryTitleBorder" Color="{ThemeResource ColorStoryTitleBorder}" />
+                    <SolidColorBrush x:Key="BrushStoryLike" Color="{ThemeResource ColorStoryLike}" />
+                    <SolidColorBrush x:Key="BrushListBackground" Color="{ThemeResource ColorListBackground}" />
+                    <SolidColorBrush x:Key="BrushCommentSplitter" Color="{ThemeResource ColorMenuSplitter}" />
+                    <SolidColorBrush x:Key="BrushButtonForeground" Color="{ThemeResource ColorButtonForeground}" />
+                    <SolidColorBrush x:Key="BrushCheckedForeground" Color="{ThemeResource ColorCheckedForeground}" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>

@@ -7,6 +7,8 @@
              xmlns:xp="using:XP"
              d:DesignHeight="300"
              d:DesignWidth="400"
+                 RequestedTheme="{Binding Source={StaticResource StorageInfo},
+                                          Path=AppTheme}"
              mc:Ignorable="d">
 
     <RelativePanel>

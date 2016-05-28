@@ -1,6 +1,7 @@
 ﻿using Brook.DuDuRiBao.Authorization;
 using Brook.DuDuRiBao.Common;
 using Brook.DuDuRiBao.Events;
+using Brook.DuDuRiBao.Models;
 using Brook.DuDuRiBao.Utils;
 using DuDuRiBao.Utils;
 using LLQ;
@@ -46,7 +47,7 @@ namespace Brook.DuDuRiBao.Elements
                 if (loginSuccess)
                 {
                     PopupMessage.DisplayMessageInRes("LoginSuccess");
-                    var info = StorageUtil.StorageInfo.ZhiHuAuthoInfo;
+                    var info = StorageInfo.Instance.ZhiHuAuthoInfo;
                     if (info == null)
                         return;
 

@@ -9,6 +9,8 @@
              d:DesignHeight="300"
              d:DesignWidth="400"
              Padding="0"
+             RequestedTheme="{Binding Source={StaticResource StorageInfo},
+                                      Path=AppTheme}"
              mc:Ignorable="d">
     <Grid>
         <xp:XPButton x:Name="ImageButton"

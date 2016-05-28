@@ -70,7 +70,7 @@ namespace Brook.DuDuRiBao.Authorization
                 return true;
 
             string msg = string.Empty;
-            var loginType = StorageUtil.StorageInfo.LoginType;
+            var loginType = StorageInfo.Instance.LoginType;
             if (!CheckLoginType(loginType, out msg))
                 return false;
 
@@ -78,7 +78,7 @@ namespace Brook.DuDuRiBao.Authorization
             if (!authorizer.IsAuthorized)
                 return false;
 
-            if (StorageUtil.StorageInfo.IsZhiHuAuthoVaild())
+            if (StorageInfo.Instance.IsZhiHuAuthoVaild())
             {
                 IsLogin = true;
                 SetHttpAuthorization();
@@ -100,7 +100,7 @@ namespace Brook.DuDuRiBao.Authorization
             if (loginToken == null)
                 return false;
 
-            StorageUtil.StorageInfo.ZhiHuAuthoInfo = new RiBaoAuthoInfo() { AnonymousLoginToken = loginToken.Access_Token };
+            StorageInfo.Instance.ZhiHuAuthoInfo = new RiBaoAuthoInfo() { AnonymousLoginToken = loginToken.Access_Token };
             SetHttpAuthorization();
 
             return true;
@@ -129,8 +129,8 @@ namespace Brook.DuDuRiBao.Authorization
 
         private static void UpdateLoginInfo(LoginType loginType, RiBaoAuthoInfo info)
         {
-            StorageUtil.StorageInfo.LoginType = loginType;
-            StorageUtil.StorageInfo.ZhiHuAuthoInfo = info;
+            StorageInfo.Instance.LoginType = loginType;
+            StorageInfo.Instance.ZhiHuAuthoInfo = info;
             StorageUtil.UpdateStorageInfo();
 
             IsLogin = true;
@@ -139,7 +139,7 @@ namespace Brook.DuDuRiBao.Authorization
 
         private static void SetHttpAuthorization()
         {
-            XPHttpClient.DefaultClient.HttpConfig.SetAuthorization("Bearer", StorageUtil.StorageInfo.ZhiHuAuthoInfo.access_token ?? StorageUtil.StorageInfo.ZhiHuAuthoInfo.AnonymousLoginToken);
+            XPHttpClient.DefaultClient.HttpConfig.SetAuthorization("Bearer", StorageInfo.Instance.ZhiHuAuthoInfo.access_token ?? StorageInfo.Instance.ZhiHuAuthoInfo.AnonymousLoginToken);
         }
 
         private static void ClearHttpAuthorization()
@@ -151,8 +151,8 @@ namespace Brook.DuDuRiBao.Authorization
         {
             IsLogin = false;
             string msg;
-            var loginType = StorageUtil.StorageInfo.LoginType;
-            StorageUtil.StorageInfo.ZhiHuAuthoInfo = null;
+            var loginType = StorageInfo.Instance.LoginType;
+            StorageInfo.Instance.ZhiHuAuthoInfo = null;
             StorageUtil.UpdateStorageInfo();
             ClearHttpAuthorization();
 

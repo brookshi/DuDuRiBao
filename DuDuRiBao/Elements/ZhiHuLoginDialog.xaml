@@ -7,6 +7,8 @@
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:xp="using:XP"
                    x:Uid="ZhiHuLoginDlg"
+                 RequestedTheme="{Binding Source={StaticResource StorageInfo},
+                                          Path=AppTheme}"
                    Title=""
                    mc:Ignorable="d">
     <RelativePanel>

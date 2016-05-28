@@ -92,7 +92,7 @@ namespace Brook.DuDuRiBao.Elements
                 if (loginSuccess)
                 {
                     PopupMessage.DisplayMessageInRes("LoginSuccess");
-                    var info = StorageUtil.StorageInfo.ZhiHuAuthoInfo;
+                    var info = StorageInfo.Instance.ZhiHuAuthoInfo;
                     if (info == null)
                         return;
 

@@ -9,6 +9,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:xp="using:XP"
              xmlns:zh="using:ZhiHu.Controls"
+                 RequestedTheme="{Binding Source={StaticResource StorageInfo},
+                                          Path=AppTheme}"
              d:DesignHeight="300"
              d:DesignWidth="400"
              mc:Ignorable="d">
