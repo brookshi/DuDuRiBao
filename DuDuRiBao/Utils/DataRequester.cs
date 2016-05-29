@@ -70,12 +70,10 @@ namespace Brook.DuDuRiBao.Utils
                 .SetAuthorization("oauth", LoginKeyProvider.ClientId);
 
             var captcha = await XPHttpClient.DefaultClient.GetAsync<Captcha>(Urls.ZhiHuCaptcha, httpParam);
-            if(captcha.Show_Captcha)
-            {
-                return await XPHttpClient.DefaultClient.PutAsync<Captcha>(Urls.ZhiHuCaptcha, httpParam);
-            }
+            if (captcha == null || !captcha.Show_Captcha)
+                return captcha;
 
-            return null;
+            return await XPHttpClient.DefaultClient.PutAsync<Captcha>(Urls.ZhiHuCaptcha, httpParam);
         }
 
         public static Task<CaptchaChecked> CheckCaptcha(string captcha)

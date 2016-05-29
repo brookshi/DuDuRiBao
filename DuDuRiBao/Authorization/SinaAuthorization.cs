@@ -60,9 +60,13 @@ namespace Brook.DuDuRiBao.Authorization
                     if (isSuccess)
                     {
                         UpdateTokenInfo(response);
+                        var zhiHuAuthoData = await LoginZhiHu();
+                        loginCallback?.Invoke(zhiHuAuthoData);
                     }
-                    var zhiHuAuthoData = await LoginZhiHu();
-                    loginCallback?.Invoke(zhiHuAuthoData);
+                    else
+                    {
+                        loginCallback?.Invoke(null);
+                    }
                 };
                 _oauth.BeginOAuth();
             }

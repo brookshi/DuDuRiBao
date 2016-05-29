@@ -9,15 +9,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:xp="using:XP"
              xmlns:zh="using:ZhiHu.Controls"
-                 RequestedTheme="{Binding Source={StaticResource StorageInfo},
-                                          Path=AppTheme}"
              d:DesignHeight="300"
              d:DesignWidth="400"
+             RequestedTheme="{Binding Source={StaticResource StorageInfo},
+                                      Path=AppTheme}"
              mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
             <converter:PivotHeaderWidthConverter x:Key="PivotHeaderWidthConverter" />
             <converter:SearchPlaceholderTextConverter x:Key="SearchPlaceholderTextConverter" />
+            <converter:DarkThemeForImageOpacityConverter x:Key="DarkThemeForImageOpacityConverter" />
 
             <DataTemplate x:Key="SearchStoryItem">
                 <Border Background="{ThemeResource BrushSearchItem}"
@@ -27,14 +28,14 @@
                         <TextBlock x:Name="StoryName"
                                    Margin="12, 8, 12, 0"
                                    common:TextBlockExtend.ColorfulText="{Binding Title}"
-                                   common:TextBlockExtend.HighLightColor="{ThemeResource BrushPrimary}"
+                                   common:TextBlockExtend.HighLightColor="{ThemeResource BrushHighLight}"
                                    FontSize="16"
                                    Foreground="{ThemeResource BrushNormalFont}"
                                    TextWrapping="WrapWholeWords" />
                         <TextBlock x:Name="StorySummary"
                                    Margin="12, 8"
                                    common:TextBlockExtend.ColorfulText="{Binding Summary}"
-                                   common:TextBlockExtend.HighLightColor="{ThemeResource BrushPrimary}"
+                                   common:TextBlockExtend.HighLightColor="{ThemeResource BrushHighLight}"
                                    FontSize="13"
                                    Foreground="{ThemeResource BrushSubFont}"
                                    RelativePanel.Below="StoryName"
@@ -54,6 +55,9 @@
                                              BackgroundBrush="{Binding BackgroundBrush}"
                                              ImageUrl="{Binding Thumbnail}"
                                              IsEnabled="False"
+                                             Opacity="{Binding Source={StaticResource StorageInfo},
+                                                               Path=AppTheme,
+                                                               Converter={StaticResource DarkThemeForImageOpacityConverter}}"
                                              Radius="4"
                                              RelativePanel.AlignLeftWithPanel="True"
                                              Word="{Binding Thumbnail}"
@@ -61,7 +65,7 @@
                         <TextBlock x:Name="CircleName"
                                    Margin="8, 12, 0, 0"
                                    common:TextBlockExtend.ColorfulText="{Binding Name}"
-                                   common:TextBlockExtend.HighLightColor="{ThemeResource BrushPrimary}"
+                                   common:TextBlockExtend.HighLightColor="{ThemeResource BrushHighLight}"
                                    FontSize="16"
                                    Foreground="{ThemeResource BrushNormalFont}"
                                    RelativePanel.AlignTopWith="CirclePhoto"
@@ -70,7 +74,7 @@
                         <TextBlock x:Name="Articles"
                                    Margin="8, 4, 12, 0"
                                    common:TextBlockExtend.ColorfulText="{Binding StoryCount}"
-                                   common:TextBlockExtend.HighLightColor="{ThemeResource BrushPrimary}"
+                                   common:TextBlockExtend.HighLightColor="{ThemeResource BrushHighLight}"
                                    FontSize="12"
                                    Foreground="{ThemeResource BrushSubFont}"
                                    RelativePanel.Below="CircleName"
@@ -85,7 +89,7 @@
                         <TextBlock x:Name="Description"
                                    Margin="8, 4, 0, 0"
                                    common:TextBlockExtend.ColorfulText="{Binding Description}"
-                                   common:TextBlockExtend.HighLightColor="{ThemeResource BrushPrimary}"
+                                   common:TextBlockExtend.HighLightColor="{ThemeResource BrushHighLight}"
                                    FontSize="14"
                                    Foreground="{ThemeResource BrushSecFont}"
                                    RelativePanel.Below="Articles"
@@ -98,16 +102,16 @@
                                      Width="72"
                                      Height="36"
                                      Margin="0, 0, 8, 0"
-                                     Background="{ThemeResource BrushPrimary}"
+                                     Background="{ThemeResource BrushNormal}"
                                      BorderThickness="0"
                                      Command="{Binding DataContext.JoinQuitCircleCommand,
                                                        ElementName=SearchCircleListView}"
                                      CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                                      CornerRadius="4"
-                                     Foreground="White"
+                                     Foreground="{ThemeResource BrushToolBarForeground}"
                                      IconPosition="NoIcon"
-                                     PointerOverBackground="{StaticResource BrushPrimaryLightS}"
-                                     PressedBackground="{StaticResource BrushPrimaryDark}"
+                                     PointerOverBackground="{StaticResource BrushOver}"
+                                     PressedBackground="{StaticResource BrushHighLight}"
                                      RelativePanel.AlignRightWithPanel="True"
                                      RelativePanel.AlignVerticalCenterWithPanel="True"
                                      Tag="0" />
@@ -141,24 +145,24 @@
                              PointerOverBackground="{StaticResource BrushPointerOver}"
                              PressedBackground="{StaticResource BrushPressed}"
                              RelativePanel.AlignLeftWithPanel="True" />
-                <TextBox x:Name="SearchTxt"
-                         Height="48"
-                         BorderThickness="0"
-                         FontSize="17"
-                         Padding="10, 13, 6, 5"
-                         PlaceholderText="{Binding ElementName=SearchPivot,
-                                                   Path=SelectedIndex,
-                                                   Converter={StaticResource SearchPlaceholderTextConverter}}"
-                         RelativePanel.AlignRightWithPanel="True"
-                         RelativePanel.RightOf="BackButton"
-                         TextChanged="SearchTxt_TextChanged"
-                         TextWrapping="NoWrap" />
+                <element:CusTextBox x:Name="SearchTxt"
+                                    Height="48"
+                                    BorderThickness="0"
+                                    FontSize="17"
+                                    Padding="10, 13, 6, 5"
+                                    PlaceholderText="{Binding ElementName=SearchPivot,
+                                                              Path=SelectedIndex,
+                                                              Converter={StaticResource SearchPlaceholderTextConverter}}"
+                                    RelativePanel.AlignRightWithPanel="True"
+                                    RelativePanel.RightOf="BackButton"
+                                    TextChanged="SearchTxt_TextChanged"
+                                    TextWrapping="NoWrap" />
             </RelativePanel>
             <zh:ZhiHuPivot x:Name="SearchPivot"
                            BackgroundLineStoke="{ThemeResource BrushSearchePanelBackground}"
                            BackgroundLineStokeThickness="2"
                            IndicatorLineStokeThickness="2"
-                           IndicatorLineStroke="{ThemeResource BrushPrimary}"
+                           IndicatorLineStroke="{ThemeResource BrushPrimaryLightS}"
                            Loaded="SearchPivot_Loaded"
                            RelativePanel.AlignBottomWithPanel="True"
                            RelativePanel.AlignLeftWithPanel="True"

@@ -2,15 +2,22 @@
                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:common="using:Brook.DuDuRiBao.Common"
+                   xmlns:converter="using:Brook.DuDuRiBao.Converters"
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:element="using:Brook.DuDuRiBao.Elements"
                    xmlns:local="using:DuDuRiBao.Elements"
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:xp="using:XP"
                    x:Uid="ZhiHuLoginDlg"
-                 RequestedTheme="{Binding Source={StaticResource StorageInfo},
-                                          Path=AppTheme}"
                    Title=""
+                   RequestedTheme="{Binding Source={StaticResource StorageInfo},
+                                            Path=AppTheme}"
                    mc:Ignorable="d">
+    <common:DialogBase.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        </ResourceDictionary>
+    </common:DialogBase.Resources>
     <RelativePanel>
         <Border x:Name="LoginBorder"
                 Margin="0, 24, 0, 0"
@@ -32,6 +39,7 @@
                          RelativePanel.AlignHorizontalCenterWithPanel="True"
                          RelativePanel.AlignLeftWithPanel="True"
                          RelativePanel.AlignRightWithPanel="True"
+                         RequestedTheme="Light"
                          TextChanged="ParamChanged"
                          TextWrapping="NoWrap" />
                 <PasswordBox x:Uid="PasswordPlaceholder"
@@ -45,7 +53,8 @@
                              RelativePanel.AlignHorizontalCenterWithPanel="True"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.Below="UserNameTxt" />
+                             RelativePanel.Below="UserNameTxt"
+                             RequestedTheme="Light" />
                 <TextBox x:Uid="CaptchaPlaceholder"
                          x:Name="CaptchaTxt"
                          Height="48"
@@ -60,8 +69,10 @@
                          RelativePanel.AlignRightWithPanel="True"
                          RelativePanel.Below="PasswordTxt"
                          RelativePanel.RightOf="CaptchaImage"
+                         RequestedTheme="Light"
                          TextChanged="ParamChanged"
-                         TextWrapping="NoWrap" />
+                         TextWrapping="NoWrap"
+                         Visibility="{x:Bind NeedCaptcha, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
                 <Image x:Name="CaptchaImage"
                        Width="120"
                        Height="48"
@@ -70,7 +81,8 @@
                        RelativePanel.Below="PasswordTxt"
                        Source=""
                        Stretch="Fill"
-                       Tapped="RefreshCaptchaImage" />
+                       Tapped="RefreshCaptchaImage"
+                       Visibility="{x:Bind NeedCaptcha, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
             </RelativePanel>
         </Border>
         <xp:XPButton x:Uid="RiBaoLogin"
@@ -79,18 +91,18 @@
                                      Path=ActualWidth}"
                      Height="40"
                      Margin="0, 16, 0, 0"
-                     Background="{ThemeResource BrushPrimary}"
+                     Background="{ThemeResource BrushNormal}"
                      BorderThickness="0"
                      Click="OnLogin"
                      Content=""
                      CornerRadius="3"
-                     DisabledBackground="{ThemeResource BrushPrimaryLight}"
+                     DisabledBackground="{ThemeResource BrushOver}"
                      Foreground="White"
                      IconPosition="NoIcon"
                      IsEnabled="{x:Bind IsLoginBtnEnabled, Mode=OneWay}"
-                     PointerOverBackground="{StaticResource BrushPrimaryLightS}"
-                     PressedBackground="{StaticResource BrushPrimaryDark}"
-                     RelativePanel.AlignHorizontalCenterWithPanel="True"
+                     PointerOverBackground="{StaticResource BrushOver}"
+                     PressedBackground="{StaticResource BrushHighLight}"
+                     RelativePanel.AlignBottomWithPanel="True"
                      RelativePanel.Below="LoginBorder" />
     </RelativePanel>
 </common:DialogBase>

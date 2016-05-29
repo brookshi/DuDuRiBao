@@ -45,6 +45,7 @@ namespace Brook.DuDuRiBao.Authorization
         public virtual void Logout()
         {
             StorageUtil.Remove(LoginDataKey);
+            TokenInfo = null;
         }
 
         protected void StoreTokenInfo()

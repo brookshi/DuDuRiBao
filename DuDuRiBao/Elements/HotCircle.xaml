@@ -1,8 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converter="using:Brook.DuDuRiBao.Converters"
                     xmlns:element="using:Brook.DuDuRiBao.Elements"
                     xmlns:utils="using:Brook.DuDuRiBao.Utils"
                     xmlns:xp="using:XP">
+    <converter:DarkThemeForImageOpacityConverter x:Key="DarkThemeForImageOpacityConverter" />
+
     <DataTemplate x:Key="HotCircleItem">
         <Border Margin="8, 0"
                 BorderBrush="{ThemeResource BrushHotCircleSplitter}"
@@ -15,13 +18,16 @@
                                      BackgroundBrush="{Binding BackgroundBrush}"
                                      ImageUrl="{Binding Thumbnail}"
                                      IsEnabled="False"
+                                     Opacity="{Binding Source={StaticResource StorageInfo},
+                                                       Path=AppTheme,
+                                                       Converter={StaticResource DarkThemeForImageOpacityConverter}}"
                                      Radius="4"
                                      RelativePanel.AlignLeftWithPanel="True"
                                      Word="{Binding Thumbnail}" />
                 <TextBlock x:Name="CircleName"
                            Margin="8, 8, 0, 0"
                            FontSize="13"
-                           Foreground="White"
+                           Foreground="{ThemeResource BrushToolBarForeground}"
                            MaxLines="1"
                            RelativePanel.AlignTopWith="CirclePhoto"
                            RelativePanel.RightOf="CirclePhoto"
@@ -29,7 +35,7 @@
                 <TextBlock x:Name="Articles"
                            Margin="8, 4, 12, 0"
                            FontSize="11"
-                           Foreground="{ThemeResource ColorHotCircleTitle}"
+                           Foreground="{ThemeResource BrushHotCircleTitle}"
                            MaxLines="1"
                            RelativePanel.Below="CircleName"
                            RelativePanel.RightOf="CirclePhoto"
@@ -37,7 +43,7 @@
                 <TextBlock x:Name="Fans"
                            Margin="0, 4, 0, 0"
                            FontSize="11"
-                           Foreground="{ThemeResource ColorHotCircleTitle}"
+                           Foreground="{ThemeResource BrushHotCircleTitle}"
                            MaxLines="1"
                            RelativePanel.Below="CircleName"
                            RelativePanel.RightOf="Articles"
@@ -50,7 +56,7 @@
                              Command="{Binding DataContext.JoinQuitCircleCommand,
                                                ElementName=HotCircleListView}"
                              CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
-                             Foreground="White"
+                             Foreground="{ThemeResource BrushToolBarForeground}"
                              Icon="Add"
                              IconInterval="12"
                              IconPosition="OnlyIcon"

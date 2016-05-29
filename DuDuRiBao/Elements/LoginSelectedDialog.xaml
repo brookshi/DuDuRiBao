@@ -6,8 +6,8 @@
                    xmlns:local="using:DuDuRiBao.Elements"
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:xp="using:XP"
-                 RequestedTheme="{Binding Source={StaticResource StorageInfo},
-                                          Path=AppTheme}"
+                   RequestedTheme="{Binding Source={StaticResource StorageInfo},
+                                            Path=AppTheme}"
                    mc:Ignorable="d">
 
     <RelativePanel>
@@ -16,14 +16,14 @@
                      Width="240"
                      Height="48"
                      Margin="0, 24, 0, 0"
-                     Background="{ThemeResource BrushPrimary}"
+                     Background="{ThemeResource BrushNormal}"
                      BorderThickness="0"
                      Click="OnZhiHuLogin"
                      Content=""
                      Foreground="White"
                      IconPosition="NoIcon"
-                     PointerOverBackground="{StaticResource BrushPrimaryLightS}"
-                     PressedBackground="{StaticResource BrushPrimaryDark}"
+                     PointerOverBackground="{StaticResource BrushOver}"
+                     PressedBackground="{StaticResource BrushHighLight}"
                      RelativePanel.AlignHorizontalCenterWithPanel="True" />
         <xp:XPButton x:Uid="WeiBoLoginBtn"
                      x:Name="WeiBoLoginBtn"

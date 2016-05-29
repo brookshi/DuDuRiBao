@@ -52,7 +52,7 @@ namespace Brook.DuDuRiBao.Utils
             Clear();
             RemoveParent();
 
-            _webViewInstance.DefaultBackgroundColor = ((SolidColorBrush)((ResourceDictionary)Application.Current.Resources.ThemeDictionaries[StorageInfo.Instance.AppTheme.ToString()])["BrushPrimary"]).Color;
+            _webViewInstance.DefaultBackgroundColor = ((SolidColorBrush)((ResourceDictionary)Application.Current.Resources.ThemeDictionaries[StorageInfo.Instance.AppTheme.ToString()])["BrushControlBackground"]).Color;
             _webViewInstance.SetBinding(WebViewExtend.ContentProperty, new Binding() { Source = source, Path = new PropertyPath(path) });
             lock(_parentLocker)
             {

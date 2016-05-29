@@ -134,6 +134,7 @@
     <Compile Include="Common\ToolBarTrigger.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
     <Compile Include="Common\WebViewExtend.cs" />
+    <Compile Include="Converters\DarkThemeConverter.cs" />
     <Compile Include="Converters\BooleanReverseConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\FlipViewVisibilityConverter.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Elements\CommentToolBar.xaml.cs">
       <DependentUpon>CommentToolBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Elements\CusTextBox.cs" />
     <Compile Include="Elements\CustomMenuFlyoutItem.cs" />
     <Compile Include="Elements\FlipViewIndicator.cs" />
     <Compile Include="Elements\LoginSelectedDialog.xaml.cs">

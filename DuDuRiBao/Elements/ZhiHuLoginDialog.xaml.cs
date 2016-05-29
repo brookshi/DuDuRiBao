@@ -40,14 +40,38 @@ namespace Brook.DuDuRiBao.Elements
         private async void GetCaptchaImage()
         {
             var captcha = await DataRequester.GetCaptchaImage();
-            if(captcha != null)
+            if (captcha == null)
             {
+                PopupMessage.DisplayMessage(StringUtil.GetString("GetCaptchaFailed"));
+                CaptchaImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/CaptchaFailed.png"));
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(captcha.Img_Base64))
+            {
+                NeedCaptcha = true;
                 LLMListView.Utils.SetBase64ToImage((BitmapSource)CaptchaImage.Source, captcha.Img_Base64);
             }
             else
             {
-                CaptchaImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/CaptchaFailed.png"));
-                PopupMessage.DisplayMessage(StringUtil.GetString("GetCaptchaFailed"));
+                NeedCaptcha = false;
+            }
+        }
+
+        private bool _needCaptcha = false;
+        public bool NeedCaptcha
+        {
+            get
+            {
+                return _needCaptcha;
+            }
+            set
+            {
+                if(value != _needCaptcha)
+                {
+                    _needCaptcha = value;
+                    Notify("NeedCaptcha");
+                }
             }
         }
 
@@ -68,7 +92,7 @@ namespace Brook.DuDuRiBao.Elements
         private void ParamChanged(object sender, RoutedEventArgs e)
         {
             IsLoginBtnEnabled = !string.IsNullOrEmpty(PasswordTxt.Password.Trim()) &&
-                                !string.IsNullOrEmpty(CaptchaTxt.Text.Trim()) &&
+                                (!NeedCaptcha || !string.IsNullOrEmpty(CaptchaTxt.Text.Trim())) &&
                                 (StringUtil.CheckEmail(UserNameTxt.Text.Trim()) ||
                                 StringUtil.CheckPhoneNum(UserNameTxt.Text.Trim()));
 
@@ -87,7 +111,7 @@ namespace Brook.DuDuRiBao.Elements
             var captcha = CaptchaTxt.Text.Trim();
 
             LoadingIcon.Display();
-            AuthorizationHelper.Login(LoginType.ZhiHu, new ZhiHuLoginInfo() { Captcha = captcha, UserName = userName, Password = password }, loginSuccess =>
+            AuthorizationHelper.Login(LoginType.ZhiHu, new ZhiHuLoginInfo() { Captcha = NeedCaptcha ? captcha : null, UserName = userName, Password = password }, loginSuccess =>
             {
                 if (loginSuccess)
                 {

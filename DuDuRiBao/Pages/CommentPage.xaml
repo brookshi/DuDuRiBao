@@ -9,9 +9,9 @@
       xmlns:local="using:Brook.DuDuRiBao.Pages"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:vm="using:Brook.DuDuRiBao.ViewModels"
-                 RequestedTheme="{Binding Source={StaticResource StorageInfo},
-                                          Path=AppTheme}"
       xmlns:xp="using:XP"
+      RequestedTheme="{Binding Source={StaticResource StorageInfo},
+                               Path=AppTheme}"
       mc:Ignorable="d">
     <Page.DataContext>
         <vm:CommentViewModel />
@@ -44,8 +44,8 @@
                          IsItemClickEnabled="False"
                          ItemTemplate="{StaticResource Comment}"
                          ItemsSource="{x:Bind CommentGroup.View}"
-                         LoadMoreProgressBarBrush="{ThemeResource BrushPrimaryDark}"
-                         RefreshProgressRingBrush="{ThemeResource BrushPrimaryDark}"
+                         LoadMoreProgressBarBrush="{ThemeResource BrushHighLight}"
+                         RefreshProgressRingBrush="{ThemeResource BrushHighLight}"
                          SelectionMode="Single"
                          ShowsScrollingPlaceholders="True">
             <llm:LLMListView.GroupStyle>
@@ -79,18 +79,19 @@
                              PointerOverTextForeground="{StaticResource BrushCommentReplyToPointerOverForeground}"
                              Visibility="{x:Bind VM.IsReplingTo, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
                 <RelativePanel Grid.Row="1">
-                    <TextBox x:Uid="CommentPlaceholder"
-                             x:Name="CommentText"
-                             Margin="4"
-                             AcceptsReturn="True"
-                             BorderThickness="1"
-                             RelativePanel.AlignBottomWithPanel="True"
-                             RelativePanel.AlignLeftWithPanel="True"
-                             RelativePanel.AlignTopWithPanel="True"
-                             RelativePanel.AlignVerticalCenterWithPanel="True"
-                             RelativePanel.LeftOf="SendBtn"
-                             Text="{x:Bind VM.PostCommentContent, Mode=TwoWay}"
-                             TextWrapping="Wrap" />
+                    <element:CusTextBox x:Uid="CommentPlaceholder"
+                                        x:Name="CommentText"
+                                        Margin="4"
+                                        AcceptsReturn="True"
+                                        BorderThickness="1"
+                                        Foreground="{ThemeResource BrushCommentInfoForeground}"
+                                        RelativePanel.AlignBottomWithPanel="True"
+                                        RelativePanel.AlignLeftWithPanel="True"
+                                        RelativePanel.AlignTopWithPanel="True"
+                                        RelativePanel.AlignVerticalCenterWithPanel="True"
+                                        RelativePanel.LeftOf="SendBtn"
+                                        Text="{x:Bind VM.PostCommentContent, Mode=TwoWay}"
+                                        TextWrapping="Wrap" />
                     <xp:XPButton x:Name="SendBtn"
                                  VerticalAlignment="Stretch"
                                  Background="Transparent"

@@ -100,7 +100,7 @@ namespace Brook.DuDuRiBao.ViewModels
             {
                 await DataRequester.QuitCircle(circle.Id);
                 btn.Icon = new SymbolIcon(Symbol.Add);
-                btn.PointerOverIconForeground = btn.PressedIconForeground = btn.IconForeground = ResUtil.GetAppThemeBrush("BrushButtonForeground");
+                btn.PointerOverIconForeground = btn.PressedIconForeground = btn.IconForeground = ResUtil.GetAppThemeBrush("BrushToolBarForeground");
                 btn.Tag = "0";
                 PopupMessage.DisplayMessageInRes("QuitCircleSuccess");
             }

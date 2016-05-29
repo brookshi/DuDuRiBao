@@ -327,4 +327,10 @@
   <data name="GetCircle" xml:space="preserve">
     <value>已订阅</value>
   </data>
+  <data name="NightMode.Text" xml:space="preserve">
+    <value>夜间模式</value>
+  </data>
+  <data name="NeedCircle" xml:space="preserve">
+    <value>订阅</value>
+  </data>
 </root>

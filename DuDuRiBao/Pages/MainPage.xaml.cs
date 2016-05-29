@@ -236,11 +236,15 @@ namespace Brook.DuDuRiBao.Pages
             UpdateCircle(Misc.Favorite_Category_Id, StringUtil.GetString("FavCategoryName"), null, true);
         }
 
+        private void NightModeBtn_Toggled(object sender, RoutedEventArgs e)
+        {
+            StorageUtil.UpdateStorageInfo();
+        }
+
         private void Feedback_Click(object sender, RoutedEventArgs e)
         {
-            StorageUtil.SetAppTheme(ElementTheme.Dark);
-            //DisplayStory(Misc.Feedback_Story_Id.ToString());
-            //ResetCategoryPanel();
+            DisplayStory(Misc.Feedback_Story_Id.ToString());
+            ResetCategoryPanel();
         }
 
         private void HotCircleListView_ItemClick(object sender, ItemClickEventArgs e)

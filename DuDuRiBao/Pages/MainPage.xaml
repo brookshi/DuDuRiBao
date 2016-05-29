@@ -31,6 +31,7 @@
 
             <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <convert:BooleanReverseConverter x:Key="BooleanReverseConverter" />
+            <convert:DarkThemeToggleConverter x:Key="DarkThemeToggleConverter" />
 
             <common:StoryDataTemplateSelector x:Key="StoryDataTemplateSelector"
                                               FavoriteTemplate="{StaticResource Favorite}"
@@ -109,6 +110,7 @@
                                  Click="Home_Click"
                                  Content=""
                                  Foreground="{ThemeResource BrushToolBarForeground}"
+                                 IconForeground="{ThemeResource BrushToolBarForeground}"
                                  IconInterval="12"
                                  IconPosition="Left"
                                  Padding="14, 0, 0, 0"
@@ -130,6 +132,7 @@
                                  Click="MyFav_Click"
                                  Content=""
                                  Foreground="{ThemeResource BrushToolBarForeground}"
+                                 IconForeground="{ThemeResource BrushToolBarForeground}"
                                  IconInterval="12"
                                  IconPosition="Left"
                                  Padding="14, 0, 0, 0"
@@ -151,6 +154,7 @@
                                  Click="HotArticle_Click"
                                  Content=""
                                  Foreground="{ThemeResource BrushToolBarForeground}"
+                                 IconForeground="{ThemeResource BrushToolBarForeground}"
                                  IconInterval="12"
                                  IconPosition="Left"
                                  Padding="14, 0, 0, 0"
@@ -172,6 +176,7 @@
                                  Click="Feedback_Click"
                                  Content=""
                                  Foreground="{ThemeResource BrushToolBarForeground}"
+                                 IconForeground="{ThemeResource BrushToolBarForeground}"
                                  IconInterval="12"
                                  IconPosition="Left"
                                  Padding="14, 0, 0, 0"
@@ -184,12 +189,39 @@
                             <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf188;" />
                         </xp:XPButton.Icon>
                     </xp:XPButton>
+                    <FontIcon x:Name="NightIcon"
+                              Height="48"
+                              Margin="18, 0, 12, 0"
+                              FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                              FontSize="16"
+                              Foreground="{ThemeResource BrushToolBarForeground}"
+                              Glyph="&#xf186;"
+                              RelativePanel.AlignLeftWithPanel="True"
+                              RelativePanel.Below="FeedbackBtn" />
+                    <TextBlock x:Uid="NightMode"
+                               x:Name="NightModeTxt"
+                               Foreground="{ThemeResource BrushToolBarForeground}"
+                               RelativePanel.AlignVerticalCenterWith="NightIcon"
+                               RelativePanel.RightOf="NightIcon"
+                               Text="" />
+                    <ToggleSwitch x:Name="NightModeBtn"
+                                  Margin="28, 0, 0, 0"
+                                  IsOn="{Binding Source={StaticResource StorageInfo},
+                                                 Path=AppTheme,
+                                                 Converter={StaticResource DarkThemeToggleConverter},
+                                                 Mode=TwoWay}"
+                                  OffContent=""
+                                  OnContent=""
+                                  RelativePanel.AlignVerticalCenterWith="NightIcon"
+                                  RelativePanel.RightOf="NightModeTxt"
+                                  RequestedTheme="Dark"
+                                  Toggled="NightModeBtn_Toggled" />
                     <RelativePanel x:Name="HotCircle"
                                    VerticalAlignment="Center"
                                    Background="{ThemeResource BrushPrimaryDark}"
                                    RelativePanel.AlignLeftWithPanel="True"
                                    RelativePanel.AlignRightWithPanel="True"
-                                   RelativePanel.Below="FeedbackBtn">
+                                   RelativePanel.Below="NightIcon">
                         <TextBlock Margin="14, 0, 0, 0"
                                    FontSize="12"
                                    Foreground="{ThemeResource BrushHotCircleTitle}"
@@ -249,12 +281,12 @@
                                      ItemClick="MainListView_ItemClick"
                                      ItemTemplateSelector="{StaticResource StoryDataTemplateSelector}"
                                      ItemsSource="{x:Bind VM.StoryDataList}"
-                                     LoadMoreProgressBarBrush="{ThemeResource BrushPrimaryDark}"
+                                     LoadMoreProgressBarBrush="{ThemeResource BrushHighLight}"
                                      RefreshAreaHeight="30"
-                                     RefreshButtonBackground="{ThemeResource BrushPrimary}"
+                                     RefreshButtonBackground="{ThemeResource BrushHighLight}"
                                      RefreshButtonVisibility="{x:Bind IsDesktopDevice, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                     RefreshProgressBarBrush="{ThemeResource BrushPrimaryDark}"
-                                     RefreshProgressRingBrush="{ThemeResource BrushPrimaryDark}"
+                                     RefreshProgressBarBrush="{ThemeResource BrushHighLight}"
+                                     RefreshProgressRingBrush="{ThemeResource BrushHighLight}"
                                      ScrollViewer.IsVerticalRailEnabled="True"
                                      SelectionMode="Single">
                         <llm:LLMListView.ItemContainerStyle>

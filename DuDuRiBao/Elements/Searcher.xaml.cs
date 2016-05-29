@@ -21,6 +21,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 using XP;
 
 namespace Brook.DuDuRiBao.Elements
@@ -80,7 +81,7 @@ namespace Brook.DuDuRiBao.Elements
             else
             {
                 await DataRequester.QuitCircle(circle.Id);
-                btn.Content = StringUtil.GetString("AddCircle.Content");
+                btn.Content = StringUtil.GetString("NeedCircle");
                 btn.PointerOverBackground = ResUtil.GetAppThemeBrush("BrushPrimaryLightS");
                 btn.PressedBackground = ResUtil.GetAppThemeBrush("BrushPrimaryDark");
                 btn.Background = ResUtil.GetAppThemeBrush("BrushPrimary");
@@ -182,11 +183,16 @@ namespace Brook.DuDuRiBao.Elements
 
         private void SearchPivot_Loaded(object sender, RoutedEventArgs e)
         {
+            var lastVisibility = Visibility;
+            Visibility = Visibility.Visible;
+            UpdateLayout();
+            var width = Math.Max(SearchPivot.ActualWidth / 2 - 24, 0);
             var headerTxts = VisualHelper.FindVisualChilds<TextBlock>(SearchPivot, "HeaderTxt");
             if (headerTxts != null)
             {
-                headerTxts.ForEach(headerTxt => headerTxt.Width = Math.Max(SearchPivot.ActualWidth / 2 - 24, 0));
+                headerTxts.ForEach(headerTxt => headerTxt.Width = width);
             }
+            Visibility = lastVisibility;
         }
 
         public void FocusText()

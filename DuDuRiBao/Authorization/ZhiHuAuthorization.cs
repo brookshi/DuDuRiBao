@@ -53,7 +53,7 @@ namespace Brook.DuDuRiBao.Authorization
                 return;
             }
 
-            if (!await CheckCaptcha(info.Captcha))
+            if (info.Captcha != null && !await CheckCaptcha(info.Captcha))
             {
                 loginCallback?.Invoke(null);
                 return;

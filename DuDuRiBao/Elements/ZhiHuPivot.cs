@@ -105,12 +105,18 @@ namespace ZhiHu.Controls
 
         private void ZhiHuPivot_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Items.Count > 1)
+            if (Items.Count > 1 && ActualWidth > 0)
             {
+                var lastVisibility = Visibility;
+                Visibility = Visibility.Visible;
+                UpdateLayout();
+
                 var res = this.ActualWidth / Items.Count;
                // if (IsMobile)
                     HeaderWidth = res;
                 _tipLine.X2 = HeaderWidth;
+
+                Visibility = lastVisibility;
             }
         }
 

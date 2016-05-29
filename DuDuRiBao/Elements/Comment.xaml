@@ -10,15 +10,20 @@
     <converter:TimeConverter x:Key="TimeConverter" />
     <converter:ReplyAuthorFormatConverter x:Key="ReplyAuthorFormatConverter" />
     <converter:NullableBooleanToBooleanConverter x:Key="NullableBooleanToBooleanConverter" />
+    <converter:DarkThemeForImageOpacityConverter x:Key="DarkThemeForImageOpacityConverter" />
 
     <DataTemplate x:Key="Comment" x:DataType="model:Comment">
-        <RelativePanel BorderBrush="{ThemeResource BrushCommentSplitter}"
+        <RelativePanel Background="{ThemeResource BrushStoryListItem}"
+                       BorderBrush="{ThemeResource BrushCommentSplitter}"
                        BorderThickness="0, 0, 0, 1"
                        Padding="0, 4, 0, 4">
             <Ellipse x:Name="CommentAvatar"
                      Width="36"
                      Height="36"
-                     Margin="4, 4, 2, 0">
+                     Margin="4, 4, 2, 0"
+                     Opacity="{Binding Source={StaticResource StorageInfo},
+                                       Path=AppTheme,
+                                       Converter={StaticResource DarkThemeForImageOpacityConverter}}">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="{x:Bind User.Avatar}" Stretch="Fill" />
                 </Ellipse.Fill>
@@ -42,6 +47,7 @@
                 <Run Foreground="{ThemeResource BrushCommentInfoForeground}" Text="{x:Bind Content}" />
                 <Run FontSize="12"
                      FontWeight="SemiBold"
+                     Foreground="{ThemeResource BrushCommentReplyToContent}"
                      Text="{x:Bind Reply_To.Author, Converter={StaticResource ReplyAuthorFormatConverter}}" />
                 <Run FontSize="12"
                      Foreground="{ThemeResource BrushCommentReplyToContent}"

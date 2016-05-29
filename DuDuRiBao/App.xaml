@@ -17,6 +17,7 @@
                     <x:Double x:Key="HeightFlipView">250</x:Double>
 
                     <Thickness x:Key="LoginButtonMargin">300, 0, 0, 0</Thickness>
+
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
 
@@ -44,6 +45,10 @@
                     <Color x:Key="ColorListBackground">#f9f9f9</Color>
                     <Color x:Key="ColorButtonForeground">#FFFFFF</Color>
                     <Color x:Key="ColorCheckedForeground">#00D74B</Color>
+
+                    <SolidColorBrush x:Key="BrushNormal" Color="#2196F3" />
+                    <SolidColorBrush x:Key="BrushHighLight" Color="#1976D2" />
+                    <SolidColorBrush x:Key="BrushOver" Color="#41a4f2" />
 
                     <SolidColorBrush x:Key="BrushMainSplitter" Color="White" />
                     <SolidColorBrush x:Key="BrushPointerOver" Color="#22000000" />
@@ -98,6 +103,8 @@
                     <SolidColorBrush x:Key="BrushCommentSplitter" Color="{ThemeResource ColorMenuSplitter}" />
                     <SolidColorBrush x:Key="BrushButtonForeground" Color="{ThemeResource ColorButtonForeground}" />
                     <SolidColorBrush x:Key="BrushCheckedForeground" Color="{ThemeResource ColorCheckedForeground}" />
+
+                    <SolidColorBrush x:Key="BrushControlBackground" Color="White" />
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Key="Dark">
@@ -106,8 +113,8 @@
                     <Color x:Key="ColorPrimaryLight">#6f7175</Color>
                     <Color x:Key="ColorPrimaryLightS">#393b3e</Color>
                     <Color x:Key="ColorHotCircleTitle">#85888c</Color>
-                    <Color x:Key="ColorMenuSplitter">#e4e4e4</Color>
-                    <Color x:Key="ColorHotCircleSplitter">#2190e9</Color>
+                    <Color x:Key="ColorMenuSplitter">#222426</Color>
+                    <Color x:Key="ColorHotCircleSplitter">#222426</Color>
                     <Color x:Key="ColorFollowCount">#CED5D9</Color>
                     <Color x:Key="ColorStoryList">#121314</Color>
                     <Color x:Key="ColorStoryListItem">#17181a</Color>
@@ -123,6 +130,10 @@
                     <Color x:Key="ColorListBackground">#121314</Color>
                     <Color x:Key="ColorButtonForeground">#7d7f83</Color>
                     <Color x:Key="ColorCheckedForeground">#00D74B</Color>
+
+                    <SolidColorBrush x:Key="BrushNormal" Color="#2196F3" />
+                    <SolidColorBrush x:Key="BrushHighLight" Color="#1976D2" />
+                    <SolidColorBrush x:Key="BrushOver" Color="#41a4f2" />
 
                     <SolidColorBrush x:Key="BrushMainSplitter" Color="#121314" />
                     <SolidColorBrush x:Key="BrushPointerOver" Color="#22000000" />
@@ -181,6 +192,9 @@
                     <SolidColorBrush x:Key="BrushCommentSplitter" Color="{ThemeResource ColorMenuSplitter}" />
                     <SolidColorBrush x:Key="BrushButtonForeground" Color="{ThemeResource ColorButtonForeground}" />
                     <SolidColorBrush x:Key="BrushCheckedForeground" Color="{ThemeResource ColorCheckedForeground}" />
+
+                    <SolidColorBrush x:Key="BrushControlBackground" Color="#1c1d1f" />
+
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
