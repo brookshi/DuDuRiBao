@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using Windows.Foundation.Metadata;
 using System;
 using LLM;
+using DuDuRiBao.Utils;
 
 namespace Brook.DuDuRiBao.Pages
 {
@@ -265,6 +266,16 @@ namespace Brook.DuDuRiBao.Pages
             if (needResetPanel)
             {
                 ResetCategoryPanel();
+            }
+        }
+
+        private void MainPivot_Loaded(object sender, RoutedEventArgs e)
+        {
+            var width = Math.Max(MainPivot.ActualWidth / 3 - 24, 0);
+            var headerTxts = VisualHelper.FindVisualChilds<TextBlock>(MainPivot, "HeaderTxt");
+            if (headerTxts != null)
+            {
+                headerTxts.ForEach(headerTxt => headerTxt.Width = width);
             }
         }
     }

@@ -12,6 +12,7 @@
                  xmlns:utils="using:Brook.DuDuRiBao.Utils"
                  xmlns:vm="using:Brook.DuDuRiBao.ViewModels"
                  xmlns:xp="using:XP"
+                 xmlns:zh="using:ZhiHu.Controls"
                  RequestedTheme="{Binding Source={StaticResource StorageInfo},
                                           Path=AppTheme}"
                  mc:Ignorable="d">
@@ -80,8 +81,8 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="StoryContentView.Visibility" Value="Collapsed" />
-                        <Setter Target="MainListView.Width" Value="Auto" />
-                        <Setter Target="MainListView.(RelativePanel.AlignRightWithPanel)" Value="True" />
+                        <Setter Target="MainPivot.Width" Value="Auto" />
+                        <Setter Target="MainPivot.(RelativePanel.AlignRightWithPanel)" Value="True" />
                         <Setter Target="Searcher.Width" Value="Auto" />
                         <Setter Target="Searcher.(RelativePanel.AlignRightWithPanel)" Value="True" />
                     </VisualState.Setters>
@@ -274,29 +275,74 @@
             </SplitView.Pane>
             <RelativePanel>
                 <Grid x:Name="LeftPanel" RelativePanel.AlignLeftWithPanel="True">
-                    <llm:LLMListView x:Name="MainListView"
-                                     Width="{StaticResource WidthStoryPanel}"
-                                     CanPullToRefresh="True"
-                                     IsItemClickEnabled="True"
-                                     ItemClick="MainListView_ItemClick"
-                                     ItemTemplateSelector="{StaticResource StoryDataTemplateSelector}"
-                                     ItemsSource="{x:Bind VM.StoryDataList}"
-                                     LoadMoreProgressBarBrush="{ThemeResource BrushHighLight}"
-                                     RefreshAreaHeight="30"
-                                     RefreshButtonBackground="{ThemeResource BrushHighLight}"
-                                     RefreshButtonVisibility="{x:Bind IsDesktopDevice, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                     RefreshProgressBarBrush="{ThemeResource BrushHighLight}"
-                                     RefreshProgressRingBrush="{ThemeResource BrushHighLight}"
-                                     ScrollViewer.IsVerticalRailEnabled="True"
-                                     SelectionMode="Single">
-                        <llm:LLMListView.ItemContainerStyle>
-                            <Style TargetType="llm:LLMListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                <Setter Property="Padding" Value="0" />
-                                <Setter Property="Margin" Value="0, 0, 0, 6" />
-                            </Style>
-                        </llm:LLMListView.ItemContainerStyle>
-                    </llm:LLMListView>
+                    <zh:ZhiHuPivot x:Name="MainPivot"
+                                   Width="{StaticResource WidthStoryPanel}"
+                                   BackgroundLineStoke="{ThemeResource BrushSearchePanelBackground}"
+                                   BackgroundLineStokeThickness="2"
+                                   IndicatorLineStokeThickness="2"
+                                   IndicatorLineStroke="{ThemeResource BrushPrimaryLightS}"
+                                   Loaded="MainPivot_Loaded"
+                                   RelativePanel.AlignBottomWithPanel="True"
+                                   RelativePanel.AlignLeftWithPanel="True"
+                                   RelativePanel.AlignRightWithPanel="True"
+                                   RelativePanel.Below="SearchPanel">
+                        <zh:ZhiHuPivot.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="HeaderTxt"
+                                           FontSize="14"
+                                           Text="{Binding}"
+                                           TextAlignment="Center" />
+                            </DataTemplate>
+                        </zh:ZhiHuPivot.HeaderTemplate>
+                        <PivotItem x:Uid="PivotDefault"
+                                   Margin="0"
+                                   Header="">
+                            <llm:LLMListView x:Name="MainListView"
+                                             CanPullToRefresh="True"
+                                             IsItemClickEnabled="True"
+                                             IsItemSwipeEnabled="False"
+                                             ItemClick="MainListView_ItemClick"
+                                             ItemTemplateSelector="{StaticResource StoryDataTemplateSelector}"
+                                             ItemsSource="{x:Bind VM.StoryDataList}"
+                                             LoadMoreProgressBarBrush="{ThemeResource BrushHighLight}"
+                                             RefreshAreaHeight="30"
+                                             RefreshButtonBackground="{ThemeResource BrushHighLight}"
+                                             RefreshButtonVisibility="{x:Bind IsDesktopDevice, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                             RefreshProgressBarBrush="{ThemeResource BrushHighLight}"
+                                             RefreshProgressRingBrush="{ThemeResource BrushHighLight}"
+                                             ScrollViewer.IsVerticalRailEnabled="True"
+                                             SelectionMode="Single">
+                                <llm:LLMListView.ItemContainerStyle>
+                                    <Style TargetType="llm:LLMListViewItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                        <Setter Property="Padding" Value="0" />
+                                        <Setter Property="Margin" Value="0, 0, 0, 6" />
+                                    </Style>
+                                </llm:LLMListView.ItemContainerStyle>
+                            </llm:LLMListView>
+                        </PivotItem>
+                        <PivotItem x:Uid="PivotDiscover"
+                                   Margin="0"
+                                   Header="">
+                            <!--<ListView x:Name="SearchStoryListView"
+                                      IsItemClickEnabled="True"
+                                      ItemClick="SearchStoryListView_ItemClick"
+                                      ItemTemplate="{StaticResource SearchStoryItem}"
+                                      ItemsSource="{x:Bind SearchStories, Mode=OneWay}"
+                                      SelectionMode="Single">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                        <Setter Property="Padding" Value="0" />
+                                        <Setter Property="Margin" Value="0, 0, 0, 0" />
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                            </ListView>-->
+                        </PivotItem>
+                        <PivotItem x:Uid="PivotMessage"
+                                   Margin="0"
+                                   Header="" />
+                    </zh:ZhiHuPivot>
                     <element:Searcher x:Name="Searcher"
                                       Width="{StaticResource WidthStoryPanel}"
                                       Margin="0, -48, 0, 0" />
