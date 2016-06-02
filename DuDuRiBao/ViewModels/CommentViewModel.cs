@@ -16,6 +16,8 @@ namespace Brook.DuDuRiBao.ViewModels
 
         public ObservableCollectionExtended<GroupComments> CommentList { get { return _commentList; } }
 
+        public int TotalCount { get { return _commentList.First().Count + _commentList.Last().Count; } }
+
         public string LastCommentId
         {
             get { return CommentList.Last().LastOrDefault()?.Id.ToString() ?? null; }
@@ -90,7 +92,7 @@ namespace Brook.DuDuRiBao.ViewModels
 
             if (_currCommentType == CommentType.Recommend)
             {
-                await RequestRecommendComments(isLoadingMore);
+                await RequestRecommendComments();
             }
             else if (_currCommentType == CommentType.Normal)
             {
@@ -116,7 +118,7 @@ namespace Brook.DuDuRiBao.ViewModels
 
         public int CurrentCommentCount { get { return CommentList.Count > 1 ? CommentList[0].Count + CommentList[1].Count : 0; } }
 
-        private async Task RequestRecommendComments(bool isLoadingMore)
+        private async Task RequestRecommendComments()
         {
             var recommendComments = await DataRequester.RequestRecommendComments(CurrentStoryId, LastCommentId);
             if (recommendComments == null)

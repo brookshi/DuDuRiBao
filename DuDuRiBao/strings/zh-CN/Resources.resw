@@ -336,7 +336,7 @@
   <data name="PivotDefault.Header" xml:space="preserve">
     <value>首页</value>
   </data>
-  <data name="PivotDiscover.Header" xml:space="preserve">
+  <data name="PivotExplore.Header" xml:space="preserve">
     <value>发现</value>
   </data>
   <data name="PivotMessage.Header" xml:space="preserve">

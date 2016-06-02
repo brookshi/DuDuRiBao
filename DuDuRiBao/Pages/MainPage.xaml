@@ -274,18 +274,17 @@
                 </RelativePanel>
             </SplitView.Pane>
             <RelativePanel>
-                <Grid x:Name="LeftPanel" RelativePanel.AlignLeftWithPanel="True">
+                <Grid x:Name="LeftPanel"
+                      RelativePanel.AlignBottomWithPanel="True"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignTopWithPanel="True">
                     <zh:ZhiHuPivot x:Name="MainPivot"
                                    Width="{StaticResource WidthStoryPanel}"
                                    BackgroundLineStoke="{ThemeResource BrushSearchePanelBackground}"
                                    BackgroundLineStokeThickness="2"
                                    IndicatorLineStokeThickness="2"
                                    IndicatorLineStroke="{ThemeResource BrushPrimaryLightS}"
-                                   Loaded="MainPivot_Loaded"
-                                   RelativePanel.AlignBottomWithPanel="True"
-                                   RelativePanel.AlignLeftWithPanel="True"
-                                   RelativePanel.AlignRightWithPanel="True"
-                                   RelativePanel.Below="SearchPanel">
+                                   Loaded="MainPivot_Loaded">
                         <zh:ZhiHuPivot.HeaderTemplate>
                             <DataTemplate>
                                 <TextBlock x:Name="HeaderTxt"
@@ -321,23 +320,14 @@
                                 </llm:LLMListView.ItemContainerStyle>
                             </llm:LLMListView>
                         </PivotItem>
-                        <PivotItem x:Uid="PivotDiscover"
+                        <PivotItem x:Uid="PivotExplore"
                                    Margin="0"
                                    Header="">
-                            <!--<ListView x:Name="SearchStoryListView"
-                                      IsItemClickEnabled="True"
-                                      ItemClick="SearchStoryListView_ItemClick"
-                                      ItemTemplate="{StaticResource SearchStoryItem}"
-                                      ItemsSource="{x:Bind SearchStories, Mode=OneWay}"
-                                      SelectionMode="Single">
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                        <Setter Property="Padding" Value="0" />
-                                        <Setter Property="Margin" Value="0, 0, 0, 0" />
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                            </ListView>-->
+                            <Grid>
+                                <WebView common:WebViewExtend.StringContent="{Binding Explore}"
+                                         DefaultBackgroundColor="White"
+                                         ScriptNotify="WebView_ScriptNotify" />
+                            </Grid>
                         </PivotItem>
                         <PivotItem x:Uid="PivotMessage"
                                    Margin="0"

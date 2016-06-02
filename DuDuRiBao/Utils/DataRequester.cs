@@ -121,6 +121,11 @@ namespace Brook.DuDuRiBao.Utils
             return RequestDataForTimeLine<TimeLine>(before, Urls.NextTimeLine);
         }
 
+        public static Task<string> RequestExplore()
+        {
+            return XPHttpClient.DefaultClient.GetAsync<string>(Urls.Explorer, null);
+        }
+
         public static Task<HotCircleStories> RequestLatestStoriesForCircle(string circleId)
         {
             return RequestDataForCircleStories<HotCircleStories>(circleId, "", Urls.CircleStories);

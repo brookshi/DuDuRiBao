@@ -48,10 +48,10 @@ namespace Brook.DuDuRiBao.Pages
                 return;
             }
 
-            var preCount = VM.CommentList.Count;
+            var preCount = VM.TotalCount;
             await VM.RequestComments(true);
             CommentListView.FinishLoadingMore();
-            _isLoadComplete = preCount == VM.CommentList.Count;
+            _isLoadComplete = preCount == VM.TotalCount;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

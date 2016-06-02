@@ -169,6 +169,10 @@ namespace Brook.DuDuRiBao.Pages
                 case StoryEventType.Search:
                     ShowSearcher();
                     break;
+                case StoryEventType.Night:
+                    if (VM != null)
+                        VM.RefreshExplore();
+                    break;
             }
         }
 
@@ -276,6 +280,30 @@ namespace Brook.DuDuRiBao.Pages
             if (headerTxts != null)
             {
                 headerTxts.ForEach(headerTxt => headerTxt.Width = width);
+            }
+        }
+
+        private void WebView_ScriptNotify(object sender, NotifyEventArgs e)
+        {
+            string data = e.Value;
+            if (!string.IsNullOrEmpty(data) && data.StartsWith(Html.NotifyCircle))
+            {
+                if(data.Contains("explore"))
+                {
+
+                }
+                else
+                {
+                    var id = data.Substring(data.LastIndexOf("/")+1);
+                    if(data.Contains("circle"))
+                    {
+
+                    }
+                    else if(data.Contains("Story"))
+                    {
+
+                    }
+                }
             }
         }
     }

@@ -32,9 +32,25 @@ namespace Brook.DuDuRiBao.ViewModels
 
         public ObservableCollectionExtended<Story> StoryDataList { get { return _storyDataList; } }
 
+        private string _explore;
+        public string Explore
+        {
+            get { return _explore; }
+            set
+            {
+                if (value != _explore)
+                {
+                    _explore = value;
+                    Notify("Explore");
+                }
+            }
+        }
+
         public override void Init()
         {
             RefreshHotCircles();
+
+            RefreshExplore();
         }
 
         public async Task Refresh()
@@ -51,6 +67,11 @@ namespace Brook.DuDuRiBao.ViewModels
         public async Task LoadMore()
         {
             await RequestMainList(true);
+        }
+
+        public async void RefreshExplore()
+        {
+            Explore = await DataRequester.RequestExplore();
         }
 
         protected void ResetStorys()

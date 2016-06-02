@@ -24,6 +24,14 @@ namespace Brook.DuDuRiBao.Utils
 {
     public static class Html
     {
+        public const string RelativeScriptFlag = "<script src=\"/";
+        public const string RelativeCSSFlag = "<link rel=\"stylesheet\" href=\"/";
+        public const string AbsoluteScriptFlag = "<script src=\"http://daily.zhihu.com/";
+        public const string AbsoluteCSSFlag = "<link rel=\"stylesheet\" href=\"http://daily.zhihu.com/";
+        public const string BodyFlag = "<body class=\"";
+        public const string BodyNightFlag = "<body class=\"night ";
+        public const string NotifyCircle = "circlely://";
+
         public const string NotifyPrex = "LinkNotify:";
 
         private const string _htmlTemplate = "<html><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes\" /><head><meta charset = \"utf-8\" > {0} {1} </head> {2} {3}</html> ";
@@ -32,7 +40,7 @@ namespace Brook.DuDuRiBao.Utils
 
         private const string _jsTemplate = "<script src=\"{0}\" type=\"text/javascript\"></script>";
 
-        private const string _notifyScript = "<script type=\"text/javascript\">for (var i = 0; i < document.links.length; i++) { document.links[i].onclick = function() { window.external.notify('"+ NotifyPrex + "' + this.href); return false; } }</script>";
+        public const string _notifyScript = "<script type=\"text/javascript\">for (var i = 0; i < document.links.length; i++) { document.links[i].onclick = function() { window.external.notify('"+ NotifyPrex + "' + this.href); return false; } }</script>";
 
         private const string _headerTemplate = "<div style=\"position:relative; height:250;  background:url({0}) no-repeat center center; background-size:100%; \">"
                                                + "<div style=\"position:relative; height:250;  background-image:url(ms-appx-web:///Assets/header_background.png); background-size:100% 100%;\">"
