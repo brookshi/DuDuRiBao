@@ -100,7 +100,6 @@ namespace Brook.DuDuRiBao.ViewModels
             }
         }
 
-
         private void InitCommentInfo()
         {
             if (CommentList.Count == 0)

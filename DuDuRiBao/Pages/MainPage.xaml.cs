@@ -22,20 +22,13 @@ namespace Brook.DuDuRiBao.Pages
     {
         public MainViewModel VM { get { return GetVM<MainViewModel>(); } }
 
-        public bool IsDesktopDevice { get { return UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Mouse; } }
-
         public bool IsCommentPanelOpen { get { return true; } }
-
-        private bool _isLoadComplete = false;
 
         public MainPage()
         {
             this.InitializeComponent();
             Initalize();
             NavigationCacheMode = NavigationCacheMode.Required;
-
-            MainListView.Refresh = RefreshMainList;
-            MainListView.LoadMore = LoadMoreStories;
 
             Loaded += MainPage_Loaded;
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
@@ -65,7 +58,17 @@ namespace Brook.DuDuRiBao.Pages
             if (isLogin)
                 UpdateLoginInfo();
 
-            MainListView.SetRefresh(true);
+            SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
+            TimeLineFrame.Navigate(typeof(TimeLinePage));
+        }
+
+        private void App_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if (TimeLineFrame.CanGoBack && e.Handled == false)
+            {
+                e.Handled = true;
+                TimeLineFrame.GoBack();
+            }
         }
 
         private void UpdateLoginInfo()
@@ -88,36 +91,13 @@ namespace Brook.DuDuRiBao.Pages
             }
         }
 
-        private async void RefreshMainList()
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            await VM.Refresh();
-            MainListView.SetRefresh(false);
-            if (!Config.IsSinglePage)
+            if (Config.IsPageSwitched(e.PreviousSize, e.NewSize) && !string.IsNullOrEmpty(ViewModelBase.CurrentStoryId))
             {
-                DisplayStory(ViewModelBase.CurrentStoryId);
+                MainContentFrame.Navigate(typeof(MainContentPage));
+                CommentFrame.Navigate(typeof(CommentPage));
             }
-        }
-
-        private async void LoadMoreStories()
-        {
-            if (_isLoadComplete)
-            {
-                MainListView.FinishLoadingMore();
-                return;
-            }
-
-            var preCount = VM.StoryDataList.Count;
-            await VM.LoadMore();
-            MainListView.FinishLoadingMore();
-            _isLoadComplete = preCount == VM.StoryDataList.Count;
-        }
-
-        private void MainListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            var story = e.ClickedItem as Story;
-
-            var storyId = story.Id.ToString();
-            DisplayStory(storyId);
         }
 
         private void DisplayStory(string storyId)
@@ -135,15 +115,6 @@ namespace Brook.DuDuRiBao.Pages
                     return;
 
                 rootFrame.Navigate(typeof(MainContentPage), storyId);
-            }
-        }
-
-        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (Config.IsPageSwitched(e.PreviousSize, e.NewSize) && !string.IsNullOrEmpty(ViewModelBase.CurrentStoryId))
-            {
-                MainContentFrame.Navigate(typeof(MainContentPage));
-                CommentFrame.Navigate(typeof(CommentPage));
             }
         }
 
@@ -172,6 +143,9 @@ namespace Brook.DuDuRiBao.Pages
                 case StoryEventType.Night:
                     if (VM != null)
                         VM.RefreshExplore();
+                    break;
+                case StoryEventType.DisplayStory:
+                    DisplayStory(param.Content);
                     break;
             }
         }
@@ -203,12 +177,6 @@ namespace Brook.DuDuRiBao.Pages
                     DisplayStory(story.Id.ToString());
                     break;
             }
-        }
-
-        [SubscriberCallback(typeof(LoginEvent))]
-        public void LoginSubscriber(LoginEvent param)
-        {
-            RefreshMainList();
         }
 
         private void RefershHotCircle_Click(object sender, RoutedEventArgs e)
@@ -266,44 +234,10 @@ namespace Brook.DuDuRiBao.Pages
             {
                 VM.CurrentCircle = circle;
             }
-            MainListView.SetRefresh(true);
+            //MainListView.SetRefresh(true);
             if (needResetPanel)
             {
                 ResetCategoryPanel();
-            }
-        }
-
-        private void MainPivot_Loaded(object sender, RoutedEventArgs e)
-        {
-            var width = Math.Max(MainPivot.ActualWidth / 3 - 24, 0);
-            var headerTxts = VisualHelper.FindVisualChilds<TextBlock>(MainPivot, "HeaderTxt");
-            if (headerTxts != null)
-            {
-                headerTxts.ForEach(headerTxt => headerTxt.Width = width);
-            }
-        }
-
-        private void WebView_ScriptNotify(object sender, NotifyEventArgs e)
-        {
-            string data = e.Value;
-            if (!string.IsNullOrEmpty(data) && data.StartsWith(Html.NotifyCircle))
-            {
-                if(data.Contains("explore"))
-                {
-
-                }
-                else
-                {
-                    var id = data.Substring(data.LastIndexOf("/")+1);
-                    if(data.Contains("circle"))
-                    {
-
-                    }
-                    else if(data.Contains("Story"))
-                    {
-
-                    }
-                }
             }
         }
     }

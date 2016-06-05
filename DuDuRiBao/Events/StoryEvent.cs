@@ -27,6 +27,7 @@ namespace Brook.DuDuRiBao.Events
         ShareToWeiBo,
         ShareToWeiXin,
         Night,
+        DisplayStory,
     }
 
     public class StoryEvent
@@ -36,5 +37,7 @@ namespace Brook.DuDuRiBao.Events
         public int Count { get; set; }
 
         public bool IsChecked { get; set; }
+
+        public string Content { get; set; }
     }
 }

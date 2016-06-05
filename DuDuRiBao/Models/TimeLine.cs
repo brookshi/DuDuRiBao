@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Brook.DuDuRiBao.Models
 {
@@ -96,5 +97,30 @@ namespace Brook.DuDuRiBao.Models
         public int count { get; set; }
         public List<Story> stories { get; set; }
         public int? last_time { get; set; } = null;
+    }
+
+    public class CircleCount
+    {
+        public int Stories { get; set; }
+        public int Editors { get; set; }
+        public int Members { get; set; }
+    }
+    public class Creator
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+    public class CircleInfo : CircleBase
+    {
+        public CircleCount Count { get; set; }
+        public int Status { get; set; }
+        public string Member_Alias { get; set; }
+        public string Image { get; set; }
+        public Creator Creator { get; set; }
+
+        public override HotCircle Clone()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

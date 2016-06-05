@@ -1,0 +1,91 @@
+﻿<common:PageBase x:Class="Brook.DuDuRiBao.Pages.CircleStoryPage"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:common="using:Brook.DuDuRiBao.Common"
+                 xmlns:convert="using:Brook.DuDuRiBao.Converters"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:element="using:Brook.DuDuRiBao.Elements"
+                 xmlns:llm="using:LLM"
+                 xmlns:local="using:Brook.DuDuRiBao.Pages"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:vm="using:Brook.DuDuRiBao.ViewModels"
+                 mc:Ignorable="d">
+    <Page.DataContext>
+        <vm:CircleStoryViewModel />
+    </Page.DataContext>
+
+    <Grid>
+        <llm:LLMListView x:Name="StoryListView"
+                         CanPullToRefresh="False"
+                         IsItemClickEnabled="True"
+                         IsItemSwipeEnabled="False"
+                         ItemClick="StoryListView_ItemClick"
+                         ItemTemplate="{StaticResource Story}"
+                         ItemsSource="{x:Bind VM.StoryDataList}"
+                         LoadMoreProgressBarBrush="{ThemeResource BrushHighLight}"
+                         RefreshAreaHeight="30"
+                         RefreshButtonBackground="{ThemeResource BrushHighLight}"
+                         RefreshButtonVisibility="Visible"
+                         RefreshIcon="Add"
+                         RefreshProgressBarBrush="{ThemeResource BrushHighLight}"
+                         RefreshProgressRingBrush="{ThemeResource BrushHighLight}"
+                         ScrollViewer.IsVerticalRailEnabled="True"
+                         SelectionMode="Single">
+            <llm:LLMListView.ItemContainerStyle>
+                <Style TargetType="llm:LLMListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="Margin" Value="0, 0, 0, 6" />
+                </Style>
+            </llm:LLMListView.ItemContainerStyle>
+            <llm:LLMListView.Header>
+                <RelativePanel DataContext="{x:Bind VM.Circle, Mode=OneWay}">
+                    <RelativePanel x:Name="TopPanel"
+                                   Height="250"
+                                   RelativePanel.AlignLeftWithPanel="True"
+                                   RelativePanel.AlignRightWithPanel="True"
+                                   RelativePanel.AlignTopWithPanel="True">
+                        <Image HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Source="{Binding Image}"
+                               Stretch="UniformToFill" />
+                        <Rectangle Height="250"
+                                   Fill="#66000000"
+                                   RelativePanel.AlignBottomWithPanel="True"
+                                   RelativePanel.AlignLeftWithPanel="True"
+                                   RelativePanel.AlignRightWithPanel="True"
+                                   RelativePanel.AlignTopWithPanel="True" />
+                        <element:CircleImage x:Name="CirclePhoto"
+                                             Width="96"
+                                             Height="96"
+                                             Margin="0, 24, 0, 0"
+                                             BackgroundBrush="{Binding BackgroundBrush}"
+                                             ImageUrl="{Binding Thumbnail}"
+                                             Opacity="{Binding Source={StaticResource StorageInfo},
+                                                               Path=AppTheme,
+                                                               Converter={StaticResource DarkThemeForImageOpacityConverter}}"
+                                             Radius="2"
+                                             RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                             RelativePanel.AlignTopWithPanel="True"
+                                             Word="{Binding VM.Circle.Thumbnail}" />
+                        <TextBlock x:Name="CircleName"
+                                   Margin="0, 12, 0, 0"
+                                   FontSize="20"
+                                   Foreground="{ThemeResource BrushToolBarForeground}"
+                                   RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                   RelativePanel.Below="CirclePhoto"
+                                   Text="{Binding Name}" />
+                        <TextBlock x:Name="CircleCreater"
+                                   Margin="0, 12, 0, 0"
+                                   FontSize="14"
+                                   Foreground="{ThemeResource BrushToolBarForeground}"
+                                   RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                   RelativePanel.Below="CircleName"
+                                   Text="{Binding Creator.Name}" />
+                    </RelativePanel>
+                    <TextBlock RelativePanel.Below="TopPanel" />
+                </RelativePanel>
+            </llm:LLMListView.Header>
+        </llm:LLMListView>
+    </Grid>
+</common:PageBase>

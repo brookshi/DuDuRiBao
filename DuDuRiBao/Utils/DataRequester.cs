@@ -126,6 +126,14 @@ namespace Brook.DuDuRiBao.Utils
             return XPHttpClient.DefaultClient.GetAsync<string>(Urls.Explorer, null);
         }
 
+        public static Task<CircleInfo> RequestCircleInfo(string circleId)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .AddUrlSegements("circleid", circleId ?? "");
+
+            return XPHttpClient.DefaultClient.GetAsync<CircleInfo>(Urls.CircleInfo, httpParam);
+        }
+
         public static Task<HotCircleStories> RequestLatestStoriesForCircle(string circleId)
         {
             return RequestDataForCircleStories<HotCircleStories>(circleId, "", Urls.CircleStories);

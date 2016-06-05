@@ -9,7 +9,6 @@
                  xmlns:llm="using:LLM"
                  xmlns:local="using:Brook.DuDuRiBao.Pages"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                 xmlns:utils="using:Brook.DuDuRiBao.Utils"
                  xmlns:vm="using:Brook.DuDuRiBao.ViewModels"
                  xmlns:xp="using:XP"
                  xmlns:zh="using:ZhiHu.Controls"
@@ -20,26 +19,6 @@
     <Page.DataContext>
         <vm:MainViewModel />
     </Page.DataContext>
-
-    <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Elements/Story.xaml" />
-                <ResourceDictionary Source="../Elements/HotCircle.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
-            <utils:Config x:Key="Config" />
-
-            <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-            <convert:BooleanReverseConverter x:Key="BooleanReverseConverter" />
-            <convert:DarkThemeToggleConverter x:Key="DarkThemeToggleConverter" />
-
-            <common:StoryDataTemplateSelector x:Key="StoryDataTemplateSelector"
-                                              FavoriteTemplate="{StaticResource Favorite}"
-                                              HotArticleTemplate="{StaticResource HotArticle}"
-                                              NormalTemplate="{StaticResource Story}" />
-        </ResourceDictionary>
-    </Page.Resources>
 
     <Grid x:Name="MainGrid" SizeChanged="Page_SizeChanged">
         <VisualStateManager.VisualStateGroups>
@@ -81,8 +60,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="StoryContentView.Visibility" Value="Collapsed" />
-                        <Setter Target="MainPivot.Width" Value="Auto" />
-                        <Setter Target="MainPivot.(RelativePanel.AlignRightWithPanel)" Value="True" />
+                        <Setter Target="TimeLineFrame.Width" Value="Auto" />
                         <Setter Target="Searcher.Width" Value="Auto" />
                         <Setter Target="Searcher.(RelativePanel.AlignRightWithPanel)" Value="True" />
                     </VisualState.Setters>
@@ -278,61 +256,7 @@
                       RelativePanel.AlignBottomWithPanel="True"
                       RelativePanel.AlignLeftWithPanel="True"
                       RelativePanel.AlignTopWithPanel="True">
-                    <zh:ZhiHuPivot x:Name="MainPivot"
-                                   Width="{StaticResource WidthStoryPanel}"
-                                   BackgroundLineStoke="{ThemeResource BrushSearchePanelBackground}"
-                                   BackgroundLineStokeThickness="2"
-                                   IndicatorLineStokeThickness="2"
-                                   IndicatorLineStroke="{ThemeResource BrushPrimaryLightS}"
-                                   Loaded="MainPivot_Loaded">
-                        <zh:ZhiHuPivot.HeaderTemplate>
-                            <DataTemplate>
-                                <TextBlock x:Name="HeaderTxt"
-                                           FontSize="14"
-                                           Text="{Binding}"
-                                           TextAlignment="Center" />
-                            </DataTemplate>
-                        </zh:ZhiHuPivot.HeaderTemplate>
-                        <PivotItem x:Uid="PivotDefault"
-                                   Margin="0"
-                                   Header="">
-                            <llm:LLMListView x:Name="MainListView"
-                                             CanPullToRefresh="True"
-                                             IsItemClickEnabled="True"
-                                             IsItemSwipeEnabled="False"
-                                             ItemClick="MainListView_ItemClick"
-                                             ItemTemplateSelector="{StaticResource StoryDataTemplateSelector}"
-                                             ItemsSource="{x:Bind VM.StoryDataList}"
-                                             LoadMoreProgressBarBrush="{ThemeResource BrushHighLight}"
-                                             RefreshAreaHeight="30"
-                                             RefreshButtonBackground="{ThemeResource BrushHighLight}"
-                                             RefreshButtonVisibility="{x:Bind IsDesktopDevice, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                             RefreshProgressBarBrush="{ThemeResource BrushHighLight}"
-                                             RefreshProgressRingBrush="{ThemeResource BrushHighLight}"
-                                             ScrollViewer.IsVerticalRailEnabled="True"
-                                             SelectionMode="Single">
-                                <llm:LLMListView.ItemContainerStyle>
-                                    <Style TargetType="llm:LLMListViewItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                        <Setter Property="Padding" Value="0" />
-                                        <Setter Property="Margin" Value="0, 0, 0, 6" />
-                                    </Style>
-                                </llm:LLMListView.ItemContainerStyle>
-                            </llm:LLMListView>
-                        </PivotItem>
-                        <PivotItem x:Uid="PivotExplore"
-                                   Margin="0"
-                                   Header="">
-                            <Grid>
-                                <WebView common:WebViewExtend.StringContent="{Binding Explore}"
-                                         DefaultBackgroundColor="White"
-                                         ScriptNotify="WebView_ScriptNotify" />
-                            </Grid>
-                        </PivotItem>
-                        <PivotItem x:Uid="PivotMessage"
-                                   Margin="0"
-                                   Header="" />
-                    </zh:ZhiHuPivot>
+                    <Frame x:Name="TimeLineFrame" Width="{StaticResource WidthStoryPanel}" />
                     <element:Searcher x:Name="Searcher"
                                       Width="{StaticResource WidthStoryPanel}"
                                       Margin="0, -48, 0, 0" />

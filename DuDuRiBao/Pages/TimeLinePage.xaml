@@ -1,0 +1,72 @@
+﻿<common:PageBase x:Class="Brook.DuDuRiBao.Pages.TimeLinePage"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:common="using:Brook.DuDuRiBao.Common"
+                 xmlns:convert="using:Brook.DuDuRiBao.Converters"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:llm="using:LLM"
+                 xmlns:local="using:Brook.DuDuRiBao.Pages"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:vm="using:Brook.DuDuRiBao.ViewModels"
+                 xmlns:zh="using:ZhiHu.Controls"
+                 mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:TimeLineViewModel />
+    </Page.DataContext>
+
+    <zh:ZhiHuPivot x:Name="MainPivot"
+                   BackgroundLineStoke="{ThemeResource BrushSearchePanelBackground}"
+                   BackgroundLineStokeThickness="2"
+                   IndicatorLineStokeThickness="2"
+                   IndicatorLineStroke="{ThemeResource BrushPrimaryLightS}"
+                   Loaded="MainPivot_Loaded">
+        <zh:ZhiHuPivot.HeaderTemplate>
+            <DataTemplate>
+                <TextBlock x:Name="HeaderTxt"
+                           FontSize="14"
+                           Text="{Binding}"
+                           TextAlignment="Center" />
+            </DataTemplate>
+        </zh:ZhiHuPivot.HeaderTemplate>
+        <PivotItem x:Uid="PivotDefault"
+                   Margin="0"
+                   Header="">
+            <llm:LLMListView x:Name="MainListView"
+                             CanPullToRefresh="True"
+                             IsItemClickEnabled="True"
+                             IsItemSwipeEnabled="False"
+                             ItemClick="MainListView_ItemClick"
+                             ItemTemplate="{StaticResource Story}"
+                             ItemsSource="{x:Bind VM.StoryDataList}"
+                             LoadMoreProgressBarBrush="{ThemeResource BrushHighLight}"
+                             RefreshAreaHeight="30"
+                             RefreshButtonBackground="{ThemeResource BrushHighLight}"
+                             RefreshButtonVisibility="{x:Bind IsDesktopDevice, Converter={StaticResource BooleanToVisibilityConverter}}"
+                             RefreshIcon="Refresh"
+                             RefreshProgressBarBrush="{ThemeResource BrushHighLight}"
+                             RefreshProgressRingBrush="{ThemeResource BrushHighLight}"
+                             SelectionMode="Single">
+                <llm:LLMListView.ItemContainerStyle>
+                    <Style TargetType="llm:LLMListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="Padding" Value="0" />
+                        <Setter Property="Margin" Value="0, 0, 0, 6" />
+                    </Style>
+                </llm:LLMListView.ItemContainerStyle>
+            </llm:LLMListView>
+        </PivotItem>
+        <PivotItem x:Uid="PivotExplore"
+                   Margin="0"
+                   Header="">
+            <Grid>
+                <WebView common:WebViewExtend.StringContent="{Binding Explore}"
+                         DefaultBackgroundColor="White"
+                         ScriptNotify="WebView_ScriptNotify" />
+            </Grid>
+        </PivotItem>
+        <PivotItem x:Uid="PivotMessage"
+                   Margin="0"
+                   Header="" />
+    </zh:ZhiHuPivot>
+</common:PageBase>

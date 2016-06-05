@@ -107,16 +107,10 @@ namespace ZhiHu.Controls
         {
             if (Items.Count > 1 && ActualWidth > 0)
             {
-                var lastVisibility = Visibility;
-                Visibility = Visibility.Visible;
-                UpdateLayout();
-
                 var res = this.ActualWidth / Items.Count;
                // if (IsMobile)
                     HeaderWidth = res;
                 _tipLine.X2 = HeaderWidth;
-
-                Visibility = lastVisibility;
             }
         }
 

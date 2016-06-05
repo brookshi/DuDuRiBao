@@ -55,7 +55,7 @@ namespace Brook.DuDuRiBao.Common
                 var content = e.NewValue.ToString();
                 content = content.Replace(Html.RelativeScriptFlag, Html.AbsoluteScriptFlag);
                 content = content.Replace(Html.RelativeCSSFlag, Html.AbsoluteCSSFlag);
-                content = content.Replace("</head>", Html._notifyScript + "</head>");
+                content = content.Replace("</body>", Html._notifyScript + "</body>");
                 if (StorageInfo.Instance.AppTheme == ElementTheme.Dark)
                 {
                     content = content.Replace(Html.BodyFlag, Html.BodyNightFlag);

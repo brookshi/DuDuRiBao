@@ -1,11 +1,25 @@
 ﻿<Application x:Class="Brook.DuDuRiBao.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:common="using:Brook.DuDuRiBao.Common"
+             xmlns:convert="using:Brook.DuDuRiBao.Converters"
              xmlns:local="using:DuDuRiBao"
              xmlns:model="using:Brook.DuDuRiBao.Models"
+             xmlns:utils="using:Brook.DuDuRiBao.Utils"
              RequestedTheme="Light">
     <Application.Resources>
         <ResourceDictionary>
+            <common:StoryDataTemplateSelector x:Key="StoryDataTemplateSelector"
+                                              FavoriteTemplate="{StaticResource Favorite}"
+                                              HotArticleTemplate="{StaticResource HotArticle}"
+                                              NormalTemplate="{StaticResource Story}" />
+            <utils:Config x:Key="Config" />
+
+            <convert:BooleanReverseConverter x:Key="BooleanReverseConverter" />
+            <convert:DarkThemeToggleConverter x:Key="DarkThemeToggleConverter" />
+            <convert:DarkThemeForImageOpacityConverter x:Key="DarkThemeForImageOpacityConverter" />
+            <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
                     <model:StorageInfo x:Key="StorageInfo" />
@@ -19,6 +33,9 @@
                     <Thickness x:Key="LoginButtonMargin">300, 0, 0, 0</Thickness>
 
                 </ResourceDictionary>
+
+                <ResourceDictionary Source="Elements/Story.xaml" />
+                <ResourceDictionary Source="Elements/HotCircle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <ResourceDictionary.ThemeDictionaries>
