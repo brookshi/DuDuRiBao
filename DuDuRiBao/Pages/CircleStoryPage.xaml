@@ -39,9 +39,9 @@
                 </Style>
             </llm:LLMListView.ItemContainerStyle>
             <llm:LLMListView.Header>
-                <RelativePanel DataContext="{x:Bind VM.Circle, Mode=OneWay}">
+                <RelativePanel Background="White" DataContext="{x:Bind VM.Circle, Mode=OneWay}">
                     <RelativePanel x:Name="TopPanel"
-                                   Height="250"
+                                   Height="180"
                                    RelativePanel.AlignLeftWithPanel="True"
                                    RelativePanel.AlignRightWithPanel="True"
                                    RelativePanel.AlignTopWithPanel="True">
@@ -49,16 +49,16 @@
                                VerticalAlignment="Center"
                                Source="{Binding Image}"
                                Stretch="UniformToFill" />
-                        <Rectangle Height="250"
+                        <Rectangle Height="180"
                                    Fill="#66000000"
                                    RelativePanel.AlignBottomWithPanel="True"
                                    RelativePanel.AlignLeftWithPanel="True"
                                    RelativePanel.AlignRightWithPanel="True"
                                    RelativePanel.AlignTopWithPanel="True" />
                         <element:CircleImage x:Name="CirclePhoto"
-                                             Width="96"
-                                             Height="96"
-                                             Margin="0, 24, 0, 0"
+                                             Width="82"
+                                             Height="82"
+                                             Margin="0, 18, 0, 0"
                                              BackgroundBrush="{Binding BackgroundBrush}"
                                              ImageUrl="{Binding Thumbnail}"
                                              Opacity="{Binding Source={StaticResource StorageInfo},
@@ -69,14 +69,14 @@
                                              RelativePanel.AlignTopWithPanel="True"
                                              Word="{Binding VM.Circle.Thumbnail}" />
                         <TextBlock x:Name="CircleName"
-                                   Margin="0, 12, 0, 0"
+                                   Margin="0, 8, 0, 0"
                                    FontSize="20"
                                    Foreground="{ThemeResource BrushToolBarForeground}"
                                    RelativePanel.AlignHorizontalCenterWithPanel="True"
                                    RelativePanel.Below="CirclePhoto"
                                    Text="{Binding Name}" />
                         <TextBlock x:Name="CircleCreater"
-                                   Margin="0, 12, 0, 0"
+                                   Margin="0, 8, 0, 0"
                                    FontSize="14"
                                    Foreground="{ThemeResource BrushToolBarForeground}"
                                    RelativePanel.AlignHorizontalCenterWithPanel="True"

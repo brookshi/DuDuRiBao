@@ -52,7 +52,6 @@ namespace Brook.DuDuRiBao.Pages
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
             VM.CircleId = e.Parameter.ToString();
-            VM.RefreshCircleInfo();
         }
 
         private void StoryListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -61,17 +60,23 @@ namespace Brook.DuDuRiBao.Pages
             if (story == null)
                 return;
 
-            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.DisplayStory, Content = story.Id.ToString() });
+            ViewModelBase.CurrentStoryId = story.Id.ToString();
+            DisplayStory();
         }
 
         private async void RefreshMainList()
         {
-            await VM.RefreshCircleInfo();
+            await VM.Refresh();
             StoryListView.SetRefresh(false);
             if (!Config.IsSinglePage)
             {
-                //DisplayStory(ViewModelBase.CurrentStoryId);
+                DisplayStory();
             }
+        }
+
+        private void DisplayStory()
+        {
+            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.DisplayStory, Content = ViewModelBase.CurrentStoryId.ToString() });
         }
 
         private async void LoadMoreStories()
@@ -83,7 +88,7 @@ namespace Brook.DuDuRiBao.Pages
             }
 
             var preCount = VM.StoryDataList.Count;
-            //await VM.LoadMore();
+            await VM.RefreshStories(true);
             StoryListView.FinishLoadingMore();
             _isLoadComplete = preCount == VM.StoryDataList.Count;
         }

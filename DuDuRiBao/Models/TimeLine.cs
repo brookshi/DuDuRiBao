@@ -53,7 +53,8 @@ namespace Brook.DuDuRiBao.Models
             if (Posts == null && circle != null)
             {
                 Posts = new List<Post>();
-                Posts.Add(new Post() {
+                Posts.Add(new Post()
+                {
                     Poster = Poster,
                     Circle = circle.Clone()
                 });
@@ -120,7 +121,13 @@ namespace Brook.DuDuRiBao.Models
 
         public override HotCircle Clone()
         {
-            throw new NotImplementedException();
+            return new HotCircle()
+            {
+                Thumbnail = Thumbnail,
+                Id = Id,
+                BackgroundBrush = BackgroundBrush,
+                Name = Name
+            };
         }
     }
 }
