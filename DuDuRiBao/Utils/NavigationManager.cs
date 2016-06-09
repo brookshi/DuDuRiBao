@@ -53,7 +53,7 @@ namespace DuDuRiBao.Utils
 
         public bool CanGoBack { get { return _frameStack.Count > 0; } }
 
-        public void GoBack()
+        public void GoBack(BackRequestedEventArgs e)
         {
             var currFrame = _frameStack.Pop();
             if (currFrame == null)
@@ -62,11 +62,12 @@ namespace DuDuRiBao.Utils
             if (currFrame.CanGoBack)
             {
                 currFrame.GoBack();
+                e.Handled = true;
                 UpdateGoBackBtnVisibility();
             }
             else
             {
-                GoBack();
+                GoBack(e);
             }
         }
 

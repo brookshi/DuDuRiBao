@@ -31,25 +31,9 @@ namespace Brook.DuDuRiBao.Pages
             NavigationCacheMode = NavigationCacheMode.Required;
 
             Loaded += MainPage_Loaded;
-            //SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
 
             LLQNotifier.Default.Register(this);
         }
-
-        //private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
-        //{
-        //    if (TimeLineFrame.CanGoBack && e.Handled == false)
-        //    {
-        //        e.Handled = true;
-        //        TimeLineFrame.GoBack();
-        //    }
-        //    else if (Searcher.Visibility == Visibility.Visible)
-        //    {
-        //        HideSearcher();
-        //        e.Handled = true;
-        //    }
-        //    NavigationManager.Instance.UpdateGoBackBtnVisibility();
-        //}
 
         private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {

@@ -107,16 +107,7 @@ namespace Brook.DuDuRiBao
 
         private void App_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            Frame rootFrame = GetWindowFrame();
-            if (rootFrame == null)
-                return;
-
-            if (rootFrame.CanGoBack && e.Handled == false)
-            {
-                e.Handled = true;
-                rootFrame.GoBack();
-            }
-            NavigationManager.Instance.UpdateGoBackBtnVisibility();
+            NavigationManager.Instance.GoBack(e);
         }
 
         public void InitConfig()
