@@ -26,7 +26,7 @@
                          RefreshAreaHeight="30"
                          RefreshButtonBackground="{ThemeResource BrushHighLight}"
                          RefreshButtonVisibility="Visible"
-                         RefreshIcon="Add"
+                         RefreshIcon="{x:Bind VM.JoinCircleButtonIcon, Mode=OneWay}"
                          RefreshProgressBarBrush="{ThemeResource BrushHighLight}"
                          RefreshProgressRingBrush="{ThemeResource BrushHighLight}"
                          ScrollViewer.IsVerticalRailEnabled="True"
@@ -50,7 +50,7 @@
                                Source="{Binding Image}"
                                Stretch="UniformToFill" />
                         <Rectangle Height="180"
-                                   Fill="#66000000"
+                                   Fill="{Binding Mask}"
                                    RelativePanel.AlignBottomWithPanel="True"
                                    RelativePanel.AlignLeftWithPanel="True"
                                    RelativePanel.AlignRightWithPanel="True"
@@ -67,7 +67,8 @@
                                              Radius="2"
                                              RelativePanel.AlignHorizontalCenterWithPanel="True"
                                              RelativePanel.AlignTopWithPanel="True"
-                                             Word="{Binding VM.Circle.Thumbnail}" />
+                                             Word="{Binding Thumbnail}"
+                                             WordSize="40" />
                         <TextBlock x:Name="CircleName"
                                    Margin="0, 8, 0, 0"
                                    FontSize="20"

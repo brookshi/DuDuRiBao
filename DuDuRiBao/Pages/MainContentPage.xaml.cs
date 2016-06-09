@@ -10,6 +10,7 @@ using Brook.DuDuRiBao.Events;
 using LLM;
 using System;
 using Windows.UI.Xaml.Media;
+using DuDuRiBao.Utils;
 
 namespace Brook.DuDuRiBao.Pages
 {
@@ -30,7 +31,7 @@ namespace Brook.DuDuRiBao.Pages
 
             if (Config.UIStatus == AppUIStatus.List)
             {
-                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+                NavigationManager.Instance.UpdateGoBackBtnVisibility();
             }
             CurrentUIStatus = Config.UIStatus;
             VM.RequestStoryData();
@@ -53,7 +54,7 @@ namespace Brook.DuDuRiBao.Pages
                         if (rootFrame == null)
                             return;
 
-                        rootFrame.Navigate(typeof(CommentPage));
+                        NavigationManager.Instance.Navigate(rootFrame, typeof(CommentPage));
                     }
                     break;
                 case StoryEventType.ShareToWeiBo:

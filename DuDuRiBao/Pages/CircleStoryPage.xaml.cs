@@ -3,6 +3,7 @@ using Brook.DuDuRiBao.Events;
 using Brook.DuDuRiBao.Models;
 using Brook.DuDuRiBao.Utils;
 using Brook.DuDuRiBao.ViewModels;
+using DuDuRiBao.Utils;
 using LLQ;
 using System;
 using System.Collections.Generic;
@@ -34,24 +35,17 @@ namespace Brook.DuDuRiBao.Pages
         public CircleStoryPage()
         {
             this.InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Required;
             StoryListView.Refresh = RefreshMainList;
             StoryListView.LoadMore = LoadMoreStories;
-            Loaded += CircleStoryPage_Loaded;
-        }
-
-        private void CircleStoryPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (IsUsingCachedWhenNavigate())
-            {
-                return;
-            }
-            StoryListView.SetRefresh(true);
+            StoryListView.RefreshButtonAction = VM.JoinCircle;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            NavigationManager.Instance.UpdateGoBackBtnVisibility();
             VM.CircleId = e.Parameter.ToString();
+            StoryListView.SetRefresh(true);
         }
 
         private void StoryListView_ItemClick(object sender, ItemClickEventArgs e)

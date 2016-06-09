@@ -78,8 +78,7 @@ namespace Brook.DuDuRiBao.Pages
                     var id = data.Substring(data.LastIndexOf("/") + 1);
                     if (data.Contains("circle"))
                     {
-                        Frame.Navigate(typeof(CircleStoryPage), id);
-                       // UpdateCircle(int.Parse(id), "", null, true);
+                        NavigationManager.Instance.Navigate(Frame, typeof(CircleStoryPage), id);
                     }
                     else if (data.Contains("Story"))
                     {

@@ -31,5 +31,6 @@ namespace Brook.DuDuRiBao.Utils
 
         public const int Unvalid_Image_Id = -1;
 
+        public const int ZhiHuCircleId = 1;
     }
 }

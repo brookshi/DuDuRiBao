@@ -31,19 +31,25 @@ namespace Brook.DuDuRiBao.Pages
             NavigationCacheMode = NavigationCacheMode.Required;
 
             Loaded += MainPage_Loaded;
-            SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
+            //SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
 
             LLQNotifier.Default.Register(this);
         }
 
-        private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
-        {
-            if(Searcher.Visibility == Visibility.Visible)
-            {
-                HideSearcher();
-                e.Handled = true;
-            }
-        }
+        //private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
+        //{
+        //    if (TimeLineFrame.CanGoBack && e.Handled == false)
+        //    {
+        //        e.Handled = true;
+        //        TimeLineFrame.GoBack();
+        //    }
+        //    else if (Searcher.Visibility == Visibility.Visible)
+        //    {
+        //        HideSearcher();
+        //        e.Handled = true;
+        //    }
+        //    NavigationManager.Instance.UpdateGoBackBtnVisibility();
+        //}
 
         private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -58,17 +64,7 @@ namespace Brook.DuDuRiBao.Pages
             if (isLogin)
                 UpdateLoginInfo();
 
-            SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
             TimeLineFrame.Navigate(typeof(TimeLinePage));
-        }
-
-        private void App_BackRequested(object sender, BackRequestedEventArgs e)
-        {
-            if (TimeLineFrame.CanGoBack && e.Handled == false)
-            {
-                e.Handled = true;
-                TimeLineFrame.GoBack();
-            }
         }
 
         private void UpdateLoginInfo()
@@ -114,7 +110,7 @@ namespace Brook.DuDuRiBao.Pages
                 if (rootFrame == null)
                     return;
 
-                rootFrame.Navigate(typeof(MainContentPage), storyId);
+                NavigationManager.Instance.Navigate(rootFrame, typeof(MainContentPage), storyId);
             }
         }
 
@@ -146,6 +142,9 @@ namespace Brook.DuDuRiBao.Pages
                     break;
                 case StoryEventType.DisplayStory:
                     DisplayStory(param.Content);
+                    break;
+                case StoryEventType.Circle:
+                    NavigationManager.Instance.Navigate(TimeLineFrame, typeof(CircleStoryPage), param.Content);
                     break;
             }
         }

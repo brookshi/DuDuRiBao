@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Brook.DuDuRiBao.Utils;
+using System;
 using System.Collections.Generic;
+using Windows.UI;
+using Windows.UI.Xaml.Media;
 
 namespace Brook.DuDuRiBao.Models
 {
@@ -118,6 +121,7 @@ namespace Brook.DuDuRiBao.Models
         public string Member_Alias { get; set; }
         public string Image { get; set; }
         public Creator Creator { get; set; }
+        public Brush Mask { get; set; }
 
         public override HotCircle Clone()
         {
@@ -128,6 +132,12 @@ namespace Brook.DuDuRiBao.Models
                 BackgroundBrush = BackgroundBrush,
                 Name = Name
             };
+        }
+
+        public override void Adjust()
+        {
+            base.Adjust();
+            Mask = Thumbnail.Length < 2 ? ColorUtil.GetDeepInBrush(BackgroundBrush) : ColorUtil.GetDefaultCirclePanelBackground();
         }
     }
 }

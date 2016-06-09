@@ -1,6 +1,9 @@
 ﻿using Brook.DuDuRiBao.Authorization;
+using Brook.DuDuRiBao.Events;
 using Brook.DuDuRiBao.Models;
+using Brook.DuDuRiBao.Pages;
 using Brook.DuDuRiBao.Utils;
+using LLQ;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -88,26 +91,14 @@ namespace Brook.DuDuRiBao.Elements
         public static readonly DependencyProperty WordSizeProperty =
             DependencyProperty.Register("WordSize", typeof(double), typeof(CircleImage), new PropertyMetadata(20d));
 
-
-        private async void QuitCircle(object sender, RoutedEventArgs e)
+        private void ClickCircle(object sender, RoutedEventArgs e)
         {
-            if (!AuthorizationHelper.IsLogin)
-            {
-                return;
-            }
             var story = this.DataContext as Story;
             if (story == null || story.Posts.Count == 0 || story.Posts[0].Circle == null)
                 return;
 
             var id = story.Posts[0].Circle.Id;
-            if (int.Parse(id) < 10)
-            {
-                PopupMessage.DisplayMessageInRes("ProtectedCircle");
-                return;
-            }
-
-            await DataRequester.QuitCircle(id);
-            PopupMessage.DisplayMessageInRes("QuitCircleSuccess");
+            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Circle, Content = id });
         }
     }
 }

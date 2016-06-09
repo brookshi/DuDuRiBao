@@ -342,4 +342,7 @@
   <data name="PivotMessage.Header" xml:space="preserve">
     <value>消息</value>
   </data>
+  <data name="CannotQuitZhiHuCircle" xml:space="preserve">
+    <value>这个日报不能取消订阅</value>
+  </data>
 </root>

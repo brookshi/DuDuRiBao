@@ -206,6 +206,7 @@
     <Compile Include="Utils\HotArticleBuilder.cs" />
     <Compile Include="Utils\HotCircleBuilder.cs" />
     <Compile Include="Utils\LoadingIcon.cs" />
+    <Compile Include="Utils\NavigationManager.cs" />
     <Compile Include="Utils\ResUtil.cs" />
     <Compile Include="Common\TextBlockExtend.cs" />
     <Compile Include="Utils\VisualHelper.cs" />

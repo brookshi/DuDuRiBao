@@ -28,6 +28,7 @@ namespace Brook.DuDuRiBao.Events
         ShareToWeiXin,
         Night,
         DisplayStory,
+        Circle,
     }
 
     public class StoryEvent

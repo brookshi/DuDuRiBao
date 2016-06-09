@@ -1,4 +1,5 @@
-﻿using Brook.DuDuRiBao.Common;
+﻿using Brook.DuDuRiBao.Authorization;
+using Brook.DuDuRiBao.Common;
 using Brook.DuDuRiBao.Events;
 using Brook.DuDuRiBao.Models;
 using Brook.DuDuRiBao.Utils;
@@ -6,11 +7,15 @@ using LLQ;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 
 namespace Brook.DuDuRiBao.ViewModels
 {
     public class CircleStoryViewModel : ViewModelBase
     {
+        private static IconElement _addIcon = new SymbolIcon(Symbol.Add);
+        private static IconElement _checkIcon = new SymbolIcon(Symbol.Accept);
+
         public string CircleId { get; set; }
 
         public CircleInfo Circle { get; set; }
@@ -21,6 +26,17 @@ namespace Brook.DuDuRiBao.ViewModels
 
         public ObservableCollectionExtended<Story> StoryDataList { get { return _storyDataList; } }
 
+        private IconElement _joinCircleButtonIcon = _addIcon;
+        public IconElement JoinCircleButtonIcon
+        {
+            get { return _joinCircleButtonIcon; }
+            set
+            {
+                _joinCircleButtonIcon = value;
+                Notify("JoinCircleButtonIcon");
+            }
+        }
+
         public CircleStoryViewModel()
         {
             
@@ -29,6 +45,9 @@ namespace Brook.DuDuRiBao.ViewModels
         public async Task Refresh()
         {
             await RefreshCircleInfo();
+            if (Circle == null)
+                return;
+
             await RefreshStories(false);
         }
 
@@ -38,6 +57,14 @@ namespace Brook.DuDuRiBao.ViewModels
                 return;
 
             Circle = await DataRequester.RequestCircleInfo(CircleId);
+            if (Circle == null)
+                return;
+
+            if (string.IsNullOrEmpty(Circle.Image))
+                Circle.Image = Circle.Thumbnail;
+            Circle.Adjust();
+
+            JoinCircleButtonIcon = Circle.Status == 1 ? _checkIcon : _addIcon;
             Notify("Circle");
         }
 
@@ -73,6 +100,34 @@ namespace Brook.DuDuRiBao.ViewModels
         {
             _currentDate = DateTime.Now.AddDays(1).ToString("yyyyMMdd");
             StoryDataList.Clear();
+        }
+
+        public async void JoinCircle()
+        {
+            if (!AuthorizationHelper.IsLogin)
+            {
+                PopupMessage.DisplayMessageInRes("NeedLogin");
+                return;
+            }
+
+            if(Misc.ZhiHuCircleId.ToString() == CircleId && JoinCircleButtonIcon == _checkIcon)
+            {
+                PopupMessage.DisplayMessageInRes("CannotQuitZhiHuCircle");
+                return;
+            }
+
+            if (JoinCircleButtonIcon == _addIcon)
+            {
+                JoinCircleButtonIcon = _checkIcon;
+                await DataRequester.JoinCircle(CircleId);
+                PopupMessage.DisplayMessageInRes("JoinCircleSuccess");
+            }
+            else
+            {
+                JoinCircleButtonIcon = _addIcon;
+                await DataRequester.QuitCircle(CircleId);
+                PopupMessage.DisplayMessageInRes("QuitCircleSuccess");
+            }
         }
     }
 }

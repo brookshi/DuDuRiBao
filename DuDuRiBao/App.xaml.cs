@@ -1,5 +1,6 @@
 ﻿using Brook.DuDuRiBao.Pages;
 using Brook.DuDuRiBao.Utils;
+using DuDuRiBao.Utils;
 using LLQ;
 using System;
 using System.Diagnostics;
@@ -115,6 +116,7 @@ namespace Brook.DuDuRiBao
                 e.Handled = true;
                 rootFrame.GoBack();
             }
+            NavigationManager.Instance.UpdateGoBackBtnVisibility();
         }
 
         public void InitConfig()

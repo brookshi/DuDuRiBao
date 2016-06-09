@@ -27,6 +27,7 @@ namespace Brook.DuDuRiBao.Utils
     public class ColorUtil
     {
         static string[] _colorPool = new string[] { "#4db6ac", "#ff8964", "#90a4ae", "#9575cd", "#aed581", "#9e9e9e", "#4dd0e1", "#a1887f" };
+        const float _deepIn = 0.7f;
 
         public static string GetColorStringByCircleId(int circleId)
         {
@@ -49,6 +50,20 @@ namespace Brook.DuDuRiBao.Utils
             var g = Convert.ToByte(hexValue.Substring(3, 2), 16);
             var b = Convert.ToByte(hexValue.Substring(4, 2), 16);
             return Color.FromArgb(255, r, g, b);
+        }
+
+        public static Brush GetDefaultCirclePanelBackground()
+        {
+            return new SolidColorBrush(Color.FromArgb(120, 0, 0, 0));
+        }
+
+        public static Brush GetDeepInBrush(Brush brush)
+        {
+            if (!(brush is SolidColorBrush))
+                return brush;
+
+            var color = ((SolidColorBrush)brush).Color;
+            return new SolidColorBrush(Color.FromArgb(255, (byte)(color.R * _deepIn), (byte)(color.G * _deepIn), (byte)(color.B * _deepIn)));
         }
     }
 }
