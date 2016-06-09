@@ -69,6 +69,7 @@ namespace Brook.DuDuRiBao.Pages
             string data = e.Value;
             if (!string.IsNullOrEmpty(data) && data.StartsWith(Html.NotifyPrex))
             {
+                data = data.ToLower();
                 if (data.Contains("explore"))
                 {
 
@@ -76,13 +77,13 @@ namespace Brook.DuDuRiBao.Pages
                 else
                 {
                     var id = data.Substring(data.LastIndexOf("/") + 1);
-                    if (data.Contains("circle"))
+                    if (data.Contains("circle/"))
                     {
                         NavigationManager.Instance.Navigate(Frame, typeof(CircleStoryPage), id);
                     }
-                    else if (data.Contains("Story"))
+                    else if (data.Contains("story"))
                     {
-
+                        LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.DisplayStory, Content = id });
                     }
                 }
             }
