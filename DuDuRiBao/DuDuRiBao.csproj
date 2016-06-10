@@ -193,6 +193,9 @@
     <Compile Include="Pages\CommentPage.xaml.cs">
       <DependentUpon>CommentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\HotCirclesPage.xaml.cs">
+      <DependentUpon>HotCirclesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainContentPage.xaml.cs">
       <DependentUpon>MainContentPage.xaml</DependentUpon>
     </Compile>
@@ -224,6 +227,7 @@
     <Compile Include="ViewModels\CircleStoryViewModel.cs" />
     <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\MainContentViewModel.cs" />
+    <Compile Include="ViewModels\HotCircleViewModel.cs" />
     <Compile Include="ViewModels\TimeLineViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.Circle.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -321,6 +325,10 @@
     <Page Include="Pages\CommentPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\HotCirclesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MainContentPage.xaml">
       <Generator>MSBuild:Compile</Generator>

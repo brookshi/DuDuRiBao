@@ -37,18 +37,21 @@ namespace DuDuRiBao.Utils
         {
             _frameStack.Push(frame);
             frame.Navigate(pageType);
+            UpdateGoBackBtnVisibility();
         }
 
         public void Navigate(Frame frame, Type pageType, object param)
         {
             _frameStack.Push(frame);
             frame.Navigate(pageType, param);
+            UpdateGoBackBtnVisibility();
         }
 
         public void Navigate(Frame frame, Type pageType, object param, NavigationTransitionInfo infoOverride)
         {
             _frameStack.Push(frame);
             frame.Navigate(pageType, param, infoOverride);
+            UpdateGoBackBtnVisibility();
         }
 
         public bool CanGoBack { get { return _frameStack.Count > 0; } }

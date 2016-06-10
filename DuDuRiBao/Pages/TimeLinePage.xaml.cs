@@ -72,7 +72,14 @@ namespace Brook.DuDuRiBao.Pages
                 data = data.ToLower();
                 if (data.Contains("explore"))
                 {
+                    if (data.Contains("circles/"))
+                    {
+                        NavigationManager.Instance.Navigate(Frame, typeof(HotCirclesPage));
+                    }
+                    else if (data.Contains("stories"))
+                    {
 
+                    }
                 }
                 else
                 {

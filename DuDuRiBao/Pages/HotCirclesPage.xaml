@@ -1,0 +1,20 @@
+﻿<common:PageBase x:Class="Brook.DuDuRiBao.Pages.HotCirclesPage"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:common="using:Brook.DuDuRiBao.Common"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:local="using:DuDuRiBao.Pages"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:vm="using:Brook.DuDuRiBao.ViewModels"
+                 mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:HotCircleViewModel />
+    </Page.DataContext>
+
+    <Grid>
+        <WebView common:WebViewExtend.StringContent="{Binding HotCircle}"
+                 DefaultBackgroundColor="White"
+                 ScriptNotify="WebView_ScriptNotify" />
+    </Grid>
+</common:PageBase>
