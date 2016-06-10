@@ -30,6 +30,7 @@ namespace Brook.DuDuRiBao.Pages
         {
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Required;
+            LLQNotifier.Default.Register(this);
             Loaded += HotStoriesPage_Loaded;
         }
 
@@ -50,6 +51,18 @@ namespace Brook.DuDuRiBao.Pages
                 data = data.ToLower();
                 var id = data.Substring(data.LastIndexOf("/") + 1);
                 LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.DisplayStory, Content = id });
+            }
+        }
+
+        [SubscriberCallback(typeof(StoryEvent))]
+        private void Subscriber(StoryEvent param)
+        {
+            switch (param.Type)
+            {
+                case StoryEventType.Night:
+                    if (VM != null)
+                        VM.RefreshHotStories();
+                    break;
             }
         }
     }

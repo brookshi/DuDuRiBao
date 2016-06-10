@@ -1,8 +1,10 @@
 ﻿using Brook.DuDuRiBao.Common;
+using Brook.DuDuRiBao.Events;
 using Brook.DuDuRiBao.Pages;
 using Brook.DuDuRiBao.Utils;
 using Brook.DuDuRiBao.ViewModels;
 using DuDuRiBao.Utils;
+using LLQ;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,6 +30,7 @@ namespace Brook.DuDuRiBao.Pages
         {
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Required;
+            LLQNotifier.Default.Register(this);
             Loaded += HotCirclesPage_Loaded;
         }
 
@@ -48,6 +51,18 @@ namespace Brook.DuDuRiBao.Pages
                 data = data.ToLower();
                 var id = data.Substring(data.LastIndexOf("/") + 1);
                 NavigationManager.Instance.Navigate(Frame, typeof(CircleStoryPage), id);
+            }
+        }
+
+        [SubscriberCallback(typeof(StoryEvent))]
+        private void Subscriber(StoryEvent param)
+        {
+            switch (param.Type)
+            {
+                case StoryEventType.Night:
+                    if (VM != null)
+                        VM.RefreshHotCircle();
+                    break;
             }
         }
     }
