@@ -14,12 +14,14 @@
 //   limitations under the License. 
 #endregion
 
+using DuDuRiBao.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 
 namespace Brook.DuDuRiBao.Utils
@@ -29,6 +31,22 @@ namespace Brook.DuDuRiBao.Utils
         public static Brush GetAppThemeBrush(string key)
         {
             return Application.Current.Resources[key] as Brush;
+        }
+
+        const double _scrollBarWidth = 8;
+
+        public static void SetScrollBarWidth(DependencyObject target)
+        {
+            SetScrollBarWidth(target, _scrollBarWidth);
+        }
+
+        public static void SetScrollBarWidth(DependencyObject target, double width)
+        {
+            var thumb = VisualHelper.FindVisualChild<ScrollBar>(target, "VerticalScrollBar");
+            if (thumb != null)
+            {
+                thumb.MaxWidth = thumb.MinWidth = width;
+            }
         }
     }
 }
