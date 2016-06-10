@@ -13,7 +13,7 @@ namespace Brook.DuDuRiBao.ViewModels
             if (isLoadingMore)
                 return;
 
-            var hotArticleList = await DataRequester.RequestHotArticles().ContinueWith(hotArticlesTask =>
+            var hotArticleList = await DataRequester.RequestHotStories().ContinueWith(hotArticlesTask =>
             {
                 var hotArticles = hotArticlesTask.Result;
                 if (string.IsNullOrEmpty(hotArticles))
