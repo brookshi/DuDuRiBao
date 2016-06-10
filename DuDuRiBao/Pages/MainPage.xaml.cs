@@ -120,10 +120,6 @@ namespace Brook.DuDuRiBao.Pages
                 case StoryEventType.Search:
                     ShowSearcher();
                     break;
-                case StoryEventType.Night:
-                    if (VM != null)
-                        VM.RefreshExplore();
-                    break;
                 case StoryEventType.DisplayStory:
                     DisplayStory(param.Content);
                     break;
@@ -152,7 +148,7 @@ namespace Brook.DuDuRiBao.Pages
                 case SearchType.Circle:
                     var circle = (CircleBase)param.SearchObj;
                     circle.Name = circle.Name.Replace("<em>", "").Replace("</em>", "");
-                    UpdateCircle(int.Parse(circle.Id), circle.Name, circle, false);
+                    NavigationManager.Instance.Navigate(TimeLineFrame, typeof(CircleStoryPage));
                     HideSearcher();
                     break;
                 case SearchType.Story:
@@ -162,24 +158,9 @@ namespace Brook.DuDuRiBao.Pages
             }
         }
 
-        private void RefershHotCircle_Click(object sender, RoutedEventArgs e)
-        {
-            VM.RefreshHotCircles();
-        }
-
         private void ResetCategoryPanel()
         {
             MainView.IsPaneOpen = !MainView.IsPaneOpen;
-        }
-
-        private void Home_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateCircle(Misc.Default_Category_Id, (sender as Button).Content.ToString(), null, true);
-        }
-
-        private void HotArticle_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateCircle(Misc.HotArtical_Category_Id, (sender as Button).Content.ToString(), null, true);
         }
 
         private void MyFav_Click(object sender, RoutedEventArgs e)
@@ -203,25 +184,19 @@ namespace Brook.DuDuRiBao.Pages
             ResetCategoryPanel();
         }
 
-        private void HotCircleListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            var circle = e.ClickedItem as HotCircle;
-            UpdateCircle(int.Parse(circle.Id), circle.Name, circle, true);
-        }
-
         private void UpdateCircle(int categoryId, string circleName, CircleBase circle, bool needResetPanel)
         {
-            VM.CurrentCategoryId = categoryId;
-            VM.CategoryName = circleName;
-            if (circle != null)
-            {
-                VM.CurrentCircle = circle;
-            }
+            //VM.CurrentCategoryId = categoryId;
+            //VM.CategoryName = circleName;
+            //if (circle != null)
+            //{
+            //    VM.CurrentCircle = circle;
+            //}
             //MainListView.SetRefresh(true);
-            if (needResetPanel)
-            {
-                ResetCategoryPanel();
-            }
+            //if (needResetPanel)
+            //{
+            //    ResetCategoryPanel();
+            //}
         }
     }
 }

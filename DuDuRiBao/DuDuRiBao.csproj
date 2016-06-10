@@ -233,9 +233,7 @@
     <Compile Include="ViewModels\MainContentViewModel.cs" />
     <Compile Include="ViewModels\HotCircleViewModel.cs" />
     <Compile Include="ViewModels\TimeLineViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.Circle.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.HotArticle.cs" />
     <Compile Include="ViewModels\MainViewModel.Favorites.cs" />
   </ItemGroup>
   <ItemGroup>

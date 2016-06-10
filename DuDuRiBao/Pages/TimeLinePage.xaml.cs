@@ -138,5 +138,17 @@ namespace Brook.DuDuRiBao.Pages
         {
             RefreshMainList();
         }
+
+        [SubscriberCallback(typeof(StoryEvent))]
+        private void Subscriber(StoryEvent param)
+        {
+            switch (param.Type)
+            {
+                case StoryEventType.Night:
+                    if (VM != null)
+                        VM.RefreshExplore();
+                    break;
+            }
+        }
     }
 }

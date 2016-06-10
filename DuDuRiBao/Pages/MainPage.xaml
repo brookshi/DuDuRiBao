@@ -80,28 +80,6 @@
                    PaneBackground="White">
             <SplitView.Pane>
                 <RelativePanel Background="{ThemeResource BrushPrimary}">
-                    <xp:XPButton x:Uid="Home"
-                                 x:Name="Home"
-                                 Width="{ThemeResource WidthStoryPanel}"
-                                 Height="48"
-                                 Background="Transparent"
-                                 BorderThickness="0"
-                                 Click="Home_Click"
-                                 Content=""
-                                 Foreground="{ThemeResource BrushToolBarForeground}"
-                                 IconForeground="{ThemeResource BrushToolBarForeground}"
-                                 IconInterval="12"
-                                 IconPosition="Left"
-                                 Padding="14, 0, 0, 0"
-                                 PointerOverBackground="{StaticResource BrushPointerOver}"
-                                 PressedBackground="{StaticResource BrushPressed}"
-                                 RelativePanel.AlignLeftWithPanel="True"
-                                 RelativePanel.AlignRightWithPanel="True"
-                                 RelativePanel.AlignTopWithPanel="True">
-                        <xp:XPButton.Icon>
-                            <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf015;" />
-                        </xp:XPButton.Icon>
-                    </xp:XPButton>
                     <xp:XPButton x:Uid="Favorite"
                                  x:Name="MyFav"
                                  Width="{ThemeResource WidthStoryPanel}"
@@ -118,32 +96,9 @@
                                  PointerOverBackground="{StaticResource BrushPointerOver}"
                                  PressedBackground="{StaticResource BrushPressed}"
                                  RelativePanel.AlignLeftWithPanel="True"
-                                 RelativePanel.AlignRightWithPanel="True"
-                                 RelativePanel.Below="Home">
+                                 RelativePanel.AlignRightWithPanel="True">
                         <xp:XPButton.Icon>
                             <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf005;" />
-                        </xp:XPButton.Icon>
-                    </xp:XPButton>
-                    <xp:XPButton x:Uid="HotArticle"
-                                 x:Name="HotArticle"
-                                 Width="{ThemeResource WidthStoryPanel}"
-                                 Height="48"
-                                 Background="Transparent"
-                                 BorderThickness="0"
-                                 Click="HotArticle_Click"
-                                 Content=""
-                                 Foreground="{ThemeResource BrushToolBarForeground}"
-                                 IconForeground="{ThemeResource BrushToolBarForeground}"
-                                 IconInterval="12"
-                                 IconPosition="Left"
-                                 Padding="14, 0, 0, 0"
-                                 PointerOverBackground="{StaticResource BrushPointerOver}"
-                                 PressedBackground="{StaticResource BrushPressed}"
-                                 RelativePanel.AlignLeftWithPanel="True"
-                                 RelativePanel.AlignRightWithPanel="True"
-                                 RelativePanel.Below="MyFav">
-                        <xp:XPButton.Icon>
-                            <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf0e7;" />
                         </xp:XPButton.Icon>
                     </xp:XPButton>
                     <xp:XPButton x:Uid="Feedback"
@@ -163,7 +118,7 @@
                                  PressedBackground="{StaticResource BrushPressed}"
                                  RelativePanel.AlignLeftWithPanel="True"
                                  RelativePanel.AlignRightWithPanel="True"
-                                 RelativePanel.Below="HotArticle">
+                                 RelativePanel.Below="MyFav">
                         <xp:XPButton.Icon>
                             <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf188;" />
                         </xp:XPButton.Icon>
@@ -195,60 +150,6 @@
                                   RelativePanel.RightOf="NightModeTxt"
                                   RequestedTheme="Dark"
                                   Toggled="NightModeBtn_Toggled" />
-                    <RelativePanel x:Name="HotCircle"
-                                   VerticalAlignment="Center"
-                                   Background="{ThemeResource BrushPrimaryDark}"
-                                   RelativePanel.AlignLeftWithPanel="True"
-                                   RelativePanel.AlignRightWithPanel="True"
-                                   RelativePanel.Below="NightIcon">
-                        <TextBlock Margin="14, 0, 0, 0"
-                                   FontSize="12"
-                                   Foreground="{ThemeResource BrushHotCircleTitle}"
-                                   RelativePanel.AlignLeftWithPanel="True"
-                                   RelativePanel.AlignVerticalCenterWithPanel="True"
-                                   Text="{x:Bind VM.HotCircleWithCount, Mode=OneWay}" />
-                        <xp:XPButton x:Uid="HotCircleRefresh"
-                                     Height="24"
-                                     Margin="12, 0, 0, 0"
-                                     Background="Transparent"
-                                     BorderThickness="0"
-                                     Click="RefershHotCircle_Click"
-                                     Content=""
-                                     CornerRadius="4"
-                                     FontSize="12"
-                                     Foreground="{ThemeResource BrushHotCircleTitle}"
-                                     IconInterval="12"
-                                     IconPosition="Left"
-                                     IconSize="12"
-                                     PointerOverBackground="{StaticResource BrushPointerOver}"
-                                     PressedBackground="{StaticResource BrushPressed}"
-                                     RelativePanel.AlignRightWithPanel="True"
-                                     RelativePanel.AlignVerticalCenterWithPanel="True">
-                            <xp:XPButton.Icon>
-                                <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf021;" />
-                            </xp:XPButton.Icon>
-                        </xp:XPButton>
-                    </RelativePanel>
-                    <ListView x:Name="HotCircleListView"
-                              Margin="0, 12, 0, 0"
-                              IsItemClickEnabled="True"
-                              ItemClick="HotCircleListView_ItemClick"
-                              ItemTemplate="{StaticResource HotCircleItem}"
-                              ItemsSource="{x:Bind VM.HotCircles, Mode=OneWay}"
-                              RelativePanel.AlignBottomWithPanel="True"
-                              RelativePanel.AlignLeftWithPanel="True"
-                              RelativePanel.AlignRightWithPanel="True"
-                              RelativePanel.Below="HotCircle"
-                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                              SelectionMode="Single">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                <Setter Property="Padding" Value="0" />
-                                <Setter Property="Margin" Value="0, 0, 0, 2" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
                 </RelativePanel>
             </SplitView.Pane>
             <RelativePanel>

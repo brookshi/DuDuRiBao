@@ -23,7 +23,7 @@ namespace Brook.DuDuRiBao.ViewModels
             }
             else
             {
-                ResetStorys();
+               // ResetStorys();
                 favData = await DataRequester.RequestLatestFavorites();
                 if (favData != null && favData.stories != null && favData.stories.Count > 0)
                 {
@@ -36,7 +36,7 @@ namespace Brook.DuDuRiBao.ViewModels
 
             FavoritesLastTime = favData.last_time;
 
-            StoryDataList.AddRange(favData.stories);
+           // StoryDataList.AddRange(favData.stories);
         }
     }
 }

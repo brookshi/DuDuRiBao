@@ -53,7 +53,7 @@ namespace Brook.DuDuRiBao.ViewModels
 
         public async Task Refresh()
         {
-            ResetStorys();
+            ResetStories();
             await RequestMainList(false);
 
             if (StoryDataList.Count < Misc.Page_Count)
@@ -72,7 +72,7 @@ namespace Brook.DuDuRiBao.ViewModels
             Explore = await DataRequester.RequestExplore();
         }
 
-        protected void ResetStorys()
+        protected void ResetStories()
         {
             _currentDate = DateTime.Now.AddDays(1).ToString("yyyyMMdd");
             StoryDataList.Clear();
@@ -80,10 +80,10 @@ namespace Brook.DuDuRiBao.ViewModels
 
         private async Task RequestMainList(bool isLoadingMore)
         {
-            await RequestDefaultCategoryData(isLoadingMore);
+            await RequestStories(isLoadingMore);
         }
 
-        private async Task RequestDefaultCategoryData(bool isLoadingMore)
+        private async Task RequestStories(bool isLoadingMore)
         {
             TimeLine timeLine = null;
 
@@ -96,7 +96,7 @@ namespace Brook.DuDuRiBao.ViewModels
             }
             else
             {
-                ResetStorys();
+                ResetStories();
                 timeLine = await DataRequester.RequestLatestTimeLine();
                 if (timeLine != null)
                 {
