@@ -1,5 +1,6 @@
 ﻿using Brook.DuDuRiBao.Common;
 using Brook.DuDuRiBao.Events;
+using Brook.DuDuRiBao.Utils;
 using LLQ;
 using System.ComponentModel;
 using Windows.UI.Xaml;
@@ -32,6 +33,10 @@ namespace Brook.DuDuRiBao.Models
         public LoginType LoginType { get; set; } = LoginType.None;
 
         public bool IsCommentPanelOpen { get; set; } = false;
+
+        public bool LazyLoadImage { get; set; } = false;
+
+        public bool NeedLazyLoadImage { get { return LazyLoadImage && NetworkUtil.IsMobile; } }
 
         public bool IsZhiHuAuthoVaild() { return ZhiHuAuthoInfo != null && !string.IsNullOrEmpty(ZhiHuAuthoInfo.access_token); }
 

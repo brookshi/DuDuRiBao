@@ -89,8 +89,13 @@ namespace Brook.DuDuRiBao.Utils
             {
                 body = "<body>" + content.Body + "</body>";
             }
-            body = LazyImageHandle(body);
-            var source = string.Format(_htmlTemplate, cssBuilder.ToString(), jsBuilder.ToString(), body, _notifyScript + _lazyLoadScript);
+            var script = _notifyScript;
+            if(StorageInfo.Instance.NeedLazyLoadImage)
+            {
+                body = LazyImageHandle(body);
+                script += _lazyLoadScript;
+            }
+            var source = string.Format(_htmlTemplate, cssBuilder.ToString(), jsBuilder.ToString(), body, script);
 
             source = source.Replace("<div class=\"img-place-holder\"></div>", header);
 
@@ -100,13 +105,16 @@ namespace Brook.DuDuRiBao.Utils
         private static string LazyImageHandle(string body)
         {
             var newBody = body;
-            var pattern = "<img class=\"content-image\".*?/>";
+            var pattern = "<img.*?>";
             var srcPattern = "src=\".*?\"";
             var regex = new Regex(pattern, RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.Compiled);
             var srcRegex = new Regex(srcPattern, RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.Compiled);
             var matches = regex.Matches(newBody);
             for(int i=0; i< matches.Count;i++)
             {
+                if (matches[i].Value.Contains("class=\"avatar\""))
+                    continue;
+
                 var srcMatch = srcRegex.Match(matches[i].Value);
                 if (srcMatch == null || string.IsNullOrEmpty(srcMatch.Value))
                     continue;
