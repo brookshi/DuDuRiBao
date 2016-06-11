@@ -19,6 +19,7 @@ using System.Text;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
+using System.Text.RegularExpressions;
 
 namespace Brook.DuDuRiBao.Utils
 {
@@ -53,6 +54,10 @@ namespace Brook.DuDuRiBao.Utils
                                                +"</div>"
                                                +"</div>";
 
+        private const string _lazyLoadDiv = "<div class='progressB' style='text-align:center; padding-top:40px; font-size:20px; color:#000000; background-color:gray; height:80px' data-src='{0}'> 点击加载图片 </div>";
+
+        private const string _lazyLoadScript = "<script>function getElementsByClassName(tagName,className) { var tag = document.getElementsByTagName(tagName); var tagAll = []; for(var i = 0 ; i<tag.length ; i++){  if(tag[i].className.indexOf(className) != -1){ tagAll[tagAll.length] = tag[i]; }} return tagAll; }  function removeElement(_element){var _parentElement = _element.parentNode;if(_parentElement){_parentElement.removeChild(_element); }}function insertAfter(newElement,targetElement){ var parent=targetElement.parentNode; if(parent.lastChild==targetElement){ parent.appendChild(newElement); } else{ parent.insertBefore(newElement,targetElement.nextSibling); } } var $progresses = getElementsByClassName('div','progressB');$progresses.forEach(function($progress){var url = $progress.getAttribute('data-src');$progress.addEventListener('click', function() {var $img = $progress.nextSibling; if(!$img){$img = document.createElement('img');$img.setAttribute('class', 'content-image');insertAfter($img, $progress);}else{$img.setAttribute('src', url); removeElement($progress);}});});</script>";
+
         public static void ArrangeMainContent(MainContent content)
         {
             content.Body = ConstructorHtml(content);
@@ -84,12 +89,32 @@ namespace Brook.DuDuRiBao.Utils
             {
                 body = "<body>" + content.Body + "</body>";
             }
-
-            var source = string.Format(_htmlTemplate, cssBuilder.ToString(), jsBuilder.ToString(), body, _notifyScript);
+            body = LazyImageHandle(body);
+            var source = string.Format(_htmlTemplate, cssBuilder.ToString(), jsBuilder.ToString(), body, _notifyScript + _lazyLoadScript);
 
             source = source.Replace("<div class=\"img-place-holder\"></div>", header);
 
             return source;
+        }
+
+        private static string LazyImageHandle(string body)
+        {
+            var newBody = body;
+            var pattern = "<img class=\"content-image\".*?/>";
+            var srcPattern = "src=\".*?\"";
+            var regex = new Regex(pattern, RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            var srcRegex = new Regex(srcPattern, RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            var matches = regex.Matches(newBody);
+            for(int i=0; i< matches.Count;i++)
+            {
+                var srcMatch = srcRegex.Match(matches[i].Value);
+                if (srcMatch == null || string.IsNullOrEmpty(srcMatch.Value))
+                    continue;
+
+                newBody = newBody.Replace(matches[i].Value, string.Format(_lazyLoadDiv, srcMatch.Value.Replace("src=\"", "").Replace("\"", "")) + srcRegex.Replace(matches[i].Value, ""));
+            }
+
+            return newBody;
         }
     }
 }
