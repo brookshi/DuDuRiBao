@@ -61,6 +61,7 @@ namespace Brook.DuDuRiBao.Models
             LoginType = info.LoginType;
             IsCommentPanelOpen = info.IsCommentPanelOpen;
             AppTheme = info.AppTheme;
+            LazyLoadImage = info.LazyLoadImage;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

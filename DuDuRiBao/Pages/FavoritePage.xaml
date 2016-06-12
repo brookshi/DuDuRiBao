@@ -1,0 +1,42 @@
+﻿<common:PageBase x:Class="Brook.DuDuRiBao.Pages.FavoritePage"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:common="using:Brook.DuDuRiBao.Common"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:llm="using:LLM"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:vm="using:Brook.DuDuRiBao.ViewModels"
+                 RequestedTheme="{Binding Source={StaticResource StorageInfo},
+                                          Path=AppTheme}"
+                 mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:FavoriteViewModel />
+    </Page.DataContext>
+
+    <Grid Background="{ThemeResource BrushStoryList}">
+        <llm:LLMListView x:Name="FavoriteListView"
+                         CanPullToRefresh="True"
+                         IsItemClickEnabled="True"
+                         IsItemSwipeEnabled="False"
+                         ItemClick="FavoriteListView_ItemClick"
+                         ItemTemplate="{StaticResource Favorite}"
+                         ItemsSource="{x:Bind VM.StoryDataList}"
+                         LoadMoreProgressBarBrush="{ThemeResource BrushHighLight}"
+                         RefreshAreaHeight="30"
+                         RefreshButtonBackground="{ThemeResource BrushHighLight}"
+                         RefreshButtonVisibility="{x:Bind IsDesktopDevice, Converter={StaticResource BooleanToVisibilityConverter}}"
+                         RefreshIcon="Refresh"
+                         RefreshProgressBarBrush="{ThemeResource BrushHighLight}"
+                         RefreshProgressRingBrush="{ThemeResource BrushHighLight}"
+                         SelectionMode="Single">
+            <llm:LLMListView.ItemContainerStyle>
+                <Style TargetType="llm:LLMListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="Margin" Value="0, 0, 0, 6" />
+                </Style>
+            </llm:LLMListView.ItemContainerStyle>
+        </llm:LLMListView>
+    </Grid>
+</common:PageBase>

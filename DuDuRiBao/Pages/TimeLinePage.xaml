@@ -9,6 +9,8 @@
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:vm="using:Brook.DuDuRiBao.ViewModels"
                  xmlns:zh="using:ZhiHu.Controls"
+                 RequestedTheme="{Binding Source={StaticResource StorageInfo},
+                                          Path=AppTheme}"
                  mc:Ignorable="d">
 
     <Page.DataContext>
@@ -67,6 +69,8 @@
         </PivotItem>
         <PivotItem x:Uid="PivotMessage"
                    Margin="0"
-                   Header="" />
+                   Header="">
+            <TextBlock Margin="4, 36, 0, 0" Text="暂时还未实现该功能，我的账号消息不够多:)" />
+        </PivotItem>
     </zh:ZhiHuPivot>
 </common:PageBase>

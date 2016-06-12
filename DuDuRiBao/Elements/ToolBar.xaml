@@ -68,7 +68,7 @@
                                                TargetToolBarHost="ContentPage" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="MenuButton.Visibility" Value="Collapsed" />
+                        <Setter Target="SettingButton.Visibility" Value="Collapsed" />
                         <Setter Target="SearchButton.Visibility" Value="Collapsed" />
                         <Setter Target="LoginButton.Visibility" Value="Collapsed" />
                         <Setter Target="CategoryText.(RelativePanel.RightOf)" Value="" />
@@ -83,7 +83,7 @@
                                                TargetToolBarHost="CommentPage" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="MenuButton.Visibility" Value="Collapsed" />
+                        <Setter Target="SettingButton.Visibility" Value="Collapsed" />
                         <Setter Target="CommentButton.Visibility" Value="Collapsed" />
                         <Setter Target="SearchButton.Visibility" Value="Collapsed" />
                         <Setter Target="LoginButton.Visibility" Value="Collapsed" />
@@ -97,28 +97,53 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <RelativePanel Background="{ThemeResource BrushPrimary}">
-            <xp:XPButton x:Name="MenuButton"
-                         Width="48"
-                         Height="48"
-                         Background="Transparent"
-                         Click="MenuButton_Click"
-                         Foreground="{ThemeResource BrushToolBarForeground}"
-                         IconForeground="{ThemeResource BrushToolBarForeground}"
-                         IconPosition="OnlyIcon"
-                         IconSize="20"
-                         PointerOverBackground="{StaticResource BrushPointerOver}"
-                         PressedBackground="{StaticResource BrushPressed}">
-                <xp:XPButton.Icon>
-                    <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE700;" />
-                </xp:XPButton.Icon>
-            </xp:XPButton>
+            <Grid x:Name="LoginPanel" RelativePanel.AlignLeftWithPanel="True">
+                <xp:XPButton x:Name="SettingButton"
+                             Width="48"
+                             Height="48"
+                             Background="Transparent"
+                             Click="SettingButton_Click"
+                             Foreground="{ThemeResource BrushToolBarForeground}"
+                             IconForeground="{ThemeResource BrushToolBarForeground}"
+                             IconPosition="OnlyIcon"
+                             IconSize="20"
+                             PointerOverBackground="{StaticResource BrushPointerOver}"
+                             PressedBackground="{StaticResource BrushPressed}">
+                    <xp:XPButton.Icon>
+                        <BitmapIcon UriSource="ms-appx:///Assets/Setting.png" />
+                    </xp:XPButton.Icon>
+                </xp:XPButton>
+                <xp:XPButton x:Name="LoginSuccessButton"
+                             Width="48"
+                             Height="48"
+                             Background="Transparent"
+                             Click="SettingButton_Click"
+                             Foreground="{ThemeResource BrushToolBarForeground}"
+                             IconForeground="{ThemeResource BrushToolBarForeground}"
+                             IconPosition="NoIcon"
+                             Padding="0"
+                             PointerOverBackground="{StaticResource BrushPointerOver}"
+                             PressedBackground="{StaticResource BrushPressed}"
+                             Visibility="Collapsed">
+                    <xp:XPButton.Content>
+                        <Rectangle Width="28"
+                                   Height="28"
+                                   RadiusX="14"
+                                   RadiusY="14">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{x:Bind UserPhotoUrl, Mode=OneWay}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </xp:XPButton.Content>
+                </xp:XPButton>
+            </Grid>
             <TextBlock x:Name="CategoryText"
                        Margin="10, 0, 0, 0"
                        FontSize="16"
                        FontWeight="Medium"
                        Foreground="{ThemeResource BrushToolBarForeground}"
                        RelativePanel.AlignVerticalCenterWithPanel="True"
-                       RelativePanel.RightOf="MenuButton"
+                       RelativePanel.RightOf="LoginPanel"
                        Text="{x:Bind Category, Mode=OneWay}" />
             <xp:XPButton x:Name="SearchButton"
                          Width="48"
@@ -137,67 +162,23 @@
                     <BitmapIcon UriSource="ms-appx:///Assets/Search.png" />
                 </xp:XPButton.Icon>
             </xp:XPButton>
-            <Grid x:Name="LoginPanel"
-                  RelativePanel.AlignVerticalCenterWithPanel="True"
-                  RelativePanel.RightOf="SearchButton">
-                <xp:XPButton x:Name="LoginButton"
-                             Width="48"
-                             Height="48"
-                             Background="Transparent"
-                             Click="LoginButton_Click"
-                             Foreground="{ThemeResource BrushToolBarForeground}"
-                             IconPosition="NoIcon"
-                             Padding="0"
-                             PointerOverBackground="{StaticResource BrushPointerOver}"
-                             PressedBackground="{StaticResource BrushPressed}">
-                    <xp:XPButton.Content>
-                        <Grid>
-                            <Rectangle Width="28"
-                                       Height="28"
-                                       RadiusX="14"
-                                       RadiusY="14">
-                                <Rectangle.Fill>
-                                    <ImageBrush ImageSource="{x:Bind UserPhotoUrl, Mode=OneWay}" />
-                                </Rectangle.Fill>
-                            </Rectangle>
-                            <Rectangle Width="28"
-                                       Height="28"
-                                       Fill="{ThemeResource BrushMask}"
-                                       RadiusX="14"
-                                       RadiusY="14" />
-                        </Grid>
-                    </xp:XPButton.Content>
-                </xp:XPButton>
-                <xp:XPButton x:Name="LoginSuccessButton"
-                             Width="48"
-                             Height="48"
-                             Background="Transparent"
-                             Foreground="{ThemeResource BrushToolBarForeground}"
-                             IconForeground="{ThemeResource BrushToolBarForeground}"
-                             IconPosition="NoIcon"
-                             Padding="0"
-                             PointerOverBackground="{StaticResource BrushPointerOver}"
-                             PressedBackground="{StaticResource BrushPressed}"
-                             Visibility="Collapsed">
-                    <xp:XPButton.Content>
-                        <Rectangle Width="28"
-                                   Height="28"
-                                   RadiusX="14"
-                                   RadiusY="14">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{x:Bind UserPhotoUrl, Mode=OneWay}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </xp:XPButton.Content>
-                    <xp:XPButton.Flyout>
-                        <MenuFlyout>
-                            <MenuFlyoutItem x:Uid="Logout"
-                                            Command="{x:Bind LogoutCommand}"
-                                            Text="" />
-                        </MenuFlyout>
-                    </xp:XPButton.Flyout>
-                </xp:XPButton>
-            </Grid>
+            <xp:XPButton x:Name="AddButton"
+                         Width="48"
+                         Height="48"
+                         Background="Transparent"
+                         Click="AddButton_Click"
+                         Foreground="{ThemeResource BrushToolBarForeground}"
+                         IconForeground="{ThemeResource BrushToolBarForeground}"
+                         IconPosition="OnlyIcon"
+                         Padding="0"
+                         PointerOverBackground="{StaticResource BrushPointerOver}"
+                         PressedBackground="{StaticResource BrushPressed}"
+                         RelativePanel.AlignVerticalCenterWithPanel="True"
+                         RelativePanel.RightOf="SearchButton">
+                <xp:XPButton.Icon>
+                    <BitmapIcon UriSource="ms-appx:///Assets/Add.png" />
+                </xp:XPButton.Icon>
+            </xp:XPButton>
             <xp:XPButton x:Name="CommentButton"
                          Height="48"
                          Margin="10, 0, 0, 0"

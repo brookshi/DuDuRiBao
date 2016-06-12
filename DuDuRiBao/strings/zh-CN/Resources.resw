@@ -348,4 +348,16 @@
   <data name="DefaultTitle" xml:space="preserve">
     <value>读读日报小布版</value>
   </data>
+  <data name="Developing" xml:space="preserve">
+    <value>暂时还未实现该功能</value>
+  </data>
+  <data name="LazyImageMode.Text" xml:space="preserve">
+    <value> 省流量模式</value>
+  </data>
+  <data name="LoginBtn.Content" xml:space="preserve">
+    <value>登录</value>
+  </data>
+  <data name="LogoutBtn.Content" xml:space="preserve">
+    <value>退出登录</value>
+  </data>
 </root>

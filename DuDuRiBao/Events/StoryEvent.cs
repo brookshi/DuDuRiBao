@@ -29,6 +29,7 @@ namespace Brook.DuDuRiBao.Events
         Night,
         DisplayStory,
         Circle,
+        Setting,
     }
 
     public class StoryEvent

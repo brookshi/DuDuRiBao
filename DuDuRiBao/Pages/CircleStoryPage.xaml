@@ -9,6 +9,8 @@
                  xmlns:local="using:Brook.DuDuRiBao.Pages"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:vm="using:Brook.DuDuRiBao.ViewModels"
+                 RequestedTheme="{Binding Source={StaticResource StorageInfo},
+                                          Path=AppTheme}"
                  mc:Ignorable="d">
     <Page.DataContext>
         <vm:CircleStoryViewModel />

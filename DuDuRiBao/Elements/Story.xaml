@@ -189,6 +189,7 @@
                 <TextBlock x:Name="MainItem_Content"
                            Margin="8"
                            FontWeight="Medium"
+                           Foreground="{ThemeResource BrushStoryTitle}"
                            LineHeight="24"
                            MaxLines="2"
                            RelativePanel.RightOf="MainItem_Image"

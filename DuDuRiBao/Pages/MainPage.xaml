@@ -72,113 +72,32 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <element:ToolBar Category="{x:Bind VM.CategoryName, Mode=OneWay}" Host="MainPage" />
-        <SplitView x:Name="MainView"
-                   Grid.Row="1"
-                   Background="{ThemeResource BrushListBackground}"
-                   DisplayMode="Overlay"
-                   OpenPaneLength="{StaticResource WidthCategoryPanel}"
-                   PaneBackground="White">
-            <SplitView.Pane>
-                <RelativePanel Background="{ThemeResource BrushPrimary}">
-                    <xp:XPButton x:Uid="Favorite"
-                                 x:Name="MyFav"
-                                 Width="{ThemeResource WidthStoryPanel}"
-                                 Height="48"
-                                 Background="Transparent"
-                                 BorderThickness="0"
-                                 Click="MyFav_Click"
-                                 Content=""
-                                 Foreground="{ThemeResource BrushToolBarForeground}"
-                                 IconForeground="{ThemeResource BrushToolBarForeground}"
-                                 IconInterval="12"
-                                 IconPosition="Left"
-                                 Padding="14, 0, 0, 0"
-                                 PointerOverBackground="{StaticResource BrushPointerOver}"
-                                 PressedBackground="{StaticResource BrushPressed}"
-                                 RelativePanel.AlignLeftWithPanel="True"
-                                 RelativePanel.AlignRightWithPanel="True">
-                        <xp:XPButton.Icon>
-                            <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf005;" />
-                        </xp:XPButton.Icon>
-                    </xp:XPButton>
-                    <xp:XPButton x:Uid="Feedback"
-                                 x:Name="FeedbackBtn"
-                                 Width="{ThemeResource WidthStoryPanel}"
-                                 Height="48"
-                                 Background="Transparent"
-                                 BorderThickness="0"
-                                 Click="Feedback_Click"
-                                 Content=""
-                                 Foreground="{ThemeResource BrushToolBarForeground}"
-                                 IconForeground="{ThemeResource BrushToolBarForeground}"
-                                 IconInterval="12"
-                                 IconPosition="Left"
-                                 Padding="14, 0, 0, 0"
-                                 PointerOverBackground="{StaticResource BrushPointerOver}"
-                                 PressedBackground="{StaticResource BrushPressed}"
-                                 RelativePanel.AlignLeftWithPanel="True"
-                                 RelativePanel.AlignRightWithPanel="True"
-                                 RelativePanel.Below="MyFav">
-                        <xp:XPButton.Icon>
-                            <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf188;" />
-                        </xp:XPButton.Icon>
-                    </xp:XPButton>
-                    <FontIcon x:Name="NightIcon"
-                              Height="48"
-                              Margin="18, 0, 12, 0"
-                              FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome"
-                              FontSize="16"
-                              Foreground="{ThemeResource BrushToolBarForeground}"
-                              Glyph="&#xf186;"
-                              RelativePanel.AlignLeftWithPanel="True"
-                              RelativePanel.Below="FeedbackBtn" />
-                    <TextBlock x:Uid="NightMode"
-                               x:Name="NightModeTxt"
-                               Foreground="{ThemeResource BrushToolBarForeground}"
-                               RelativePanel.AlignVerticalCenterWith="NightIcon"
-                               RelativePanel.RightOf="NightIcon"
-                               Text="" />
-                    <ToggleSwitch x:Name="NightModeBtn"
-                                  Margin="28, 0, 0, 0"
-                                  IsOn="{Binding Source={StaticResource StorageInfo},
-                                                 Path=AppTheme,
-                                                 Converter={StaticResource DarkThemeToggleConverter},
-                                                 Mode=TwoWay}"
-                                  OffContent=""
-                                  OnContent=""
-                                  RelativePanel.AlignVerticalCenterWith="NightIcon"
-                                  RelativePanel.RightOf="NightModeTxt"
-                                  RequestedTheme="Dark"
-                                  Toggled="NightModeBtn_Toggled" />
-                </RelativePanel>
-            </SplitView.Pane>
-            <RelativePanel>
-                <Grid x:Name="LeftPanel"
-                      RelativePanel.AlignBottomWithPanel="True"
-                      RelativePanel.AlignLeftWithPanel="True"
-                      RelativePanel.AlignTopWithPanel="True">
-                    <Frame x:Name="TimeLineFrame" Width="{StaticResource WidthStoryPanel}" />
-                    <element:Searcher x:Name="Searcher"
-                                      Width="{StaticResource WidthStoryPanel}"
-                                      Margin="0, -48, 0, 0" />
-                </Grid>
-                <SplitView x:Name="StoryContentView"
-                           CompactPaneLength="0"
-                           DisplayMode="Inline"
-                           IsPaneOpen="False"
-                           OpenPaneLength="{StaticResource WidthCommentPanel}"
-                           PaneBackground="{ThemeResource BrushListBackground}"
-                           PanePlacement="Right"
-                           RelativePanel.AlignBottomWithPanel="True"
-                           RelativePanel.AlignRightWithPanel="True"
-                           RelativePanel.AlignTopWithPanel="True"
-                           RelativePanel.RightOf="LeftPanel">
-                    <SplitView.Pane>
-                        <Frame x:Name="CommentFrame" />
-                    </SplitView.Pane>
-                    <Frame x:Name="MainContentFrame" />
-                </SplitView>
-            </RelativePanel>
-        </SplitView>
+        <RelativePanel Grid.Row="1" Background="{ThemeResource BrushListBackground}">
+            <Grid x:Name="LeftPanel"
+                  RelativePanel.AlignBottomWithPanel="True"
+                  RelativePanel.AlignLeftWithPanel="True"
+                  RelativePanel.AlignTopWithPanel="True">
+                <Frame x:Name="TimeLineFrame" Width="{StaticResource WidthStoryPanel}" />
+                <element:Searcher x:Name="Searcher"
+                                  Width="{StaticResource WidthStoryPanel}"
+                                  Margin="0, -48, 0, 0" />
+            </Grid>
+            <SplitView x:Name="StoryContentView"
+                       CompactPaneLength="0"
+                       DisplayMode="Inline"
+                       IsPaneOpen="False"
+                       OpenPaneLength="{StaticResource WidthCommentPanel}"
+                       PaneBackground="{ThemeResource BrushListBackground}"
+                       PanePlacement="Right"
+                       RelativePanel.AlignBottomWithPanel="True"
+                       RelativePanel.AlignRightWithPanel="True"
+                       RelativePanel.AlignTopWithPanel="True"
+                       RelativePanel.RightOf="LeftPanel">
+                <SplitView.Pane>
+                    <Frame x:Name="CommentFrame" />
+                </SplitView.Pane>
+                <Frame x:Name="MainContentFrame" />
+            </SplitView>
+        </RelativePanel>
     </Grid>
 </common:PageBase>

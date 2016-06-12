@@ -103,9 +103,6 @@ namespace Brook.DuDuRiBao.Pages
         {
             switch (param.Type)
             {
-                case StoryEventType.Menu:
-                    ResetCategoryPanel();
-                    break;
                 case StoryEventType.Comment:
                     if (!Config.IsSinglePage)
                     {
@@ -125,6 +122,11 @@ namespace Brook.DuDuRiBao.Pages
                     break;
                 case StoryEventType.Circle:
                     NavigationManager.Instance.Navigate(TimeLineFrame, typeof(CircleStoryPage), param.Content);
+                    break;
+                case StoryEventType.Setting:
+                    if (TimeLineFrame.Content is SettingPage)
+                        return;
+                    NavigationManager.Instance.Navigate(TimeLineFrame, typeof(SettingPage));
                     break;
             }
         }
@@ -156,47 +158,6 @@ namespace Brook.DuDuRiBao.Pages
                     DisplayStory(story.Id.ToString());
                     break;
             }
-        }
-
-        private void ResetCategoryPanel()
-        {
-            MainView.IsPaneOpen = !MainView.IsPaneOpen;
-        }
-
-        private void MyFav_Click(object sender, RoutedEventArgs e)
-        {
-            if (!AuthorizationHelper.IsLogin)
-            {
-                PopupMessage.DisplayMessageInRes("NeedLogin");
-                return;
-            }
-            UpdateCircle(Misc.Favorite_Category_Id, StringUtil.GetString("FavCategoryName"), null, true);
-        }
-
-        private void NightModeBtn_Toggled(object sender, RoutedEventArgs e)
-        {
-            StorageUtil.UpdateStorageInfo();
-        }
-
-        private void Feedback_Click(object sender, RoutedEventArgs e)
-        {
-            DisplayStory(Misc.Feedback_Story_Id.ToString());
-            ResetCategoryPanel();
-        }
-
-        private void UpdateCircle(int categoryId, string circleName, CircleBase circle, bool needResetPanel)
-        {
-            //VM.CurrentCategoryId = categoryId;
-            //VM.CategoryName = circleName;
-            //if (circle != null)
-            //{
-            //    VM.CurrentCircle = circle;
-            //}
-            //MainListView.SetRefresh(true);
-            //if (needResetPanel)
-            //{
-            //    ResetCategoryPanel();
-            //}
         }
     }
 }

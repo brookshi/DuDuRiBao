@@ -9,6 +9,7 @@ using Windows.UI.Xaml;
 using System;
 using Windows.UI.Xaml.Controls;
 using XP;
+using DuDuRiBao.Utils;
 
 namespace Brook.DuDuRiBao.Elements
 {
@@ -152,13 +153,13 @@ namespace Brook.DuDuRiBao.Elements
             {
                 UserPhotoUrl = param.UserPhotoUrl;
                 LoginSuccessButton.Visibility = Visibility.Visible;
-                LoginButton.Visibility = Visibility.Collapsed;
+                SettingButton.Visibility = Visibility.Collapsed;
             }
             else
             {
                 UserPhotoUrl = "ms-appx:///Assets/Login.png";
                 LoginSuccessButton.Visibility = Visibility.Collapsed;
-                LoginButton.Visibility = Visibility.Visible;
+                SettingButton.Visibility = Visibility.Visible;
             }
         }
 
@@ -168,30 +169,20 @@ namespace Brook.DuDuRiBao.Elements
             ShareUrl = shareEvent.ShareUrl;
         }
 
-        private void MenuButton_Click(object sender, RoutedEventArgs e)
+        private void SettingButton_Click(object sender, RoutedEventArgs e)
         {
-            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Menu });
+            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Setting });
         }
 
-        private async void LoginButton_Click(object sender, RoutedEventArgs e)
+        private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            if(!AuthorizationHelper.IsLogin)
-            {
-                LoginSelectedDialog dlg = new LoginSelectedDialog();
-                await dlg.ShowAsync();
-            }
+            PopupMessage.DisplayMessageInRes("Developing");
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Search });
         }
-
-        public DelayCommand<XPButton> LogoutCommand { get; set; } = new DelayCommand<XPButton>(async btn =>
-        {
-            await AuthorizationHelper.Logout();
-            LLQNotifier.Default.Notify(new LoginEvent() { IsLogin = false });
-        });
 
         private void ShareToWeiBo(object sender, RoutedEventArgs e)
         {
