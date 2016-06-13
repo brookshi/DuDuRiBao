@@ -28,6 +28,8 @@ namespace Brook.DuDuRiBao.Pages
         public FavoriteViewModel VM { get { return GetVM<FavoriteViewModel>(); } }
         private bool _isLoadComplete = false;
 
+        public Visibility ToolBarVisibility { get { return Config.UIStatus == AppUIStatus.List ? Visibility.Visible : Visibility.Collapsed; } }
+
         public FavoritePage()
         {
             this.InitializeComponent();

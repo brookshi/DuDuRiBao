@@ -61,7 +61,7 @@ namespace Brook.DuDuRiBao.Pages
                 return;
             }
 
-            NavigationManager.Instance.Navigate(Frame, typeof(FavoritePage));
+            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.FavPage });
         }
 
         private void NightModeBtn_Toggled(object sender, RoutedEventArgs e)

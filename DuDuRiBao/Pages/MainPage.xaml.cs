@@ -121,13 +121,34 @@ namespace Brook.DuDuRiBao.Pages
                     DisplayStory(param.Content);
                     break;
                 case StoryEventType.Circle:
-                    NavigationManager.Instance.Navigate(TimeLineFrame, typeof(CircleStoryPage), param.Content);
+                    Navigate(typeof(CircleStoryPage), param.Content);
+                    break;
+                case StoryEventType.HotCircle:
+                    Navigate(typeof(HotCirclesPage), null);
+                    break;
+                case StoryEventType.HotStory:
+                    Navigate(typeof(HotStoriesPage), null);
+                    break;
+                case StoryEventType.FavPage:
+                    Navigate(typeof(FavoritePage), null);
                     break;
                 case StoryEventType.Setting:
                     if (TimeLineFrame.Content is SettingPage)
                         return;
-                    NavigationManager.Instance.Navigate(TimeLineFrame, typeof(SettingPage));
+                    Navigate(typeof(SettingPage), null);
                     break;
+            }
+        }
+
+        void Navigate(Type type, object content)
+        {
+            if (Config.UIStatus == AppUIStatus.All || Config.UIStatus == AppUIStatus.ListAndContent)
+            {
+                NavigationManager.Instance.Navigate(TimeLineFrame, type, content);
+            }
+            else
+            {
+                NavigationManager.Instance.Navigate(Frame, type, content);
             }
         }
 
@@ -150,7 +171,7 @@ namespace Brook.DuDuRiBao.Pages
                 case SearchType.Circle:
                     var circle = (CircleBase)param.SearchObj;
                     circle.Name = circle.Name.Replace("<em>", "").Replace("</em>", "");
-                    NavigationManager.Instance.Navigate(TimeLineFrame, typeof(CircleStoryPage));
+                    Navigate(typeof(CircleStoryPage), circle.Id);
                     HideSearcher();
                     break;
                 case SearchType.Story:

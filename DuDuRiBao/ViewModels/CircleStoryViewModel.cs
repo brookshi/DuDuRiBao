@@ -26,6 +26,17 @@ namespace Brook.DuDuRiBao.ViewModels
 
         public ObservableCollectionExtended<Story> StoryDataList { get { return _storyDataList; } }
 
+        private string _title = StringUtil.GetString("DefaultTitle");
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                _title = value;
+                Notify("Title");
+            }
+        }
+
         private IconElement _joinCircleButtonIcon = _addIcon;
         public IconElement JoinCircleButtonIcon
         {
@@ -60,6 +71,7 @@ namespace Brook.DuDuRiBao.ViewModels
             if (Circle == null)
                 return;
 
+            Title = Circle.Name;
             if (string.IsNullOrEmpty(Circle.Image))
                 Circle.Image = Circle.Thumbnail;
             Circle.Adjust();

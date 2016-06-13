@@ -50,7 +50,7 @@ namespace Brook.DuDuRiBao.Pages
             {
                 data = data.ToLower();
                 var id = data.Substring(data.LastIndexOf("/") + 1);
-                NavigationManager.Instance.Navigate(Frame, typeof(CircleStoryPage), id);
+                LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Circle, Content = id });
             }
         }
 

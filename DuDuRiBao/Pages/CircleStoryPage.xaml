@@ -17,7 +17,18 @@
     </Page.DataContext>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <element:ToolBar Height="48"
+                         Category="{x:Bind VM.Title, Mode=OneWay}"
+                         Host="CommentPage"
+                         Visibility="{Binding Source={StaticResource Config},
+                                              Path=IsSinglePage,
+                                              Converter={StaticResource BooleanToVisibilityConverter}}" />
         <llm:LLMListView x:Name="StoryListView"
+                         Grid.Row="1"
                          CanPullToRefresh="False"
                          IsItemClickEnabled="True"
                          IsItemSwipeEnabled="False"

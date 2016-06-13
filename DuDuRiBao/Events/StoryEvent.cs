@@ -29,6 +29,9 @@ namespace Brook.DuDuRiBao.Events
         Night,
         DisplayStory,
         Circle,
+        HotCircle,
+        HotStory,
+        FavPage,
         Setting,
     }
 
