@@ -14,173 +14,249 @@
             <PaneThemeTransition Edge="Top" />
         </TransitionCollection>
     </Page.Transitions>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <element:ToolBar x:Uid="SettingToolBar"
-                         Height="48"
-                         Category=""
-                         Host="CommentPage"
-                         Visibility="{Binding Source={StaticResource Config},
-                                              Path=IsSinglePage,
-                                              Converter={StaticResource BooleanToVisibilityConverter}}" />
-        <RelativePanel Grid.Row="1"
-                       Background="{ThemeResource BrushStoryList}"
-                       Padding="0, 24, 0, 0">
-            <Grid x:Name="LoginPanel"
-                  RelativePanel.AlignLeftWithPanel="True"
-                  RelativePanel.AlignRightWithPanel="True"
-                  RelativePanel.AlignTopWithPanel="True">
-                <xp:XPButton x:Uid="LoginBtn"
-                             x:Name="LoginBtn"
+    <ScrollViewer>
+        <Grid Background="{ThemeResource BrushStoryList}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <element:ToolBar x:Uid="SettingToolBar"
+                             Height="48"
+                             Category=""
+                             Host="CommentPage"
+                             Visibility="{Binding Source={StaticResource Config},
+                                                  Path=IsSinglePage,
+                                                  Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <RelativePanel Grid.Row="1"
+                           Background="{ThemeResource BrushStoryList}"
+                           Padding="0, 24, 0, 0">
+                <Grid x:Name="LoginPanel"
+                      RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True"
+                      RelativePanel.AlignTopWithPanel="True">
+                    <xp:XPButton x:Uid="LoginBtn"
+                                 x:Name="LoginBtn"
+                                 Width="{Binding ElementName=LoginPanel,
+                                                 Path=ActualWidth}"
+                                 Height="48"
+                                 Background="{ThemeResource BrushNormal}"
+                                 BorderThickness="0"
+                                 Click="Login_Click"
+                                 Content=""
+                                 Foreground="{ThemeResource BrushToolBarForeground}"
+                                 IconForeground="{ThemeResource BrushToolBarForeground}"
+                                 IconInterval="12"
+                                 IconPosition="NoIcon"
+                                 Padding="14, 0, 0, 0"
+                                 PointerOverBackground="{StaticResource BrushOver}"
+                                 PressedBackground="{StaticResource BrushHighLight}" />
+                    <xp:XPButton x:Uid="LogoutBtn"
+                                 x:Name="LogoutBtn"
+                                 Width="{Binding ElementName=LoginPanel,
+                                                 Path=ActualWidth}"
+                                 Height="48"
+                                 Background="#CA2300"
+                                 BorderThickness="0"
+                                 Click="Logout_Click"
+                                 Content=""
+                                 Foreground="{ThemeResource BrushToolBarForeground}"
+                                 IconForeground="{ThemeResource BrushToolBarForeground}"
+                                 IconInterval="12"
+                                 IconPosition="NoIcon"
+                                 Padding="14, 0, 0, 0"
+                                 PointerOverBackground="#E32700"
+                                 PressedBackground="#971B00"
+                                 RelativePanel.AlignLeftWithPanel="True"
+                                 RelativePanel.AlignRightWithPanel="True"
+                                 RelativePanel.AlignTopWithPanel="True" />
+                </Grid>
+                <xp:XPButton x:Uid="Favorite"
+                             x:Name="MyFav"
                              Width="{Binding ElementName=LoginPanel,
                                              Path=ActualWidth}"
                              Height="48"
-                             Background="{ThemeResource BrushNormal}"
-                             BorderThickness="0"
-                             Click="Login_Click"
+                             Margin="0, 24, 0, 0"
+                             Background="{ThemeResource BrushStoryListItem}"
+                             BorderBrush="{ThemeResource BrushCommentSplitter}"
+                             BorderThickness="0, 0, 0, 1"
+                             Click="MyFav_Click"
                              Content=""
-                             Foreground="{ThemeResource BrushToolBarForeground}"
-                             IconForeground="{ThemeResource BrushToolBarForeground}"
+                             Foreground="{ThemeResource BrushStoryTitle}"
+                             IconForeground="{ThemeResource BrushStoryTitle}"
                              IconInterval="12"
-                             IconPosition="NoIcon"
+                             IconPosition="Left"
                              Padding="14, 0, 0, 0"
-                             PointerOverBackground="{StaticResource BrushOver}"
-                             PressedBackground="{StaticResource BrushHighLight}" />
-                <xp:XPButton x:Uid="LogoutBtn"
-                             x:Name="LogoutBtn"
-                             Width="{Binding ElementName=LoginPanel,
-                                             Path=ActualWidth}"
-                             Height="48"
-                             Background="#CA2300"
-                             BorderThickness="0"
-                             Click="Logout_Click"
-                             Content=""
-                             Foreground="{ThemeResource BrushToolBarForeground}"
-                             IconForeground="{ThemeResource BrushToolBarForeground}"
-                             IconInterval="12"
-                             IconPosition="NoIcon"
-                             Padding="14, 0, 0, 0"
-                             PointerOverBackground="#E32700"
-                             PressedBackground="#971B00"
+                             PointerOverBackground="{StaticResource BrushPointerOver}"
+                             PressedBackground="{StaticResource BrushPressed}"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.AlignTopWithPanel="True" />
-            </Grid>
-            <xp:XPButton x:Uid="Favorite"
-                         x:Name="MyFav"
-                         Width="{Binding ElementName=LoginPanel,
-                                         Path=ActualWidth}"
-                         Height="48"
-                         Margin="0, 24, 0, 0"
-                         Background="{ThemeResource BrushStoryListItem}"
-                         BorderBrush="{ThemeResource BrushCommentSplitter}"
-                         BorderThickness="0, 0, 0, 1"
-                         Click="MyFav_Click"
-                         Content=""
-                         Foreground="{ThemeResource BrushStoryTitle}"
-                         IconForeground="{ThemeResource BrushStoryTitle}"
-                         IconInterval="12"
-                         IconPosition="Left"
-                         Padding="14, 0, 0, 0"
-                         PointerOverBackground="{StaticResource BrushPointerOver}"
-                         PressedBackground="{StaticResource BrushPressed}"
-                         RelativePanel.AlignLeftWithPanel="True"
-                         RelativePanel.AlignRightWithPanel="True"
-                         RelativePanel.Below="LoginPanel">
-                <xp:XPButton.Icon>
-                    <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf005;" />
-                </xp:XPButton.Icon>
-            </xp:XPButton>
-            <xp:XPButton x:Uid="Feedback"
-                         x:Name="FeedbackBtn"
-                         Width="{Binding ElementName=LoginPanel,
-                                         Path=ActualWidth}"
-                         Height="48"
-                         Background="{ThemeResource BrushStoryListItem}"
-                         BorderBrush="{ThemeResource BrushCommentSplitter}"
-                         BorderThickness="0, 0, 0, 1"
-                         Click="Feedback_Click"
-                         Content=""
-                         Foreground="{ThemeResource BrushStoryTitle}"
-                         IconForeground="{ThemeResource BrushStoryTitle}"
-                         IconInterval="12"
-                         IconPosition="Left"
-                         Padding="14, 0, 0, 0"
-                         PointerOverBackground="{StaticResource BrushPointerOver}"
-                         PressedBackground="{StaticResource BrushPressed}"
-                         RelativePanel.AlignLeftWithPanel="True"
-                         RelativePanel.AlignRightWithPanel="True"
-                         RelativePanel.Below="MyFav">
-                <xp:XPButton.Icon>
-                    <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf188;" />
-                </xp:XPButton.Icon>
-            </xp:XPButton>
-            <RelativePanel x:Name="NightPanel"
-                           Background="{ThemeResource BrushStoryListItem}"
-                           BorderBrush="{ThemeResource BrushCommentSplitter}"
-                           BorderThickness="0, 0, 0, 1"
-                           RelativePanel.AlignLeftWithPanel="True"
-                           RelativePanel.AlignRightWithPanel="True"
-                           RelativePanel.Below="FeedbackBtn">
-                <FontIcon x:Name="NightIcon"
-                          Height="48"
-                          Margin="18, 0, 12, 0"
-                          FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome"
-                          FontSize="16"
-                          Foreground="{ThemeResource BrushStoryTitle}"
-                          Glyph="&#xf186;"
-                          RelativePanel.AlignLeftWithPanel="True" />
-                <TextBlock x:Uid="NightMode"
-                           x:Name="NightModeTxt"
-                           Foreground="{ThemeResource BrushStoryTitle}"
-                           RelativePanel.AlignVerticalCenterWith="NightIcon"
-                           RelativePanel.RightOf="NightIcon"
-                           Text="" />
-                <ToggleSwitch x:Name="NightModeBtn"
-                              Margin="0,0,-80,0"
-                              IsOn="{Binding Source={StaticResource StorageInfo},
-                                             Path=AppTheme,
-                                             Converter={StaticResource DarkThemeToggleConverter},
-                                             Mode=TwoWay}"
-                              OffContent=""
-                              OnContent=""
-                              RelativePanel.AlignRightWithPanel="True"
-                              RelativePanel.AlignVerticalCenterWith="NightIcon"
-                              Toggled="NightModeBtn_Toggled" />
+                             RelativePanel.Below="LoginPanel">
+                    <xp:XPButton.Icon>
+                        <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf005;" />
+                    </xp:XPButton.Icon>
+                </xp:XPButton>
+                <xp:XPButton x:Uid="Feedback"
+                             x:Name="FeedbackBtn"
+                             Width="{Binding ElementName=LoginPanel,
+                                             Path=ActualWidth}"
+                             Height="48"
+                             Background="{ThemeResource BrushStoryListItem}"
+                             BorderBrush="{ThemeResource BrushCommentSplitter}"
+                             BorderThickness="0, 0, 0, 1"
+                             Click="Feedback_Click"
+                             Content=""
+                             Foreground="{ThemeResource BrushStoryTitle}"
+                             IconForeground="{ThemeResource BrushStoryTitle}"
+                             IconInterval="12"
+                             IconPosition="Left"
+                             Padding="14, 0, 0, 0"
+                             PointerOverBackground="{StaticResource BrushPointerOver}"
+                             PressedBackground="{StaticResource BrushPressed}"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.Below="MyFav">
+                    <xp:XPButton.Icon>
+                        <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf188;" />
+                    </xp:XPButton.Icon>
+                </xp:XPButton>
+                <RelativePanel x:Name="NightPanel"
+                               Background="{ThemeResource BrushStoryListItem}"
+                               BorderBrush="{ThemeResource BrushCommentSplitter}"
+                               BorderThickness="0, 0, 0, 1"
+                               RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignRightWithPanel="True"
+                               RelativePanel.Below="FeedbackBtn">
+                    <FontIcon x:Name="NightIcon"
+                              Height="48"
+                              Margin="18, 0, 12, 0"
+                              FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                              FontSize="16"
+                              Foreground="{ThemeResource BrushStoryTitle}"
+                              Glyph="&#xf186;"
+                              RelativePanel.AlignLeftWithPanel="True" />
+                    <TextBlock x:Uid="NightMode"
+                               x:Name="NightModeTxt"
+                               Foreground="{ThemeResource BrushStoryTitle}"
+                               RelativePanel.AlignVerticalCenterWith="NightIcon"
+                               RelativePanel.RightOf="NightIcon"
+                               Text="" />
+                    <ToggleSwitch x:Name="NightModeBtn"
+                                  Margin="0,0,-80,0"
+                                  IsOn="{Binding Source={StaticResource StorageInfo},
+                                                 Path=AppTheme,
+                                                 Converter={StaticResource DarkThemeToggleConverter},
+                                                 Mode=TwoWay}"
+                                  OffContent=""
+                                  OnContent=""
+                                  RelativePanel.AlignRightWithPanel="True"
+                                  RelativePanel.AlignVerticalCenterWith="NightIcon"
+                                  Toggled="NightModeBtn_Toggled" />
+                </RelativePanel>
+                <RelativePanel x:Name="LazyImagePanel"
+                               Background="{ThemeResource BrushStoryListItem}"
+                               RelativePanel.AlignLeftWithPanel="True"
+                               RelativePanel.AlignRightWithPanel="True"
+                               RelativePanel.Below="NightPanel">
+                    <FontIcon x:Name="LazyIcon"
+                              Height="48"
+                              Margin="18, 0, 12, 0"
+                              FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome"
+                              FontSize="20"
+                              Foreground="{ThemeResource BrushStoryTitle}"
+                              Glyph="&#xf10b;"
+                              RelativePanel.AlignLeftWithPanel="True" />
+                    <TextBlock x:Uid="LazyImageMode"
+                               x:Name="LazyImageTxt"
+                               Foreground="{ThemeResource BrushStoryTitle}"
+                               RelativePanel.AlignVerticalCenterWith="LazyIcon"
+                               RelativePanel.RightOf="LazyIcon"
+                               Text="" />
+                    <ToggleSwitch x:Name="LazyModeBtn"
+                                  Margin="0,0,-80,0"
+                                  IsOn="{Binding Source={StaticResource StorageInfo},
+                                                 Path=LazyLoadImage,
+                                                 Mode=TwoWay}"
+                                  OffContent=""
+                                  OnContent=""
+                                  RelativePanel.AlignRightWithPanel="True"
+                                  RelativePanel.AlignVerticalCenterWith="LazyIcon"
+                                  Toggled="LazyModeBtn_Toggled" />
+                </RelativePanel>
             </RelativePanel>
-            <RelativePanel x:Name="LazyImagePanel"
-                           Background="{ThemeResource BrushStoryListItem}"
-                           RelativePanel.AlignLeftWithPanel="True"
-                           RelativePanel.AlignRightWithPanel="True"
-                           RelativePanel.Below="NightPanel">
-                <FontIcon x:Name="LazyIcon"
-                          Height="48"
-                          Margin="18, 0, 12, 0"
-                          FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome"
-                          FontSize="20"
-                          Foreground="{ThemeResource BrushStoryTitle}"
-                          Glyph="&#xf10b;"
-                          RelativePanel.AlignLeftWithPanel="True" />
-                <TextBlock x:Uid="LazyImageMode"
-                           x:Name="LazyImageTxt"
-                           Foreground="{ThemeResource BrushStoryTitle}"
-                           RelativePanel.AlignVerticalCenterWith="LazyIcon"
-                           RelativePanel.RightOf="LazyIcon"
-                           Text="" />
-                <ToggleSwitch x:Name="LazyModeBtn"
-                              Margin="0,0,-80,0"
-                              IsOn="{Binding Source={StaticResource StorageInfo},
-                                             Path=LazyLoadImage,
-                                             Mode=TwoWay}"
-                              OffContent=""
-                              OnContent=""
-                              RelativePanel.AlignRightWithPanel="True"
-                              RelativePanel.AlignVerticalCenterWith="LazyIcon"
-                              Toggled="LazyModeBtn_Toggled" />
+            <RelativePanel Grid.Row="2"
+                           Background="{ThemeResource BrushStoryList}"
+                           Padding="0, 24, 0, 0">
+                <xp:XPButton x:Name="AYYBtn"
+                             Width="{Binding ElementName=LoginPanel,
+                                             Path=ActualWidth}"
+                             Height="80"
+                             Background="{ThemeResource BrushStoryListItem}"
+                             BorderBrush="{ThemeResource BrushCommentSplitter}"
+                             BorderThickness="0, 0, 0, 1"
+                             Click="AiYingYong_Click"
+                             Foreground="{ThemeResource BrushStoryTitle}"
+                             IconForeground="{ThemeResource BrushStoryTitle}"
+                             IconPosition="NoIcon"
+                             Padding="14, 0, 0, 0"
+                             PointerOverBackground="{StaticResource BrushPointerOver}"
+                             PressedBackground="{StaticResource BrushPressed}"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True">
+                    <xp:XPButton.Content>
+                        <RelativePanel Height="80">
+                            <Image x:Name="AYYImage"
+                                   Source="../Assets/AiYingYong.png"
+                                   Stretch="Uniform" />
+                            <TextBlock x:Name="AYYName"
+                                       Margin="24, 12, 0, 0"
+                                       FontSize="22"
+                                       RelativePanel.RightOf="AYYImage"
+                                       Text="爱应用" />
+                            <TextBlock Margin="24, 4, 0, 0"
+                                       FontSize="14"
+                                       RelativePanel.Below="AYYName"
+                                       RelativePanel.RightOf="AYYImage"
+                                       Text="合作伙伴" />
+                        </RelativePanel>
+                    </xp:XPButton.Content>
+                </xp:XPButton>
+                <xp:XPButton x:Name="WFKBtn"
+                             Width="{Binding ElementName=LoginPanel,
+                                             Path=ActualWidth}"
+                             Height="80"
+                             Background="{ThemeResource BrushStoryListItem}"
+                             BorderBrush="{ThemeResource BrushCommentSplitter}"
+                             BorderThickness="0, 0, 0, 1"
+                             Click="WeiFengKe_Click"
+                             Foreground="{ThemeResource BrushStoryTitle}"
+                             IconForeground="{ThemeResource BrushStoryTitle}"
+                             IconPosition="NoIcon"
+                             Padding="14, 0, 0, 0"
+                             PointerOverBackground="{StaticResource BrushPointerOver}"
+                             PressedBackground="{StaticResource BrushPressed}"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.Below="AYYBtn">
+                    <xp:XPButton.Content>
+                        <RelativePanel Height="80">
+                            <Image x:Name="WFKImage"
+                                   Source="../Assets/WeiFengKe.png"
+                                   Stretch="Uniform" />
+                            <TextBlock x:Name="WFKName"
+                                       Margin="24, 12, 0, 0"
+                                       FontSize="22"
+                                       RelativePanel.RightOf="WFKImage"
+                                       Text="微疯客" />
+                            <TextBlock Margin="24, 4, 0, 0"
+                                       FontSize="14"
+                                       RelativePanel.Below="WFKName"
+                                       RelativePanel.RightOf="WFKImage"
+                                       Text="合作伙伴" />
+                        </RelativePanel>
+                    </xp:XPButton.Content>
+                </xp:XPButton>
             </RelativePanel>
-        </RelativePanel>
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </common:PageBase>

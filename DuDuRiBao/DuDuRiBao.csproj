@@ -96,6 +96,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\AiYingYong.png" />
     <Content Include="Assets\Add.png" />
     <Content Include="Assets\CaptchaFailed.png" />
     <Content Include="Assets\Search.png" />
@@ -269,6 +270,7 @@
     <Content Include="Assets\Login.png" />
     <Content Include="Assets\Share.png" />
     <Content Include="Assets\weibo.png" />
+    <Content Include="Assets\WeiFengKe.png" />
     <Content Include="Assets\weixin.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <None Include="Package.StoreAssociation.xml" />

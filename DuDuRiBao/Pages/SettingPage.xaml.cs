@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -80,7 +81,17 @@ namespace Brook.DuDuRiBao.Pages
             LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.DisplayStory, Content = Misc.Feedback_Story_Id.ToString() });
         }
 
-        [SubscriberCallback(typeof(LoginEvent))]
+        private async void AiYingYong_Click(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("ayywin:"));
+        }
+
+        private async void WeiFengKe_Click(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("http://m.weifengke.com"));
+        }
+
+       [SubscriberCallback(typeof(LoginEvent))]
         public void LoginSubscriber(LoginEvent param)
         {
             UpdateLoginBtnStatus();
