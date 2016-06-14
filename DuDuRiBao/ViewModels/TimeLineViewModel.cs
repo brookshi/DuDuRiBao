@@ -98,7 +98,7 @@ namespace Brook.DuDuRiBao.ViewModels
             {
                 ResetStories();
                 timeLine = await DataRequester.RequestLatestTimeLine();
-                if (timeLine != null)
+                if (timeLine != null && timeLine.Items.Count > 0)
                 {
                     CurrentStoryId = timeLine.Items.First().Id.ToString();
                 }
