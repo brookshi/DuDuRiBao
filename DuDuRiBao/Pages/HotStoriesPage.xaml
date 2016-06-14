@@ -9,6 +9,11 @@
                                           Path=AppTheme}"
                  mc:Ignorable="d">
 
+    <Page.Transitions>
+        <TransitionCollection>
+            <PaneThemeTransition Edge="Right" />
+        </TransitionCollection>
+    </Page.Transitions>
     <Page.DataContext>
         <vm:HotStoriesViewModel />
     </Page.DataContext>

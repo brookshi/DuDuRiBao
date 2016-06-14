@@ -31,6 +31,7 @@ namespace Brook.DuDuRiBao.Pages
             NavigationCacheMode = NavigationCacheMode.Required;
 
             Loaded += MainPage_Loaded;
+            SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
 
             LLQNotifier.Default.Register(this);
         }
@@ -49,6 +50,15 @@ namespace Brook.DuDuRiBao.Pages
                 UpdateLoginInfo();
 
             TimeLineFrame.Navigate(typeof(TimeLinePage));
+        }
+
+        private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if (Searcher.Visibility == Visibility.Visible)
+            {
+                HideSearcher();
+                e.Handled = true;
+            }
         }
 
         private void UpdateLoginInfo()

@@ -12,6 +12,13 @@
                  RequestedTheme="{Binding Source={StaticResource StorageInfo},
                                           Path=AppTheme}"
                  mc:Ignorable="d">
+
+    <Page.Transitions>
+        <TransitionCollection>
+            <PaneThemeTransition Edge="Right" />
+        </TransitionCollection>
+    </Page.Transitions>
+
     <Page.DataContext>
         <vm:CircleStoryViewModel />
     </Page.DataContext>

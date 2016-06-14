@@ -7,6 +7,11 @@
       RequestedTheme="{Binding Source={StaticResource StorageInfo},
                                Path=AppTheme}"
       mc:Ignorable="d">
+    <Page.Transitions>
+        <TransitionCollection>
+            <PaneThemeTransition Edge="Top" />
+        </TransitionCollection>
+    </Page.Transitions>
     <Grid>
         <RelativePanel Background="{ThemeResource BrushStoryList}" Padding="0, 24, 0, 0">
             <Grid x:Name="LoginPanel"

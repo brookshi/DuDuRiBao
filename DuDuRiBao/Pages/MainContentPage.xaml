@@ -10,9 +10,17 @@
       RequestedTheme="{Binding Source={StaticResource StorageInfo},
                                Path=AppTheme}"
       mc:Ignorable="d">
+
+    <Page.Transitions>
+        <TransitionCollection>
+            <PaneThemeTransition Edge="Right" />
+        </TransitionCollection>
+    </Page.Transitions>
+
     <Page.DataContext>
         <vm:MainContentViewModel />
     </Page.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
