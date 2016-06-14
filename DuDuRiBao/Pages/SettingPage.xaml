@@ -1,19 +1,34 @@
-﻿<Page x:Class="Brook.DuDuRiBao.Pages.SettingPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:xp="using:XP"
-      RequestedTheme="{Binding Source={StaticResource StorageInfo},
-                               Path=AppTheme}"
-      mc:Ignorable="d">
+﻿<common:PageBase x:Class="Brook.DuDuRiBao.Pages.SettingPage"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:common="using:Brook.DuDuRiBao.Common"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:element="using:Brook.DuDuRiBao.Elements"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:xp="using:XP"
+                 RequestedTheme="{Binding Source={StaticResource StorageInfo},
+                                          Path=AppTheme}"
+                 mc:Ignorable="d">
     <Page.Transitions>
         <TransitionCollection>
             <PaneThemeTransition Edge="Top" />
         </TransitionCollection>
     </Page.Transitions>
     <Grid>
-        <RelativePanel Background="{ThemeResource BrushStoryList}" Padding="0, 24, 0, 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <element:ToolBar x:Uid="SettingToolBar"
+                         Height="48"
+                         Category=""
+                         Host="CommentPage"
+                         Visibility="{Binding Source={StaticResource Config},
+                                              Path=IsSinglePage,
+                                              Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <RelativePanel Grid.Row="1"
+                       Background="{ThemeResource BrushStoryList}"
+                       Padding="0, 24, 0, 0">
             <Grid x:Name="LoginPanel"
                   RelativePanel.AlignLeftWithPanel="True"
                   RelativePanel.AlignRightWithPanel="True"
@@ -168,4 +183,4 @@
             </RelativePanel>
         </RelativePanel>
     </Grid>
-</Page>
+</common:PageBase>

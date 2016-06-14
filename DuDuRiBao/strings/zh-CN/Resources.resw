@@ -225,11 +225,11 @@
   <data name="Home.Content" xml:space="preserve">
     <value>首页</value>
   </data>
-  <data name="HotArticle.Content" xml:space="preserve">
+  <data name="HotStory" xml:space="preserve">
     <value>热门文章</value>
   </data>
   <data name="HotCircle" xml:space="preserve">
-    <value>热门日报 ({0})</value>
+    <value>热门日报</value>
   </data>
   <data name="HotCircleRefresh.Content" xml:space="preserve">
     <value>换一批</value>
@@ -359,5 +359,8 @@
   </data>
   <data name="LogoutBtn.Content" xml:space="preserve">
     <value>退出登录</value>
+  </data>
+  <data name="SettingToolBar.Category" xml:space="preserve">
+    <value>设置</value>
   </data>
 </root>

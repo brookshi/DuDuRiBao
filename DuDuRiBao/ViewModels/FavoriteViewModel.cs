@@ -15,6 +15,11 @@ namespace Brook.DuDuRiBao.ViewModels
 
         public ObservableCollectionExtended<Story> StoryDataList { get { return _storyDataList; } }
 
+        public string Title
+        {
+            get { return StringUtil.GetString("FavCategoryName"); }
+        }
+
         public async Task Refresh()
         {
             await RequestFavorites(false);

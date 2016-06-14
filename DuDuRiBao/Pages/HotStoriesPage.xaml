@@ -3,6 +3,7 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:common="using:Brook.DuDuRiBao.Common"
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:element="using:Brook.DuDuRiBao.Elements"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:vm="using:Brook.DuDuRiBao.ViewModels"
                  RequestedTheme="{Binding Source={StaticResource StorageInfo},
@@ -19,7 +20,18 @@
     </Page.DataContext>
 
     <Grid>
-        <WebView common:WebViewExtend.StringContent="{Binding HotStories}"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <element:ToolBar Height="48"
+                         Category="{x:Bind VM.Title, Mode=OneWay}"
+                         Host="CommentPage"
+                         Visibility="{Binding Source={StaticResource Config},
+                                              Path=IsSinglePage,
+                                              Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <WebView Grid.Row="1"
+                 common:WebViewExtend.StringContent="{Binding HotStories}"
                  DefaultBackgroundColor="White"
                  ScriptNotify="WebView_ScriptNotify" />
     </Grid>

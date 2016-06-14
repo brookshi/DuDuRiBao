@@ -40,6 +40,11 @@ namespace Brook.DuDuRiBao.ViewModels
             }
         }
 
+        public string Title
+        {
+            get { return StringUtil.GetString("HotStory"); }
+        }
+
         public override void Init()
         {
             RefreshHotStories();

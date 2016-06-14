@@ -1,4 +1,5 @@
 ﻿using Brook.DuDuRiBao.Authorization;
+using Brook.DuDuRiBao.Common;
 using Brook.DuDuRiBao.Elements;
 using Brook.DuDuRiBao.Events;
 using Brook.DuDuRiBao.Utils;
@@ -21,7 +22,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Brook.DuDuRiBao.Pages
 {
-    public sealed partial class SettingPage : Page
+    public sealed partial class SettingPage : PageBase
     {
         public SettingPage()
         {
