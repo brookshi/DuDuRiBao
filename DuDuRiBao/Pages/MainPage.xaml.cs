@@ -15,6 +15,7 @@ using Windows.Foundation.Metadata;
 using System;
 using LLM;
 using DuDuRiBao.Utils;
+using Windows.UI.Xaml.Media;
 
 namespace Brook.DuDuRiBao.Pages
 {
@@ -77,7 +78,14 @@ namespace Brook.DuDuRiBao.Pages
             var isStatusBarPresent = ApiInformation.IsTypePresent(typeof(StatusBar).ToString());
             if (isStatusBarPresent)
             {
-                await StatusBar.GetForCurrentView().HideAsync();
+                var statusBar = StatusBar.GetForCurrentView();
+                if (statusBar != null)
+                {
+                    statusBar.BackgroundOpacity = 1;
+                    statusBar.ForegroundColor = Windows.UI.Colors.White;
+                    statusBar.BackgroundColor = StorageInfo.Instance.AppTheme == ElementTheme.Light ? ColorUtil.GetColorFromHexString("#1976D2") : ColorUtil.GetColorFromHexString("#0e0e0f");
+                    await statusBar.ShowAsync();
+                }
             }
         }
 
@@ -146,6 +154,9 @@ namespace Brook.DuDuRiBao.Pages
                     if (TimeLineFrame.Content is SettingPage)
                         return;
                     Navigate(typeof(SettingPage), null);
+                    break;
+                case StoryEventType.Night:
+                    InitUI();
                     break;
             }
         }

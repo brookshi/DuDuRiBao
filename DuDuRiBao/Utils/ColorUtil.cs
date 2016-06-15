@@ -48,7 +48,7 @@ namespace Brook.DuDuRiBao.Utils
         {
             var r = Convert.ToByte(hexValue.Substring(1, 2), 16);
             var g = Convert.ToByte(hexValue.Substring(3, 2), 16);
-            var b = Convert.ToByte(hexValue.Substring(4, 2), 16);
+            var b = Convert.ToByte(hexValue.Substring(5, 2), 16);
             return Color.FromArgb(255, r, g, b);
         }
 
