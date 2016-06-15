@@ -183,6 +183,38 @@
                                   RelativePanel.AlignVerticalCenterWith="LazyIcon"
                                   Toggled="LazyModeBtn_Toggled" />
                 </RelativePanel>
+                <xp:XPButton x:Name="VersionBtn"
+                             Width="{Binding ElementName=LoginPanel,
+                                             Path=ActualWidth}"
+                             Height="48"
+                             Margin="0, 24, 0, 0"
+                             Background="{ThemeResource BrushStoryListItem}"
+                             BorderBrush="{ThemeResource BrushCommentSplitter}"
+                             BorderThickness="0, 0, 0, 1"
+                             Click="Version_Click"
+                             Content="当前版本: 1.3"
+                             Foreground="{ThemeResource BrushStoryTitle}"
+                             IconForeground="{ThemeResource BrushStoryTitle}"
+                             IconInterval="12"
+                             IconPosition="Left"
+                             Padding="14, 0, 0, 0"
+                             PointerOverBackground="{StaticResource BrushPointerOver}"
+                             PressedBackground="{StaticResource BrushPressed}"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.Below="LazyImagePanel">
+                    <xp:XPButton.Icon>
+                        <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf188;" />
+                    </xp:XPButton.Icon>
+                </xp:XPButton>
+                <Ellipse Width="8"
+                         Height="8"
+                         Margin="0, 32, 8, 0"
+                         HorizontalAlignment="Right"
+                         VerticalAlignment="Top"
+                         Fill="#CA2300"
+                         RelativePanel.AlignRightWith="VersionBtn"
+                         RelativePanel.AlignTopWith="VersionBtn" />
             </RelativePanel>
             <RelativePanel Grid.Row="2"
                            Background="{ThemeResource BrushStoryList}"

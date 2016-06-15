@@ -81,6 +81,10 @@ namespace Brook.DuDuRiBao.Pages
             LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.DisplayStory, Content = Misc.Feedback_Story_Id.ToString() });
         }
 
+        private void Version_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
         private async void AiYingYong_Click(object sender, RoutedEventArgs e)
         {
             await Launcher.LaunchUriAsync(new Uri("ayywin:"));

@@ -138,6 +138,12 @@
                         </Rectangle>
                     </xp:XPButton.Content>
                 </xp:XPButton>
+                <Ellipse Width="8"
+                         Height="8"
+                         Margin="0, 8, 8, 0"
+                         HorizontalAlignment="Right"
+                         VerticalAlignment="Top"
+                         Fill="#CA2300" />
             </Grid>
             <TextBlock x:Name="CategoryText"
                        Margin="10, 0, 0, 0"
