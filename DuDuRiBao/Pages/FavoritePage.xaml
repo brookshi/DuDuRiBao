@@ -33,6 +33,9 @@
                                               Converter={StaticResource BooleanToVisibilityConverter}}" />
         <llm:LLMListView x:Name="FavoriteListView"
                          CanPullToRefresh="True"
+                         FloatButtonBackground="{ThemeResource BrushHighLight}"
+                         FloatButtonIcon="Refresh"
+                         FloatButtonVisibility="{x:Bind IsDesktopDevice, Converter={StaticResource BooleanToVisibilityConverter}}"
                          IsItemClickEnabled="True"
                          IsItemSwipeEnabled="False"
                          ItemClick="FavoriteListView_ItemClick"
@@ -40,9 +43,6 @@
                          ItemsSource="{x:Bind VM.StoryDataList}"
                          LoadMoreProgressBarBrush="{ThemeResource BrushHighLight}"
                          RefreshAreaHeight="30"
-                         RefreshButtonBackground="{ThemeResource BrushHighLight}"
-                         RefreshButtonVisibility="{x:Bind IsDesktopDevice, Converter={StaticResource BooleanToVisibilityConverter}}"
-                         RefreshIcon="Refresh"
                          RefreshProgressBarBrush="{ThemeResource BrushHighLight}"
                          RefreshProgressRingBrush="{ThemeResource BrushHighLight}"
                          SelectionMode="Single">

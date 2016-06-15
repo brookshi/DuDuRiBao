@@ -16,11 +16,11 @@ namespace Brook.DuDuRiBao.ViewModels
 
         public ObservableCollectionExtended<GroupComments> CommentList { get { return _commentList; } }
 
-        public int TotalCount { get { return _commentList.First().Count + _commentList.Last().Count; } }
+        public int TotalCount { get { return _commentList.Count > 1 ? _commentList.First().Count + _commentList.Last().Count : 0; } }
 
         public string LastCommentId
         {
-            get { return CommentList.Last().LastOrDefault()?.Id.ToString() ?? null; }
+            get { return CommentList.Count > 0 ? CommentList.Last().LastOrDefault()?.Id.ToString() ?? null : null; }
         }
 
         public string Title

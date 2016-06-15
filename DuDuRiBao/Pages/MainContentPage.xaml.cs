@@ -65,7 +65,7 @@ namespace Brook.DuDuRiBao.Pages
                     PostMsg.Text = string.Format($"{VM.MainHtmlContent.Title} {VM.MainHtmlContent.Share_Url}");
                     Animator.Use(AnimationType.ZoomInDown).SetDuration(TimeSpan.FromMilliseconds(800)).PlayOn(WeiboSharePopup, () =>
                     {
-                        var transform = (CompositeTransform)LLM.Utils.PrepareTransform(WeiboSharePopup, typeof(CompositeTransform));
+                        var transform = (CompositeTransform)AnimUtil.PrepareTransform(WeiboSharePopup, typeof(CompositeTransform));
                         transform.CenterX = transform.CenterY = 0;
                     });
                     break;
@@ -77,7 +77,7 @@ namespace Brook.DuDuRiBao.Pages
             Animator.Use(AnimationType.Hinge).PlayOn(WeiboSharePopup, () =>
             {
                 WeiboSharePopup.IsOpen = false;
-                var transform = (CompositeTransform)LLM.Utils.PrepareTransform(WeiboSharePopup, typeof(CompositeTransform));
+                var transform = (CompositeTransform)AnimUtil.PrepareTransform(WeiboSharePopup, typeof(CompositeTransform));
                 transform.Rotation = 0;
                 transform.TranslateX = transform.TranslateY = 0;
             });
@@ -91,7 +91,7 @@ namespace Brook.DuDuRiBao.Pages
             Animator.Use(AnimationType.ZoomOutUp).SetDuration(TimeSpan.FromMilliseconds(800)).PlayOn(WeiboSharePopup, () =>
             {
                 WeiboSharePopup.IsOpen = false;
-                var transform = (CompositeTransform)LLM.Utils.PrepareTransform(WeiboSharePopup, typeof(CompositeTransform));
+                var transform = (CompositeTransform)AnimUtil.PrepareTransform(WeiboSharePopup, typeof(CompositeTransform));
                 transform.CenterX = transform.CenterY = 0;
                 transform.ScaleX = transform.ScaleY = 1;
                 transform.TranslateX = transform.TranslateY = 0;

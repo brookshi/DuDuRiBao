@@ -20,9 +20,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace Brook.DuDuRiBao.Utils
 {
@@ -47,6 +49,17 @@ namespace Brook.DuDuRiBao.Utils
             {
                 thumb.MaxWidth = thumb.MinWidth = width;
             }
+        }
+
+        public static async void SetBase64ToImage(BitmapSource imageSource, string base64Str)
+        {
+            var imgBytes = Convert.FromBase64String(base64Str);
+            var ms = new InMemoryRandomAccessStream();
+            var dw = new DataWriter(ms);
+            dw.WriteBytes(imgBytes);
+            await dw.StoreAsync();
+            ms.Seek(0);
+            imageSource.SetSource(ms);
         }
     }
 }

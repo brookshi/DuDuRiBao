@@ -224,6 +224,7 @@
     <Compile Include="Utils\NetworkUtil.cs" />
     <Compile Include="Utils\ResUtil.cs" />
     <Compile Include="Common\TextBlockExtend.cs" />
+    <Compile Include="Utils\AnimUtil.cs" />
     <Compile Include="Utils\VisualHelper.cs" />
     <Compile Include="Utils\ColorUtil.cs" />
     <Compile Include="Utils\Config.cs" />

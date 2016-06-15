@@ -50,7 +50,7 @@ namespace Brook.DuDuRiBao.Elements
             if (!string.IsNullOrEmpty(captcha.Img_Base64))
             {
                 NeedCaptcha = true;
-                LLMListView.Utils.SetBase64ToImage((BitmapSource)CaptchaImage.Source, captcha.Img_Base64);
+                ResUtil.SetBase64ToImage((BitmapSource)CaptchaImage.Source, captcha.Img_Base64);
             }
             else
             {

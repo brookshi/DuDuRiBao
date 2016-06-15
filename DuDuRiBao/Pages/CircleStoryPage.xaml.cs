@@ -38,7 +38,7 @@ namespace Brook.DuDuRiBao.Pages
             NavigationCacheMode = NavigationCacheMode.Required;
             StoryListView.Refresh = RefreshMainList;
             StoryListView.LoadMore = LoadMoreStories;
-            StoryListView.RefreshButtonAction = VM.JoinCircle;
+            StoryListView.FloatButtonAction = VM.JoinCircle;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
