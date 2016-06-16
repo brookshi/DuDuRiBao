@@ -61,10 +61,10 @@
         <PivotItem x:Uid="PivotExplore"
                    Margin="0"
                    Header="">
-            <Grid>
-                <WebView common:WebViewExtend.StringContent="{Binding Explore}"
+            <Grid x:Name="ExploreGrid">
+                <!--<WebView common:WebViewExtend.StringContent="{Binding Explore}"
                          DefaultBackgroundColor="White"
-                         ScriptNotify="WebView_ScriptNotify" />
+                         ScriptNotify="WebView_ScriptNotify" />-->
             </Grid>
         </PivotItem>
         <PivotItem x:Uid="PivotMessage"

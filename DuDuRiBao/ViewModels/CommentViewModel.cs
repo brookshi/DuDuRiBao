@@ -28,6 +28,8 @@ namespace Brook.DuDuRiBao.ViewModels
             get { return StringUtil.GetString("CommentTitle"); }
         }
 
+        public bool IsRefreshing { get; set; }
+
         private bool _isReplingTo = false;
         public bool IsReplingTo
         {

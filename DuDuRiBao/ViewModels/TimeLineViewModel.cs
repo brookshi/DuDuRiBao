@@ -32,18 +32,11 @@ namespace Brook.DuDuRiBao.ViewModels
 
         public ObservableCollectionExtended<Story> StoryDataList { get { return _storyDataList; } }
 
-        private string _explore;
-        public string Explore
+        public string Explore { get; set; }
+
+        public void UpdateExplore()
         {
-            get { return _explore; }
-            set
-            {
-                if (value != _explore)
-                {
-                    _explore = value;
-                    Notify("Explore");
-                }
-            }
+            Notify("Explore");
         }
 
         public override void Init()

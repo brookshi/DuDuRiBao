@@ -23,7 +23,7 @@
         <vm:CircleStoryViewModel />
     </Page.DataContext>
 
-    <Grid>
+    <Grid Background="{ThemeResource BrushListBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
@@ -37,6 +37,9 @@
         <llm:LLMListView x:Name="StoryListView"
                          Grid.Row="1"
                          CanPullToRefresh="False"
+                         FloatButtonBackground="{ThemeResource BrushHighLight}"
+                         FloatButtonIcon="{x:Bind VM.JoinCircleButtonIcon, Mode=OneWay}"
+                         FloatButtonVisibility="Visible"
                          IsItemClickEnabled="True"
                          IsItemSwipeEnabled="False"
                          ItemClick="StoryListView_ItemClick"
@@ -44,9 +47,6 @@
                          ItemsSource="{x:Bind VM.StoryDataList}"
                          LoadMoreProgressBarBrush="{ThemeResource BrushHighLight}"
                          RefreshAreaHeight="30"
-                         FloatButtonBackground="{ThemeResource BrushHighLight}"
-                         FloatButtonVisibility="Visible"
-                         FloatButtonIcon="{x:Bind VM.JoinCircleButtonIcon, Mode=OneWay}"
                          RefreshProgressBarBrush="{ThemeResource BrushHighLight}"
                          RefreshProgressRingBrush="{ThemeResource BrushHighLight}"
                          ScrollViewer.IsVerticalRailEnabled="True"

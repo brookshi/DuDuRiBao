@@ -75,7 +75,7 @@ namespace Brook.DuDuRiBao.Pages
 
         private async void LoadMoreStories()
         {
-            if (_isLoadComplete)
+            if (_isLoadComplete || VM.StoryDataList.Count == 0)
             {
                 StoryListView.FinishLoadingMore();
                 return;

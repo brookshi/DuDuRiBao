@@ -36,6 +36,19 @@ namespace Brook.DuDuRiBao.Models
 
         public bool LazyLoadImage { get; set; } = false;
 
+        private bool _haveNewVersion = false;
+        public bool HaveNewVersion
+        {
+            get { return _haveNewVersion; }
+            set
+            {
+                _haveNewVersion = value;
+                Notify("HaveNewVersion");
+            }
+        }
+
+        public string NewVersion { get; set; }
+
         public bool NeedLazyLoadImage { get { return LazyLoadImage && NetworkUtil.IsMobile; } }
 
         public bool IsZhiHuAuthoVaild() { return ZhiHuAuthoInfo != null && !string.IsNullOrEmpty(ZhiHuAuthoInfo.access_token); }

@@ -143,7 +143,10 @@
                          Margin="0, 8, 8, 0"
                          HorizontalAlignment="Right"
                          VerticalAlignment="Top"
-                         Fill="#CA2300" />
+                         Fill="#CA2300"
+                         Visibility="{Binding Source={StaticResource StorageInfo},
+                                              Path=HaveNewVersion,
+                                              Converter={StaticResource BooleanToVisibilityConverter}}" />
             </Grid>
             <TextBlock x:Name="CategoryText"
                        Margin="10, 0, 0, 0"

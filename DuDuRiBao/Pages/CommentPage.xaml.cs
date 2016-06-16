@@ -36,13 +36,15 @@ namespace Brook.DuDuRiBao.Pages
 
         private async void RefreshCommentList()
         {
+            VM.IsRefreshing = true;
             await VM.RequestComments(false);
             CommentListView.SetRefresh(false);
+            VM.IsRefreshing = false;
         }
 
         private async void LoadMoreComments()
         {
-            if (_isLoadComplete)
+            if (_isLoadComplete || VM.IsRefreshing)
             {
                 CommentListView.FinishLoadingMore();
                 return;
