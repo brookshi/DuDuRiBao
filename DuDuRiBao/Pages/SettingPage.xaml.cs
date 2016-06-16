@@ -94,6 +94,11 @@ namespace Brook.DuDuRiBao.Pages
                 Title = StringUtil.GetString("Version")
             }.ShowAsync();
         }
+        
+        private async void Score_Click(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri(Urls.Score));
+        }
 
         private async void AiYingYong_Click(object sender, RoutedEventArgs e)
         {

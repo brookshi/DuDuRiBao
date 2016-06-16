@@ -218,6 +218,30 @@
                          Visibility="{Binding Source={StaticResource StorageInfo},
                                               Path=HaveNewVersion,
                                               Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <xp:XPButton x:Uid="Score"
+                             x:Name="ScoreBtn"
+                             Width="{Binding ElementName=LoginPanel,
+                                             Path=ActualWidth}"
+                             Height="48"
+                             Background="{ThemeResource BrushStoryListItem}"
+                             BorderBrush="{ThemeResource BrushCommentSplitter}"
+                             BorderThickness="0, 0, 0, 1"
+                             Click="Score_Click"
+                             Content=""
+                             Foreground="{ThemeResource BrushStoryTitle}"
+                             IconForeground="{ThemeResource BrushStoryTitle}"
+                             IconInterval="12"
+                             IconPosition="Left"
+                             Padding="14, 0, 0, 0"
+                             PointerOverBackground="{StaticResource BrushPointerOver}"
+                             PressedBackground="{StaticResource BrushPressed}"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.Below="VersionBtn">
+                    <xp:XPButton.Icon>
+                        <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf087;" />
+                    </xp:XPButton.Icon>
+                </xp:XPButton>
             </RelativePanel>
             <RelativePanel Grid.Row="2"
                            Background="{ThemeResource BrushStoryList}"

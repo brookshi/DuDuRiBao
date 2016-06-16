@@ -372,6 +372,9 @@
   <data name="IsNewestVersion" xml:space="preserve">
     <value>已经是最新版本！</value>
   </data>
+  <data name="Score.Content" xml:space="preserve">
+    <value>求5星好评 : )</value>
+  </data>
   <data name="Version" xml:space="preserve">
     <value>版本</value>
   </data>
