@@ -14,35 +14,21 @@
 //   limitations under the License. 
 #endregion
 
-using Brook.DuDuRiBao.Common;
-using Brook.DuDuRiBao.Models;
-using Brook.DuDuRiBao.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 
-namespace Brook.DuDuRiBao.ViewModels
+namespace Brook.DuDuRiBao.Models
 {
-    public partial class MainViewModel : ViewModelBase
+    public struct VersionDesc
     {
-        public string CategoryName { get; set; } = StringUtil.GetString("DefaultTitle");
+        public PackageVersion Version { get; set; }
 
-        public override void Init()
-        {
-            CheckVersion();
-        }
+        public string Id { get; set; }
 
-        private async void CheckVersion()
-        {
-            StorageInfo.Instance.HaveNewVersion = false;
-            StorageInfo.Instance.NewVersion = await DataRequester.GetVersion();
-
-            if(StringUtil.CompareVersion(StorageInfo.Instance.NewVersion.Version, Package.Current.Id.Version))
-            {
-                StorageInfo.Instance.HaveNewVersion = true;
-            }
-        }
+        public string Content { get; set; }
     }
 }

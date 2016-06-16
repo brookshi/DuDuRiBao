@@ -192,7 +192,9 @@
                              BorderBrush="{ThemeResource BrushCommentSplitter}"
                              BorderThickness="0, 0, 0, 1"
                              Click="Version_Click"
-                             Content="当前版本: 1.3"
+                             Content="{Binding Source={StaticResource StorageInfo},
+                                               Path=NewVersion,
+                                               Converter={StaticResource VersionConverter}}"
                              Foreground="{ThemeResource BrushStoryTitle}"
                              IconForeground="{ThemeResource BrushStoryTitle}"
                              IconInterval="12"

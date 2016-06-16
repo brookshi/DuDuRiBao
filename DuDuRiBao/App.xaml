@@ -19,6 +19,7 @@
             <convert:DarkThemeToggleConverter x:Key="DarkThemeToggleConverter" />
             <convert:DarkThemeForImageOpacityConverter x:Key="DarkThemeForImageOpacityConverter" />
             <convert:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <convert:VersionConverter x:Key="VersionConverter" />
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>

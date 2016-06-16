@@ -14,35 +14,26 @@
 //   limitations under the License. 
 #endregion
 
-using Brook.DuDuRiBao.Common;
 using Brook.DuDuRiBao.Models;
 using Brook.DuDuRiBao.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Windows.ApplicationModel;
+using Windows.UI.Xaml.Data;
 
-namespace Brook.DuDuRiBao.ViewModels
+namespace Brook.DuDuRiBao.Converters
 {
-    public partial class MainViewModel : ViewModelBase
+    public class VersionConverter : IValueConverter
     {
-        public string CategoryName { get; set; } = StringUtil.GetString("DefaultTitle");
-
-        public override void Init()
+        public object Convert(object value, Type targetType, object parameter, string language)
         {
-            CheckVersion();
+            var version = (VersionDesc)value;
+            var currVer = string.Format($"{Package.Current.Id.Version.Major}.{Package.Current.Id.Version.Minor}.{Package.Current.Id.Version.Build}");
+            return string.Format(StringUtil.GetString("VersionDesc"), currVer, version.Id);
         }
 
-        private async void CheckVersion()
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            StorageInfo.Instance.HaveNewVersion = false;
-            StorageInfo.Instance.NewVersion = await DataRequester.GetVersion();
-
-            if(StringUtil.CompareVersion(StorageInfo.Instance.NewVersion.Version, Package.Current.Id.Version))
-            {
-                StorageInfo.Instance.HaveNewVersion = true;
-            }
+            throw new NotImplementedException();
         }
     }
 }

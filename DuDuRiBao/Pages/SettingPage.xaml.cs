@@ -2,6 +2,7 @@
 using Brook.DuDuRiBao.Common;
 using Brook.DuDuRiBao.Elements;
 using Brook.DuDuRiBao.Events;
+using Brook.DuDuRiBao.Models;
 using Brook.DuDuRiBao.Utils;
 using DuDuRiBao.Utils;
 using LLQ;
@@ -81,8 +82,17 @@ namespace Brook.DuDuRiBao.Pages
             LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.DisplayStory, Content = Misc.Feedback_Story_Id.ToString() });
         }
 
-        private void Version_Click(object sender, RoutedEventArgs e)
+        private async void Version_Click(object sender, RoutedEventArgs e)
         {
+            await new ContentDialog()
+            {
+                PrimaryButtonText = StringUtil.GetString("Download"),
+                IsPrimaryButtonEnabled = StorageInfo.Instance.HaveNewVersion,
+                PrimaryButtonCommand = new DelayCommand<object>(async obj => { await Launcher.LaunchUriAsync(new Uri(Urls.Download)); }),
+                SecondaryButtonText = StringUtil.GetString("Cancel"),
+                Content = StorageInfo.Instance.HaveNewVersion ? StorageInfo.Instance.NewVersion.Content : StringUtil.GetString("IsNewestVersion"),
+                Title = StringUtil.GetString("Version")
+            }.ShowAsync();
         }
 
         private async void AiYingYong_Click(object sender, RoutedEventArgs e)

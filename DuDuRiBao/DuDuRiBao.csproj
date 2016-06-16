@@ -136,6 +136,7 @@
     <Compile Include="Common\ToolBarTrigger.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
     <Compile Include="Common\WebViewExtend.cs" />
+    <Compile Include="Converters\VersionConverter.cs" />
     <Compile Include="Converters\DarkThemeConverter.cs" />
     <Compile Include="Converters\BooleanReverseConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
@@ -188,6 +189,7 @@
     <Compile Include="Models\SendCommentData.cs" />
     <Compile Include="Models\StorageInfo.cs" />
     <Compile Include="Models\StoryExtraInfo.cs" />
+    <Compile Include="Models\VersionDesc.cs" />
     <Compile Include="Models\ZhiHuAuthoInfo.cs" />
     <Compile Include="Pages\CircleStoryPage.xaml.cs">
       <DependentUpon>CircleStoryPage.xaml</DependentUpon>

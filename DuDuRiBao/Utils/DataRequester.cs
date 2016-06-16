@@ -306,5 +306,12 @@ namespace Brook.DuDuRiBao.Utils
 
             return XPHttpClient.DefaultClient.GetAsync<T>(functionUrl, httpParam);
         }
+
+
+        public static Task<VersionDesc> GetVersion()
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder.SetNeedBaseUrl(false);
+            return XPHttpClient.DefaultClient.GetAsync<VersionDesc>(Urls.Version, httpParam);
+        }
     }
 }

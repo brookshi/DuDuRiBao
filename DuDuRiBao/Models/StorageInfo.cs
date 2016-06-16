@@ -47,7 +47,7 @@ namespace Brook.DuDuRiBao.Models
             }
         }
 
-        public string NewVersion { get; set; }
+        public VersionDesc NewVersion { get; set; }
 
         public bool NeedLazyLoadImage { get { return LazyLoadImage && NetworkUtil.IsMobile; } }
 

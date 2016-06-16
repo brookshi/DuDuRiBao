@@ -17,6 +17,7 @@
 using Brook.DuDuRiBao.Common;
 using System;
 using System.Text.RegularExpressions;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.Resources;
 
 namespace Brook.DuDuRiBao.Utils
@@ -125,6 +126,11 @@ namespace Brook.DuDuRiBao.Utils
             var pattern = "^[1]\\d{10}$";
             Regex regex = new Regex(pattern);
             return regex.IsMatch(num);
+        }
+
+        public static bool CompareVersion(PackageVersion verA, PackageVersion verB)
+        {
+            return verA.Major * 100 + verA.Minor * 10 + verA.Build > verB.Major * 100 + verB.Minor * 10 + verB.Build;
         }
     }
 }
