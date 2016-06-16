@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -35,6 +36,7 @@ namespace Brook.DuDuRiBao.Pages
         public TimeLinePage()
         {
             this.InitializeComponent();
+            InitExploreWebView();
             Initalize();
             NavigationCacheMode = NavigationCacheMode.Required;
             LLQNotifier.Default.Register(this);
@@ -45,13 +47,36 @@ namespace Brook.DuDuRiBao.Pages
             Loaded += TimeLinePage_Loaded;
         }
 
+        private void InitExploreWebView()
+        {
+            WebView webView = new WebView(WebViewExecutionMode.SameThread);
+            webView.ScriptNotify += WebView_ScriptNotify;
+            webView.DefaultBackgroundColor = Colors.White;
+            webView.SetBinding(WebViewExtend.StringContentProperty, new Binding() { Source = VM, Path = new PropertyPath("Explore") });
+            ExploreGrid.Children.Add(webView);
+        }
+
         private void TimeLinePage_Loaded(object sender, RoutedEventArgs e)
         {
             if (IsUsingCachedWhenNavigate())
             {
                 return;
             }
+            MainPivot.SelectionChanged += MainPivot_SelectionChanged;
             MainListView.SetRefresh(true);
+        }
+
+        bool _isInitalize = false;
+        private void MainPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_isInitalize)
+                return;
+
+            if(MainPivot.SelectedIndex == 1)
+            {
+                _isInitalize = true;
+                VM.UpdateExplore();
+            }
         }
 
         private void MainPivot_Loaded(object sender, RoutedEventArgs e)
@@ -108,7 +133,7 @@ namespace Brook.DuDuRiBao.Pages
 
         private async void LoadMoreStories()
         {
-            if (_isLoadComplete)
+            if (_isLoadComplete || VM.StoryDataList.Count == 0)
             {
                 MainListView.FinishLoadingMore();
                 return;
