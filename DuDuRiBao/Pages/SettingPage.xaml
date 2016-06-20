@@ -206,7 +206,7 @@
                              RelativePanel.AlignRightWithPanel="True"
                              RelativePanel.Below="LazyImagePanel">
                     <xp:XPButton.Icon>
-                        <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf188;" />
+                        <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf021;" />
                     </xp:XPButton.Icon>
                 </xp:XPButton>
                 <Ellipse Width="8"
