@@ -53,6 +53,11 @@ namespace Brook.DuDuRiBao.Authorization
             return (IAuthorize)typeInfo.GetDeclaredField("Instance").GetValue(null);
         }
 
+        public static IAuthorize GetAuthorization(LoginType loginType)
+        {
+            return Authorizations.ContainsKey(loginType) ? Authorizations[loginType] : null;
+        }
+
         public static async Task<bool> AutoLogin()
         {
             if(!(await Login()))
@@ -152,6 +157,7 @@ namespace Brook.DuDuRiBao.Authorization
             IsLogin = false;
             string msg;
             var loginType = StorageInfo.Instance.LoginType;
+            StorageInfo.Instance.LoginType = LoginType.None;
             StorageInfo.Instance.ZhiHuAuthoInfo = null;
             StorageUtil.UpdateStorageInfo();
             ClearHttpAuthorization();

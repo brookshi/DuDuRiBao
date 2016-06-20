@@ -31,6 +31,8 @@ namespace Brook.DuDuRiBao.Authorization
     {
         public static readonly ZhiHuAuthorization Instance = new ZhiHuAuthorization();
 
+        protected override string LoginDataKey { get { return "ZhiHuTokenInfo"; } }
+
         public override bool IsAuthorized
         {
             get

@@ -186,13 +186,21 @@ namespace Brook.DuDuRiBao.Elements
 
         private void ShareToWeiBo(object sender, RoutedEventArgs e)
         {
-            if (!AuthorizationHelper.IsLogin)
+            var sinaAutho = AuthorizationHelper.GetAuthorization(LoginType.Sina);
+            if (sinaAutho == null)
+                throw new NotSupportedException("not support sina login");
+
+            if (!sinaAutho.IsAuthorized)
             {
-                PopupMessage.DisplayMessageInRes("NeedLogin");
-                Animator.Use(AnimationType.Shake).PlayOn(ShareButton);
-                return;
+                ((SinaAuthorization)sinaAutho).LoginForShare(isSuccess => {
+                    if (isSuccess)
+                        LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.ShareToWeiBo });
+                });
             }
-            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.ShareToWeiBo });
+            else
+            {
+                LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.ShareToWeiBo });
+            }
         }
 
         private void CommentButton_Click(object sender, RoutedEventArgs e)

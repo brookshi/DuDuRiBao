@@ -12,6 +12,8 @@ namespace Brook.DuDuRiBao.Authorization
     {
         public static readonly SinaAuthorization Instance = new SinaAuthorization();
 
+        protected override string LoginDataKey { get { return "SinaTokenInfo"; } }
+
         private ClientOAuth _oauth = new ClientOAuth();
 
         static SinaAuthorization()
@@ -59,6 +61,7 @@ namespace Brook.DuDuRiBao.Authorization
                 {
                     if (isSuccess)
                     {
+                        _oauth.IsAuthorized = true;
                         UpdateTokenInfo(response);
                         var zhiHuAuthoData = await LoginZhiHu();
                         loginCallback?.Invoke(zhiHuAuthoData);
@@ -74,6 +77,29 @@ namespace Brook.DuDuRiBao.Authorization
             {
                 loginCallback?.Invoke(null);
             }
+        }
+
+        public void LoginForShare(Action<bool> loginCallback)
+        {
+            if (IsAuthorized && TokenInfo != null)
+            {
+                loginCallback?.Invoke(true);
+                return;
+            }
+            _oauth.LoginCallback += (isSuccess, err, response) =>
+            {
+                if (isSuccess)
+                {
+                    _oauth.IsAuthorized = true;
+                    UpdateTokenInfo(response);
+                    loginCallback?.Invoke(true);
+                }
+                else
+                {
+                    loginCallback?.Invoke(false);
+                }
+            };
+            _oauth.BeginOAuth();
         }
 
         Task<RiBaoAuthoInfo> LoginZhiHu()

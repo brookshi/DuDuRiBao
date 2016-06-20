@@ -26,7 +26,7 @@ namespace Brook.DuDuRiBao.Authorization
 {
     public abstract class AuthorizationBase : IAuthorize
     {
-        protected const string LoginDataKey = "TokenInfo";
+        protected virtual string LoginDataKey { get { return "TokenInfo"; } }
         public TokenInfo TokenInfo { get; protected set; }
 
         public AuthorizationBase()
