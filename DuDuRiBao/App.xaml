@@ -64,6 +64,8 @@
                     <Color x:Key="ColorButtonForeground">#FFFFFF</Color>
                     <Color x:Key="ColorCheckedForeground">#00D74B</Color>
 
+                    <SolidColorBrush x:Key="BrushTransparent" Color="#33000000" />
+
                     <SolidColorBrush x:Key="BrushNormal" Color="#2196F3" />
                     <SolidColorBrush x:Key="BrushHighLight" Color="#1976D2" />
                     <SolidColorBrush x:Key="BrushOver" Color="#41a4f2" />
@@ -148,6 +150,8 @@
                     <Color x:Key="ColorListBackground">#121314</Color>
                     <Color x:Key="ColorButtonForeground">#7d7f83</Color>
                     <Color x:Key="ColorCheckedForeground">#00D74B</Color>
+
+                    <SolidColorBrush x:Key="BrushTransparent" Color="#33000000" />
 
                     <SolidColorBrush x:Key="BrushNormal" Color="#2196F3" />
                     <SolidColorBrush x:Key="BrushHighLight" Color="#1976D2" />

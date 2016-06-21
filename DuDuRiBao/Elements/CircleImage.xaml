@@ -40,12 +40,13 @@
                      Height="{x:Bind Height, Mode=OneWay}"
                      Background="{x:Bind BackgroundBrush, Mode=OneWay}"
                      BorderThickness="0"
+                     Click="ClickCircle"
                      CornerRadius="{x:Bind Radius, Mode=OneWay}"
                      Foreground="White"
                      IconPosition="NoIcon"
                      IsEnabled="{x:Bind IsEnabled, Mode=OneWay}"
                      Padding="0"
-                     PointerOverBackground="{ThemeResource BrushPointerOver}"
+                     PointerOverBackground="{ThemeResource BrushTransparent}"
                      PressedBackground="{ThemeResource BrushPressed}"
                      RelativePanel.AlignVerticalCenterWithPanel="True">
             <xp:XPButton.Content>
