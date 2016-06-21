@@ -32,6 +32,7 @@
                                               Path=IsSinglePage,
                                               Converter={StaticResource BooleanToVisibilityConverter}}" />
         <llm:LLMListView x:Name="FavoriteListView"
+                         Grid.Row="1"
                          CanPullToRefresh="True"
                          FloatButtonBackground="{ThemeResource BrushHighLight}"
                          FloatButtonIcon="Refresh"
