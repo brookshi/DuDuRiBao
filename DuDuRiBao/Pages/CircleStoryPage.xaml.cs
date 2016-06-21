@@ -39,13 +39,24 @@ namespace Brook.DuDuRiBao.Pages
             StoryListView.Refresh = RefreshMainList;
             StoryListView.LoadMore = LoadMoreStories;
             StoryListView.FloatButtonAction = VM.JoinCircle;
+
+            Loaded += CircleStoryPage_Loaded;
+        }
+
+        private void CircleStoryPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (IsUsingCachedWhenNavigate())
+            {
+                return;
+            }
+            StoryListView.SetRefresh(true);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             NavigationManager.Instance.UpdateGoBackBtnVisibility();
+            _canUseCached = VM.CircleId == e.Parameter.ToString();
             VM.CircleId = e.Parameter.ToString();
-            StoryListView.SetRefresh(true);
         }
 
         private void StoryListView_ItemClick(object sender, ItemClickEventArgs e)
