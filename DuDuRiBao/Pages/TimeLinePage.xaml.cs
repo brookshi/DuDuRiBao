@@ -171,7 +171,10 @@ namespace Brook.DuDuRiBao.Pages
             {
                 case StoryEventType.Night:
                     if (VM != null)
+                    {
                         VM.RefreshExplore();
+                        VM.UpdateExplore();
+                    }
                     break;
             }
         }
