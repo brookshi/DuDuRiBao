@@ -129,7 +129,7 @@ namespace Brook.DuDuRiBao.Pages
 
                     if (Config.UIStatus == AppUIStatus.All)
                     {
-                        StorageUtil.SetCommentPanelStatus(StoryContentView.IsPaneOpen);
+                        Storager.SetCommentPanelStatus(StoryContentView.IsPaneOpen);
                     }
                     break;
                 case StoryEventType.Search:

@@ -1,11 +1,12 @@
 ﻿using Brook.DuDuRiBao.Models;
+using Brook.DuDuRiBao.Utils;
 using System;
 using Windows.Storage;
 using Windows.UI.Xaml;
 
-namespace Brook.DuDuRiBao.Utils
+namespace Brook.DuDuRiBao.Models
 {
-    public class StorageUtil
+    public class Storager
     {
         private const string StorageInfoKey = "StorageInfo";
 
@@ -13,7 +14,7 @@ namespace Brook.DuDuRiBao.Utils
 
         static ApplicationDataContainer _localSetting = ApplicationData.Current.LocalSettings;
 
-        static StorageUtil()
+        static Storager()
         {
             StorageInfo StorageInfo;
             if (TryGetJsonObj(StorageInfoKey, out StorageInfo))

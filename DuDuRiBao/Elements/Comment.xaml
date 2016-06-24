@@ -2,7 +2,6 @@
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converter="using:Brook.DuDuRiBao.Converters"
-                    xmlns:element="using:Brook.DuDuRiBao.Elements"
                     xmlns:local="using:Brook.DuDuRiBao.Elements"
                     xmlns:model="using:Brook.DuDuRiBao.Models"
                     xmlns:xp="using:XP">

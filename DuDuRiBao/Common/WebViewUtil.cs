@@ -25,7 +25,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 
-namespace Brook.DuDuRiBao.Utils
+namespace Brook.DuDuRiBao.Common
 {
     public static class WebViewUtil
     {

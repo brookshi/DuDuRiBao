@@ -69,13 +69,13 @@ namespace Brook.DuDuRiBao.Pages
 
         private void NightModeBtn_Toggled(object sender, RoutedEventArgs e)
         {
-            StorageUtil.UpdateStorageInfo();
+            Storager.UpdateStorageInfo();
             NavigationManager.Instance.UpdateGoBackBtnVisibility();
         }
 
         private void LazyModeBtn_Toggled(object sender, RoutedEventArgs e)
         {
-            StorageUtil.UpdateStorageInfo();
+            Storager.UpdateStorageInfo();
         }
 
         private void Feedback_Click(object sender, RoutedEventArgs e)

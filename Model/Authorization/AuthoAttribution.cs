@@ -14,27 +14,24 @@
 //   limitations under the License. 
 #endregion
 
-using Brook.DuDuRiBao.Models;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+using Brook.DuDuRiBao.Common;
+using System;
 
-namespace Brook.DuDuRiBao.Common
+namespace Brook.DuDuRiBao.Authorization
 {
-    public class CircleDataTemplateSelector : DataTemplateSelector
+    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
+    sealed class AuthoAttribution : Attribute
     {
-        public DataTemplate CircleImageTemplate { get; set; }
+        readonly LoginType loginType;
 
-        public DataTemplate CircleWordTemplate { get; set; }
-
-        protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
+        public AuthoAttribution(LoginType loginType)
         {
-            var circle = item as HotCircle;
-            if (circle != null && circle.Thumbnail.Contains("http"))
-            {
-                return CircleImageTemplate;
-            }
+            this.loginType = loginType;
+        }
 
-            return CircleWordTemplate;
+        public LoginType LoginType
+        {
+            get { return loginType; }
         }
     }
 }

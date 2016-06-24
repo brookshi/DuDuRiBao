@@ -1,5 +1,6 @@
 ﻿using Brook.DuDuRiBao.Common;
 using Brook.DuDuRiBao.Events;
+using Brook.DuDuRiBao.Models;
 using Brook.DuDuRiBao.Pages;
 using Brook.DuDuRiBao.Utils;
 using Brook.DuDuRiBao.ViewModels;

@@ -16,13 +16,14 @@
 
 using Brook.DuDuRiBao.Authorization;
 using Brook.DuDuRiBao.Models;
+using Brook.DuDuRiBao.Utils;
 using System;
 using System.Net;
 using System.Threading.Tasks;
 using XPHttp;
 using XPHttp.HttpContent;
 
-namespace Brook.DuDuRiBao.Utils
+namespace Brook.DuDuRiBao.Models
 {
     public class DataRequester
     {

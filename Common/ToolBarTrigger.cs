@@ -2,7 +2,7 @@
 
 namespace Brook.DuDuRiBao.Common
 {
-    public class ToolBarTrigger : StateTriggerBase
+    public sealed class ToolBarTrigger : StateTriggerBase
     {
         public ToolBarHost TargetToolBarHost { get; set; } = ToolBarHost.MainPage;
 

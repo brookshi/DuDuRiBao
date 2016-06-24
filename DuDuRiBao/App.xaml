@@ -9,10 +9,6 @@
              RequestedTheme="Light">
     <Application.Resources>
         <ResourceDictionary>
-            <common:StoryDataTemplateSelector x:Key="StoryDataTemplateSelector"
-                                              FavoriteTemplate="{StaticResource Favorite}"
-                                              HotArticleTemplate="{StaticResource HotArticle}"
-                                              NormalTemplate="{StaticResource Story}" />
             <utils:Config x:Key="Config" />
 
             <convert:BooleanReverseConverter x:Key="BooleanReverseConverter" />

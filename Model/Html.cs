@@ -21,7 +21,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using System.Text.RegularExpressions;
 
-namespace Brook.DuDuRiBao.Utils
+namespace Brook.DuDuRiBao.Models
 {
     public static class Html
     {
