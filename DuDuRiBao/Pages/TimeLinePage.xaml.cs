@@ -52,7 +52,7 @@ namespace Brook.DuDuRiBao.Pages
             WebView webView = new WebView(WebViewExecutionMode.SameThread);
             webView.ScriptNotify += WebView_ScriptNotify;
             webView.DefaultBackgroundColor = Colors.White;
-            webView.SetBinding(WebViewExtend.StringContentProperty, new Binding() { Source = VM, Path = new PropertyPath("Explore") });
+            webView.SetBinding(WebViewExtend.StringContentProperty, new Binding() { Source = VM, Path = new PropertyPath("Explore"), Mode = BindingMode.OneWay });
             ExploreGrid.Children.Add(webView);
         }
 
@@ -172,11 +172,16 @@ namespace Brook.DuDuRiBao.Pages
                 case StoryEventType.Night:
                     if (VM != null)
                     {
-                        VM.RefreshExplore();
+                        MakeExploreChanged();
                         VM.UpdateExplore();
                     }
                     break;
             }
+        }
+
+        private void MakeExploreChanged()
+        {
+            VM.Explore += " ";
         }
     }
 }
