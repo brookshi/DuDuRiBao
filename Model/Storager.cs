@@ -10,14 +10,14 @@ namespace Brook.DuDuRiBao.Models
     {
         private const string StorageInfoKey = "StorageInfo";
 
-        private const string TileBeInitedKey = "TileBeInited";
+        private const string LoginInfoKey = "LoginInfoKey";
 
         static ApplicationDataContainer _localSetting = ApplicationData.Current.LocalSettings;
 
         static Storager()
         {
             StorageInfo StorageInfo;
-            if (TryGetJsonObj(StorageInfoKey, out StorageInfo))
+            if (TryGetJsonObj(StorageInfoKey, out StorageInfo) && StorageInfo.Instance != null)
             {
                 StorageInfo.Instance.CopyValue(StorageInfo);
             }
@@ -41,22 +41,6 @@ namespace Brook.DuDuRiBao.Models
         {
             StorageInfo.Instance.AppTheme = theme;
             UpdateStorageInfo();
-        }
-
-        public static bool IsTileInited()
-        {
-            int value = 0;
-            if (TryGet(TileBeInitedKey, out value))
-            {
-                return value == 1;
-            }
-
-            return false;
-        }
-
-        public static void SetTileInited()
-        {
-            Add(TileBeInitedKey, "1");
         }
 
         public static void Add(string key, string value)
@@ -124,6 +108,21 @@ namespace Brook.DuDuRiBao.Models
             {
                 _localSetting.Values.Remove(key);
             }
+        }
+
+        public static void SetLoginInfo(string info)
+        {
+            _localSetting.Values[LoginInfoKey] = info;
+        }
+
+        public static string GetLoginInfo()
+        {
+            if(_localSetting.Values.ContainsKey(LoginInfoKey))
+            {
+                return _localSetting.Values[LoginInfoKey].ToString();
+            }
+
+            return null;
         }
     }
 }

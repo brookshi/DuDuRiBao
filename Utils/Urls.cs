@@ -21,7 +21,7 @@ namespace Brook.DuDuRiBao.Utils
     {
         public const string LocalUrlPrefx = "http://daily.zhihu.com";
 
-        public const string BaseUrl = "https://news-at.zhihu.com/api/7/";
+        public const string BaseUrl = "http://news-at.zhihu.com/api/7/";
 
         public const string ZhiHuLogin = "https://api.zhihu.com/sign_in";
 

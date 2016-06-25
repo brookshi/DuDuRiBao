@@ -1,25 +1,39 @@
 ﻿using Brook.DuDuRiBao.Authorization;
 using Brook.DuDuRiBao.Models;
+using Brook.DuDuRiBao.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.Background;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
+using XPHttp;
 
-namespace Brook.BackgroundComponent
+namespace BackgroundComponent
 {
     public sealed class LiveTileTask : IBackgroundTask
     {
-        const string TileTemplateFile = "TileTemplate.xml";
+        const string TileTemplateFile = "Assets/TileTemplate.xml";
         const string BodyTag = "{{body}}";
         const string ImageTag = "{{image}}";
+        const string CircleTag = "{{Circle}}";
 
         string _tileTemplate;
         TileUpdater _tileUpdater;
+
+        public LiveTileTask()
+        {
+            StorageInfo.IsApplication = false;
+            InitTemplate();
+            InitHttpClient();
+            InitTileUpdater();
+        }
 
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
@@ -30,8 +44,6 @@ namespace Brook.BackgroundComponent
 
         private async Task GetLatestNews()
         {
-            await AuthorizationHelper.AutoLogin();
-
             var timeLine = await DataRequester.RequestLatestTimeLine();
             UpdatePrimaryTile(BuildAllTileXml(timeLine));
         }
@@ -52,23 +64,22 @@ namespace Brook.BackgroundComponent
 
         string BuildTileXmlForStory(Story story, int index)
         {
+            story.AdjustForImage();
             var content = _tileTemplate;
             content = content.Replace(BodyTag, story.Title);
-            content = content.Replace(ImageTag, story.Images[0]);
+            content = content.Replace(ImageTag, story.Images[0]); 
+            content = content.Replace(CircleTag, story.Posts[0].Circle.Name);
             return content;
         }
 
         private void UpdatePrimaryTile(List<string> xmls)
         {
             if (xmls == null || !xmls.Any())
-            {
                 return;
-            }
 
             try
             {
-                InitTileUpdater();
-
+                _tileUpdater.Clear();
                 foreach (var xml in xmls)
                 {
                     var doc = new XmlDocument();
@@ -91,7 +102,24 @@ namespace Brook.BackgroundComponent
                 _tileUpdater.EnableNotificationQueueForSquare310x310(true);
                 _tileUpdater.EnableNotificationQueue(true);
             }
-            _tileUpdater.Clear();
+        }
+
+        private void InitTemplate()
+        {
+            _tileTemplate = File.ReadAllText(Path.Combine(Package.Current.InstalledLocation.Path, TileTemplateFile));
+        }
+
+        private void InitHttpClient()
+        {
+            XPHttpClient.DefaultClient.HttpConfig
+                .SetBaseUrl(Urls.BaseUrl)
+                .SetUseHttpCache(false)
+                .SetDefaultHeaders("x-client-id", "4")
+                .ApplyConfig();
+
+            var token = Storager.GetLoginInfo();
+            if (token != null)
+                XPHttpClient.DefaultClient.HttpConfig.SetAuthorization("Bearer", token);
         }
     }
 }

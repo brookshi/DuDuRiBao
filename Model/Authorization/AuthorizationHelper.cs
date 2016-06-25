@@ -35,21 +35,8 @@ namespace Brook.DuDuRiBao.Authorization
 
         static AuthorizationHelper()
         {
-            var currentAssembly = Application.Current.GetType().GetTypeInfo().Assembly;
-
-            var authorizeTypes = currentAssembly.DefinedTypes.Where(type => type.BaseType == typeof(AuthorizationBase)).ToList();
-
-            authorizeTypes.ForEach(o => Authorizations[GetLoginType(o)] = GetAuthorization(o));
-        }
-
-        private static LoginType GetLoginType(TypeInfo typeInfo)
-        {
-            return typeInfo.GetCustomAttribute<AuthoAttribution>().LoginType;
-        }
-
-        private static IAuthorize GetAuthorization(TypeInfo typeInfo)
-        {
-            return (IAuthorize)typeInfo.GetDeclaredField("Instance").GetValue(null);
+            Authorizations[LoginType.Sina] = SinaAuthorization.Instance;
+            Authorizations[LoginType.ZhiHu] = ZhiHuAuthorization.Instance;
         }
 
         public static IAuthorize GetAuthorization(LoginType loginType)
@@ -143,7 +130,9 @@ namespace Brook.DuDuRiBao.Authorization
 
         private static void SetHttpAuthorization()
         {
-            XPHttpClient.DefaultClient.HttpConfig.SetAuthorization("Bearer", StorageInfo.Instance.ZhiHuAuthoInfo.access_token ?? StorageInfo.Instance.ZhiHuAuthoInfo.AnonymousLoginToken);
+            var token = StorageInfo.Instance.ZhiHuAuthoInfo.access_token ?? StorageInfo.Instance.ZhiHuAuthoInfo.AnonymousLoginToken;
+            XPHttpClient.DefaultClient.HttpConfig.SetAuthorization("Bearer", token);
+            Storager.SetLoginInfo(token);
         }
 
         private static void ClearHttpAuthorization()

@@ -217,6 +217,9 @@
     <Content Include="Assets\ListItemShadow1.png" />
     <Content Include="Assets\Login.png" />
     <Content Include="Assets\Share.png" />
+    <Content Include="Assets\TileTemplate.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\weibo.png" />
     <Content Include="Assets\WeiFengKe.png" />
     <Content Include="Assets\weixin.png" />
@@ -334,6 +337,10 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BackgroundComponent\BackgroundComponent.csproj">
+      <Project>{403283e3-9d1b-4d12-84b2-1d9ce3214fcf}</Project>
+      <Name>BackgroundComponent</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{76dd053d-247e-414d-8a9a-3d6d4721e2d6}</Project>
       <Name>Common</Name>

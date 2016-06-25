@@ -14,8 +14,12 @@ using System.Threading.Tasks;
 using Windows.Foundation.Metadata;
 using System;
 using LLM;
+using System.Linq;
 using DuDuRiBao.Utils;
 using Windows.UI.Xaml.Media;
+using Windows.ApplicationModel.Background;
+using Windows.UI.Notifications;
+using BackgroundComponent;
 
 namespace Brook.DuDuRiBao.Pages
 {
@@ -49,7 +53,7 @@ namespace Brook.DuDuRiBao.Pages
             var isLogin = await AuthorizationHelper.AutoLogin();
             if (isLogin)
                 UpdateLoginInfo();
-
+            RegisterLiveTileTask();
             TimeLineFrame.Navigate(typeof(TimeLinePage));
         }
 
@@ -200,6 +204,32 @@ namespace Brook.DuDuRiBao.Pages
                     DisplayStory(story.Id.ToString());
                     break;
             }
+        }
+
+        private const string LIVETILETASK = "DuDuRiBaoTileTask";
+        private async void RegisterLiveTileTask()
+        {
+            var status = await BackgroundExecutionManager.RequestAccessAsync();
+            if (status == BackgroundAccessStatus.Unspecified || status == BackgroundAccessStatus.Denied)
+            {
+                return;
+            }
+            foreach(var task in BackgroundTaskRegistration.AllTasks)
+            {
+                if (task.Value.Name == LIVETILETASK)
+                {
+                    task.Value.Unregister(true);
+                }
+            }
+
+            var taskBuilder = new BackgroundTaskBuilder
+            {
+                Name = LIVETILETASK,
+                TaskEntryPoint = typeof(LiveTileTask).FullName
+            };
+            taskBuilder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+            taskBuilder.SetTrigger(new TimeTrigger(15, false));
+            taskBuilder.Register();
         }
     }
 }

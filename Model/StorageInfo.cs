@@ -11,16 +11,31 @@ namespace Brook.DuDuRiBao.Models
     {
         static StorageInfo _instance;
         static object _lockObj = new object();
+        public static bool IsApplication = true;
+
         public static StorageInfo Instance
         {
             get
             {
+                if (!IsApplication)
+                    return null;
+
                 if(_instance == null)
                 {
-                    lock(_lockObj)
+                    lock (_lockObj)
                     {
-                        if(_instance == null && Application.Current.Resources.MergedDictionaries[0].ContainsKey("StorageInfo"))
-                            _instance = (StorageInfo)Application.Current.Resources.MergedDictionaries[0]["StorageInfo"];
+                        if (_instance == null)
+                        {
+                            if (IsApplication)
+                            {
+                                if (Application.Current.Resources.MergedDictionaries[0].ContainsKey("StorageInfo"))
+                                    _instance = (StorageInfo)Application.Current.Resources.MergedDictionaries[0]["StorageInfo"];
+                            }
+                            else
+                            {
+                                _instance = new StorageInfo();
+                            }
+                        }
                     }
                     
                 } 
