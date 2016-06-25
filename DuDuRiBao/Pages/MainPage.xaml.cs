@@ -79,7 +79,7 @@ namespace Brook.DuDuRiBao.Pages
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
 
-            var isStatusBarPresent = ApiInformation.IsTypePresent(typeof(StatusBar).ToString()) || ApiInformation.IsApiContractPresent("Windows.Phone.PhoneContract", 1, 0);
+            var isStatusBarPresent = ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar") || ApiInformation.IsApiContractPresent("Windows.Phone.PhoneContract", 1, 0);
             if (isStatusBarPresent)
             {
                 var statusBar = StatusBar.GetForCurrentView();
