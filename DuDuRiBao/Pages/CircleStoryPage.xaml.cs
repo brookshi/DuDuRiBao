@@ -41,6 +41,7 @@ namespace Brook.DuDuRiBao.Pages
             StoryListView.FloatButtonAction = VM.JoinCircle;
 
             Loaded += CircleStoryPage_Loaded;
+            LLQNotifier.Default.Register(this);
         }
 
         private void CircleStoryPage_Loaded(object sender, RoutedEventArgs e)
@@ -96,6 +97,25 @@ namespace Brook.DuDuRiBao.Pages
             await VM.RefreshStories(true);
             StoryListView.FinishLoadingMore();
             _isLoadComplete = preCount == VM.StoryDataList.Count;
+        }
+
+        [SubscriberCallback(typeof(SearchEvent))]
+        private void SearchSubscriber(SearchEvent param)
+        {
+            switch (param.Type)
+            {
+                case SearchType.Circle:
+                    if (!(Frame.Content is CircleStoryPage))
+                        return;
+
+                    var circle = (CircleBase)param.SearchObj;
+                    if (circle == null)
+                        return;
+
+                    VM.CircleId = circle.Id;
+                    StoryListView.SetRefresh(true);
+                    break;
+            }
         }
     }
 }

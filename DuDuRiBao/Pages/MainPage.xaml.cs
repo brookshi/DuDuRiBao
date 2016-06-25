@@ -194,10 +194,11 @@ namespace Brook.DuDuRiBao.Pages
             switch (param.Type)
             {
                 case SearchType.Circle:
-                    var circle = (CircleBase)param.SearchObj;
-                    circle.Name = circle.Name.Replace("<em>", "").Replace("</em>", "");
-                    Navigate(typeof(CircleStoryPage), circle.Id);
                     HideSearcher();
+                    if (TimeLineFrame.Content is CircleStoryPage)
+                        return;
+                    var circle = (CircleBase)param.SearchObj;
+                    NavigationManager.Instance.Navigate(TimeLineFrame, typeof(CircleStoryPage), circle.Id);
                     break;
                 case SearchType.Story:
                     var story = (SearchStory)param.SearchObj;
