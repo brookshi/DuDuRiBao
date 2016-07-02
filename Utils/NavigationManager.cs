@@ -58,7 +58,7 @@ namespace DuDuRiBao.Utils
 
         public void GoBack(BackRequestedEventArgs e)
         {
-            if (_frameStack.Count == 0)
+            if (_frameStack.Count == 0 || e.Handled)
                 return;
 
             var currFrame = _frameStack.Pop();

@@ -64,11 +64,13 @@ namespace BackgroundComponent
 
         string BuildTileXmlForStory(Story story, int index)
         {
-            story.AdjustForImage();
+            if (story == null || string.IsNullOrEmpty(_tileTemplate))
+                return "";
+
             var content = _tileTemplate;
             content = content.Replace(BodyTag, story.Title);
-            content = content.Replace(ImageTag, story.Images[0]); 
-            content = content.Replace(CircleTag, story.Posts[0].Circle.Name);
+            content = content.Replace(ImageTag, (story.Images != null && story.Images.Count > 0) ? story.Images[0] : ""); 
+            content = content.Replace(CircleTag, (story.Posts != null && story.Posts.Count > 0 && story.Posts[0].Circle != null) ? story.Posts[0].Circle.Name : "");
             return content;
         }
 
