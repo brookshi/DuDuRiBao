@@ -47,6 +47,10 @@ namespace Brook.DuDuRiBao.Utils
 
         public const string HotArticle = "explore/stories/hot";
 
+        public const string CreateCircle = "circle/create";
+
+        public const string PostToCircle = "user/me/posts";
+
         public const string JoinCircle = "circle/{circleid}/join";
 
         public const string QuitCircle = "circle/{circleid}/quit";

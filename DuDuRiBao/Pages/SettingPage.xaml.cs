@@ -83,6 +83,11 @@ namespace Brook.DuDuRiBao.Pages
             LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.DisplayStory, Content = Misc.Feedback_Story_Id.ToString() });
         }
 
+        private void CreateCircle_Click(object sender, RoutedEventArgs e)
+        {
+            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.CreateCircle });
+        }
+
         private async void Version_Click(object sender, RoutedEventArgs e)
         {
             await new ContentDialog()

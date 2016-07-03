@@ -159,6 +159,9 @@ namespace Brook.DuDuRiBao.Pages
                         return;
                     Navigate(typeof(SettingPage), null);
                     break;
+                case StoryEventType.CreateCircle:
+                    Navigate(typeof(CreateCirclePage), null);
+                    break;
                 case StoryEventType.Night:
                     InitUI();
                     break;

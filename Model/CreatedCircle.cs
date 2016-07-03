@@ -14,36 +14,30 @@
 //   limitations under the License. 
 #endregion
 
+using Brook.DuDuRiBao.Common;
+using System.Collections.Generic;
+using System.ComponentModel;
 
-namespace Brook.DuDuRiBao.Events
+namespace Brook.DuDuRiBao.Models
 {
-    public enum StoryEventType
+    public class CreatedCircle
     {
-        Menu,
-        Search,
-        Comment,
-        Like,
-        Fav,
-        ShareToWeiBo,
-        ShareToWeiXin,
-        Night,
-        DisplayStory,
-        Circle,
-        HotCircle,
-        HotStory,
-        FavPage,
-        Setting,
-        CreateCircle,
+        public string description { get; set; }
+        public string name { get; set; }
     }
 
-    public class StoryEvent
+    public class CreatedCircleMessage
     {
-        public StoryEventType Type { get; set; }
+        public int Status { get; set; }
+        public string Error_Msg { get; set; }
+        public int Id { get; set; }
+    }
 
-        public int Count { get; set; }
-
-        public bool IsChecked { get; set; }
-
-        public string Content { get; set; }
+    public class PostedToCircle
+    {
+        public List<int> circle_ids { get; set; }
+        public string reason { get; set; }
+        public string title { get; set; }
+        public string url { get; set; }
     }
 }

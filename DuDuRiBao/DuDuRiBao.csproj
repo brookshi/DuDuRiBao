@@ -162,6 +162,9 @@
     <Compile Include="Pages\CommentPage.xaml.cs">
       <DependentUpon>CommentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CreateCirclePage.xaml.cs">
+      <DependentUpon>CreateCirclePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\FavoritePage.xaml.cs">
       <DependentUpon>FavoritePage.xaml</DependentUpon>
     </Compile>
@@ -287,6 +290,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\CommentPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\CreateCirclePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

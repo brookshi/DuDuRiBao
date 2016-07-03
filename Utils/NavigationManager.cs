@@ -77,6 +77,22 @@ namespace DuDuRiBao.Utils
             }
         }
 
+        public void GoBack()
+        {
+            if (_frameStack.Count == 0)
+                return;
+
+            var currFrame = _frameStack.Pop();
+            if (currFrame == null)
+                return;
+
+            if (currFrame.CanGoBack)
+            {
+                currFrame.GoBack();
+                UpdateGoBackBtnVisibility();
+            }
+        }
+
         public void UpdateGoBackBtnVisibility()
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;

@@ -1,0 +1,69 @@
+﻿<common:PageBase x:Class="Brook.DuDuRiBao.Pages.CreateCirclePage"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:common="using:Brook.DuDuRiBao.Common"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:element="using:Brook.DuDuRiBao.Elements"
+                 xmlns:llm="using:LLM"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:vm="using:Brook.DuDuRiBao.ViewModels"
+                 xmlns:xp="using:XP"
+                 RequestedTheme="{Binding Source={StaticResource StorageInfo},
+                                          Path=AppTheme}"
+                 mc:Ignorable="d">
+
+    <Page.Transitions>
+        <TransitionCollection>
+            <PaneThemeTransition Edge="Right" />
+        </TransitionCollection>
+    </Page.Transitions>
+
+    <Grid Background="{ThemeResource BrushStoryList}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <element:ToolBar Height="48"
+                         Category="创建日报"
+                         Host="CommentPage"
+                         Visibility="{Binding Source={StaticResource Config},
+                                              Path=IsSinglePage,
+                                              Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <RelativePanel Grid.Row="1">
+            <element:CusTextBox x:Uid="CreateCircleTitle"
+                                x:Name="CircleTitle"
+                                Margin="4"
+                                BorderThickness="1"
+                                Foreground="{ThemeResource BrushCommentInfoForeground}"
+                                RelativePanel.AlignLeftWithPanel="True"
+                                RelativePanel.AlignTopWithPanel="True"
+                                RelativePanel.LeftOf="SendBtn"
+                                TextWrapping="NoWrap" />
+            <xp:XPButton x:Name="SendBtn"
+                         Margin="0, 2, 0, 0"
+                         VerticalAlignment="Stretch"
+                         Background="Transparent"
+                         Click="{x:Bind CreateCircle}"
+                         Foreground="{StaticResource BrushSendButton}"
+                         Icon="Accept"
+                         IconPosition="OnlyIcon"
+                         PointerOverBackground="Transparent"
+                         PointerOverIconForeground="{StaticResource BrushPrimary}"
+                         PressedBackground="{ThemeResource BrushPressed}"
+                         PressedIconForeground="{StaticResource BrushPrimary}"
+                         RelativePanel.AlignRightWithPanel="True"
+                         RelativePanel.AlignTopWithPanel="True" />
+            <element:CusTextBox x:Uid="CreateCircleDesc"
+                                x:Name="CircleDesc"
+                                Margin="4, 16, 4, 4"
+                                AcceptsReturn="True"
+                                BorderThickness="1"
+                                Foreground="{ThemeResource BrushCommentInfoForeground}"
+                                RelativePanel.AlignBottomWithPanel="True"
+                                RelativePanel.AlignLeftWithPanel="True"
+                                RelativePanel.AlignRightWithPanel="True"
+                                RelativePanel.Below="SendBtn"
+                                TextWrapping="Wrap" />
+        </RelativePanel>
+    </Grid>
+</common:PageBase>

@@ -71,12 +71,36 @@
                                  RelativePanel.AlignRightWithPanel="True"
                                  RelativePanel.AlignTopWithPanel="True" />
                 </Grid>
+                <xp:XPButton x:Uid="CreateCircle"
+                             x:Name="CreateCircle"
+                             Width="{Binding ElementName=LoginPanel,
+                                             Path=ActualWidth}"
+                             Height="48"
+                             Margin="0, 24, 0, 0"
+                             Background="{ThemeResource BrushStoryListItem}"
+                             BorderBrush="{ThemeResource BrushCommentSplitter}"
+                             BorderThickness="0, 0, 0, 1"
+                             Click="CreateCircle_Click"
+                             Content=""
+                             Foreground="{ThemeResource BrushStoryTitle}"
+                             IconForeground="{ThemeResource BrushStoryTitle}"
+                             IconInterval="12"
+                             IconPosition="Left"
+                             Padding="14, 0, 0, 0"
+                             PointerOverBackground="{StaticResource BrushPointerOver}"
+                             PressedBackground="{StaticResource BrushPressed}"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.Below="LoginPanel">
+                    <xp:XPButton.Icon>
+                        <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf016;" />
+                    </xp:XPButton.Icon>
+                </xp:XPButton>
                 <xp:XPButton x:Uid="Favorite"
                              x:Name="MyFav"
                              Width="{Binding ElementName=LoginPanel,
                                              Path=ActualWidth}"
                              Height="48"
-                             Margin="0, 24, 0, 0"
                              Background="{ThemeResource BrushStoryListItem}"
                              BorderBrush="{ThemeResource BrushCommentSplitter}"
                              BorderThickness="0, 0, 0, 1"
@@ -91,7 +115,7 @@
                              PressedBackground="{StaticResource BrushPressed}"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.Below="LoginPanel">
+                             RelativePanel.Below="CreateCircle">
                     <xp:XPButton.Icon>
                         <FontIcon FontFamily="/Assets/Fonts/fontawesome-webfont.ttf#FontAwesome" Glyph="&#xf005;" />
                     </xp:XPButton.Icon>

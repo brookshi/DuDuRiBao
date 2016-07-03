@@ -381,4 +381,19 @@
   <data name="VersionDesc" xml:space="preserve">
     <value>当前版本: {0}  最新版本: {1}</value>
   </data>
+  <data name="CreateCircle.Content" xml:space="preserve">
+    <value>创建日报</value>
+  </data>
+  <data name="CreateCircleDesc.PlaceholderText" xml:space="preserve">
+    <value>介绍日报</value>
+  </data>
+  <data name="CreateCircleError" xml:space="preserve">
+    <value>名字不能为空</value>
+  </data>
+  <data name="CreateCircleSuccess" xml:space="preserve">
+    <value>创建日报成功</value>
+  </data>
+  <data name="CreateCircleTitle.PlaceholderText" xml:space="preserve">
+    <value>日报名字</value>
+  </data>
 </root>

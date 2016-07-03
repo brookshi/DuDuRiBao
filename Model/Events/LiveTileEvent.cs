@@ -14,36 +14,16 @@
 //   limitations under the License. 
 #endregion
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Brook.DuDuRiBao.Events
 {
-    public enum StoryEventType
+    public class LiveTileEvent
     {
-        Menu,
-        Search,
-        Comment,
-        Like,
-        Fav,
-        ShareToWeiBo,
-        ShareToWeiXin,
-        Night,
-        DisplayStory,
-        Circle,
-        HotCircle,
-        HotStory,
-        FavPage,
-        Setting,
-        CreateCircle,
-    }
-
-    public class StoryEvent
-    {
-        public StoryEventType Type { get; set; }
-
-        public int Count { get; set; }
-
-        public bool IsChecked { get; set; }
-
-        public string Content { get; set; }
+        public bool NeedLiveTile { get; set; }
     }
 }

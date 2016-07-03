@@ -115,6 +115,7 @@
     <Compile Include="Authorization\LoginKeyProvider.cs" />
     <Compile Include="Authorization\SinaAuthorization.cs" />
     <Compile Include="Authorization\ZhiHuAuthorization.cs" />
+    <Compile Include="CreatedCircle.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="DataRequester.cs" />
     <Compile Include="Events\CommentEvent.cs" />

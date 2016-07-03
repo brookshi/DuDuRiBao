@@ -18,6 +18,7 @@ using Brook.DuDuRiBao.Authorization;
 using Brook.DuDuRiBao.Models;
 using Brook.DuDuRiBao.Utils;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using XPHttp;
@@ -279,6 +280,22 @@ namespace Brook.DuDuRiBao.Models
                 .AddUrlSegements("text", text != null ? text : "");
 
             return XPHttpClient.DefaultClient.GetAsync<SearchStories>(Urls.SearchStory, httpParam);
+        }
+
+        public static Task<CreatedCircleMessage> CreateCircle(string name, string desc)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .SetObjectBody(new CreatedCircle() { name = name, description = desc }, HttpContentType.Json);
+
+            return XPHttpClient.DefaultClient.PostAsync<CreatedCircleMessage>(Urls.CreateCircle, httpParam);
+        }
+
+        public static Task PostToCircle(string url, string title, string reason, List<int> circleIds)
+        {
+            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
+                .SetObjectBody(new PostedToCircle() { url = url, title = title, reason = reason, circle_ids = circleIds }, HttpContentType.Json);
+
+            return XPHttpClient.DefaultClient.PostAsync(Urls.PostToCircle, httpParam);
         }
 
 
