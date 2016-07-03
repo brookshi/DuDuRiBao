@@ -396,4 +396,25 @@
   <data name="CreateCircleTitle.PlaceholderText" xml:space="preserve">
     <value>日报名字</value>
   </data>
+  <data name="NoCircle" xml:space="preserve">
+    <value>你还没有日报，先创建一个吧</value>
+  </data>
+  <data name="PostToCircleError" xml:space="preserve">
+    <value>链接和标题不能为空</value>
+  </data>
+  <data name="PostToCircleNeedCircle" xml:space="preserve">
+    <value>没有选择要推送的日报</value>
+  </data>
+  <data name="PostToCircleReason.PlaceholderText" xml:space="preserve">
+    <value>分享亮点、槽点和我的观点...</value>
+  </data>
+  <data name="PostToCircleSuccess" xml:space="preserve">
+    <value>转推成功</value>
+  </data>
+  <data name="PostToCircleTitle.PlaceholderText" xml:space="preserve">
+    <value>文章标题</value>
+  </data>
+  <data name="PostToCircleUrl.PlaceholderText" xml:space="preserve">
+    <value>想要推荐的链接</value>
+  </data>
 </root>

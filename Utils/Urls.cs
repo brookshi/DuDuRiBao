@@ -49,7 +49,9 @@ namespace Brook.DuDuRiBao.Utils
 
         public const string CreateCircle = "circle/create";
 
-        public const string PostToCircle = "user/me/posts";
+        public const string PostToCircle = "post/url";
+
+        public const string OwnCircles = "circles/owned";
 
         public const string JoinCircle = "circle/{circleid}/join";
 

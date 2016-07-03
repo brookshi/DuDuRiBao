@@ -162,6 +162,11 @@ namespace Brook.DuDuRiBao.Pages
                 case StoryEventType.CreateCircle:
                     Navigate(typeof(CreateCirclePage), null);
                     break;
+                case StoryEventType.PostToCircle:
+                    if (TimeLineFrame.Content is PostToCirclePage)
+                        return;
+                    Navigate(typeof(PostToCirclePage), null);
+                    break;
                 case StoryEventType.Night:
                     InitUI();
                     break;

@@ -40,4 +40,23 @@ namespace Brook.DuDuRiBao.Models
         public string title { get; set; }
         public string url { get; set; }
     }
+
+    public class OwnCircleCount
+    {
+        public int Stories { get; set; }
+        public int Editors { get; set; }
+        public int Members { get; set; }
+    }
+
+    public class OwnCircleInfo
+    {
+        public OwnCircleCount Count { get; set; }
+        public string Thumbnail { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+    public class OwnCircles
+    {
+        public List<OwnCircleInfo> Circles { get; set; }
+    }
 }

@@ -85,6 +85,11 @@ namespace Brook.DuDuRiBao.Pages
 
         private void CreateCircle_Click(object sender, RoutedEventArgs e)
         {
+            if (!AuthorizationHelper.IsLogin)
+            {
+                PopupMessage.DisplayMessageInRes("NeedLogin");
+                return;
+            }
             LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.CreateCircle });
         }
 

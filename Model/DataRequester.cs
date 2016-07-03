@@ -298,6 +298,11 @@ namespace Brook.DuDuRiBao.Models
             return XPHttpClient.DefaultClient.PostAsync(Urls.PostToCircle, httpParam);
         }
 
+        public static Task<OwnCircles> GetOwnCircles()
+        {
+            return XPHttpClient.DefaultClient.GetAsync<OwnCircles>(Urls.OwnCircles, null);
+        }
+
 
         public static Task<T> RequestDataForTimeLine<T>(string before, string functionUrl)
         {

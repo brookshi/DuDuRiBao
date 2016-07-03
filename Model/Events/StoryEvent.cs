@@ -34,6 +34,7 @@ namespace Brook.DuDuRiBao.Events
         FavPage,
         Setting,
         CreateCircle,
+        PostToCircle,
     }
 
     public class StoryEvent

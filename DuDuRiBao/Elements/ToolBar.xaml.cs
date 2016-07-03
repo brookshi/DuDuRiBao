@@ -176,7 +176,12 @@ namespace Brook.DuDuRiBao.Elements
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            PopupMessage.DisplayMessageInRes("Developing");
+            if (!AuthorizationHelper.IsLogin)
+            {
+                PopupMessage.DisplayMessageInRes("NeedLogin");
+                return;
+            }
+            LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.PostToCircle });
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -237,8 +242,7 @@ namespace Brook.DuDuRiBao.Elements
 
         private void Notify(string property)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }
