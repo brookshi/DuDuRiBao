@@ -1,1 +1,1 @@
-C:\projects\DuDuRiBao\DuDuRiBao\AppPackages\DuDuRiBao_1.3.0.0\DuDuRiBao_1.3.0.0_x86_x64_arm.appxbundle
+C:\projects\DuDuRiBao\DuDuRiBao\AppPackages\DuDuRiBao_1.4.0.0\DuDuRiBao_1.4.0.0_x86_x64_arm.appxbundle
