@@ -111,9 +111,9 @@ namespace Brook.DuDuRiBao.Pages
             await Launcher.LaunchUriAsync(new Uri(Urls.Score));
         }
 
-        private async void AiYingYong_Click(object sender, RoutedEventArgs e)
+        private async void RuanFenQuan_Click(object sender, RoutedEventArgs e)
         {
-            await Launcher.LaunchUriAsync(new Uri("ayywin:"));
+            await Launcher.LaunchUriAsync(new Uri("http://app.ruanfenquan.com/"));
         }
 
         private async void WeiFengKe_Click(object sender, RoutedEventArgs e)

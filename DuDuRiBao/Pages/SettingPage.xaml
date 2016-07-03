@@ -270,14 +270,14 @@
             <RelativePanel Grid.Row="2"
                            Background="{ThemeResource BrushStoryList}"
                            Padding="0, 24, 0, 0">
-                <xp:XPButton x:Name="AYYBtn"
+                <xp:XPButton x:Name="RFQBtn"
                              Width="{Binding ElementName=LoginPanel,
                                              Path=ActualWidth}"
                              Height="80"
                              Background="{ThemeResource BrushStoryListItem}"
                              BorderBrush="{ThemeResource BrushCommentSplitter}"
                              BorderThickness="0, 0, 0, 1"
-                             Click="AiYingYong_Click"
+                             Click="RuanFenQuan_Click"
                              Foreground="{ThemeResource BrushStoryTitle}"
                              IconForeground="{ThemeResource BrushStoryTitle}"
                              IconPosition="NoIcon"
@@ -288,18 +288,18 @@
                              RelativePanel.AlignRightWithPanel="True">
                     <xp:XPButton.Content>
                         <RelativePanel Height="80">
-                            <Image x:Name="AYYImage"
-                                   Source="../Assets/AiYingYong.png"
+                            <Image x:Name="RFQImage"
+                                   Source="../Assets/RuanFenQuan.png"
                                    Stretch="Uniform" />
-                            <TextBlock x:Name="AYYName"
+                            <TextBlock x:Name="RFQName"
                                        Margin="24, 12, 0, 0"
                                        FontSize="22"
-                                       RelativePanel.RightOf="AYYImage"
-                                       Text="爱应用" />
+                                       RelativePanel.RightOf="RFQImage"
+                                       Text="软粉圈" />
                             <TextBlock Margin="24, 4, 0, 0"
                                        FontSize="14"
-                                       RelativePanel.Below="AYYName"
-                                       RelativePanel.RightOf="AYYImage"
+                                       RelativePanel.Below="RFQName"
+                                       RelativePanel.RightOf="RFQImage"
                                        Text="合作伙伴" />
                         </RelativePanel>
                     </xp:XPButton.Content>
@@ -320,7 +320,7 @@
                              PressedBackground="{StaticResource BrushPressed}"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.Below="AYYBtn">
+                             RelativePanel.Below="RFQBtn">
                     <xp:XPButton.Content>
                         <RelativePanel Height="80">
                             <Image x:Name="WFKImage"
