@@ -46,7 +46,7 @@ namespace Brook.DuDuRiBao.Pages
 
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
-            LoginSelectedDialog dlg = new LoginSelectedDialog();
+            ZhiHuLoginDialog dlg = new ZhiHuLoginDialog();
             await dlg.ShowAsync();
         }
 

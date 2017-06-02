@@ -189,25 +189,6 @@ namespace Brook.DuDuRiBao.Elements
             LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Search });
         }
 
-        private void ShareToWeiBo(object sender, RoutedEventArgs e)
-        {
-            var sinaAutho = AuthorizationHelper.GetAuthorization(LoginType.Sina);
-            if (sinaAutho == null)
-                throw new NotSupportedException("not support sina login");
-
-            if (!sinaAutho.IsAuthorized)
-            {
-                ((SinaAuthorization)sinaAutho).LoginForShare(isSuccess => {
-                    if (isSuccess)
-                        LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.ShareToWeiBo });
-                });
-            }
-            else
-            {
-                LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.ShareToWeiBo });
-            }
-        }
-
         private void CommentButton_Click(object sender, RoutedEventArgs e)
         {
             LLQNotifier.Default.Notify(new StoryEvent() { Type = StoryEventType.Comment });

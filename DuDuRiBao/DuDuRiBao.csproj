@@ -20,7 +20,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>26CD27AD5A326C4F958CCDE67912F7305EE23A91</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>A145CCBF1D051E14CA1FEF2B8A2CB42D324313CC</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -336,14 +336,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="RestSharp">
-      <HintPath>dll\RestSharp.winmd</HintPath>
-    </Reference>
-    <Reference Include="WeiboSDKForWinRT">
-      <HintPath>dll\WeiboSDKForWinRT.winmd</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="WindowsMobile, Version=10.0.10240.0">

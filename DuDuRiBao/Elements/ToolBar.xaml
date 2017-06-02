@@ -262,19 +262,6 @@
                                 <Setter Property="MaxWidth" Value="140" />
                             </Style>
                         </MenuFlyout.MenuFlyoutPresenterStyle>
-                        <local:CustomMenuFlyoutItem Margin="0"
-                                                    BorderBrush="{ThemeResource BrushMenuSplitter}"
-                                                    BorderThickness="0, 0, 0, 1"
-                                                    Click="ShareToWeiBo"
-                                                    Padding="{ThemeResource MenuFlyoutItemThemePaddingNarrow}">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Width="24"
-                                       Height="22"
-                                       Source="ms-appx:///Assets/weibo.png"
-                                       Stretch="Fill" />
-                                <TextBlock x:Uid="ShareToWeiBo" Margin="4, 2, 4, 0" />
-                            </StackPanel>
-                        </local:CustomMenuFlyoutItem>
                         <MenuFlyoutItem x:Name="WeiXinItem" Template="{StaticResource WeiXinTemplate}" />
                     </MenuFlyout>
                 </xp:XPButton.Flyout>

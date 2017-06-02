@@ -28,14 +28,6 @@ namespace Brook.DuDuRiBao.Models
 {
     public class DataRequester
     {
-        public static Task<RiBaoAuthoInfo> LoginUsingWeibo(TokenInfo info)
-        {
-            var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder
-                .SetBody(new HttpJsonContent(info))
-                .AddHeader("x-client-id", "3");
-            return XPHttpClient.DefaultClient.PostAsync<RiBaoAuthoInfo>(Urls.Login, httpParam);
-        }
-
         public static Task<RiBaoAuthoInfo> LoginUsingZhiHu(TokenInfo info)
         {
             var httpParam = XPHttpClient.DefaultClient.RequestParamBuilder

@@ -243,9 +243,6 @@
   <data name="ShareSuccess" xml:space="preserve">
     <value>分享成功</value>
   </data>
-  <data name="ShareToWeiBo.Text" xml:space="preserve">
-    <value>分享到微博</value>
-  </data>
   <data name="ShareToWeiXin.Text" xml:space="preserve">
     <value>微信扫一扫</value>
   </data>
@@ -284,9 +281,6 @@
   </data>
   <data name="UserNamePlaceholder.PlaceholderText" xml:space="preserve">
     <value>手机号或邮箱</value>
-  </data>
-  <data name="WeiBoLoginBtn.Content" xml:space="preserve">
-    <value>微博账号登录</value>
   </data>
   <data name="ZhiHuLoginBtn.Content" xml:space="preserve">
     <value>知乎账号登录</value>

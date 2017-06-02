@@ -58,53 +58,7 @@ namespace Brook.DuDuRiBao.Pages
                         NavigationManager.Instance.Navigate(rootFrame, typeof(CommentPage));
                     }
                     break;
-                case StoryEventType.ShareToWeiBo:
-                    if (WeiboSharePopup.IsOpen)
-                        break;
-
-                    WeiboSharePopup.IsOpen = true;
-                    PostMsg.Text = string.Format($"{VM.MainHtmlContent.Title} {VM.MainHtmlContent.Share_Url}");
-                    Animator.Use(AnimationType.ZoomInDown).SetDuration(TimeSpan.FromMilliseconds(800)).PlayOn(WeiboSharePopup, () =>
-                    {
-                        var transform = (CompositeTransform)AnimUtil.PrepareTransform(WeiboSharePopup, typeof(CompositeTransform));
-                        transform.CenterX = transform.CenterY = 0;
-                    });
-                    break;
             }
-        }
-
-        private void CloseWeiBoShareDlg(object sender, RoutedEventArgs e)
-        {
-            Animator.Use(AnimationType.Hinge).PlayOn(WeiboSharePopup, () =>
-            {
-                WeiboSharePopup.IsOpen = false;
-                var transform = (CompositeTransform)AnimUtil.PrepareTransform(WeiboSharePopup, typeof(CompositeTransform));
-                transform.Rotation = 0;
-                transform.TranslateX = transform.TranslateY = 0;
-            });
-        }
-
-        private async void ShareWeiBo(object sender, RoutedEventArgs e)
-        {
-            if (VM == null || VM.MainHtmlContent == null)
-                return;
-
-            Animator.Use(AnimationType.ZoomOutUp).SetDuration(TimeSpan.FromMilliseconds(800)).PlayOn(WeiboSharePopup, () =>
-            {
-                WeiboSharePopup.IsOpen = false;
-                var transform = (CompositeTransform)AnimUtil.PrepareTransform(WeiboSharePopup, typeof(CompositeTransform));
-                transform.CenterX = transform.CenterY = 0;
-                transform.ScaleX = transform.ScaleY = 1;
-                transform.TranslateX = transform.TranslateY = 0;
-                WeiboSharePopup.Opacity = 1;
-            });
-
-            WeiboSDKForWinRT.SdkNetEngine engine = new WeiboSDKForWinRT.SdkNetEngine();
-            var response = await engine.RequestCmd(WeiboSDKForWinRT.SdkRequestType.POST_MESSAGE, new WeiboSDKForWinRT.CmdPostMessage() { Status = PostMsg.Text });
-            if (response.errCode == WeiboSDKForWinRT.SdkErrCode.SUCCESS)
-                PopupMessage.DisplayMessageInRes("ShareSuccess");
-            else
-                PopupMessage.DisplayMessageInRes("ShareFailed");
         }
     }
 }

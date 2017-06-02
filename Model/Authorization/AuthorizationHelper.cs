@@ -35,7 +35,7 @@ namespace Brook.DuDuRiBao.Authorization
 
         static AuthorizationHelper()
         {
-            Authorizations[LoginType.Sina] = SinaAuthorization.Instance;
+            Authorizations[LoginType.Sina] = ZhiHuAuthorization.Instance;
             Authorizations[LoginType.ZhiHu] = ZhiHuAuthorization.Instance;
         }
 

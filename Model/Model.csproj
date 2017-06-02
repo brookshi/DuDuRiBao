@@ -113,7 +113,6 @@
     <Compile Include="Authorization\AuthorizationHelper.cs" />
     <Compile Include="Authorization\IAuthorize.cs" />
     <Compile Include="Authorization\LoginKeyProvider.cs" />
-    <Compile Include="Authorization\SinaAuthorization.cs" />
     <Compile Include="Authorization\ZhiHuAuthorization.cs" />
     <Compile Include="CreatedCircle.cs" />
     <Compile Include="Comment.cs" />

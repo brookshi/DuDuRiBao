@@ -243,9 +243,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
-*.sln
-/DuDuRiBao/Utils/Urls.cs
-*.saz
-/DuDuRiBao/Authorization/AnonymousLogin.cs
-/DuDuRiBao/Authorization/AnonymousLoginKey.cs
-/DuDuRiBao/Authorization/LoginKeyProvider.cs
+
